@@ -1,0 +1,23 @@
+{
+  "name": "divit",
+  "displayName": "Divit — akademik yazım tezgâhı",
+  "description": "Tez ve makale değerlendirme, kaynak doğrulama, idari yazışma, akademik dışa aktarma. Hocanın kendi makinesinde, kendi dosyalarıyla çalışır.",
+  "author": { "name": "Mehmet Akif Orakçı" },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/ortam-kontrol.sh" },
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/otomatik-kayit.sh baslangic" }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "type": "command", "command": "${CLAUDE_PLUGIN_ROOT}/scripts/otomatik-kayit.sh bitis" }
+        ]
+      }
+    ]
+  }
+}

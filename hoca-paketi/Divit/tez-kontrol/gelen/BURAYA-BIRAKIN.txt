@@ -1,0 +1,4 @@
+Öğrenci dosyalarını bu klasöre bırakın (Word, PDF ya da metin).
+
+Bu klasördeki dosyalara Divit'in yazma izni yoktur.
+Okur, rapor yazar; öğrencinin metnine dokunmaz.

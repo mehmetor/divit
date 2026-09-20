@@ -1,0 +1,12 @@
+{
+  "name": "divit",
+  "owner": { "name": "Mehmet Akif Orakçı", "email": "mehmetakiforakci@gmail.com" },
+  "description": "Divit — akademik yazım tezgâhı. Makale, tez, kitap.",
+  "plugins": [
+    {
+      "name": "divit",
+      "source": "./plugins/divit",
+      "description": "Divit — akademik yazım tezgâhı. Tez değerlendirme, kaynak doğrulama, idari yazışma, dışa aktarma."
+    }
+  ]
+}

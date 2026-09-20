@@ -1,0 +1,6 @@
+Kaynak PDF'lerinizi buraya bırakın.
+
+Zotero kullanıyorsanız bunun yerine kaynaklar.bib dosyası
+otomatik güncellenir; kurulumda birlikte ayarlarız.
+
+Divit yalnızca burada bulunan kaynaklara atıf yapar.
