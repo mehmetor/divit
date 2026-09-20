@@ -22,6 +22,12 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
 5. **Yedekleme sessizdir.** `.divit-vault` işaretçisi olan klasörde
    çalışır, başka hiçbir projeye dokunmaz.
 
+6. **Alan bilgisi koda değil kılavuza.** `plugins/divit/alan/<alan>.md`
+   dosyaları veridir; skill'ler onları okur. Yeni alan eklemek bir
+   dosya yazmaktır, kod değiştirmek değil (`alan/ORNEK-SABLON.md`).
+   Kılavuz hocanın kendi makalelerinden çıkarılır, hafızadan değil;
+   kurulumda hocayla doğrulanır ve düzeltmeler repoya geri işlenir.
+
 ## Skill yazarken
 
 - Her SKILL.md 150 satırın altında kalsın.

@@ -20,6 +20,11 @@ Sorularını numaralandırıp liste hâlinde yığma.
 2. "Alanınız ne? Hangi konularda yazıyorsunuz?"
 3. "Elinizde özgeçmiş var mı? Varsa bu klasöre bırakın, ben okurum."
 
+CV'den şunları çıkar: tam unvan ve bölüm, alt uzmanlık, yayın
+dili dağılımı, sık gönderdiği dergiler, yürüttüğü proje türleri,
+tamamlanmış/devam eden tez danışmanlıkları, idari görevler.
+Bunlar hangi skill'in işe yarayacağını baştan söyler.
+
 CV varsa oku ve **çıkardıklarını onaylat**: "Şunları anladım: ...
 Doğru mu, eksik var mı?" Onaysız kaydetme.
 
@@ -40,6 +45,27 @@ kaçındığı kalıplar, paragraf uzunluğu.
 hocanın sesiyle üretmek için değil. Taslaklar kasıtlı olarak nötr ve
 işaretli çıkar; hoca içeriği onayladıktan sonra üslup uygulanır.
 Sebebi: kendi sesiyle gelen metni insan daha az denetler.
+
+## Adım 2b — Alan kuralları
+
+`${CLAUDE_PLUGIN_ROOT}/alan/` altında hocanın alanına uyan bir kılavuz
+var mı bak (`ziraat.md` gibi). Varsa içeriğini
+`.claude/profil/alan.md` dosyasına kopyala.
+
+**Kopyalayıp geçme — hocayla doğrula.** Kılavuzdaki her madde bir
+varsayımdır. Beş dakikada şunları sor:
+
+- "Tablolara ne diyorsunuz, Çizelge mi Tablo mu?"
+- "Verimleri dekar üzerinden mi hektar üzerinden mi veriyorsunuz?"
+- "Hangi istatistik testini kullanıyorsunuz?"
+- "Yöntem bölümünde mutlaka bulunmasını istediğiniz şeyler neler?"
+
+Cevapları `alan.md` içine işle. Hocanın dediği, kılavuzda yazanı ezer.
+
+Uygun kılavuz **yoksa** `alan.md` boş kalsın — yanlış alan kuralı
+uygulamak, hiç uygulamamaktan kötüdür. Hocanın iki-üç makalesini
+okuyup `alan/ORNEK-SABLON.md` yapısında yeni bir kılavuz çıkar ve
+Mehmet'e iletilmek üzere `.claude/oturum/` altına da bir kopya bırak.
 
 ## Adım 3 — Kaynakça yolu
 

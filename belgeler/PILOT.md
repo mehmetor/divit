@@ -8,13 +8,27 @@ için ölçümlerin çoğu hiçbir şey sormadan, hiçbir metin dışarı
 
 ## Aşama 1 — Tek hoca (2 hafta)
 
-**Kim:** Sosyal bilimler / hukuk / ilahiyat / edebiyat alanından,
-tez danışmanlığı olan, Zotero kullanan (ya da kullanmaya istekli)
-bir hoca. Fen/mühendislik pilotu ilk tur için seçme — orada işin
-%70'i veri, Divit oraya girmiyor.
+**Kim:** Ziraat / tarım bilimleri, branş CV ile netleşecek.
+Hazırlık ve oturum akışı: `ILK-OTURUM.md`.
+
+İlk planda sosyal bilimler önerilmişti; ziraat o gerekçenin
+dışında kalıyor. Tez danışmanlığı yükü ağır, Türkçe yayın geleneği
+güçlü, proje raporu yükü büyük — üçü de Divit'in güçlü olduğu
+yerler. Ayrıca ziraat metinlerinde **mekanik olarak doğrulanabilir**
+çok şey var (birim dönüşümü, Latince adlandırma, çizelge-metin
+tutarlılığı); bunlar yorum değil denetim oldukları için hocanın
+güvenmesi kolay.
+
+**Bu alandaki risk:** makalenin özü deneme sonucu ve istatistiktir,
+metin işin belki üçte biridir. `bolum-yaz` burada zayıf kalır.
+Vaat dar tutulur: Divit analiz yapmaz, tutarlılık denetler.
 
 **Tek iş:** `tez-kontrol`. Kitap yazımını pilotta açma; aylara
 yayılır, sinyal gelmez.
+
+Hocanın elinde okunmayı bekleyen öğrenci metni **yoksa** pilot işi
+`yazisma`ya çevrilir (proje raporu / idari yazışma). Malzemesiz
+`tez-kontrol` pilotu ölçüm vermez.
 
 **Yapılacak:** İlk iki oturumda yanında otur ve izle. Not al, müdahale
 etme. Bu iki oturum, buradaki bütün tasarım tartışmalarından daha

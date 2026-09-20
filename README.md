@@ -24,7 +24,8 @@ sağlayan takımı kurar.
 
 ## Ne yapmaz
 
-Hakemlik (yayıncı politikaları yasaklıyor) · not/puan verme ·
+Veri analizi ve istatistik yorumu (yalnız tutarlılık denetler) ·
+hakemlik (yayıncı politikaları yasaklıyor) · not/puan verme ·
 intihal veya AI-tespit hükmü · veri analizi ·
 `kaynaklar.bib` dışında künye üretme.
 
@@ -35,6 +36,7 @@ divit/
 ├── .claude-plugin/marketplace.json   marketplace tanımı
 ├── plugins/divit/                    tek plugin (bilinçli karar)
 │   ├── skills/                       sekiz skill
+│   ├── alan/                         alan kılavuzları (ziraat, +şablon)
 │   └── scripts/                      ortam kontrolü, otomatik yedek
 ├── hoca-paketi/                      hocanın makinesine giden paket
 │   ├── kur.sh                        tek seferlik kurulum
@@ -42,6 +44,7 @@ divit/
 └── belgeler/
     ├── IHTIYAC-ANALIZI.md            hoca ne istiyor — varsayımlar + doğrulama
     ├── PILOT.md                      pilot planı ve kabul kriterleri
+    ├── ILK-OTURUM.md                 ilk hoca: hazırlık, akış, sonrası
     └── TASARIM-NOTLARI.md            ilk tasarımdan sapmalar ve gerekçeleri
 ```
 

@@ -50,13 +50,30 @@ Kısa makale, LaTeX yaygın, şekil ve tablo ağırlıklı, veri analizi
 (R/Python/SPSS) merkezde, çok yazarlı. Metin kısmı işin %30'u.
 *Divit buraya yarım yarar sağlar; veri tarafına girmeden vaat verme.*
 
+**Ziraat / tarım bilimleri** *(ilk pilotun alanı)*
+Deneme temelli makale, Türkçe yayın geleneği güçlü, tez danışmanlığı
+yükü ağır, TÜBİTAK/TAGEM/BAP proje ve rapor yükü büyük. Metin işin
+üçte biri; gerisi deneme ve istatistik. Buna karşılık **mekanik
+olarak doğrulanabilir** unsuru bol: birim dönüşümü (kg/da ↔ kg/ha),
+Latince adlandırma, istatistik harflendirmesi, çizelge-metin
+tutarlılığı. *Divit burada "yorumlayan" değil "denetleyen" olarak
+konumlanır — güven kazanması en kolay kip budur.*
+Alan kılavuzu: `plugins/divit/alan/ziraat.md`.
+
 **Eğitim / işletme / iletişim**
 Anket, ölçek, SPSS, orta uzunlukta makale, hızlı yayın baskısı.
 İntihal ve AI-tespit kaygısı en yüksek küme. *En hassas kullanıcı.*
 
 **Karar:** Çekirdek ürün alandan bağımsız (kaynak doğrulama, tez
 raporu, idari yazışma, dışa aktarma). Alana özel olan her şey
-hocanın kendi `profil/alan.md` dosyasına yazılır, koda gömülmez.
+`plugins/divit/alan/<alan>.md` kılavuzlarında durur ve kurulumda
+hocanın `.claude/profil/alan.md` dosyasına kopyalanıp **hocayla
+doğrulanır**. Koda gömülmez.
+
+Bu, farklı alanlardan hocalara ölçeklenme mekanizmasıdır: her yeni
+hoca bir kılavuz üretir, kılavuz repoya geri işlenir, aynı alandan
+gelen bir sonraki hoca onu hazır bulur. Yeni alan eklemek kod
+değişikliği değil, bir dosya yazmaktır (`alan/ORNEK-SABLON.md`).
 
 > **Doğrulama sorusu:** "Son makaleni hangi programda yazdın? Word mü,
 > LaTeX mi? Kaynakçayı nasıl tutuyorsun?"

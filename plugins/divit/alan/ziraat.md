@@ -1,0 +1,113 @@
+# Alan kılavuzu — Ziraat / tarım bilimleri
+
+Bu dosya `kurulum` sırasında hocanın `.claude/profil/alan.md`
+dosyasına kopyalanır ve **hocayla birlikte** düzeltilir. Buradaki
+her madde bir varsayımdır; hoca "biz öyle yapmıyoruz" derse
+hocanın dediği geçerlidir.
+
+## Terminoloji
+
+- Tablolara **Çizelge** denir, "Tablo" değil. Şekiller "Şekil".
+  Metinde "Çizelge 3'te görüldüğü gibi" biçiminde atıf yapılır.
+- **Tekerrür** (replication), **parsel**, **deneme deseni**,
+  **uygulama/konu** (treatment) yerleşik karşılıklardır. Bunları
+  İngilizceden yeniden çevirme.
+- Hangi karşılığı kullandığını hocanın metinlerinden öğren ve
+  metin boyunca değiştirme.
+
+## Birimler — en sık ve en sessiz hata kaynağı
+
+Türkiye'de tarla verileri **dekar** üzerinden, uluslararası
+yayınlarda **hektar** üzerinden verilir. Dönüşüm hatası çok yaygın
+ve gözden kaçar.
+
+- 1 dekar (da) = 1000 m² · 1 hektar (ha) = 10 da
+- kg/da × 10 = kg/ha · ton/ha = kg/da ÷ 100
+
+**Kontrol edilecekler:**
+- Metin, çizelge ve özet aynı birimi mi kullanıyor?
+- Bir değer hem kg/da hem kg/ha olarak geçiyorsa dönüşüm doğru mu?
+- İngilizce özet (abstract) Türkçe özetle aynı sayıları mı veriyor?
+  *Farklı çıkması sık görülür; mutlaka karşılaştır.*
+- Gübre dozları saf besin maddesi mi (N, P₂O₅, K₂O) yoksa gübre
+  miktarı mı? Hangisi olduğu yazılmış mı?
+- Verim, bin tane ağırlığı (g), hektolitre ağırlığı (kg/hl),
+  protein (%) — birimleri yazılmış mı?
+
+Aritmetiği **hesapla ve doğrula**, göz kararı geçme.
+
+## Latince adlar
+
+- Tür adı italik: *Triticum aestivum* L. Cins büyük, tür küçük harf.
+- Yazar kısaltması italik değil: L., Mill., DC.
+- İlk geçişten sonra cins kısaltılır: *T. aestivum*. Metin boyunca
+  tutarlı mı kontrol et.
+- Çeşit adı italik değil, tırnak veya `cv.` ile: cv. Bezostaja 1.
+- Zararlı ve hastalık etmenlerinde de aynı kural geçerli.
+
+**Kontrol:** Aynı türün metinde hem açık hem kısaltılmış, hem italik
+hem düz geçmesi çok sık. Hepsini tara.
+
+## İstatistik — yorumlama değil, tutarlılık denetimi
+
+**Divit istatistik analizi yapmaz, sonuç yorumlamaz.** Yaptığı,
+metnin kendi içinde tutarlı olup olmadığını denetlemektir. Bu ayrım
+korunur; aşılırsa hocanın güveni haklı olarak kırılır.
+
+Kontrol edilecekler:
+- **Deneme deseni yazılmış mı?** (tesadüf blokları, tesadüf parselleri,
+  bölünmüş parseller, faktöriyel...) Tekerrür sayısı verilmiş mi?
+- Kullanılan test adı yazılmış mı (LSD, Duncan, Tukey) ve **metin
+  boyunca aynı test mi**? Yöntemde Duncan deyip çizelgede LSD yazmak
+  sık görülür.
+- Önem düzeyi (P<0.05 / P<0.01) tutarlı mı? Çizelge altındaki
+  yıldız açıklaması (*, **) metinle uyuşuyor mu?
+- **Harflendirme:** Çizelgede aynı harfi taşıyan gruplar için metinde
+  "farklı bulunmuştur" denmiş mi? Bu doğrudan bir çelişkidir, en
+  üste yaz.
+- Çizelgedeki sayı ile metinde anılan sayı **birebir aynı mı**?
+  Her birini tek tek karşılaştır.
+- Ortalamalar ve CV (%) verilmiş mi? CV alan için makul aralıkta mı
+  denmez — yalnızca verilip verilmediği kontrol edilir.
+- "İki yıllık ortalama" kullanılmışsa yıl × uygulama interaksiyonu
+  ele alınmış mı? Önemliyse ortalama vermek yanıltıcıdır — bunu
+  *soru olarak* sor, hüküm verme.
+- Lokasyon ve yıl sayısı, yöntemde ve bulgularda aynı mı?
+
+## Yapı ve yayın
+
+- Ziraat makalelerinde yaygın düzen: Giriş → Materyal ve Yöntem →
+  Bulgular ve Tartışma → Sonuç. "Materyal ve Yöntem" başlığı
+  yerleşiktir.
+- Materyal bölümünde bulunması beklenenler: deneme yeri ve yılı,
+  toprak analizi (pH, EC, organik madde, bünye), iklim verileri
+  (sıcaklık, yağış — çok yıllık ortalamayla birlikte), kullanılan
+  çeşit/materyal ve kaynağı, ekim-hasat tarihleri, parsel boyutu,
+  ekim normu, gübreleme ve sulama programı.
+  **Bunlardan eksik olan her biri tekrarlanabilirliği bozar** —
+  `tez-kontrol` raporunda ayrı madde olarak yaz.
+- İklim ve toprak verisinin kaynağı belirtilmiş mi (meteoroloji
+  istasyonu, analiz laboratuvarı)?
+- Türkçe ve İngilizce özet birbirinin çevirisi mi, sayılar tutuyor mu?
+- Anahtar kelimeler iki dilde de var mı?
+
+## Proje ve rapor işleri
+
+Ziraat fakültelerinde makale dışı yazım yükü ağırdır. `yazisma`
+skill'i bunları da kapsar:
+- TÜBİTAK, TAGEM, BAP proje başvuruları ve gelişme/sonuç raporları
+- Çeşit tescil ve denemelerine ilişkin raporlar
+- Çiftçi/sektör bilgilendirme metinleri, yaygın etki bölümleri
+
+Bu metinlerde de kural aynı: **sayı, tarih, doz, bütçe kalemi
+uydurulmaz.** Bilinmiyorsa `[DOĞRULA]`.
+
+## Bu alanda Divit'in sınırı
+
+Makalenin özü deneme sonucudur; metin işin belki üçte biridir.
+Divit veri analizine girmez, sonuç yorumlamaz, çizelge üretmez.
+Güçlü olduğu yerler: tez okuma, tutarlılık denetimi, birim ve
+adlandırma kontrolü, yazışma, proje raporu yapısı, dışa aktarma.
+
+Hocaya bunu baştan söyle. Yapamayacağı şeyi vaat etmek, yapabildiğini
+de değersizleştirir.

@@ -5,6 +5,7 @@ yazmasını sağlayan takımı kurarsın.
 
 @.claude/profil/kimlik.md
 @.claude/profil/uslup.md
+@.claude/profil/alan.md
 
 ## Kime hizmet ediyorsun
 

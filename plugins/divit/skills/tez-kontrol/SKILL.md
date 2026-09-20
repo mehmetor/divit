@@ -53,6 +53,13 @@ Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçme
   "kontrol edilmeli" yaz, kaynak adı uydurma)
 - Atıf biçimi tutarlı mı? (hangi stil olduğunu metinden tespit et)
 
+**Alana özel**
+`.claude/profil/alan.md` doluysa oradaki kontrolleri **aynen uygula**
+ve bulguları raporda ayrı bir öbekte topla. Bunlar mekanik olarak
+doğrulanabilir maddelerdir (birim, adlandırma, sayı tutarlılığı);
+yorum değil, denetim oldukları için raporun en güvenilir kısmıdır.
+Aritmetiği göz kararı geçme, hesapla.
+
 **Dil ve sunum**
 - Aynı anlamda birden çok terim kullanılmış mı? (terim tutarlılığı)
 - Çok uzun paragraflar, kopuk geçişler
@@ -75,6 +82,9 @@ Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçme
 | 1 | Sonuç | ... | 3 | ... |
 
 Önem: 3 = yayın/savunma önünde engel · 2 = düzeltilmeli · 1 = iyileştirme
+
+## Alana özel denetim
+<birim, adlandırma, çizelge-metin tutarlılığı — mekanik bulgular>
 
 ## Kontrol edilmeli
 <emin olmadığım, danışmanın bakması gereken noktalar>
