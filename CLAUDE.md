@@ -34,6 +34,15 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
 9. **Koruma yazıyla değil izinle.** `gelen/` ve `hakemlik/` kısıtları
    `settings.json` deny kurallarındadır (`Edit(...)`; `Write(...)` eşleşmez).
 10. **Tek plugin.** Erken bölme isim uzayı borcu yaratır.
+11. **Kurallar eklentide, klasörde değil.** Hocanın klasöründeki
+    `CLAUDE.md` kendiliğinden güncellenmez; eklenti güncellenir. Bu yüzden
+    çalışma kuralları `skills/kurallar` içindedir ve klasördeki CLAUDE.md
+    yalnızca "önce kuralları yükle" satırıyla güvenlik çekirdeğini taşır.
+    Kural değişikliği → `kurallar` skill'i → `./yayinla.sh --gonder`.
+12. **Geri bildirim onaylı ve anonim.** Divit `.divit/gunluk.md` ve
+    `.divit/sorunlar.md` tutar; `paylas` bunları öğrenci bilgisi
+    çıkarılmış hâlde hocaya gösterir, açık onaydan sonra e-postayı hoca
+    gönderir. Oturum dökümleri kullanılmaz.
 
 ## Skill yazarken
 

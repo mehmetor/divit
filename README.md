@@ -21,6 +21,8 @@ sağlayan takımı kurar.
 | Bölüm/makale üzerinde çalışma | `bolum-yaz` |
 | Önceki sürüme dönme | `geri-al` |
 | Kılavuzu açma | `yardim` |
+| Geri bildirimi geliştiriciye iletme (onaylı) | `paylas` |
+| Çalışma kuralları (her oturumda kendiliğinden) | `kurallar` |
 | İlk kurulum, profil çıkarma | `kurulum` |
 | İhtiyaç görüşmesi (pilot için) | `ihtiyac-gorusmesi` |
 
@@ -58,7 +60,7 @@ divit/
 ├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
 ├── dagitim/                         yayınlanmış eklenti zip'leri
 ├── plugins/divit/                   eklentinin kaynağı
-│   ├── skills/                      on skill
+│   ├── skills/                      on iki skill
 │   ├── alan/                        örnek alan kılavuzları (başlangıç noktası)
 │   └── scripts/                     yardımcı betik (isteğe bağlı)
 ├── hoca-paketi/Divit/               hocanın Belgeler/Divit klasörü şablonu

@@ -95,6 +95,7 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
     <li><a href="#guvenlik">Güvenlik</a></li>
     <li><a href="#geri">Bir şey bozulursa</a></li>
     <li><a href="#yapmaz">Divit'in yapmadığı işler</a></li>
+    <li><a href="#geribildirim">Geri bildirim</a></li>
   </ol>
 </nav>
 
@@ -191,6 +192,9 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td>Önceki sürüme dönme</td>
     <td><span class="yaz">geri al</span></td>
     <td>Aynı dosya</td></tr>
+<tr><td>Geri bildirim gönderme</td>
+    <td><span class="yaz">geri bildirim gönder</span></td>
+    <td>E-posta</td></tr>
 <tr><td>Bu kılavuzu açma</td>
     <td><span class="yaz">yardım</span></td>
     <td>Bu sayfa</td></tr>
@@ -203,9 +207,9 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <div class="tablo"><table>
 <thead><tr><th>Seçenek</th><th>Anlamı</th></tr></thead>
 <tbody>
-<tr><td><b>Allow</b> / <b>Yes</b></td><td>Bu işleme izin verin.</td></tr>
-<tr><td><b>Always allow</b> / <b>Don't ask again</b></td><td>Bu tür işleme her zaman izin verin.</td></tr>
-<tr><td><b>Deny</b> / <b>No</b></td><td>İzin vermeyin. Divit başka bir yol dener ya da size sorar.</td></tr>
+<tr><td><b>Allow once</b></td><td>Bu işleme bir kez izin verin.</td></tr>
+<tr><td><b>Always allow</b></td><td>Bu işleme her zaman izin verin. Divit bir daha sormaz.</td></tr>
+<tr><td><b>Deny</b></td><td>İzin vermeyin. Divit başka bir yol dener ya da size sorar.</td></tr>
 </tbody></table></div>
 <div class="kutu uyari"><b class="etiket">UYARI</b>
 Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye sorun.</div>
@@ -265,6 +269,28 @@ Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gö
   <li>Divit istatistik analizi yapmaz. Divit yalnızca metindeki sayıların tutarlılığını kontrol eder.</li>
   <li>Divit sizin yerinize makale yazmaz. Divit yapıyı, eksikleri ve itirazları gösterir.</li>
 </ul>
+</section>
+
+<section id="geribildirim">
+<h2>11. Geri bildirim</h2>
+<p>Divit yeni bir araçtır. Sizin deneyiminiz Divit'i geliştirir.</p>
+<p>Divit çalışırken iki şeyi not eder:</p>
+<ul>
+  <li>Yaptığı işlerin kısa bir listesi.</li>
+  <li>Karşılaştığınız sorunlar. Örnek: "bu olmadı", "anlamadım" dediğiniz anlar.</li>
+</ul>
+<h3>Notları gönderin</h3>
+<ol class="adim">
+  <li>Divit sohbetine şunu yazın: <span class="yaz">geri bildirim gönder</span></li>
+  <li>Divit neyi göndereceğini açıklar. Dosyayı ekranda gösterir.</li>
+  <li>Dosyayı okuyun. Çıkarılmasını istediğiniz bir şey varsa söyleyin.</li>
+  <li>Onaylıyorsanız <b>evet</b> yazın.</li>
+  <li>E-posta programınız açılır. <b>Gönder</b> düğmesine tıklayın.</li>
+</ol>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit metinlerinizi, öğrenci dosyalarını ve özgeçmişinizi göndermez. Divit onayınız olmadan hiçbir şey göndermez. Göndermeyi siz yaparsınız.</div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Bir sorun yaşadığınızda Divit'e doğrudan söyleyin. Örnek: "bu olmadı, raporu çok uzun yazdın". Divit sorunu düzeltir ve not eder.</div>
 </section>
 
 <footer>
