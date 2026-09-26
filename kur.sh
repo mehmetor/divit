@@ -130,12 +130,15 @@ adim "5/6 Divit eklentisi"
 if [ -n "$TEST" ] && [ -z "${CLAUDE_CONFIG_DIR:-}" ]; then
   bilgi "(sınama: atlandı)"
 elif command -v claude >/dev/null 2>&1; then
-  claude plugin marketplace add "$PAZAR_URL" >/dev/null 2>&1 \
-    || claude plugin marketplace update divit >/dev/null 2>&1
-  if claude plugin install divit@divit >/dev/null 2>&1 || claude plugin update divit@divit >/dev/null 2>&1; then
+  KAYIT="$GECICI/eklenti.log"
+  claude plugin marketplace add "$PAZAR_URL" >>"$KAYIT" 2>&1 \
+    || claude plugin marketplace update divit >>"$KAYIT" 2>&1
+  if claude plugin install divit@divit >>"$KAYIT" 2>&1 || claude plugin update divit@divit >>"$KAYIT" 2>&1; then
     bilgi "Kuruldu."
   else
     uyari "Şimdi kurulamadı; uygulama ilk açıldığında kendiliğinden inecek."
+    bilgi "Ayrıntı (geliştiriciye gönderin):"
+    grep -v '^[[:space:]]*$' "$KAYIT" | tail -12 | sed 's/^/    /'
   fi
 else
   bilgi "Uygulama ilk açıldığında kendiliğinden inecek."

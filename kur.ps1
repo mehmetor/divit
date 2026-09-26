@@ -150,12 +150,18 @@ Get-ChildItem $Hedef -Recurse -Force -Filter '.gitkeep' -ErrorAction SilentlyCon
 Adim "5/6 Divit eklentisi"
 if ($Test -and -not $env:CLAUDE_CONFIG_DIR) { Bilgi "(sinama: atlandi)" }
 elseif (Get-Command claude -ErrorAction SilentlyContinue) {
-  & claude plugin marketplace add $PazarUrl *> $null
-  if ($LASTEXITCODE -ne 0) { & claude plugin marketplace update divit *> $null }
-  & claude plugin install divit@divit *> $null
-  if ($LASTEXITCODE -ne 0) { & claude plugin update divit@divit *> $null }
+  $cikti = @()
+  $cikti += (& claude plugin marketplace add $PazarUrl 2>&1 | Out-String)
+  if ($LASTEXITCODE -ne 0) { $cikti += (& claude plugin marketplace update divit 2>&1 | Out-String) }
+  $cikti += (& claude plugin install divit@divit 2>&1 | Out-String)
+  if ($LASTEXITCODE -ne 0) { $cikti += (& claude plugin update divit@divit 2>&1 | Out-String) }
   if ($LASTEXITCODE -eq 0) { Bilgi "Kuruldu." }
-  else { Uyari "Simdi kurulamadi; uygulama ilk acildiginda kendiliginden inecek." }
+  else {
+    Uyari "Simdi kurulamadi; uygulama ilk acildiginda kendiliginden inecek."
+    Write-Host "  Ayrinti (gelistiriciye gonderin):" -ForegroundColor DarkGray
+    ($cikti -join "`n").Trim() -split "`n" | Where-Object { $_.Trim() } |
+      Select-Object -Last 12 | ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+  }
 } else { Bilgi "Uygulama ilk acildiginda kendiliginden inecek." }
 
 # ---------------------------------------------------------------- 6
