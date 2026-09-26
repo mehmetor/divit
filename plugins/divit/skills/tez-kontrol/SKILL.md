@@ -24,8 +24,9 @@ Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçme
 
 ## Akış
 
-1. `tez-kontrol/gelen/` içindeki dosyayı oku. PDF ise `pdftotext` ile
-   metne çevirip oku (geçici dosyayı `.claude/oturum/` altına koy).
+1. `tez-kontrol/gelen/` içindeki dosyayı oku. PDF'i Read aracıyla
+   doğrudan oku (uzunsa `pages` ile parça parça). Word dosyasını
+   `CLAUDE.md`'deki pandoc yoluyla `.divit/gecici/` altına metne çevir.
 2. Uzunsa önce yapıyı çıkar (başlıklar, bölüm uzunlukları), sonra
    bölüm bölüm oku. Tamamını okumadan rapor yazma.
 3. Aşağıdaki listeyi sırayla uygula.
@@ -54,7 +55,7 @@ Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçme
 - Atıf biçimi tutarlı mı? (hangi stil olduğunu metinden tespit et)
 
 **Alana özel**
-`.claude/profil/alan.md` doluysa oradaki kontrolleri **aynen uygula**
+`.divit/profil/alan.md` doluysa oradaki kontrolleri **aynen uygula**
 ve bulguları raporda ayrı bir öbekte topla. Bunlar mekanik olarak
 doğrulanabilir maddelerdir (birim, adlandırma, sayı tutarlılığı);
 yorum değil, denetim oldukları için raporun en güvenilir kısmıdır.

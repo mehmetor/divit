@@ -10,7 +10,7 @@ Risk düşük, kazanç anında görünür — ürünün güven kazandığı yer 
 
 ## Ortak kurallar
 
-- Hocanın unvanı, bölümü, üniversitesi `.claude/profil/kimlik.md`
+- Hocanın unvanı, bölümü, üniversitesi `.divit/profil/kimlik.md`
   dosyasından alınır. Orada yoksa **sor**, uydurma.
 - Tarih, sayı, yönetmelik maddesi, madde numarası **asla uydurulmaz**.
   Bilinmiyorsa `[DOĞRULA: ...]` yaz ve orada bırak.

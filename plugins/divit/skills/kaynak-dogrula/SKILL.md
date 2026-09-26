@@ -47,7 +47,7 @@ kaynağın PDF'i veya metni `kaynaklar/` altında bulunmalı.
    - **a. Künye var mı?** `.bib` içinde anahtar bulunuyor mu?
    - **b. Tam metin var mı?** `kaynaklar/` altında PDF/metin var mı?
    - **c. Pasaj var mı?** Atfın dayandığı iddiayı destekleyen
-     **birebir cümleyi** kaynaktan bul. `pdftotext` + arama kullan.
+     **birebir cümleyi** kaynaktan bul. PDF'i Read aracıyla aç, Grep ile ara.
      Hafızadan cevap verme — dosyayı gerçekten aç.
 3. Sonucu tabloya yaz.
 
@@ -64,9 +64,9 @@ Künyenin kendisi de yanlış olabilir: yazar adı bozulmuş, yıl kaymış,
 başlık değişmiş. DOI'si olan her giriş için yayıncı kaydını çek ve
 karşılaştır (soyadı, yıl, dergi, cilt, sayfa, başlık):
 
-```bash
-curl -s "https://api.crossref.org/works/<DOI>" | python3 -c "import json,sys; m=json.load(sys.stdin)['message']; print(m['title'][0], [a.get('family') for a in m.get('author',[])], m['issued']['date-parts'][0][0], m.get('volume'), m.get('page'))"
-```
+WebFetch aracıyla `https://api.crossref.org/works/<DOI>` adresini oku;
+başlığı, yazar soyadlarını, yılı, cildi ve sayfayı iste. (Komut satırı
+kullanma — WebFetch Windows'ta da Mac'te de aynı çalışır.)
 
 DOI'si olmayan giriş için `works?query.bibliographic=<başlık+yazar>`
 ile ara; **başlık benzerliği yüksek değilse eşleşme sayma.** Bulamadığını

@@ -39,7 +39,8 @@ varsayımıyla yazıldı. Branş netleşince:
 ### 3. Kurulum
 
 ```bash
-DIVIT_GITHUB_KULLANICI=<kullanici> ./hoca-paketi/kur.sh
+irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex   # Windows
+curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash   # Mac
 ```
 
 Hocanın makinesinde, hocanın yanında yap. Kurulumu izlemesi
@@ -91,7 +92,7 @@ geniş tutup geri çekilmekten iyidir.
 3. İki hafta dokunma. İkinci haftanın sonunda vault'un kayıtlarına bak:
 
 ```bash
-git -C ~/Divit log --format='%ad  %s' --date=format:'%d %b %H:%M'
+# Hocanın Belgeler/Divit/.divit/gunluk.md dosyasını (izniyle) birlikte açın
 ```
 
 Kendiliğinden açmış mı? Kaç kez? En sert ölçüt bu — sorulmadan

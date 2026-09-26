@@ -2,9 +2,9 @@
 
 ## İlke
 
-Beğeni sorulmaz, davranış ölçülür. Hocanın klasörü git reposu olduğu
-için ölçümlerin çoğu hiçbir şey sormadan, hiçbir metin dışarı
-çıkmadan diff'ten okunur.
+Beğeni sorulmaz, davranış ölçülür. Divit her işi hocanın klasöründeki
+`.divit/gunluk.md` dosyasına yazdığı için ölçümlerin çoğu hiçbir şey
+sormadan, hiçbir metin dışarı çıkmadan günlükten okunur (hocanın izniyle).
 
 ## Aşama 1 — Tek hoca (2 hafta)
 
@@ -40,7 +40,7 @@ fazla şey öğretir.
 |---|---|---|
 | Kurulumu yardımsız tamamlama | Gözlem | Evet |
 | 2. haftada kendiliğinden açma | Commit tarihleri | Evet |
-| Rapordan silinen oran | `git diff` | < %40 |
+| Rapordan silinen oran | Hocayla raporu birlikte okuma | < %40 |
 | Doğrulanamayan atıf | `kaynaklar/dogrulama.md` | **0** |
 | Word'e dönülen iş | Görüşme notu | Kayıt altına alınır |
 

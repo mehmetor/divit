@@ -19,7 +19,8 @@ sağlayan takımı kurar.
 | Word/PDF çıktısı, dergi stili | `disa-aktar` |
 | Kendi makalesinin gönderim öncesi okuması | `yayin-oncesi` |
 | Bölüm/makale üzerinde çalışma | `bolum-yaz` |
-| Bozulanı geri alma | `geri-al` |
+| Önceki sürüme dönme | `geri-al` |
+| Kılavuzu açma | `yardim` |
 | İlk kurulum, profil çıkarma | `kurulum` |
 | İhtiyaç görüşmesi (pilot için) | `ihtiyac-gorusmesi` |
 
@@ -30,41 +31,49 @@ hakemlik (yayıncı politikaları yasaklıyor) · not/puan verme ·
 intihal veya AI-tespit hükmü · veri analizi ·
 `kaynaklar.bib` dışında künye üretme.
 
+## Kurulum
+
+Hocanın Claude Pro hesabı olmalı. Sonra tek komut:
+
+**Windows** (PowerShell):
+```powershell
+irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex
+```
+
+**Mac** (Terminal):
+```bash
+curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash
+```
+
+Sonra Claude uygulaması → **Code** → **Local** → **Select folder** →
+Belgeler → Divit → `merhaba`. Divit hocayı kendisi tanır.
+Ayrıntı: [`belgeler/KURULUM-REHBERI.md`](belgeler/KURULUM-REHBERI.md).
+
 ## Yapı
 
 ```
 divit/
-├── .claude-plugin/marketplace.json   marketplace tanımı
-├── plugins/divit/                    tek plugin (bilinçli karar)
-│   ├── skills/                       dokuz skill
-│   ├── alan/                         alan kılavuzları (ziraat, +şablon)
-│   └── scripts/                      ortam kontrolü, otomatik yedek
-├── hoca-paketi/                      hocanın makinesine giden paket
-│   ├── kur.sh                        tek seferlik kurulum
-│   └── Divit/                        çalışma klasörü şablonu
-└── belgeler/
-    ├── IHTIYAC-ANALIZI.md            hoca ne istiyor — varsayımlar + doğrulama
-    ├── PILOT.md                      pilot planı ve kabul kriterleri
-    ├── ILK-OTURUM.md                 ilk hoca: hazırlık, akış, sonrası
-    └── TASARIM-NOTLARI.md            ilk tasarımdan sapmalar ve gerekçeleri
+├── kur.ps1, kur.sh                  tek komutluk kurulum (Windows, Mac)
+├── yayinla.sh                       eklentiyi hocalara yayınlar
+├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
+├── dagitim/                         yayınlanmış eklenti zip'leri
+├── plugins/divit/                   eklentinin kaynağı
+│   ├── skills/                      on skill
+│   ├── alan/                        örnek alan kılavuzları (başlangıç noktası)
+│   └── scripts/                     yardımcı betik (isteğe bağlı)
+├── hoca-paketi/Divit/               hocanın Belgeler/Divit klasörü şablonu
+│   ├── CLAUDE.md                    Divit'in hocayla çalışma kuralları
+│   ├── KILAVUZ.html                 hocanın kılavuzu
+│   └── .divit/profil/               Divit'in hocayı tanıdığı dosyalar
+└── belgeler/                        ihtiyaç analizi, pilot planı, rehberler
 ```
-
-## Kurulum (Mehmet çalıştırır, hoca değil)
-
-```bash
-DIVIT_GITHUB_KULLANICI=<kullanici> ./hoca-paketi/kur.sh
-```
-
-Hocaya düşen: masaüstündeki Divit simgesine çift tıklamak ve
-"başlayalım" demek.
 
 ## Geliştirme
 
 ```bash
-claude plugin validate .                 # yapı doğrulama
-/plugin marketplace add ./               # yerel test
+claude plugin validate plugins/divit
+./yayinla.sh            # zip + marketplace.json + commit
+./yayinla.sh --gonder   # ayrıca GitHub'a gönder → hocalara ulaşır
 ```
 
-`version` alanı bilinçli olarak yazılmamıştır — commit SHA'sı sürüm
-sayılır, her push hocalara geçer. Pilot 3 kişiyi aştığında `stable`
-dalına geçilecek (bkz. `belgeler/PILOT.md`).
+Tasarım kararları ve gerekçeleri: [`CLAUDE.md`](CLAUDE.md).

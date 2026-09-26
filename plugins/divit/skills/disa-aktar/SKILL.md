@@ -11,9 +11,14 @@ elle düzeltme olmadan.
 
 ## Ön kontrol
 
-`pandoc` kurulu değilse dur ve hocaya söyle:
-"Word çıktısı için pandoc adında küçük bir program gerekiyor,
-bir kez kurulur. Kurayım mı?" Onay almadan kurma.
+pandoc kurulumda Divit'le birlikte gelir; yeri `DIVIT_PANDOC` ortam
+değişkenindedir. Çalışmazsa hocaya teknik ayrıntı anlatma: "Word çıktısı
+için gereken araç bu bilgisayarda çalışmıyor; Divit'i kuran kişiye
+haber verin" de ve metni md olarak `cikti/` altına bırak.
+
+**PDF:** pandoc PDF için ayrıca LaTeX ister; Divit bunu kurmaz. PDF
+istenirse Word çıktısı üret ve hocaya söyle: "Word'de Dosya → Farklı
+Kaydet → PDF seçin." 
 
 ## Akış
 
@@ -21,17 +26,12 @@ bir kez kurulur. Kurayım mı?" Onay almadan kurma.
    çıktı alma — çıktı alındıktan sonra hoca metni gönderir ve
    düzeltme şansı kalmaz. Sorunlu atıf varsa göster ve sor.
 2. Hedefi sor: Word mü PDF mi, hangi dergi/stil?
-3. CSL stilini belirle. `.claude/stiller/` altında yoksa
-   Zotero Style Repository'den indirilmesi gerekir — hocaya söyle.
-4. Çalıştır:
-
-```bash
-pandoc taslak.md \
-  --citeproc \
-  --bibliography=kaynaklar.bib \
-  --csl=.claude/stiller/<stil>.csl \
-  -o "cikti/<ad>.docx"
-```
+3. CSL stilini belirle. `.claude/stiller/` altında yoksa Zotero Style
+   Repository'den (`https://www.zotero.org/styles/<stil-adı>`) indir —
+   Mac'te `curl -fsSL -o`, Windows'ta `Invoke-WebRequest -OutFile`.
+4. Çalıştır (tek satır):
+   - Mac: `"$DIVIT_PANDOC" taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
+   - Windows: `& $env:DIVIT_PANDOC taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
 
 5. Çıktıyı `cikti/` altına koy, kaynak markdown'a dokunma.
 

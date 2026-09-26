@@ -67,7 +67,7 @@ Anket, ölçek, SPSS, orta uzunlukta makale, hızlı yayın baskısı.
 **Karar:** Çekirdek ürün alandan bağımsız (kaynak doğrulama, tez
 raporu, idari yazışma, dışa aktarma). Alana özel olan her şey
 `plugins/divit/alan/<alan>.md` kılavuzlarında durur ve kurulumda
-hocanın `.claude/profil/alan.md` dosyasına kopyalanıp **hocayla
+hocanın `.divit/profil/alan.md` dosyasına kopyalanıp **hocayla
 doğrulanır**. Koda gömülmez.
 
 Bu, farklı alanlardan hocalara ölçeklenme mekanizmasıdır: her yeni
@@ -119,7 +119,7 @@ geri dönülür. Hoca git'i hiç görmez.
 
 ## 5. Kabul kriterleri — ürün ne zaman iyi sayılır
 
-Beğeni sorulmaz, davranış ölçülür. Vault git reposu olduğu için
+Beğeni sorulmaz, davranış ölçülür. Divit her işi `.divit/gunluk.md`'ye yazdığı için
 ilk üçü hocaya hiçbir şey sormadan diff'ten okunur.
 
 | Ölçüt | Eşik |

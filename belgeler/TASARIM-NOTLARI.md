@@ -28,3 +28,21 @@ ki sonradan geri alınmak istenirse neyin feda edileceği bilinsin.
   Bozuk bir commit şu an aynı anda herkesi düşürür.
 - **Ad: Divit.** Konumlanma gerekçesi güçlü, korundu. Marka başvurusu
   pilot sonrasına; TÜRKPATENT sorgusu ücretsiz, şimdi yapılabilir.
+
+## İkinci yeniden tasarım (27 Eylül 2026) — Windows ve gerçek kullanıcı
+
+İlk pilot hazırlığında kurulum Mac, Homebrew ve git varsayıyordu; rehber
+sekiz bölüm ve teknik ayrıntıyla doluydu. Mehmet'in geri bildirimi:
+Türkiye'de hocaların çoğu Windows kullanıyor, hoca makinelerinde git yok,
+kurulum tek komut olmalı, Divit hocayı kendisi tanımalı.
+
+| Önce | Sonra | Neden |
+|---|---|---|
+| Terminal penceresi | Claude masaüstü → Code sekmesi | Hoca terminal görmemeli; masaüstü uygulaması eklenti, skill ve proje ayarlarını CLI ile aynı okur |
+| Yalnız Mac, Homebrew | Windows + Mac, `irm \| iex` / `curl \| bash` | Yönetici hakkı, git, Python gerekmez |
+| GitHub pazar yeri (git ister) | `url` pazar yeri + `archive` eklenti | Git'siz indirme; sürüm = zip özeti, otomatik güncelleme açık |
+| Bash hook'ları | Hook yok | Hook'lar Windows'ta PowerShell'le çalışır; ortak betik yok |
+| git ile otomatik yedek | Önceki sürüm kuralı | Git yok; Word hiç yerinde değişmez |
+| `.claude/profil/` | `.divit/profil/` | `.claude/` korumalı yol: her yazım İngilizce onay sorusu doğururdu (uçtan uca sınamada bulundu) |
+| `hocalar/<ad>/` elle hazırlık, sabit alan kılavuzları | `kurulum` skill'i özgeçmişten alanı çıkarır, makaleleri bulur, kılavuzu yazar | Geliştirici her alan için hazırlık yapamaz |
+| `paketle.sh` ile kişiye özel zip | Tek genel kurulum | Kişiye özel bilgi kurulumda değil, ilk sohbette toplanır |

@@ -1,6 +1,6 @@
 # Alan kılavuzu — Ziraat / tarım bilimleri
 
-Bu dosya `kurulum` sırasında hocanın `.claude/profil/alan.md`
+Bu dosya `kurulum` sırasında hocanın `.divit/profil/alan.md`
 dosyasına kopyalanır ve **hocayla birlikte** düzeltilir. Buradaki
 her madde bir varsayımdır; hoca "biz öyle yapmıyoruz" derse
 hocanın dediği geçerlidir.

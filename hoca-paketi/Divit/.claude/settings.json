@@ -2,40 +2,44 @@
   "extraKnownMarketplaces": {
     "divit": {
       "source": {
-        "source": "github",
-        "repo": "GITHUB_KULLANICI/divit"
-      }
+        "source": "url",
+        "url": "https://raw.githubusercontent.com/mehmetor/divit/main/.claude-plugin/marketplace.json"
+      },
+      "autoUpdate": true
     }
   },
-  "enabledPlugins": {
-    "divit@divit": true
+  "env": {
+    "DIVIT_PANDOC": "__PANDOC__"
   },
   "permissions": {
+    "defaultMode": "acceptEdits",
     "allow": [
       "Read(./**)",
-      "Grep(./**)",
-      "Glob(./**)",
       "Edit(./tez-kontrol/rapor/**)",
       "Edit(./yazilar/**)",
       "Edit(./cikti/**)",
       "Edit(./kaynaklar/dogrulama.md)",
-      "Bash(pdftotext:*)",
-      "Bash(pandoc:*)",
-      "Bash(git status:*)",
-      "Bash(git log:*)",
-      "Bash(git diff:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(open KILAVUZ.html)",
-      "Bash(pdfinfo:*)"
+      "Edit(./.divit/**)",
+      "Bash(*pandoc*)",
+      "PowerShell(*pandoc*)",
+      "Bash(open *)",
+      "PowerShell(Invoke-Item *)",
+      "PowerShell(Start-Process *)",
+      "Bash(curl -fsSL -o *)",
+      "PowerShell(Invoke-WebRequest *)",
+      "WebSearch",
+      "WebFetch(domain:api.crossref.org)",
+      "WebFetch(domain:api.unpaywall.org)",
+      "WebFetch(domain:dergipark.org.tr)",
+      "WebFetch(domain:akademik.yok.gov.tr)"
     ],
     "deny": [
-      "Edit(./tez-kontrol/gelen/**)",
+      "Edit(./**/gelen/**)",
       "Read(./hakemlik/**)",
       "Edit(./hakemlik/**)",
-      "Bash(rm:*)",
-      "Bash(git reset:*)",
-      "Bash(git push:*)"
+      "Bash(rm *)",
+      "PowerShell(Remove-Item *)",
+      "Bash(git reset *)"
     ]
   }
 }

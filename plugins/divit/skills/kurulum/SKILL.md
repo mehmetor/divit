@@ -1,113 +1,129 @@
 ---
 name: kurulum
-description: Divit'in ilk kurulumu. Hocanın CV'si ve birkaç yazısından kimlik ve üslup profilini çıkarır, çalışma klasörünü hazırlar. Hoca ilk kez açtığında, "kurulum", "başlayalım", "beni tanı" dediğinde veya .claude/profil/kimlik.md boşsa kullan.
+description: Divit'in hocayı tanıdığı ilk kurulum. Özgeçmişi ister, alanı kendisi çıkarır, makalelerini bulur, alan kurallarını ve üslup profilini yazar, süren işleri öğrenip klasörleri hazırlar. Profil dosyaları "Henüz doldurulmadı" diyorsa, hoca ilk kez açtığında, "başlayalım", "beni tanı" dediğinde kullan.
 ---
 
-# İlk kurulum
+# İlk kurulum — Divit hocayı tanır
 
-Hedef: hoca on beş dakika içinde ilk gerçek işini yapmış olsun.
-Kurulum ekranı değil, **ilk iş** kurulumdur.
+Kimse hocanın bilgilerini önceden hazırlamadı. Her şeyi **sen** toplarsın:
+özgeçmişten, hocanın yayımlanmış makalelerinden ve hocanın cevaplarından.
+Hedef: hoca 15 dakika içinde ilk gerçek işini bitirmiş olsun.
 
-## Ton
+## Kurallar
 
-Hoca teknik değil. Terminal, git, dosya yolu, JSON gibi kelimeleri
-kullanma. "Klasör", "dosya", "yedek" yeterli. Aynı anda tek soru sor.
-Sorularını numaralandırıp liste hâlinde yığma.
+- Aynı anda tek soru. Liste hâlinde soru yığma.
+- Teknik kelime yok. "Dosyayı bu pencereye sürükleyin" yeter.
+- **Onaysız hiçbir şey profile girmez.** Çıkardığını göster, "doğru mu?" de.
+- Bulamadığın bilgiyi tahmin etme; sor ya da boş bırak.
+- Hoca yorulursa dur. Kaldığın yeri `gorevler.md` sonuna not et
+  ("Kurulum: 3. adımda kaldı") ve bir sonraki oturumda oradan sür.
 
-## Adım 0 — Ön doldurulmuş profil var mı
+## 1. Tanışma ve özgeçmiş
 
-`.claude/profil/kimlik.md` önceden doldurulmuşsa (Mehmet kurulumda
-kamuya açık akademik profilden hazırlamış olabilir) soruları sorma;
-**dosyayı hocaya göster ve satır satır onaylat:** "Sizi akademik
-profilinizden tanımaya çalıştım, doğru mu, eksik var mı?"
-Onaylanmayan satırı sil. Sonra Adım 2'ye geç.
+Kendini üç cümleyle tanıt: ne yaparsın, ne yapmazsın (not vermem, sizin
+yerinize yazmam, kaynaklarınızda olmayan atıf üretmem).
 
-## Adım 1 — Tanışma (3 soru, tek tek)
+Sonra iste:
+> "Özgeçmişinizi bu pencereye sürükler misiniz? PDF ya da Word olabilir.
+> Elinizde yoksa AVESİS ya da YÖK Akademik sayfanızın adresi de yeter."
 
-1. "Nasıl hitap edeyim? Unvanınız ve bölümünüz?"
-2. "Alanınız ne? Hangi konularda yazıyorsunuz?"
-3. "Elinizde özgeçmiş var mı? Varsa bu klasöre bırakın, ben okurum."
+- Dosya gelirse oku (PDF → Read; Word → `CLAUDE.md`'deki pandoc yolu).
+- Adres gelirse WebFetch ile oku. Yalnız ad gelirse WebSearch ile
+  "<ad> AVESİS" ara; bulduğun sayfayı hocaya gösterip "bu siz misiniz?" diye sor.
 
-CV'den şunları çıkar: tam unvan ve bölüm, alt uzmanlık, yayın
-dili dağılımı, sık gönderdiği dergiler, yürüttüğü proje türleri,
-tamamlanmış/devam eden tez danışmanlıkları, idari görevler.
-Bunlar hangi skill'in işe yarayacağını baştan söyler.
+Özgeçmişten çıkar: unvan, bölüm, üniversite, alan ve alt alanlar, çalışma
+konuları, yayın dilleri (oranıyla), sık gönderdiği dergiler, danışmanlıklar,
+projeler, idari görevler, jüri/komisyon görevleri.
 
-CV varsa oku ve **çıkardıklarını onaylat**: "Şunları anladım: ...
-Doğru mu, eksik var mı?" Onaysız kaydetme.
+`kimlik.md`'yi yaz, **hocaya göster, onaylat.** Jüri, hakemlik ya da
+komisyon görevi varsa şunu da söyle: "Bu dosyaları bana vermeyin; başkasının
+gizli belgeleri."
 
-`.claude/profil/kimlik.md` dosyasını yaz: unvan, bölüm, üniversite,
-alan, çalışma konuları, yazdığı diller, ders verdiği düzeyler.
+## 2. Alanı belirle
 
-## Adım 2 — Üslup
+Özgeçmişten alanı **sen** çıkar ve öner:
+> "Çalışmalarınız ağırlıklı olarak bahçe bitkileri — sebze yetiştiriciliği
+> ve hasat sonrası. Bir de kadın çalışmaları alanında yazıyorsunuz. Doğru mu?"
 
-"Kendi yazdığınız 2-3 makale veya bölüm verir misiniz? Nasıl
-yazdığınızı öğreneyim ki size yabancı gelen metinler üretmeyeyim."
+**Birden fazla kimlik olabilir** (ör. ziraat deneme makaleleri + sosyal
+bilim metinleri). Her birini ayrı ele al; kuralları karıştırma.
 
-Metinleri oku, `.claude/profil/uslup.md` yaz: cümle uzunluğu eğilimi,
-birinci çoğul mu tekil mi ("çalışmamızda" / "bu yazıda"), dipnot
-alışkanlığı, terim tercihleri (hangi Türkçe karşılığı seçiyor),
-kaçındığı kalıplar, paragraf uzunluğu.
+## 3. Makaleleri bul
 
-**Önemli:** Üslup profili metni *cilalamak* için kullanılır, taslağı
-hocanın sesiyle üretmek için değil. Taslaklar kasıtlı olarak nötr ve
-işaretli çıkar; hoca içeriği onayladıktan sonra üslup uygulanır.
-Sebebi: kendi sesiyle gelen metni insan daha az denetler.
+Üslup ve alan kuralları için hocanın **ilk yazar olduğu** 2-3 yakın tarihli
+makalesi gerekir. Çok yazarlı makalelerde metni çoğu zaman ilk yazar
+(öğrenci) yazar; o metin hocanın üslubunu vermez.
 
-## Adım 2b — Alan kuralları
+1. Önce kendin bul: özgeçmişteki makale başlıklarını DergiPark'ta ya da
+   Crossref'te (`api.crossref.org/works?query.bibliographic=...`) ara.
+   Açık erişimli olanların PDF'ini `kaynaklar/hoca-makaleleri/` altına indir.
+2. Bulamadığın ya da erişimi kapalı olanlar için hocadan iste:
+   "Şu iki makalenizin PDF'i elinizde var mı?"
+3. Her kimlik için en az bir metin hedefle.
 
-`${CLAUDE_PLUGIN_ROOT}/alan/` altında hocanın alanına uyan bir kılavuz
-var mı bak (`ziraat.md` gibi). Varsa içeriğini
-`.claude/profil/alan.md` dosyasına kopyala.
+## 4. Alan kurallarını yaz
 
-**Kopyalayıp geçme — hocayla doğrula.** Kılavuzdaki her madde bir
-varsayımdır. Beş dakikada şunları sor:
+`${CLAUDE_PLUGIN_ROOT}/alan/` klasörüne bak. Hocanın alanına uyan hazır
+bir kılavuz varsa (ör. `ziraat.md`) başlangıç olarak kullan, hocanın
+alt alanına göre daralt.
 
-- "Tablolara ne diyorsunuz, Çizelge mi Tablo mu?"
-- "Verimleri dekar üzerinden mi hektar üzerinden mi veriyorsunuz?"
-- "Hangi istatistik testini kullanıyorsunuz?"
-- "Yöntem bölümünde mutlaka bulunmasını istediğiniz şeyler neler?"
+Uyan kılavuz yoksa **kendin yaz.** Yapı olarak
+`${CLAUDE_PLUGIN_ROOT}/alan/ORNEK-SABLON.md` dosyasını izle. İçeriği
+hafızadan değil, 3. adımda okuduğun makalelerden çıkar:
 
-Cevapları `alan.md` içine işle. Hocanın dediği, kılavuzda yazanı ezer.
+- Terimler: hocanın kullandığı Türkçe karşılıklar (Çizelge mi Tablo mu?)
+- Sayı ve birim tuzakları: bu alanda hangi birimler karışır, dönüşüm formülü
+- Adlandırma: Latince adlar, kimyasal adlar, hukuk atıf biçimi, arşiv künyesi…
+- Yöntem bölümünde bulunması zorunlu olanlar
+- Kanıt denetimi: çizelge-metin, test-bulgu tutarlılığı
+- Yayın alışkanlıkları: bölüm düzeni, atıf stili, dergiler
+- Makale dışı yazım yükü: projeler, raporlar
+- **Divit'in bu alandaki sınırı** — mutlaka yaz
 
-Uygun kılavuz **yoksa** `alan.md` boş kalsın — yanlış alan kuralı
-uygulamak, hiç uygulamamaktan kötüdür. Hocanın iki-üç makalesini
-okuyup `alan/ORNEK-SABLON.md` yapısında yeni bir kılavuz çıkar ve
-Mehmet'e iletilmek üzere `.claude/oturum/` altına da bir kopya bırak.
+Sonra hocaya 3-5 kısa soruyla doğrulat. Örnek:
+> "Makalelerinizde tablolara 'Çizelge' diyorsunuz; öğrencilerinizden de
+> bunu mu bekliyorsunuz?"
 
-## Adım 3 — Kaynakça yolu
+Hocanın cevabı yazdığını ezer. Sonucu `alan.md`'ye yaz. Birden fazla
+kimlik varsa her biri ayrı başlık olsun.
 
-"Kaynaklarınızı nasıl tutuyorsunuz? Zotero, Mendeley, EndNote ya da
-klasörde PDF?"
+## 5. Üslup profili
 
-- **Zotero** → Better BibTeX eklentisini kur, `kaynaklar.bib` dosyasına
-  otomatik dışa aktarımı ayarla. Adımları tek tek, ekran ekran anlat.
-- **Diğer / yok** → `kaynaklar/` klasörüne PDF atmasını söyle.
-  `kaynak-dogrula` bu yolla da çalışır.
+Aynı makalelerden `uslup.md`'yi çıkar: cümle uzunluğu, şahıs, sık
+kalıplar, atıf biçimi, terim + parantez İngilizce alışkanlığı, İngilizce
+metinlerde tekrar eden yapılar. En sona bir **"Koru / İşaretle"** tablosu
+koy: hocanın bilerek seçtiği üslup ile gerçek hatayı ayır. Hocaya kısa bir
+özet göster.
 
-Her iki durumda da şunu söyle: *"Kaynaklarınızda olmayan hiçbir atıfı
-size vermem. Emin olamadığım yere işaret koyarım."* Bu cümle ürünün
-tek satırlık vaadidir, kurulumda mutlaka geçsin.
+## 6. Süren işler ve klasörler
 
-## Adım 4 — İlk iş
+Üç soru sor, tek tek:
+1. "Şu an danışmanlığını yaptığınız öğrenciler var mı?"
+2. "Yürüyen projelerinizde yaklaşan bir rapor tarihi var mı?"
+3. "Yayına hazırladığınız bir metin var mı?"
 
-"Şimdi gerçek bir iş yapalım. Hangisi elinizde var?"
-- Okumanız gereken bir öğrenci metni → `tez-kontrol`
-- Yazmanız gereken bir yazı/dilekçe → `yazisma`
-- Elinizdeki bir taslağın atıf kontrolü → `kaynak-dogrula`
+Cevaplara göre `gorevler.md`'yi yaz: iş, kişi (öğrenci için baş harfler),
+tarih, durum. Gerekirse klasör öner, onay alınca oluştur:
+`tez-kontrol/gelen/<baş harfler>/`, `yazilar/<makale-adı>/`,
+`yazilar/proje-<ad>/`.
 
-Birini bitirmeden kurulumu bitmiş sayma.
+## 7. Güvence ve ilk iş
 
-## Adım 5 — Güvence
+Kapanışta tek paragraf:
+> "Öğrenci dosyalarınıza yazmam, yalnızca okurum. Word dosyalarınızı hiç
+> değiştirmem; değişikliği yeni bir dosyaya yazarım. Kaynaklarınızda
+> olmayan bir kaynağa atıf yapmam, emin olmadığım yere işaret koyarım.
+> Bir şey ters giderse 'geri al' demeniz yeter."
 
-Kapanışta tek paragraf, sadeleştirilmiş:
+Sonra gerçek bir işe geç: `gorevler.md`'de en yakın tarihli iş hangisiyse
+onu öner. Hiç iş yoksa `yardim` skill'inin özetini göster.
 
-> Her oturumda çalışmanızın yedeğini alıyorum. Bir şey bozulursa
-> "geri al" demeniz yeterli. Öğrenci dosyalarınıza yazma iznim yok,
-> sadece okuyabiliyorum. Kaynaklarınızda olmayan bir künyeyi asla
-> üretmem.
+## 8. Geri bildirim (isteğe bağlı)
 
-## Adım 6 — İhtiyaç notu
+Hocaya sor:
+> "Yazdığım alan kurallarını, adınız olmadan, Divit'i geliştiren kişiyle
+> paylaşmama izin verir misiniz? Aynı alandaki başka hocalara yardımcı olur."
 
-`ihtiyac-gorusmesi` skill'ini çalıştırmayı teklif et: "On dakikanızı
-alırsam, bu aracı size göre ayarlayabilirim." Kabul ederse oraya geç.
+İzin verirse kılavuzu **kişisel bilgileri çıkararak**
+`.divit/paylasim/alan-<alan>.md` olarak kaydet. İzin yoksa hiçbir şey
+kaydetme. Kendin göndermeye çalışma; yalnızca kaydet.

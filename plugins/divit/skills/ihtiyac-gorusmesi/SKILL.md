@@ -7,7 +7,7 @@ description: Hocanın gerçek iş akışını ve ihtiyaçlarını tespit eden ya
 
 Bu skill ürünü hocaya uydurmak *ve* geliştiriciye ne yapacağını
 söylemek için var. Çıktı iki yere gider: hocanın profiline ve
-`.claude/oturum/ihtiyac-notu.md` dosyasına.
+`.divit/paylasim/ihtiyac-notu.md` dosyasına.
 
 ## Yöntem kuralı
 
@@ -47,7 +47,7 @@ Tek tek sor, cevabı dinle, üstüne git. Anketmiş gibi okuma.
 
 ## Çıktı — ihtiyaç notu
 
-`.claude/oturum/ihtiyac-notu.md`:
+`.divit/paylasim/ihtiyac-notu.md`:
 
 ```markdown
 # İhtiyaç notu — <alan>, <tarih>

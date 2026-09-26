@@ -63,6 +63,15 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
   h2{break-after:avoid} ol.adim>li,.kutu,tr{break-inside:avoid}
   ol.adim>li::before{background:#000;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+.isl{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.5px;border-radius:4px;padding:1px 7px;margin-right:6px;vertical-align:1px}
+.win{background:#e3ecf7;color:#1c4a7a} .mac{background:#ececec;color:#333}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .win{background:#1e2c3b;color:#9cc3e3} :root:not([data-theme="light"]) .mac{background:#2a2a2a;color:#ddd}}
+:root[data-theme="dark"] .win{background:#1e2c3b;color:#9cc3e3} :root[data-theme="dark"] .mac{background:#2a2a2a;color:#ddd}
+.iki{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 14px}
+.iki>div{background:var(--kagit);border:1px solid var(--cizgi);border-radius:8px;padding:10px 12px}
+@media (max-width:560px){.iki{grid-template-columns:1fr}}
+.tanim{background:var(--vurgu-acik);border-radius:10px;padding:14px 16px;margin:0 0 16px}
 </style>
 </head>
 <body>
@@ -78,14 +87,14 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
   <ol>
     <li><a href="#nedir">Divit nedir</a></li>
     <li><a href="#ac">Divit'i açın</a></li>
+    <li><a href="#ilk">İlk açılış</a></li>
     <li><a href="#konus">Divit'e iş verin</a></li>
     <li><a href="#isler">Divit'in yaptığı işler</a></li>
     <li><a href="#izin">İzin soruları</a></li>
-    <li><a href="#klasor">Klasörleriniz</a></li>
+    <li><a href="#klasor">Divit klasörü</a></li>
     <li><a href="#guvenlik">Güvenlik</a></li>
     <li><a href="#geri">Bir şey bozulursa</a></li>
     <li><a href="#yapmaz">Divit'in yapmadığı işler</a></li>
-    <li><a href="#kapat">Divit'i kapatın</a></li>
   </ol>
 </nav>
 
@@ -94,26 +103,49 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
 <p>Divit, bilgisayarınızda çalışan bir yardımcıdır.</p>
 <p>Divit öğrenci tezlerini okur. Divit makalelerinizi göndermeden önce kontrol eder. Divit yazışmalarınızı hazırlar.</p>
 <p>Divit sizin yerinize karar vermez. Divit size bulgu ve öneri verir. Son karar sizindir.</p>
-<p>Divit yalnızca <b>Divit klasöründeki</b> dosyalarla çalışır.</p>
+<div class="tanim"><b>Divit nerede çalışır?</b><br>
+Divit, <b>Claude</b> uygulamasının içinde çalışır. Claude uygulamasında <b>Code</b> sekmesini açarsınız. Sonra <b>Divit klasörünü</b> seçersiniz. Bu kılavuzda buna <b>Divit sohbeti</b> diyoruz.</div>
 </section>
 
 <section id="ac">
 <h2>2. Divit'i açın</h2>
 <ol class="adim">
-  <li>Masaüstünde <b>Divit</b> simgesini bulun.</li>
-  <li>Simgeye çift tıklayın.</li>
-  <li>Siyah bir pencere açılır. Bu pencere <b>Divit penceresidir</b>.</li>
-  <li>Pencerenin altında yazı alanı vardır. İsteğinizi bu alana yazın.</li>
-  <li><kbd>Enter</kbd> tuşuna basın.</li>
+  <li>Claude uygulamasını açın.
+    <div class="iki" style="margin-top:8px">
+      <div><span class="isl win">WINDOWS</span>Başlat menüsünü açın. <b>Claude</b> yazın. <kbd>Enter</kbd> tuşuna basın.</div>
+      <div><span class="isl mac">MAC</span>Dock'ta Claude simgesine tıklayın. Ya da Uygulamalar klasöründe <b>Claude</b>'u açın.</div>
+    </div></li>
+  <li>Pencerenin üst ortasında <b>Code</b> sekmesine tıklayın.</li>
+  <li><b>Local</b> seçeneğini seçin.</li>
+  <li><b>Select folder</b> düğmesine tıklayın.</li>
+  <li><b>Belgeler</b> klasörünü açın. <b>Divit</b> klasörünü seçin.
+    <div class="iki" style="margin-top:8px">
+      <div><span class="isl win">WINDOWS</span><b>Klasör seç</b> düğmesine tıklayın.</div>
+      <div><span class="isl mac">MAC</span><b>Aç</b> düğmesine tıklayın.</div>
+    </div></li>
+  <li>Alttaki mesaj kutusuna yazın. <kbd>Enter</kbd> tuşuna basın.</li>
 </ol>
 <div class="kutu not"><b class="etiket">NOT</b>
-İlk açılışta Divit sizden Claude hesabınızla giriş yapmanızı ister. Bu işlemi yalnızca bir kez yaparsınız.</div>
+Claude uygulaması seçtiğiniz klasörü genellikle hatırlar. Sonraki açılışlarda adım 3–5'i yapmanız gerekmeyebilir. Soldaki listede önceki Divit sohbetleriniz görünür.</div>
 <div class="kutu not"><b class="etiket">NOT</b>
-İlk açılışta Divit "Do you trust the files in this folder?" diye sorar. <b>Yes</b> seçeneğini seçin. <kbd>Enter</kbd> tuşuna basın.</div>
+Uygulama "Do you trust the files in this folder?" diye sorarsa <b>Yes</b> ya da <b>Trust</b> seçeneğini seçin. Bu soru yalnızca ilk seferde çıkar.</div>
+</section>
+
+<section id="ilk">
+<h2>3. İlk açılış</h2>
+<p>İlk açılışta Divit sizi tanımak ister. Divit sizden özgeçmişinizi ister.</p>
+<ol class="adim">
+  <li>Özgeçmişinizi (PDF ya da Word) mesaj kutusuna sürükleyin. Ya da AVESİS sayfanızın adresini yazın.</li>
+  <li>Divit özgeçmişinizden çıkardıklarını gösterir. Doğru olup olmadığını söyleyin.</li>
+  <li>Divit alanınızı önerir. Doğru olup olmadığını söyleyin.</li>
+  <li>Divit makalelerinizi internetten bulur. Bulamadıklarını sizden ister.</li>
+  <li>Divit birkaç kısa soru sorar. Soruları cevaplayın.</li>
+</ol>
+<p>Bu işlem yaklaşık 15 dakika sürer. Yarıda bırakırsanız Divit bir sonraki açılışta kaldığı yerden devam eder.</p>
 </section>
 
 <section id="konus">
-<h2>3. Divit'e iş verin</h2>
+<h2>4. Divit'e iş verin</h2>
 <p>Divit ile kendi cümlelerinizle konuşun. Özel komut bilmeniz gerekmez.</p>
 <h3>İyi bir istek nasıl yazılır</h3>
 <ol class="adim">
@@ -123,13 +155,18 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
 </ol>
 <p>Örnek istek:</p>
 <span class="yaz">gelen klasöründeki tezi oku, rapor çıkar</span>
-<p style="margin-top:12px">Divit bir soru sorarsa soruyu cevaplayın. Divit her seferinde tek soru sorar.</p>
+<h3>Divit'e dosya verin</h3>
+<p>İki yol vardır. İkisi de aynı sonucu verir.</p>
+<ul>
+  <li>Dosyayı mesaj kutusuna sürükleyin.</li>
+  <li>Dosyayı Divit klasöründeki ilgili klasöre koyun. Örnek: öğrenci tezini <code>tez-kontrol/gelen</code> klasörüne koyun.</li>
+</ul>
 <div class="kutu not"><b class="etiket">NOT</b>
-Divit bazen çalışırken birkaç dakika bekler. Uzun bir metni okurken bu normaldir. Pencereyi kapatmayın.</div>
+Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. Durdurmak isterseniz mesaj kutusunun yanındaki durdurma düğmesine tıklayın.</div>
 </section>
 
 <section id="isler">
-<h2>4. Divit'in yaptığı işler</h2>
+<h2>5. Divit'in yaptığı işler</h2>
 <div class="tablo"><table>
 <thead><tr><th>İş</th><th>Şöyle yazın</th><th>Sonuç nerede</th></tr></thead>
 <tbody>
@@ -148,10 +185,10 @@ Divit bazen çalışırken birkaç dakika bekler. Uzun bir metni okurken bu norm
 <tr><td>Hakemlere cevap mektubu</td>
     <td><span class="yaz">hakem yorumlarına cevap mektubu hazırla</span></td>
     <td><code>yazilar</code></td></tr>
-<tr><td>Word ya da PDF çıktısı</td>
+<tr><td>Word çıktısı</td>
     <td><span class="yaz">bunu Word'e çevir</span></td>
     <td><code>cikti</code></td></tr>
-<tr><td>Eski hâline dönme</td>
+<tr><td>Önceki sürüme dönme</td>
     <td><span class="yaz">geri al</span></td>
     <td>Aynı dosya</td></tr>
 <tr><td>Bu kılavuzu açma</td>
@@ -161,23 +198,24 @@ Divit bazen çalışırken birkaç dakika bekler. Uzun bir metni okurken bu norm
 </section>
 
 <section id="izin">
-<h2>5. İzin soruları</h2>
-<p>Divit bazı işlemlerden önce sizden izin ister. Pencerede birkaç seçenek görürsünüz.</p>
+<h2>6. İzin soruları</h2>
+<p>Divit bazı işlemlerden önce sizden izin ister. Mesaj kutusunun üstünde bir soru çıkar. Soru İngilizce olabilir.</p>
 <div class="tablo"><table>
 <thead><tr><th>Seçenek</th><th>Anlamı</th></tr></thead>
 <tbody>
-<tr><td><b>Yes</b></td><td>Bu işleme bir kez izin verin.</td></tr>
-<tr><td><b>Yes, and don't ask again</b></td><td>Bu tür işleme her zaman izin verin.</td></tr>
-<tr><td><b>No</b></td><td>İzin vermeyin. Divit başka bir yol dener ya da size sorar.</td></tr>
+<tr><td><b>Allow</b> / <b>Yes</b></td><td>Bu işleme izin verin.</td></tr>
+<tr><td><b>Always allow</b> / <b>Don't ask again</b></td><td>Bu tür işleme her zaman izin verin.</td></tr>
+<tr><td><b>Deny</b> / <b>No</b></td><td>İzin vermeyin. Divit başka bir yol dener ya da size sorar.</td></tr>
 </tbody></table></div>
 <div class="kutu uyari"><b class="etiket">UYARI</b>
-Bir işlemi anlamazsanız <b>No</b> seçeneğini seçin. Sonra Divit'e "bu ne işlem?" diye sorun.</div>
-<p>Divit dosya okumak ve kendi rapor klasörlerine yazmak için izin istemez. Bu işlemlere önceden izin verildi.</p>
+Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye sorun.</div>
+<p>Divit dosya okumak ve kendi klasörlerine yazmak için izin istemez. Bu işlemlere önceden izin verildi.</p>
+<p>Mesaj kutusunun yanında bir mod seçici vardır. <b>Accept edits</b> seçili kalsın. Bu ayarı değiştirmeyin.</p>
 </section>
 
 <section id="klasor">
-<h2>6. Klasörleriniz</h2>
-<p>Divit klasörü kişisel klasörünüzdedir. Finder'da <b>Divit</b> klasörünü açın.</p>
+<h2>7. Divit klasörü</h2>
+<p>Divit klasörü <b>Belgeler</b> klasörünüzdedir. Masaüstündeki <b>Divit</b> kısayolu da bu klasörü açar.</p>
 <div class="tablo"><table>
 <thead><tr><th>Klasör</th><th>İçindekiler</th></tr></thead>
 <tbody>
@@ -185,42 +223,42 @@ Bir işlemi anlamazsanız <b>No</b> seçeneğini seçin. Sonra Divit'e "bu ne i�
 <tr><td><code>tez-kontrol/rapor</code></td><td>Divit'in yazdığı değerlendirme raporları.</td></tr>
 <tr><td><code>yazilar</code></td><td>Sizin metinleriniz ve yazışmalarınız.</td></tr>
 <tr><td><code>kaynaklar</code></td><td>Kaynak PDF'leriniz. Divit yalnızca buradaki kaynaklara atıf yapar.</td></tr>
-<tr><td><code>cikti</code></td><td>Word ve PDF çıktıları.</td></tr>
+<tr><td><code>cikti</code></td><td>Word çıktıları.</td></tr>
 <tr><td><code>arsiv</code></td><td>Biten işler.</td></tr>
 </tbody></table></div>
-<h3>Bir dosyayı Divit'e verin</h3>
-<ol class="adim">
-  <li>Finder'da dosyayı bulun.</li>
-  <li>Dosyayı ilgili klasöre sürükleyin. Örnek: öğrenci tezini <code>tez-kontrol/gelen</code> klasörüne sürükleyin.</li>
-  <li>Divit penceresinde isteğinizi yazın.</li>
-</ol>
+<div class="kutu uyari"><b class="etiket">UYARI</b>
+<code>.divit</code> ve <code>.claude</code> klasörlerine dokunmayın. Bu klasörler Divit'in kendi dosyalarıdır. Sizi tanıdığı bilgiler ve önceki sürümler buradadır.</div>
 </section>
 
 <section id="guvenlik">
-<h2>7. Güvenlik</h2>
+<h2>8. Güvenlik</h2>
 <div class="kutu uyari"><b class="etiket">UYARI</b>
 Hakemlik için gelen makaleleri Divit'e vermeyin. Jüri ve teşvik dosyalarını Divit'e vermeyin. Bu dosyalar başka kişilerin gizli belgeleridir.</div>
 <p>Divit öğrenci dosyalarını değiştiremez. Divit bu dosyaları yalnızca okur.</p>
+<p>Divit Word dosyalarınızı hiç değiştirmez. Divit değişikliği yeni bir dosyaya yazar.</p>
 <p>Divit kaynaklarınızda olmayan bir kaynağa atıf yapmaz. Divit bir kaynağı bulamazsa metne <code>[ATIF GEREKLİ]</code> yazar.</p>
 <p>Divit emin olmadığı bir sayıyı ya da tarihi <code>[DOĞRULA]</code> ile işaretler. Bu işaretleri kontrol edin.</p>
-<p>Divit her oturumda çalışmanızın yedeğini alır.</p>
 <div class="kutu not"><b class="etiket">NOT</b>
 Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gönderilir. Yayımlanmamış ve kişisel bilgi içeren metinlerde bunu göz önünde tutun.</div>
 </section>
 
 <section id="geri">
-<h2>8. Bir şey bozulursa</h2>
+<h2>9. Bir şey bozulursa</h2>
 <ol class="adim">
-  <li>Divit penceresine şunu yazın: <span class="yaz">geri al</span></li>
-  <li>Divit son değişiklikleri tarih ve saatle gösterir.</li>
+  <li>Divit sohbetine şunu yazın: <span class="yaz">geri al</span></li>
+  <li>Divit önceki sürümleri tarih ve saatle gösterir.</li>
   <li>Dönmek istediğiniz tarihi yazın.</li>
   <li>Divit dosyanızı o tarihteki hâline getirir. Diğer dosyalarınız değişmez.</li>
 </ol>
-<p>Divit penceresi yanıt vermezse <kbd>Ctrl</kbd> + <kbd>C</kbd> tuşlarına basın. Sonra Divit'i yeniden açın.</p>
+<p>Divit yalnızca kendi değiştirdiği dosyaların önceki sürümlerini saklar. Kendi elinizle değiştirdiğiniz bir dosya için:</p>
+<div class="iki">
+  <div><span class="isl win">WINDOWS</span>Belgeler klasörünüz OneDrive ile eşitleniyorsa dosyaya sağ tıklayın. <b>Sürüm geçmişi</b>'ni seçin.</div>
+  <div><span class="isl mac">MAC</span>Time Machine açıksa dosyanın önceki hâline oradan dönün.</div>
+</div>
 </section>
 
 <section id="yapmaz">
-<h2>9. Divit'in yapmadığı işler</h2>
+<h2>10. Divit'in yapmadığı işler</h2>
 <ul>
   <li>Divit not vermez. Divit kabul ya da ret kararı vermez.</li>
   <li>Divit intihal kararı vermez. Divit "yapay zekâ yazmış" kararı vermez.</li>
@@ -229,18 +267,9 @@ Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gö
 </ul>
 </section>
 
-<section id="kapat">
-<h2>10. Divit'i kapatın</h2>
-<ol class="adim">
-  <li>Divit penceresine şunu yazın: <span class="yaz">/exit</span></li>
-  <li><kbd>Enter</kbd> tuşuna basın.</li>
-  <li>Pencereyi kapatın.</li>
-</ol>
-</section>
-
 <footer>
   Yardım için: Mehmet Akif Orakçı · mehmetakiforakci@gmail.com<br>
-  Bu kılavuzu Divit penceresinde <code>yardım</code> yazarak yeniden açabilirsiniz.
+  Bu kılavuzu Divit sohbetinde <code>yardım</code> yazarak yeniden açabilirsiniz.
 </footer>
 
 </main>

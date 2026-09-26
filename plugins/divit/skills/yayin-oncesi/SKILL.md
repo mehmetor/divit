@@ -24,11 +24,15 @@ listesidir; metni yeniden yazmaz.
 
 ## Akış
 
-1. Metni düz metne çevir (`pandoc -t plain --wrap=none`). Tamamını oku.
-2. Mekanik denetimleri çalıştır:
-   ```bash
-   python3 "${CLAUDE_PLUGIN_ROOT}/scripts/harf-lsd-denetimi.py" taslak.docx
-   ```
+1. Metni düz metne çevir (`CLAUDE.md`'deki pandoc yolu, `-t plain
+   --wrap=none`, çıktı `.divit/gecici/`). Tamamını oku.
+2. Harf–LSD denetimi: Mac'te Python varsa betiği çalıştır:
+   `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/harf-lsd-denetimi.py" <dosya>`.
+   Python yoksa (Windows'ta genellikle yoktur) kuralı kendin uygula:
+   her çizelge satırında her ikili için `fark = |a − b|`; fark > LSD ise
+   ortak harf olamaz, fark < LSD ise en az bir ortak harf olmalı. Her
+   çifti tek tek yaz ve hesapla; göz kararı geçme. Harf dizisinde atlama
+   (a, b, f) da yazım hatasıdır.
 3. Aşağıdaki kontrol listesini uygula.
 4. `rapor/on-degerlendirme-<tarih>.md` yaz, `pandoc` ile .docx üret
    (hoca Word'de okur). Tablo sütun oranlarını içeriğe göre ayarla.

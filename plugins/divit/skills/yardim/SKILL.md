@@ -5,11 +5,9 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Hoca "
 
 # Yardım
 
-1. Kılavuzu tarayıcıda aç:
-   ```bash
-   open KILAVUZ.html
-   ```
-   Dosya yoksa bu adımı atla; bunu hocaya söyleme.
+1. Kılavuzu tarayıcıda aç — Mac: `open KILAVUZ.html`,
+   Windows: `Invoke-Item KILAVUZ.html`. Dosya yoksa bu adımı atla;
+   bunu hocaya söyleme.
 
 2. Pencerede şu kısa özeti ver — **bu biçimde, bu kadar kısa**:
 
