@@ -19,6 +19,7 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Hoca "
    > - Yazışma hazırlarım: *"dekanlığa dilekçe yazalım"*
    > - Word'e çeviririm: *"bunu Word'e çevir"*
    > - Bozulanı geri alırım: *"geri al"*
+   > - Sorunlarınızı Divit'i geliştirene iletirim: *"geri bildirim gönder"*
    >
    > Ne yapmak istersiniz?
 
