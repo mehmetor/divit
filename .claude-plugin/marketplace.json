@@ -10,8 +10,8 @@
       "name": "divit",
       "source": {
         "source": "archive",
-        "url": "https://raw.githubusercontent.com/mehmetor/divit/main/dagitim/divit-7d2a25e94a43.zip",
-        "sha256": "7d2a25e94a4397f9cc64c20ec50a3d20488da6b56a77e8c1bed7d71c04714b28"
+        "url": "https://raw.githubusercontent.com/mehmetor/divit/main/dagitim/divit-0357aca38e7f.zip",
+        "sha256": "0357aca38e7f3b2e1a40981e95b24ecd826dc799e25c3439acad82f228851528"
       },
       "description": "Divit — akademik yazım tezgâhı. Tez değerlendirme, kaynak doğrulama, idari yazışma, dışa aktarma."
     }
