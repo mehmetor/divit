@@ -17,6 +17,9 @@ Hedef: hoca 15 dakika içinde ilk gerçek işini bitirmiş olsun.
 - Bulamadığın bilgiyi tahmin etme; sor ya da boş bırak.
 - Hoca yorulursa dur. Kaldığın yeri `gorevler.md` sonuna not et
   ("Kurulum: 3. adımda kaldı") ve bir sonraki oturumda oradan sür.
+- **Hocanın "yok", "elimde yok", "istemiyorum" dediği her şeyi hemen
+  `gorevler.md`'deki kurulum durumuna yaz** (ör. "Gesunde Pflanzen 2023 PDF'i:
+  hocada yok"). O şeyi bir daha isteme; onsuz devam et.
 
 ## 1. Tanışma ve özgeçmiş
 
