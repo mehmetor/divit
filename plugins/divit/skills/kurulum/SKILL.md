@@ -14,6 +14,14 @@ Hoca teknik değil. Terminal, git, dosya yolu, JSON gibi kelimeleri
 kullanma. "Klasör", "dosya", "yedek" yeterli. Aynı anda tek soru sor.
 Sorularını numaralandırıp liste hâlinde yığma.
 
+## Adım 0 — Ön doldurulmuş profil var mı
+
+`.claude/profil/kimlik.md` önceden doldurulmuşsa (Mehmet kurulumda
+kamuya açık akademik profilden hazırlamış olabilir) soruları sorma;
+**dosyayı hocaya göster ve satır satır onaylat:** "Sizi akademik
+profilinizden tanımaya çalıştım, doğru mu, eksik var mı?"
+Onaylanmayan satırı sil. Sonra Adım 2'ye geç.
+
 ## Adım 1 — Tanışma (3 soru, tek tek)
 
 1. "Nasıl hitap edeyim? Unvanınız ve bölümünüz?"

@@ -35,8 +35,11 @@ bu aracın en somut faydasıdır.
 - Her paragraf en az bir işe yarasın; dolgu cümle yok.
 - Sayı, tarih, oran, yönetmelik: kaynağı yoksa `[DOĞRULA]`.
 - Atıf: `kaynaklar.bib` dışında künye yok, yoksa `[ATIF GEREKLİ]`.
-- Türkçe akademik dil: "-mektedir" yığını yok, İngilizce devrik yapı
-  yok, gereksiz edilgen yok.
+- Metin belgenin dilinde yazılır. Türkçede "-mektedir" yığını,
+  İngilizce devrik yapı, gereksiz edilgen yok. İngilizcede Türkçeden
+  kalıp çeviri yok ("it was determined that", "in this context").
+- İngilizce makalede dergi yönergesinin dil tercihini (US/UK) sor,
+  metin boyunca tutarlı tut.
 
 **5. Üslup en sonda.**
 İçerik onaylanmadan `uslup.md` uygulanmaz. Sebebi: hocanın kendi

@@ -4,6 +4,8 @@
 set -uo pipefail
 
 GITHUB_KULLANICI="${DIVIT_GITHUB_KULLANICI:-}"
+PROFIL="${DIVIT_PROFIL:-}"     # opsiyonel: ön doldurulmuş kimlik.md / alan.md klasörü
+ALAN="${DIVIT_ALAN:-}"         # opsiyonel: plugins/divit/alan/<ALAN>.md
 HEDEF="${1:-$HOME/Divit}"
 KAYNAK="$(cd "$(dirname "$0")" && pwd)/Divit"
 
@@ -28,6 +30,19 @@ cp -R "$KAYNAK/." "$HEDEF/"
 ayar="$HEDEF/.claude/settings.json"
 sed -i '' "s|GITHUB_KULLANICI|$GITHUB_KULLANICI|" "$ayar" 2>/dev/null \
   || sed -i "s|GITHUB_KULLANICI|$GITHUB_KULLANICI|" "$ayar"
+
+# --- ön doldurulmuş profil (opsiyonel) ---
+# Kurulum skill'i bu dosyaları hocaya gösterip onaylatır; onaysız satır silinir.
+DEPO="$(cd "$(dirname "$0")/.." && pwd)"
+if [ -n "$ALAN" ] && [ -f "$DEPO/plugins/divit/alan/$ALAN.md" ]; then
+  cp "$DEPO/plugins/divit/alan/$ALAN.md" "$HEDEF/.claude/profil/alan.md"
+  echo "Alan kılavuzu: $ALAN"
+fi
+if [ -n "$PROFIL" ]; then
+  for f in kimlik.md uslup.md alan.md; do
+    [ -f "$PROFIL/$f" ] && cp "$PROFIL/$f" "$HEDEF/.claude/profil/$f" && echo "Profil: $f"
+  done
+fi
 
 # --- gerekli araçlar ---
 eksik=()

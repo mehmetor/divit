@@ -91,11 +91,55 @@ Kontrol edilecekler:
 - Türkçe ve İngilizce özet birbirinin çevirisi mi, sayılar tutuyor mu?
 - Anahtar kelimeler iki dilde de var mı?
 
+## Alt alan: bahçe bitkileri — sık görülen ölçümler ve tuzaklar
+
+Hocanın alt alanına göre ilgili öbekleri tut, gerisini `alan.md`'den sil.
+
+**Hasat sonrası / muhafaza**
+- Ağırlık kaybı (%), sertlik (N veya kg-kuvvet — hangisi olduğu
+  yazılmış mı), SÇKM (°Brix), titre edilebilir asitlik (hangi asit
+  cinsinden: sitrik/malik), renk (L*, a*, b*, hue°, kroma).
+- Muhafaza koşulları eksiksiz mi: sıcaklık (°C), bağıl nem (%),
+  süre, ölçüm aralıkları. MAP/KA'da gaz bileşimi (% O₂, % CO₂).
+- 1-MCP dozu birimi karışır: ppb, µL L⁻¹, nL L⁻¹. Metin boyunca tek
+  birim mi, dönüşüm doğru mu?
+- Vazo ömrü / raf ömrü: "ömrün bittiği" ölçüt tanımlanmış mı?
+
+**Sulama**
+- Kısıntılı sulamada seviyeler neye göre (% ETc, % tava kapasitesi,
+  kap buharlaşması)? Tanım yöntemde var mı?
+- Su kullanım etkinliği birimi: kg m⁻³ mü, kg da⁻¹ mm⁻¹ mi?
+  Farklı çalışmalarla karşılaştırılıyorsa aynı birim mi?
+- Uygulanan toplam su (mm veya m³ da⁻¹) ile verim birlikte verilmiş mi?
+
+**Ağır metal / kalıntı**
+- **Taze ağırlık mı kuru ağırlık mı?** mg kg⁻¹ değerinin hangisine
+  göre olduğu yazılmamışsa mevzuat sınırıyla karşılaştırma anlamsız
+  olur. En ciddi ve en sık kaçan tutarsızlık budur.
+- Karşılaştırılan yasal sınırın kaynağı ve yılı (Türk Gıda Kodeksi,
+  AB tüzüğü) verilmiş mi? Sınır değerini **uydurma** — `[DOĞRULA]`.
+- Analiz yöntemi (ICP-OES, AAS), tespit limiti (LOD) verilmiş mi?
+
+**Biyolojik mücadele / yaşam tablosu**
+- Parametre adları ve birimleri tutarlı mı (r, λ, R₀, T; gün⁻¹).
+- Sıcaklık, nem, fotoperiyot koşulları verilmiş mi?
+
+**Doku kültürü / ıslah**
+- Ortam bileşimi ve bitki büyüme düzenleyici dozları (mg L⁻¹),
+  sterilizasyon, inkübasyon koşulları, başarı oranının paydası
+  (kültüre alınan anter sayısı mı, embriyo mu?) açık mı?
+
+**Aşılama**
+- Anaç ve kalem adları çeşit adlandırma kuralına uygun mu, metin
+  boyunca aynı yazılıyor mu?
+
 ## Proje ve rapor işleri
 
 Ziraat fakültelerinde makale dışı yazım yükü ağırdır. `yazisma`
 skill'i bunları da kapsar:
 - TÜBİTAK, TAGEM, BAP proje başvuruları ve gelişme/sonuç raporları
+- AB ortaklı projeler (Horizon, ERA.NET, PRIMA): İngilizce ara
+  raporlar, iş paketi (WP) ve çıktı (deliverable) takibi
 - Çeşit tescil ve denemelerine ilişkin raporlar
 - Çiftçi/sektör bilgilendirme metinleri, yaygın etki bölümleri
 

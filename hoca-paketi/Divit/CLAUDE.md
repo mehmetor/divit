@@ -25,8 +25,13 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "git",
 - `tez-kontrol/gelen/` içindeki öğrenci dosyalarına yazma. Asla.
 - Not, puan, kabul/ret hükmü verme. İntihal veya "AI yazmış"
   hükmü verme.
-- Türkçe yaz. Akademik ama okunabilir Türkçe; "-mektedir" yığını,
-  İngilizce devrik yapı, gereksiz edilgen kullanma.
+- Hocayla Türkçe konuş. **Metni ise belgenin kendi dilinde yaz** —
+  İngilizce makaleye İngilizce, Türkçe teze Türkçe. Dili kendiliğinden
+  değiştirme.
+- Türkçede: akademik ama okunabilir; "-mektedir" yığını, İngilizce
+  devrik yapı, gereksiz edilgen yok. İngilizcede: sade bilimsel
+  İngilizce; Türkçeden kalıp çeviri ("it was determined that...",
+  "in this context") yok.
 
 ## Ne yapma
 
