@@ -58,6 +58,23 @@ kaynağın PDF'i veya metni `kaynaklar/` altında bulunmalı.
 | ⚠️ Tam metin yok | Künye var, PDF yok | Doğrulanamaz; hoca PDF'i eklemeli |
 | ❌ Künye yok | `.bib`'de yok | `[ATIF GEREKLİ]` — atıf kurulamaz |
 
+## Yayıncı kaydıyla doğrulama (DOI)
+
+Künyenin kendisi de yanlış olabilir: yazar adı bozulmuş, yıl kaymış,
+başlık değişmiş. DOI'si olan her giriş için yayıncı kaydını çek ve
+karşılaştır (soyadı, yıl, dergi, cilt, sayfa, başlık):
+
+```bash
+curl -s "https://api.crossref.org/works/<DOI>" | python3 -c "import json,sys; m=json.load(sys.stdin)['message']; print(m['title'][0], [a.get('family') for a in m.get('author',[])], m['issued']['date-parts'][0][0], m.get('volume'), m.get('page'))"
+```
+
+DOI'si olmayan giriş için `works?query.bibliographic=<başlık+yazar>`
+ile ara; **başlık benzerliği yüksek değilse eşleşme sayma.** Bulamadığını
+"doğrulanamadı" diye bırak, tahminle tamamlama.
+
+Özellikle ara: bir kelimenin toplu değiştirilmesiyle bozulmuş adlar
+(metinde "bell → capia" yapılınca "La Bella" → "La Capiaa" olur).
+
 ## Doğrulanmış atıf kaydı
 
 Doğrulanan her atıf için `kaynaklar/dogrulama.md` dosyasına satır ekle:

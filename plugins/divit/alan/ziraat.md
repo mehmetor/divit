@@ -133,6 +133,29 @@ Hocanın alt alanına göre ilgili öbekleri tut, gerisini `alan.md`'den sil.
 - Anaç ve kalem adları çeşit adlandırma kuralına uygun mu, metin
   boyunca aynı yazılıyor mu?
 
+## Türkçe → İngilizce çeviri tuzakları
+
+Ziraat makaleleri çoğu zaman Türkçe yazılıp çevriliyor. Aşağıdakiler
+çeviride sessizce anlam değiştirir; `yayin-oncesi` bunları arar.
+
+| Türkçe | Yanlış çeviri | Doğrusu |
+|---|---|---|
+| yaş ağırlık | age weight | fresh weight (FW) |
+| kuru ağırlık | – | dry weight (DW) |
+| YA / KA (çizelgede) | çevrilmeden kalır | FW / DW |
+| lekesiz fide | non-spotless | spotless / disease-free |
+| suda çözünür kuru madde (SÇKM) | water-soluble dry matter | soluble solids content (SSC, °Brix) |
+| titre edilebilir asitlik | titratable acid content | titratable acidity (TA) |
+| tekerrür | repetition | replication |
+| uygulama (deneme konusu) | application | treatment |
+| deneme deseni | trial pattern | experimental design |
+| tesadüf blokları | random blocks | randomized complete block design |
+| çeşit | variety / species | cultivar (cv.) |
+| ülkemiz | our country | Türkiye |
+| dekar | decare | 0.1 ha — uluslararası metinde ha kullan |
+
+Ayrıca: ondalık virgül (90,40) → nokta (90.40); "Anonim" → "Anonymous".
+
 ## Proje ve rapor işleri
 
 Ziraat fakültelerinde makale dışı yazım yükü ağırdır. `yazisma`

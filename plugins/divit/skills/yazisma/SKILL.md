@@ -14,8 +14,10 @@ Risk düşük, kazanç anında görünür — ürünün güven kazandığı yer 
   dosyasından alınır. Orada yoksa **sor**, uydurma.
 - Tarih, sayı, yönetmelik maddesi, madde numarası **asla uydurulmaz**.
   Bilinmiyorsa `[DOĞRULA: ...]` yaz ve orada bırak.
-- Türkçe yazışmada resmî ama okunabilir dil. "-mektedir" yığını yok,
-  "işbu", "mezkûr" gibi kalıplar yok. Kısa cümle.
+- Resmî yazışmanın dili kurumun ve hocanın alışkanlığına uyar.
+  Üniversite yazışmasında yerleşik kalıplar ("arz ederim", "gereğini
+  bilgilerinize") beklenen biçimdir; kaldırma. Hocanın önceki bir
+  yazısı varsa onu örnek al.
 - Taslak her zaman **hocanın gözden geçirmesi için** üretilir; asla
   "gönderilmeye hazır" diye sunma.
 

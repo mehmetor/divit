@@ -35,9 +35,10 @@ bu aracın en somut faydasıdır.
 - Her paragraf en az bir işe yarasın; dolgu cümle yok.
 - Sayı, tarih, oran, yönetmelik: kaynağı yoksa `[DOĞRULA]`.
 - Atıf: `kaynaklar.bib` dışında künye yok, yoksa `[ATIF GEREKLİ]`.
-- Metin belgenin dilinde yazılır. Türkçede "-mektedir" yığını,
-  İngilizce devrik yapı, gereksiz edilgen yok. İngilizcede Türkçeden
-  kalıp çeviri yok ("it was determined that", "in this context").
+- Metin belgenin dilinde yazılır. Üslup hocanındır (`uslup.md`);
+  genel yazım zevki hocanın alışkanlığını ezmez. İngilizcede Türkçeden
+  kalıp çeviriyi ("it was determined that") hataya dönüşeceği için
+  işaretle, ama hocanın bilerek seçtiği ifadeyi değiştirme.
 - İngilizce makalede dergi yönergesinin dil tercihini (US/UK) sor,
   metin boyunca tutarlı tut.
 

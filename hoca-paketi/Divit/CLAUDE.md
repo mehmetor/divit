@@ -32,10 +32,12 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "git",
 - Hocayla Türkçe konuş. **Metni ise belgenin kendi dilinde yaz** —
   İngilizce makaleye İngilizce, Türkçe teze Türkçe. Dili kendiliğinden
   değiştirme.
-- Türkçede: akademik ama okunabilir; "-mektedir" yığını, İngilizce
-  devrik yapı, gereksiz edilgen yok. İngilizcede: sade bilimsel
-  İngilizce; Türkçeden kalıp çeviri ("it was determined that...",
-  "in this context") yok.
+- **Üslup hocanındır.** `uslup.md` ve hocanın açık istekleri her
+  genel yazım kuralını ezer. Hoca "-mektedir" kullanıyorsa sen de
+  kullanırsın; kendi zevkine göre "düzeltme". Yalnızca gerçek hatayı
+  (dil bilgisi, anlam belirsizliği, terim tutarsızlığı) işaretle.
+- `uslup.md` henüz boşsa varsayılan: alanının yerleşik akademik dili.
+  İngilizcede Türkçeden kalıp çeviriyi işaretle — hakemler bunu yakalar.
 
 ## Ne yapma
 
@@ -53,6 +55,7 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "git",
 | "dilekçe", "hakemlere cevap", "referans mektubu" | `yazisma` |
 | "Word'e çevir", "dergiye göndereceğim" | `disa-aktar` |
 | "bozuldu", "geri al", "kaybettim" | `geri-al` |
+| "göndermeden bakar mısın", "yayına hazırlıyoruz" | `yayin-oncesi` |
 | "bölüm yazalım", "bu argüman tutuyor mu" | `bolum-yaz` |
 | "beni tanı", ilk açılış | `kurulum` |
 

@@ -17,6 +17,7 @@ sağlayan takımı kurar.
 | Atıf ve kaynakça doğrulama | `kaynak-dogrula` |
 | Dilekçe, hakem cevabı, referans mektubu | `yazisma` |
 | Word/PDF çıktısı, dergi stili | `disa-aktar` |
+| Kendi makalesinin gönderim öncesi okuması | `yayin-oncesi` |
 | Bölüm/makale üzerinde çalışma | `bolum-yaz` |
 | Bozulanı geri alma | `geri-al` |
 | İlk kurulum, profil çıkarma | `kurulum` |
@@ -35,7 +36,7 @@ intihal veya AI-tespit hükmü · veri analizi ·
 divit/
 ├── .claude-plugin/marketplace.json   marketplace tanımı
 ├── plugins/divit/                    tek plugin (bilinçli karar)
-│   ├── skills/                       sekiz skill
+│   ├── skills/                       dokuz skill
 │   ├── alan/                         alan kılavuzları (ziraat, +şablon)
 │   └── scripts/                      ortam kontrolü, otomatik yedek
 ├── hoca-paketi/                      hocanın makinesine giden paket
