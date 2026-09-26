@@ -15,6 +15,7 @@
     "defaultMode": "acceptEdits",
     "allow": [
       "Read(./**)",
+      "Read(~/.claude/plugins/**)",
       "Edit(./tez-kontrol/rapor/**)",
       "Edit(./yazilar/**)",
       "Edit(./cikti/**)",
