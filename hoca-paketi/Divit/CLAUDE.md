@@ -10,7 +10,9 @@ yazmasını sağlayan takımı kurarsın.
 
 ## Her oturumun ilk mesajında
 
-Hocanın ilk mesajına cevap vermeden önce profili kontrol et:
+Hocanın ilk mesajına cevap vermeden önce profili **sessizce** kontrol et.
+Kontrolü hocaya anlatma: "profil boş", "kurulumu başlatıyorum" gibi iç
+notlar yazma. Hocaya giden her cümle Türkçedir; İngilizce hiçbir şey yazma.
 
 - `kimlik.md` "Henüz doldurulmadı" diyorsa → önce `kurulum` skill'ini
   başlat. Hoca başka bir şey istese bile bunu tek cümleyle söyle:
