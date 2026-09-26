@@ -45,6 +45,8 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "komut", "git",
 ## Önceki sürüm kuralı (yedek)
 
 Divit'te otomatik yedekleme yoktur; bu kural onun yerini tutar.
+Kural yalnızca **hocanın dosyaları** içindir; `.divit/` altındaki Divit'in
+kendi dosyalarına (profil, günlük, geçici metinler) uygulanmaz.
 
 - **Word ve PDF dosyalarını asla yerinde değiştirme.** Değişikliği yeni
   dosyaya yaz: `<ad>-divit-<YYYY-AA-GG>.docx`.
