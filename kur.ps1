@@ -72,28 +72,41 @@ else {
 Adim "2/6 Claude Code (eklenti kurulumu icin)"
 $env:Path = "$Ev\.local\bin;$env:Path"
 $EnAzSurum = [version]'2.1.224'      # eklentinin zip olarak inmesi (archive kaynağı) bu sürümle geldi
-function ClaudeSurumu {
-  $v = (& claude --version 2>$null | Select-Object -First 1) -replace '^([0-9.]+).*$', '$1'
+$YerelClaude = Join-Path $Ev '.local\bin\claude.exe'   # resmî (npm'siz) kurulumun yeri
+$Claude = $null                                         # eklenti adımında kullanılacak claude
+function ClaudeSurumu($exe) {
+  $v = (& $exe --version 2>$null | Select-Object -First 1) -replace '^([0-9.]+).*$', '$1'
   try { return [version]$v } catch { return [version]'0.0' }
 }
-if (Get-Command claude -ErrorAction SilentlyContinue) {
-  $sv = ClaudeSurumu
+function ResmiKurulum {
+  # Ayrı süreçte: resmî kurucu 'exit' derse bu betik kapanmasın.
+  powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://claude.ai/install.ps1 | iex" | Out-Null
+}
+if (Test-Path $YerelClaude) { $Claude = $YerelClaude }
+elseif (Get-Command claude -ErrorAction SilentlyContinue) { $Claude = (Get-Command claude).Source }
+if ($Claude) {
+  $sv = ClaudeSurumu $Claude
   if ($sv -lt $EnAzSurum) {
     Bilgi "Surum $sv eski; guncelleniyor..."
-    & claude update *> $null
-    $sv = ClaudeSurumu
+    & $Claude update *> $null
+    $sv = ClaudeSurumu $Claude
+  }
+  if ($sv -lt $EnAzSurum -and -not $Test) {
+    # Eski kopya çoğu zaman npm kurulumudur ve npm'e ulaşamayınca güncellenemez.
+    Bilgi "Guncellenemedi; resmi kurulum yapiliyor..."
+    ResmiKurulum
+    if (Test-Path $YerelClaude) { $Claude = $YerelClaude; $sv = ClaudeSurumu $Claude }
   }
   if ($sv -lt $EnAzSurum) {
-    Uyari "Claude Code $sv eski (en az $EnAzSurum gerekli) ve guncellenemedi. Eklenti kurulamaz."
-    Write-Host "    Cozum: irm https://claude.ai/install.ps1 | iex   (sonra bu kurulumu yeniden calistirin)" -ForegroundColor DarkGray
+    Uyari "Claude Code $sv eski (en az $EnAzSurum gerekli). Eklenti kurulamaz."
+    $Claude = $null
   } else { Bilgi "Kurulu: $sv" }
 }
 elseif ($Test) { Bilgi "(sinama: atlandi)" }
 else {
-  # Ayrı süreçte: resmî kurucu 'exit' derse bu betik kapanmasın.
-  powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://claude.ai/install.ps1 | iex" | Out-Null
+  ResmiKurulum
   $env:Path = "$Ev\.local\bin;$env:Path"
-  if (Get-Command claude -ErrorAction SilentlyContinue) { Bilgi "Kuruldu." }
+  if (Test-Path $YerelClaude) { $Claude = $YerelClaude; Bilgi "Kuruldu." }
   else { Uyari "Kurulamadi. Eklenti, uygulama ilk acildiginda kendiliginden inecek." }
 }
 
@@ -163,12 +176,12 @@ Get-ChildItem $Hedef -Recurse -Force -Filter '.gitkeep' -ErrorAction SilentlyCon
 # ---------------------------------------------------------------- 5
 Adim "5/6 Divit eklentisi"
 if ($Test -and -not $env:CLAUDE_CONFIG_DIR) { Bilgi "(sinama: atlandi)" }
-elseif (Get-Command claude -ErrorAction SilentlyContinue) {
+elseif ($Claude) {
   $cikti = @()
-  $cikti += (& claude plugin marketplace add $PazarUrl 2>&1 | Out-String)
-  if ($LASTEXITCODE -ne 0) { $cikti += (& claude plugin marketplace update divit 2>&1 | Out-String) }
-  $cikti += (& claude plugin install divit@divit 2>&1 | Out-String)
-  if ($LASTEXITCODE -ne 0) { $cikti += (& claude plugin update divit@divit 2>&1 | Out-String) }
+  $cikti += (& $Claude plugin marketplace add $PazarUrl 2>&1 | Out-String)
+  if ($LASTEXITCODE -ne 0) { $cikti += (& $Claude plugin marketplace update divit 2>&1 | Out-String) }
+  $cikti += (& $Claude plugin install divit@divit 2>&1 | Out-String)
+  if ($LASTEXITCODE -ne 0) { $cikti += (& $Claude plugin update divit@divit 2>&1 | Out-String) }
   if ($LASTEXITCODE -eq 0) { Bilgi "Kuruldu." }
   else {
     Uyari "Simdi kurulamadi; uygulama ilk acildiginda kendiliginden inecek."

@@ -66,6 +66,12 @@ eski_mi() { [ "$(printf '%s\n%s\n' "$EN_AZ" "$1" | sort -V | head -1)" != "$EN_A
 if command -v claude >/dev/null 2>&1; then
   SV="$(surum)"
   if eski_mi "$SV"; then bilgi "Sürüm $SV eski; güncelleniyor…"; claude update >/dev/null 2>&1; SV="$(surum)"; fi
+  if eski_mi "$SV" && [ -z "$TEST" ]; then
+    # Eski kopya çoğu zaman npm kurulumudur ve npm'e ulaşamayınca güncellenemez.
+    bilgi "Güncellenemedi; resmî kurulum yapılıyor…"
+    curl -fsSL https://claude.ai/install.sh | bash >/dev/null 2>&1
+    hash -r; SV="$(surum)"     # ~/.local/bin PATH'in başında: yeni kopya öne geçer
+  fi
   if eski_mi "$SV"; then
     uyari "Claude Code $SV eski (en az $EN_AZ gerekli) ve güncellenemedi. Eklenti kurulamaz."
     bilgi "  Çözüm: curl -fsSL https://claude.ai/install.sh | bash   (sonra bu kurulumu yeniden çalıştırın)"
