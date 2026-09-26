@@ -136,6 +136,10 @@ ilk üçü hocaya hiçbir şey sormadan diff'ten okunur.
   mülkiyeti; yayıncıların çoğu (COPE çizgisi) bunu açıkça yasaklıyor.
   Hocanın *kendi yazdığı* rapor metninin dil denetimi yapılabilir,
   makalenin kendisi okunmaz. Bu kural yazıyla değil izinle uygulanır.
+- **Jüri ve komisyon dosyaları da aynı sınıfta.** Doçentlik jürisi,
+  atama ve teşvik komisyonu dosyaları meslektaşın kişisel ve gizli
+  belgeleridir. İlk pilot hocanın CV'sinde ikisi birden çıktı —
+  kıdemli hocalarda yaygın olduğu varsayılmalı.
 - **İntihal kararı verilmez.** Üslup kopması işaretlenir, hüküm hocaya
   bırakılır. AI-tespit iddiası hiç üretilmez — bu araçlar güvenilmez
   ve öğrenciye haksızlık üretir.

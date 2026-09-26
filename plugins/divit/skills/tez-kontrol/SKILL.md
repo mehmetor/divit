@@ -1,6 +1,6 @@
 ---
 name: tez-kontrol
-description: Öğrenci tezi, makalesi, dönem ödevi veya bölüm taslağını değerlendirip yapılandırılmış danışman raporu üretir. Hoca "şu tezi oku", "öğrencinin metnine bakar mısın", "bu ödevi değerlendir", "rapor çıkar" dediğinde kullan. Öğrenci metnine asla dokunmaz, yalnızca rapor yazar.
+description: Öğrenci tezi, makalesi, dönem ödevi, bitirme/tasarım projesi, staj raporu veya bölüm taslağını değerlendirip yapılandırılmış danışman raporu üretir. Hoca "şu tezi oku", "öğrencinin metnine bakar mısın", "bu ödevi değerlendir", "rapor çıkar" dediğinde kullan. Öğrenci metnine asla dokunmaz, yalnızca rapor yazar.
 ---
 
 # Tez / öğrenci metni değerlendirme
