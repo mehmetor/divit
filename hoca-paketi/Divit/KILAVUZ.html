@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divit Kılavuzu</title>
+<style>
+:root{
+  --zemin:#fbfaf7; --kagit:#ffffff; --metin:#1d2521; --soluk:#5b6660; --cizgi:#dfe3df;
+  --vurgu:#1f4e3d; --vurgu-acik:#e6efe9; --uyari:#8a3b12; --uyari-zemin:#fbeee6;
+  --not:#28506e; --not-zemin:#e8f0f6; --kod:#f1f3f1;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --zemin:#131816; --kagit:#1a201d; --metin:#e3e8e5; --soluk:#9aa7a0; --cizgi:#2d3632;
+    --vurgu:#8fcfb1; --vurgu-acik:#1f2d27; --uyari:#f0a878; --uyari-zemin:#2e211a;
+    --not:#9cc3e3; --not-zemin:#1b2630; --kod:#232b27;
+  }
+}
+:root[data-theme="dark"]{
+  --zemin:#131816; --kagit:#1a201d; --metin:#e3e8e5; --soluk:#9aa7a0; --cizgi:#2d3632;
+  --vurgu:#8fcfb1; --vurgu-acik:#1f2d27; --uyari:#f0a878; --uyari-zemin:#2e211a;
+  --not:#9cc3e3; --not-zemin:#1b2630; --kod:#232b27;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--zemin);color:var(--metin);
+  font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:40px 16px 80px}
+header{border-bottom:3px solid var(--vurgu);padding-bottom:18px;margin-bottom:28px}
+header h1{margin:0;font-size:34px;color:var(--vurgu);letter-spacing:.5px}
+header p{margin:4px 0 0;color:var(--soluk)}
+nav{background:var(--kagit);border:1px solid var(--cizgi);border-radius:10px;padding:14px 18px;margin-bottom:32px}
+nav b{display:block;margin-bottom:6px}
+nav ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
+nav a{color:var(--vurgu);text-decoration:none}
+nav a:hover{text-decoration:underline}
+h2{font-size:23px;color:var(--vurgu);margin:44px 0 12px;padding-top:8px;border-top:1px solid var(--cizgi)}
+h3{font-size:18px;margin:22px 0 8px}
+p{margin:0 0 12px}
+ol.adim{counter-reset:a;list-style:none;padding:0;margin:0 0 16px}
+ol.adim>li{counter-increment:a;position:relative;padding:10px 12px 10px 52px;margin:0 0 8px;
+  background:var(--kagit);border:1px solid var(--cizgi);border-radius:8px}
+ol.adim>li::before{content:counter(a);position:absolute;left:12px;top:9px;width:28px;height:28px;border-radius:50%;
+  background:var(--vurgu);color:var(--kagit);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.kutu{border-radius:8px;padding:12px 14px 12px 16px;margin:0 0 14px;border-left:5px solid}
+.kutu b.etiket{display:block;letter-spacing:1px;font-size:13px;margin-bottom:2px}
+.uyari{background:var(--uyari-zemin);border-color:var(--uyari)} .uyari b.etiket{color:var(--uyari)}
+.not{background:var(--not-zemin);border-color:var(--not)} .not b.etiket{color:var(--not)}
+.yaz{display:block;background:var(--kod);border:1px dashed var(--cizgi);border-radius:6px;padding:8px 12px;margin:6px 0 0;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px}
+kbd{font-family:ui-monospace,Menlo,monospace;font-size:14px;background:var(--kod);border:1px solid var(--cizgi);
+  border-bottom-width:2px;border-radius:4px;padding:1px 6px}
+.tablo{overflow-x:auto;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;background:var(--kagit);font-size:16px}
+th,td{border:1px solid var(--cizgi);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--vurgu-acik)}
+td .yaz{margin:0;font-size:14px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:15px;background:var(--kod);padding:1px 5px;border-radius:4px}
+footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid var(--cizgi);padding-top:14px}
+@media (max-width:560px){nav ol{columns:1} header h1{font-size:28px}}
+@media print{
+  body{background:#fff;color:#000;font-size:12pt} nav{display:none}
+  h2{break-after:avoid} ol.adim>li,.kutu,tr{break-inside:avoid}
+  ol.adim>li::before{background:#000;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Divit Kılavuzu</h1>
+  <p>Akademik yazım tezgâhı · Makale, tez, kitap</p>
+</header>
+
+<nav>
+  <b>İçindekiler</b>
+  <ol>
+    <li><a href="#nedir">Divit nedir</a></li>
+    <li><a href="#ac">Divit'i açın</a></li>
+    <li><a href="#konus">Divit'e iş verin</a></li>
+    <li><a href="#isler">Divit'in yaptığı işler</a></li>
+    <li><a href="#izin">İzin soruları</a></li>
+    <li><a href="#klasor">Klasörleriniz</a></li>
+    <li><a href="#guvenlik">Güvenlik</a></li>
+    <li><a href="#geri">Bir şey bozulursa</a></li>
+    <li><a href="#yapmaz">Divit'in yapmadığı işler</a></li>
+    <li><a href="#kapat">Divit'i kapatın</a></li>
+  </ol>
+</nav>
+
+<section id="nedir">
+<h2>1. Divit nedir</h2>
+<p>Divit, bilgisayarınızda çalışan bir yardımcıdır.</p>
+<p>Divit öğrenci tezlerini okur. Divit makalelerinizi göndermeden önce kontrol eder. Divit yazışmalarınızı hazırlar.</p>
+<p>Divit sizin yerinize karar vermez. Divit size bulgu ve öneri verir. Son karar sizindir.</p>
+<p>Divit yalnızca <b>Divit klasöründeki</b> dosyalarla çalışır.</p>
+</section>
+
+<section id="ac">
+<h2>2. Divit'i açın</h2>
+<ol class="adim">
+  <li>Masaüstünde <b>Divit</b> simgesini bulun.</li>
+  <li>Simgeye çift tıklayın.</li>
+  <li>Siyah bir pencere açılır. Bu pencere <b>Divit penceresidir</b>.</li>
+  <li>Pencerenin altında yazı alanı vardır. İsteğinizi bu alana yazın.</li>
+  <li><kbd>Enter</kbd> tuşuna basın.</li>
+</ol>
+<div class="kutu not"><b class="etiket">NOT</b>
+İlk açılışta Divit sizden Claude hesabınızla giriş yapmanızı ister. Bu işlemi yalnızca bir kez yaparsınız.</div>
+<div class="kutu not"><b class="etiket">NOT</b>
+İlk açılışta Divit "Do you trust the files in this folder?" diye sorar. <b>Yes</b> seçeneğini seçin. <kbd>Enter</kbd> tuşuna basın.</div>
+</section>
+
+<section id="konus">
+<h2>3. Divit'e iş verin</h2>
+<p>Divit ile kendi cümlelerinizle konuşun. Özel komut bilmeniz gerekmez.</p>
+<h3>İyi bir istek nasıl yazılır</h3>
+<ol class="adim">
+  <li>İşi söyleyin. Örnek: "değerlendir", "kontrol et", "yaz".</li>
+  <li>Dosyayı söyleyin. Örnek: "gelen klasöründeki tez".</li>
+  <li>Gerekirse amacı söyleyin. Örnek: "dergiye göndereceğim".</li>
+</ol>
+<p>Örnek istek:</p>
+<span class="yaz">gelen klasöründeki tezi oku, rapor çıkar</span>
+<p style="margin-top:12px">Divit bir soru sorarsa soruyu cevaplayın. Divit her seferinde tek soru sorar.</p>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit bazen çalışırken birkaç dakika bekler. Uzun bir metni okurken bu normaldir. Pencereyi kapatmayın.</div>
+</section>
+
+<section id="isler">
+<h2>4. Divit'in yaptığı işler</h2>
+<div class="tablo"><table>
+<thead><tr><th>İş</th><th>Şöyle yazın</th><th>Sonuç nerede</th></tr></thead>
+<tbody>
+<tr><td>Öğrenci tezini, ödevini ya da raporunu değerlendirme</td>
+    <td><span class="yaz">gelen klasöründeki tezi değerlendir</span></td>
+    <td><code>tez-kontrol/rapor</code></td></tr>
+<tr><td>Kendi makalenizi göndermeden önce kontrol etme</td>
+    <td><span class="yaz">bu makaleyi göndermeden kontrol et</span></td>
+    <td><code>yazilar</code></td></tr>
+<tr><td>Atıfları ve kaynakçayı kontrol etme</td>
+    <td><span class="yaz">bu metindeki atıfları kontrol et</span></td>
+    <td><code>kaynaklar/dogrulama.md</code></td></tr>
+<tr><td>Dilekçe, kurul yazısı, referans mektubu</td>
+    <td><span class="yaz">dekanlığa izin dilekçesi yazalım</span></td>
+    <td><code>yazilar</code></td></tr>
+<tr><td>Hakemlere cevap mektubu</td>
+    <td><span class="yaz">hakem yorumlarına cevap mektubu hazırla</span></td>
+    <td><code>yazilar</code></td></tr>
+<tr><td>Word ya da PDF çıktısı</td>
+    <td><span class="yaz">bunu Word'e çevir</span></td>
+    <td><code>cikti</code></td></tr>
+<tr><td>Eski hâline dönme</td>
+    <td><span class="yaz">geri al</span></td>
+    <td>Aynı dosya</td></tr>
+<tr><td>Bu kılavuzu açma</td>
+    <td><span class="yaz">yardım</span></td>
+    <td>Bu sayfa</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="izin">
+<h2>5. İzin soruları</h2>
+<p>Divit bazı işlemlerden önce sizden izin ister. Pencerede birkaç seçenek görürsünüz.</p>
+<div class="tablo"><table>
+<thead><tr><th>Seçenek</th><th>Anlamı</th></tr></thead>
+<tbody>
+<tr><td><b>Yes</b></td><td>Bu işleme bir kez izin verin.</td></tr>
+<tr><td><b>Yes, and don't ask again</b></td><td>Bu tür işleme her zaman izin verin.</td></tr>
+<tr><td><b>No</b></td><td>İzin vermeyin. Divit başka bir yol dener ya da size sorar.</td></tr>
+</tbody></table></div>
+<div class="kutu uyari"><b class="etiket">UYARI</b>
+Bir işlemi anlamazsanız <b>No</b> seçeneğini seçin. Sonra Divit'e "bu ne işlem?" diye sorun.</div>
+<p>Divit dosya okumak ve kendi rapor klasörlerine yazmak için izin istemez. Bu işlemlere önceden izin verildi.</p>
+</section>
+
+<section id="klasor">
+<h2>6. Klasörleriniz</h2>
+<p>Divit klasörü kişisel klasörünüzdedir. Finder'da <b>Divit</b> klasörünü açın.</p>
+<div class="tablo"><table>
+<thead><tr><th>Klasör</th><th>İçindekiler</th></tr></thead>
+<tbody>
+<tr><td><code>tez-kontrol/gelen</code></td><td>Öğrenci dosyaları. Değerlendirilecek dosyayı buraya koyun.</td></tr>
+<tr><td><code>tez-kontrol/rapor</code></td><td>Divit'in yazdığı değerlendirme raporları.</td></tr>
+<tr><td><code>yazilar</code></td><td>Sizin metinleriniz ve yazışmalarınız.</td></tr>
+<tr><td><code>kaynaklar</code></td><td>Kaynak PDF'leriniz. Divit yalnızca buradaki kaynaklara atıf yapar.</td></tr>
+<tr><td><code>cikti</code></td><td>Word ve PDF çıktıları.</td></tr>
+<tr><td><code>arsiv</code></td><td>Biten işler.</td></tr>
+</tbody></table></div>
+<h3>Bir dosyayı Divit'e verin</h3>
+<ol class="adim">
+  <li>Finder'da dosyayı bulun.</li>
+  <li>Dosyayı ilgili klasöre sürükleyin. Örnek: öğrenci tezini <code>tez-kontrol/gelen</code> klasörüne sürükleyin.</li>
+  <li>Divit penceresinde isteğinizi yazın.</li>
+</ol>
+</section>
+
+<section id="guvenlik">
+<h2>7. Güvenlik</h2>
+<div class="kutu uyari"><b class="etiket">UYARI</b>
+Hakemlik için gelen makaleleri Divit'e vermeyin. Jüri ve teşvik dosyalarını Divit'e vermeyin. Bu dosyalar başka kişilerin gizli belgeleridir.</div>
+<p>Divit öğrenci dosyalarını değiştiremez. Divit bu dosyaları yalnızca okur.</p>
+<p>Divit kaynaklarınızda olmayan bir kaynağa atıf yapmaz. Divit bir kaynağı bulamazsa metne <code>[ATIF GEREKLİ]</code> yazar.</p>
+<p>Divit emin olmadığı bir sayıyı ya da tarihi <code>[DOĞRULA]</code> ile işaretler. Bu işaretleri kontrol edin.</p>
+<p>Divit her oturumda çalışmanızın yedeğini alır.</p>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gönderilir. Yayımlanmamış ve kişisel bilgi içeren metinlerde bunu göz önünde tutun.</div>
+</section>
+
+<section id="geri">
+<h2>8. Bir şey bozulursa</h2>
+<ol class="adim">
+  <li>Divit penceresine şunu yazın: <span class="yaz">geri al</span></li>
+  <li>Divit son değişiklikleri tarih ve saatle gösterir.</li>
+  <li>Dönmek istediğiniz tarihi yazın.</li>
+  <li>Divit dosyanızı o tarihteki hâline getirir. Diğer dosyalarınız değişmez.</li>
+</ol>
+<p>Divit penceresi yanıt vermezse <kbd>Ctrl</kbd> + <kbd>C</kbd> tuşlarına basın. Sonra Divit'i yeniden açın.</p>
+</section>
+
+<section id="yapmaz">
+<h2>9. Divit'in yapmadığı işler</h2>
+<ul>
+  <li>Divit not vermez. Divit kabul ya da ret kararı vermez.</li>
+  <li>Divit intihal kararı vermez. Divit "yapay zekâ yazmış" kararı vermez.</li>
+  <li>Divit istatistik analizi yapmaz. Divit yalnızca metindeki sayıların tutarlılığını kontrol eder.</li>
+  <li>Divit sizin yerinize makale yazmaz. Divit yapıyı, eksikleri ve itirazları gösterir.</li>
+</ul>
+</section>
+
+<section id="kapat">
+<h2>10. Divit'i kapatın</h2>
+<ol class="adim">
+  <li>Divit penceresine şunu yazın: <span class="yaz">/exit</span></li>
+  <li><kbd>Enter</kbd> tuşuna basın.</li>
+  <li>Pencereyi kapatın.</li>
+</ol>
+</section>
+
+<footer>
+  Yardım için: Mehmet Akif Orakçı · mehmetakiforakci@gmail.com<br>
+  Bu kılavuzu Divit penceresinde <code>yardım</code> yazarak yeniden açabilirsiniz.
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
 # Divit'i başlatır. Çift tıklayın.
-cd "$(dirname "$0")" || exit 1
+# Masaüstündeki simge bir bağlantıdır; Divit klasörüne gitmek için çöz.
+kaynak="$0"; [ -L "$kaynak" ] && kaynak="$(readlink "$kaynak")"
+cd "$(dirname "$kaynak")" || exit 1
 clear
 cat <<'MSG'
 
   Divit — akademik yazım tezgâhı
 
-  Ne yapmak istediğinizi kendi cümlelerinizle yazın. Örnek:
+  İsteğinizi aşağıdaki alana yazın. Enter tuşuna basın.
 
-    · "gelen klasöründeki tezi oku, rapor çıkar"
-    · "şu taslaktaki atıfları kontrol et"
-    · "dekanlığa izin dilekçesi yazalım"
-    · "bunu Word'e çevir"
-    · "bozuldu, geri al"
+  Örnek istekler:
+    · gelen klasöründeki tezi değerlendir
+    · bu makaleyi göndermeden kontrol et
+    · dekanlığa izin dilekçesi yazalım
+    · geri al
 
-  Çıkmak için:  Ctrl-C  ya da  /exit
+  Kılavuzu açmak için şunu yazın:  yardım
+  Divit'i kapatmak için şunu yazın:  /exit
 
 MSG
 exec claude

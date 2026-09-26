@@ -16,7 +16,7 @@ if [ ! -d .git ]; then
   git init -q
   git config user.name  "Divit"
   git config user.email "divit@local"
-  printf '.DS_Store\n*.tmp\n.claude/oturum/\n' > .gitignore
+  [ -f .gitignore ] || printf '.DS_Store\n*.tmp\n.claude/oturum/*\n!.claude/oturum/.gitkeep\n' > .gitignore
 fi
 
 git add -A >/dev/null 2>&1

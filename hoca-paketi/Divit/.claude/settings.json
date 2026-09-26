@@ -1,7 +1,10 @@
 {
   "extraKnownMarketplaces": {
     "divit": {
-      "source": { "source": "github", "repo": "GITHUB_KULLANICI/divit" }
+      "source": {
+        "source": "github",
+        "repo": "GITHUB_KULLANICI/divit"
+      }
     }
   },
   "enabledPlugins": {
@@ -12,24 +15,24 @@
       "Read(./**)",
       "Grep(./**)",
       "Glob(./**)",
-      "Write(./tez-kontrol/rapor/**)",
-      "Write(./yazilar/**)",
-      "Write(./cikti/**)",
-      "Write(./kaynaklar/dogrulama.md)",
+      "Edit(./tez-kontrol/rapor/**)",
       "Edit(./yazilar/**)",
+      "Edit(./cikti/**)",
+      "Edit(./kaynaklar/dogrulama.md)",
       "Bash(pdftotext:*)",
       "Bash(pandoc:*)",
       "Bash(git status:*)",
       "Bash(git log:*)",
       "Bash(git diff:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(open KILAVUZ.html)",
+      "Bash(pdfinfo:*)"
     ],
     "deny": [
-      "Write(./tez-kontrol/gelen/**)",
       "Edit(./tez-kontrol/gelen/**)",
       "Read(./hakemlik/**)",
-      "Write(./hakemlik/**)",
+      "Edit(./hakemlik/**)",
       "Bash(rm:*)",
       "Bash(git reset:*)",
       "Bash(git push:*)"

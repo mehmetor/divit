@@ -58,6 +58,7 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "git",
 | "göndermeden bakar mısın", "yayına hazırlıyoruz" | `yayin-oncesi` |
 | "bölüm yazalım", "bu argüman tutuyor mu" | `bolum-yaz` |
 | "beni tanı", ilk açılış | `kurulum` |
+| "yardım", "ne yapabilirsin", ne isteyeceğini bilemiyor | `yardim` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman**
 `kaynak-dogrula` çalıştır.

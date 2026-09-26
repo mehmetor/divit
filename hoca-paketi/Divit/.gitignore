@@ -1,0 +1,6 @@
+.DS_Store
+*.tmp
+# Divit geçici dosyaları: öğrenci metninden çıkarılan düz metinler burada durur, yedeğe girmez
+.claude/oturum/*
+!.claude/oturum/.gitkeep
+.claude/settings.local.json
