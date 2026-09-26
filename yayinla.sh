@@ -49,7 +49,7 @@ PY
 
 claude plugin validate . >/dev/null || { echo "HATA: marketplace doğrulanamadı."; claude plugin validate .; exit 1; }
 
-git add "$ZIP" .claude-plugin/marketplace.json
+git add "$ZIP" .claude-plugin/marketplace.json "$EKLENTI"
 git commit -q -m "yayın: divit $KISA" -m "Eklenti zip'i ve marketplace.json güncellendi."
 echo "Hazır: $ZIP ($KISA)"
 

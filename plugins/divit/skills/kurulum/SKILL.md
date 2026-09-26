@@ -57,6 +57,12 @@ makalesi gerekir. Çok yazarlı makalelerde metni çoğu zaman ilk yazar
 1. Önce kendin bul: özgeçmişteki makale başlıklarını DergiPark'ta ya da
    Crossref'te (`api.crossref.org/works?query.bibliographic=...`) ara.
    Açık erişimli olanların PDF'ini `kaynaklar/hoca-makaleleri/` altına indir.
+   **Her dosya için ayrı ve tek bir komut kullan; komutları `;` ya da `&&`
+   ile zincirleme.** Zincirlenmiş komut ön izinle eşleşmez ve hocaya
+   İngilizce izin sorusu çıkar. Klasör, dosya indirilirken yoksa önce ayrı
+   bir komutla oluşturulur.
+   - Windows: `Invoke-WebRequest -Uri "<adres>" -OutFile "kaynaklar/hoca-makaleleri/<ad>.pdf"`
+   - Mac: `curl -fsSL -o "kaynaklar/hoca-makaleleri/<ad>.pdf" "<adres>"`
 2. Bulamadığın ya da erişimi kapalı olanlar için hocadan iste:
    "Şu iki makalenizin PDF'i elinizde var mı?"
 3. Her kimlik için en az bir metin hedefle.

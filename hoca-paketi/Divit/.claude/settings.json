@@ -27,6 +27,8 @@
       "PowerShell(Start-Process *)",
       "Bash(curl -fsSL -o *)",
       "PowerShell(Invoke-WebRequest *)",
+      "PowerShell(New-Item *)",
+      "Bash(mkdir *)",
       "WebSearch",
       "WebFetch(domain:api.crossref.org)",
       "WebFetch(domain:api.unpaywall.org)",
