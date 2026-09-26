@@ -120,7 +120,7 @@ SABLON="$(find "$GECICI/repo" -maxdepth 3 -type d -path '*/hoca-paketi/Divit' | 
 
 if [ -d "$HEDEF" ]; then
   bilgi "Klasör zaten var. Kişisel dosyalara dokunmadan Divit dosyaları güncelleniyor."
-  for f in CLAUDE.md KILAVUZ.html tez-kontrol/CLAUDE.md; do
+  for f in CLAUDE.md KILAVUZ.html KART.html tez-kontrol/CLAUDE.md; do
     mkdir -p "$HEDEF/$(dirname "$f")"; cp "$SABLON/$f" "$HEDEF/$f"
   done
   mkdir -p "$HEDEF/.claude/rules" "$HEDEF/.divit"

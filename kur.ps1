@@ -143,7 +143,7 @@ $S = $Sablon.FullName
 
 if (Test-Path $Hedef) {
   Bilgi "Klasor zaten var. Kisisel dosyalara dokunmadan Divit dosyalari guncelleniyor."
-  foreach ($f in @('CLAUDE.md', 'KILAVUZ.html', 'tez-kontrol\CLAUDE.md')) {
+  foreach ($f in @('CLAUDE.md', 'KILAVUZ.html', 'KART.html', 'tez-kontrol\CLAUDE.md')) {
     $h = Join-Path $Hedef $f
     New-Item -ItemType Directory -Force -Path (Split-Path $h) | Out-Null
     Copy-Item (Join-Path $S $f) $h -Force
