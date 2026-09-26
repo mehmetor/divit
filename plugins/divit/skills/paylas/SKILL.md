@@ -91,7 +91,9 @@ Hoca "hayır" derse: "Tamam, hiçbir şey gönderilmedi. Dosya
 
 Konu: `Divit geri bildirim — <alan> — <YYYY-AA-GG>`
 
-İlk çalışan yolu kullan, sırayla dene:
+İlk çalışan yolu kullan, sırayla dene. **Bir yol başarısız olursa bir
+sonrakine geç; b'yi atlama.** Windows 11'deki yeni Outlook a'yı
+desteklemez ama b'de açılır.
 
 **a. Windows + Outlook** — e-posta dosya ekli hazırlanır, hoca yalnızca
 **Gönder**'e basar:
@@ -109,7 +111,11 @@ Mac: `open ".divit/paylasim"`) ve söyle: "Açılan e-postaya
 `geri-bildirim-<tarih>.md` dosyasını sürükleyip gönderin."
 
 **c. Hiçbiri açılmazsa** (tarayıcıdan e-posta kullanan hocalar): adresi ve
-dosyanın yerini yaz; hocanın kendi e-postasından ek olarak göndermesini iste.
+dosyanın yerini yaz, dosyanın klasörünü aç; hocanın kendi e-postasından ek
+olarak göndermesini iste.
+
+Hocaya hangi yolun çalıştığını söyleme; yalnızca yapacağı tek şeyi söyle
+("Açılan e-postada Gönder'e basın" ya da "dosyayı e-postaya sürükleyin").
 
 ## 6. Kaydet
 
