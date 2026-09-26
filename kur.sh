@@ -147,10 +147,15 @@ if [ -n "$TEST" ] && [ -z "${CLAUDE_CONFIG_DIR:-}" ]; then
   bilgi "(sınama: atlandı)"
 elif command -v claude >/dev/null 2>&1; then
   KAYIT="$GECICI/eklenti.log"
-  claude plugin marketplace add "$PAZAR_URL" >>"$KAYIT" 2>&1 \
-    || claude plugin marketplace update divit >>"$KAYIT" 2>&1
-  if claude plugin install divit@divit >>"$KAYIT" 2>&1 || claude plugin update divit@divit >>"$KAYIT" 2>&1; then
-    bilgi "Kuruldu."
+  # Her çalıştırmada: ekle (yoksa), katalogu yenile, kur (yoksa), güncelle (varsa).
+  # "Zaten kurulu" da başarı döndüğü için sonuç eklenti listesinden okunur.
+  claude plugin marketplace add "$PAZAR_URL" >>"$KAYIT" 2>&1
+  claude plugin marketplace update divit >>"$KAYIT" 2>&1
+  claude plugin install divit@divit >>"$KAYIT" 2>&1
+  claude plugin update divit@divit >>"$KAYIT" 2>&1
+  LISTE="$(claude plugin list 2>&1)"
+  if printf '%s' "$LISTE" | grep -q 'divit@divit'; then
+    bilgi "Kurulu ve güncel (sürüm $(printf '%s' "$LISTE" | grep -A2 'divit@divit' | grep -oE 'Version: *[^ ]+' | awk '{print $2}'))."
   else
     uyari "Şimdi kurulamadı; uygulama ilk açıldığında kendiliğinden inecek."
     bilgi "Ayrıntı (geliştiriciye gönderin):"

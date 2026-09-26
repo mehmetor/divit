@@ -177,12 +177,19 @@ Get-ChildItem $Hedef -Recurse -Force -Filter '.gitkeep' -ErrorAction SilentlyCon
 Adim "5/6 Divit eklentisi"
 if ($Test -and -not $env:CLAUDE_CONFIG_DIR) { Bilgi "(sinama: atlandi)" }
 elseif ($Claude) {
+  # Her çalıştırmada: ekle (yoksa), katalogu yenile, kur (yoksa), güncelle (varsa).
+  # "Zaten kurulu" da başarı döndüğü için tek tek çıkış koduna bakılmaz;
+  # sonuç kurulu eklentiler listesinden okunur.
   $cikti = @()
   $cikti += (& $Claude plugin marketplace add $PazarUrl 2>&1 | Out-String)
-  if ($LASTEXITCODE -ne 0) { $cikti += (& $Claude plugin marketplace update divit 2>&1 | Out-String) }
+  $cikti += (& $Claude plugin marketplace update divit 2>&1 | Out-String)
   $cikti += (& $Claude plugin install divit@divit 2>&1 | Out-String)
-  if ($LASTEXITCODE -ne 0) { $cikti += (& $Claude plugin update divit@divit 2>&1 | Out-String) }
-  if ($LASTEXITCODE -eq 0) { Bilgi "Kuruldu." }
+  $cikti += (& $Claude plugin update divit@divit 2>&1 | Out-String)
+  $liste = (& $Claude plugin list 2>&1 | Out-String)
+  if ($liste -match 'divit@divit') {
+    $surum = if ($liste -match 'divit@divit[\s\S]*?Version:\s*(\S+)') { $Matches[1] } else { '?' }
+    Bilgi "Kurulu ve guncel (surum $surum)."
+  }
   else {
     Uyari "Simdi kurulamadi; uygulama ilk acildiginda kendiliginden inecek."
     Write-Host "  Ayrinti (gelistiriciye gonderin):" -ForegroundColor DarkGray
