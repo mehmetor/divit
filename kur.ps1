@@ -71,8 +71,22 @@ else {
 # ---------------------------------------------------------------- 2
 Adim "2/6 Claude Code (eklenti kurulumu icin)"
 $env:Path = "$Ev\.local\bin;$env:Path"
+$EnAzSurum = [version]'2.1.224'      # eklentinin zip olarak inmesi (archive kaynağı) bu sürümle geldi
+function ClaudeSurumu {
+  $v = (& claude --version 2>$null | Select-Object -First 1) -replace '^([0-9.]+).*$', '$1'
+  try { return [version]$v } catch { return [version]'0.0' }
+}
 if (Get-Command claude -ErrorAction SilentlyContinue) {
-  Bilgi ("Kurulu: " + (& claude --version 2>$null | Select-Object -First 1))
+  $sv = ClaudeSurumu
+  if ($sv -lt $EnAzSurum) {
+    Bilgi "Surum $sv eski; guncelleniyor..."
+    & claude update *> $null
+    $sv = ClaudeSurumu
+  }
+  if ($sv -lt $EnAzSurum) {
+    Uyari "Claude Code $sv eski (en az $EnAzSurum gerekli) ve guncellenemedi. Eklenti kurulamaz."
+    Write-Host "    Cozum: irm https://claude.ai/install.ps1 | iex   (sonra bu kurulumu yeniden calistirin)" -ForegroundColor DarkGray
+  } else { Bilgi "Kurulu: $sv" }
 }
 elseif ($Test) { Bilgi "(sinama: atlandi)" }
 else {

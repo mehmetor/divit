@@ -60,8 +60,18 @@ fi
 # ---------------------------------------------------------------- 2
 adim "2/6 Claude Code (eklenti kurulumu için)"
 export PATH="$HOME/.local/bin:$PATH"
+EN_AZ="2.1.224"   # eklentinin zip olarak inmesi (archive kaynağı) bu sürümle geldi
+surum() { claude --version 2>/dev/null | head -1 | grep -oE '^[0-9]+\.[0-9]+\.[0-9]+'; }
+eski_mi() { [ "$(printf '%s\n%s\n' "$EN_AZ" "$1" | sort -V | head -1)" != "$EN_AZ" ]; }
 if command -v claude >/dev/null 2>&1; then
-  bilgi "Kurulu: $(claude --version 2>/dev/null | head -1)"
+  SV="$(surum)"
+  if eski_mi "$SV"; then bilgi "Sürüm $SV eski; güncelleniyor…"; claude update >/dev/null 2>&1; SV="$(surum)"; fi
+  if eski_mi "$SV"; then
+    uyari "Claude Code $SV eski (en az $EN_AZ gerekli) ve güncellenemedi. Eklenti kurulamaz."
+    bilgi "  Çözüm: curl -fsSL https://claude.ai/install.sh | bash   (sonra bu kurulumu yeniden çalıştırın)"
+  else
+    bilgi "Kurulu: $SV"
+  fi
 elif [ -n "$TEST" ]; then
   bilgi "(sınama: atlandı)"
 else
