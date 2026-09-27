@@ -1,0 +1,239 @@
+{
+  "projectId": "1ed2ff23-7891-464b-aa70-09738f8831fe",
+  "project": "divit",
+  "defaultProvider": "claude",
+  "tmuxSession": "orc",
+  "baseBranch": "main",
+  "tracker": {
+    "kind": "none",
+    "prefix": ""
+  },
+  "budget": {
+    "defaultRunUsd": 6,
+    "dailyUsd": 40,
+    "warnAtPct": 75,
+    "prices": {}
+  },
+  "gate": {
+    "timeoutSec": 50,
+    "questionTimeoutSec": 600,
+    "rules": [
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "\\brm\\s+-rf\\b",
+        "note": "ozyinelemeli silme"
+      },
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "git\\s+push\\b.*\\b(main|master)\\b",
+        "note": "main'e push = deploy"
+      },
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "git\\s+push\\s+.*--force",
+        "note": "force push"
+      },
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "gh\\s+pr\\s+merge",
+        "note": "PR merge"
+      },
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "\\b(railway|vercel|fly)\\s+(up|deploy)",
+        "note": "deploy"
+      },
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "docker\\s+compose\\s+down\\s+.*-v",
+        "note": "volume silme"
+      },
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "(drop|truncate)\\s+table",
+        "note": "sema/veri silme"
+      },
+      {
+        "class": "irreversible",
+        "tool": "^Bash$",
+        "pattern": "git\\s+worktree\\s+remove",
+        "note": "worktree silme"
+      },
+      {
+        "class": "external",
+        "tool": "Gmail__send_message|Gmail__reply|Gmail__forward",
+        "note": "disari e-posta"
+      },
+      {
+        "class": "external",
+        "tool": "^Bash$",
+        "pattern": "gh\\s+(issue|pr)\\s+comment",
+        "note": "GitHub'da gorunur yorum"
+      },
+      {
+        "class": "pii",
+        "tool": "^(Write|Edit)$",
+        "pattern": "(tc_?kimlik|kimlik_?no|veli_?telefon|ogrenci_?ad)",
+        "note": "PII alani"
+      },
+      {
+        "class": "validity",
+        "tool": "^(Write|Edit)$",
+        "pattern": "(cut_?off|kesme_?puani|katsayi|cronbach|norm_?tablo)",
+        "note": "gecerlik iddiasi"
+      },
+      {
+        "class": "stack",
+        "tool": "^Bash$",
+        "pattern": "npm\\s+(i|install)\\s+(?!--)(?!.*--save-dev)[a-z@]",
+        "note": "yeni bagimlilik"
+      }
+    ]
+  },
+  "routing": {
+    "llmFallback": true,
+    "llmModel": "haiku",
+    "llmBudgetUsd": 0.05
+  },
+  "lanes": [
+    {
+      "id": "issue",
+      "title": "Var olan issue'yu yurut (/issue ritueli)",
+      "ref": "^[A-Z]{2,5}-\\d+$",
+      "keywords": [
+        "issue",
+        "baslat",
+        "ilerle",
+        "numara"
+      ],
+      "prompt": "/issue {ref}",
+      "model": "opus",
+      "permissionMode": "auto",
+      "worktree": true,
+      "budgetUsd": 8
+    },
+    {
+      "id": "feature",
+      "title": "Buyuk isi tasarla, issue setine bol (/feature ritueli)",
+      "keywords": [
+        "ozellik",
+        "feature",
+        "tasarlayalim",
+        "olgunlastir",
+        "nasil insa"
+      ],
+      "prompt": "/feature {text}",
+      "model": "opus",
+      "effort": "high",
+      "permissionMode": "auto",
+      "worktree": true,
+      "budgetUsd": 10
+    },
+    {
+      "id": "review",
+      "title": "Degisiklikleri incele (salt okunur)",
+      "keywords": [
+        "review",
+        "incele",
+        "gozden gecir",
+        "kod incelemesi"
+      ],
+      "prompt": "/code-review high",
+      "model": "opus",
+      "permissionMode": "auto",
+      "readOnly": true,
+      "worktree": false,
+      "budgetUsd": 4
+    },
+    {
+      "id": "analiz",
+      "title": "Oturum / ogrenci vaka incelemesi (/analiz ritueli)",
+      "keywords": [
+        "analiz",
+        "sikayet",
+        "ogrenci",
+        "oturum",
+        "tuhaflik"
+      ],
+      "prompt": "/analiz {text}",
+      "model": "opus",
+      "permissionMode": "auto",
+      "readOnly": true,
+      "worktree": false,
+      "budgetUsd": 5
+    },
+    {
+      "id": "merge-pr",
+      "title": "PR'i kapat (/merge-pr ritueli)",
+      "keywords": [
+        "merge",
+        "pr'i bitir",
+        "landing"
+      ],
+      "prompt": "/merge-pr {text}",
+      "model": "opus",
+      "permissionMode": "auto",
+      "worktree": false,
+      "budgetUsd": 4
+    },
+    {
+      "id": "docs",
+      "title": "Dokuman yazimi / guncelleme",
+      "keywords": [
+        "dokuman",
+        "docs",
+        "readme",
+        "adr",
+        "yaz"
+      ],
+      "prompt": "{text}",
+      "agent": "docs-writer",
+      "model": "sonnet",
+      "permissionMode": "auto",
+      "worktree": true,
+      "budgetUsd": 3
+    },
+    {
+      "id": "handoff",
+      "title": "Devredilen serbest is — ritual yok, devredenin agacinda",
+      "keywords": [],
+      "prompt": "{text}",
+      "model": "opus",
+      "permissionMode": "auto",
+      "worktree": false,
+      "budgetUsd": 6
+    },
+    {
+      "id": "research",
+      "title": "Arastirma / kesif (salt okunur, varsayilan)",
+      "keywords": [
+        "arastir",
+        "kesfet",
+        "bak",
+        "nerede",
+        "nasil calisiyor"
+      ],
+      "prompt": "{text}",
+      "agent": "researcher",
+      "model": "sonnet",
+      "permissionMode": "auto",
+      "readOnly": true,
+      "worktree": false,
+      "budgetUsd": 2,
+      "fallback": true
+    }
+  ],
+  "automation": {
+    "enabled": false,
+    "label": "orc:auto",
+    "pollSec": 60,
+    "maxConcurrent": 2
+  }
+}
