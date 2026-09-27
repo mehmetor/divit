@@ -16,6 +16,7 @@ set -uo pipefail
 REPO="${DIVIT_REPO:-mehmetor/divit}"
 DAL="${DIVIT_DAL:-main}"
 PANDOC_SURUM="3.11"
+PDFCPU_SURUM="0.15.0"
 TEST="${DIVIT_TEST:-}"
 HEDEF="${DIVIT_HEDEF:-$HOME/Documents/Divit}"
 ARACLAR="$HOME/.divit/araclar"
@@ -89,7 +90,7 @@ else
 fi
 
 # ---------------------------------------------------------------- 3
-adim "3/6 Word dönüştürücü (pandoc $PANDOC_SURUM)"
+adim "3/6 Word ve PDF araçları"
 PANDOC="$ARACLAR/pandoc"
 if [ -x "$PANDOC" ] && "$PANDOC" --version 2>/dev/null | grep -q "$PANDOC_SURUM"; then
   bilgi "Kurulu."
@@ -104,6 +105,29 @@ else
   else
     uyari "pandoc indirilemedi. Word dosyaları PDF olarak verilmeli."
   fi
+fi
+
+# PDF aracı (pdfcpu): birleştirme, sayfa çıkarma, işaretleme.
+PDFCPU="$ARACLAR/pdfcpu"
+if [ -x "$PDFCPU" ] && "$PDFCPU" version 2>/dev/null | grep -q "$PDFCPU_SURUM"; then
+  bilgi "PDF aracı kurulu."
+else
+  [ "$(uname -m)" = "arm64" ] && PMIMARI="arm64" || PMIMARI="x86_64"
+  URL="https://github.com/pdfcpu/pdfcpu/releases/download/v$PDFCPU_SURUM/pdfcpu_${PDFCPU_SURUM}_Darwin_$PMIMARI.tar.xz"
+  if curl -fsSL -o "$GECICI/pdfcpu.tar.xz" "$URL" && mkdir -p "$GECICI/pdfcpu" && tar -xf "$GECICI/pdfcpu.tar.xz" -C "$GECICI/pdfcpu"; then
+    BUL="$(find "$GECICI/pdfcpu" -type f -name pdfcpu | head -1)"
+    mkdir -p "$ARACLAR" && cp "$BUL" "$PDFCPU" && chmod +x "$PDFCPU"
+    xattr -d com.apple.quarantine "$PDFCPU" 2>/dev/null
+    "$PDFCPU" version >/dev/null 2>&1 && bilgi "PDF aracı kuruldu." || uyari "PDF aracı çalışmadı. PDF birleştirme ve sayfa işleri yapılamaz."
+  else
+    uyari "PDF aracı indirilemedi. PDF birleştirme ve sayfa işleri yapılamaz."
+  fi
+fi
+# Türkçe harfler için yazı tipi (bir kez).
+if [ -x "$PDFCPU" ] && ! "$PDFCPU" fonts list 2>/dev/null | grep -q ArialMT; then
+  for f in "/System/Library/Fonts/Supplemental/Arial.ttf" "/Library/Fonts/Arial.ttf"; do
+    [ -f "$f" ] && "$PDFCPU" fonts install "$f" >/dev/null 2>&1 && break
+  done
 fi
 
 # ---------------------------------------------------------------- 4
@@ -135,7 +159,7 @@ else
 fi
 # Ayarlar Divit'e aittir, her kurulumda yenilenir. Hocanın "bir daha sorma"
 # izinleri settings.local.json'da durur; ona dokunulmaz.
-sed "s|__PANDOC__|$PANDOC|" "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
+sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
 [ -f "$HEDEF/.claude/settings.local.json" ] || \
   printf '{\n  "enabledPlugins": { "divit@divit": true }\n}\n' > "$HEDEF/.claude/settings.local.json"
 xattr -dr com.apple.quarantine "$HEDEF" 2>/dev/null

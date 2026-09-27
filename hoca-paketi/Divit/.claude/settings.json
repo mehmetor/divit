@@ -9,7 +9,8 @@
     }
   },
   "env": {
-    "DIVIT_PANDOC": "__PANDOC__"
+    "DIVIT_PANDOC": "__PANDOC__",
+    "DIVIT_PDFCPU": "__PDFCPU__"
   },
   "permissions": {
     "defaultMode": "acceptEdits",
@@ -25,6 +26,9 @@
       "Edit(./.divit/**)",
       "Bash(*pandoc*)",
       "PowerShell(*pandoc*)",
+      "Bash(*pdfcpu*)",
+      "PowerShell(*pdfcpu*)",
+      "PowerShell(*Word.Application*)",
       "Bash(open *)",
       "PowerShell(Invoke-Item *)",
       "PowerShell(Start-Process *)",

@@ -19,6 +19,7 @@ try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::
 $Repo        = if ($env:DIVIT_REPO) { $env:DIVIT_REPO } else { 'mehmetor/divit' }
 $Dal         = if ($env:DIVIT_DAL)  { $env:DIVIT_DAL }  else { 'main' }
 $PandocSurum = '3.11'
+$PdfcpuSurum = '0.15.0'
 $Test        = [bool]$env:DIVIT_TEST
 $Belgeler    = [Environment]::GetFolderPath('MyDocuments')     # OneDrive yönlendirmesini de bilir
 $Hedef       = if ($env:DIVIT_HEDEF) { $env:DIVIT_HEDEF } else { Join-Path $Belgeler 'Divit' }
@@ -111,7 +112,7 @@ else {
 }
 
 # ---------------------------------------------------------------- 3
-Adim "3/6 Word donusturucu (pandoc $PandocSurum)"
+Adim "3/6 Word ve PDF araclari"
 $Pandoc = Join-Path $Araclar 'pandoc.exe'
 $pandocTamam = (Test-Path $Pandoc) -and ((& $Pandoc --version 2>$null | Out-String) -match [regex]::Escape($PandocSurum))
 if ($pandocTamam) { Bilgi "Kurulu." }
@@ -126,6 +127,28 @@ else {
     Unblock-File $Pandoc -ErrorAction SilentlyContinue
     if (& $Pandoc --version 2>$null) { Bilgi "Kuruldu." } else { Uyari "pandoc calismadi. Word dosyalari PDF olarak verilmeli." }
   } else { Uyari "pandoc indirilemedi. Word dosyalari PDF olarak verilmeli." }
+}
+
+# PDF araci (pdfcpu): birlestirme, sayfa cikarma, isaretleme.
+$Pdfcpu = Join-Path $Araclar 'pdfcpu.exe'
+$pdfcpuTamam = (Test-Path $Pdfcpu) -and ((& $Pdfcpu version 2>$null | Out-String) -match [regex]::Escape($PdfcpuSurum))
+if ($pdfcpuTamam) { Bilgi "PDF araci kurulu." }
+else {
+  $zip = Join-Path $Gecici 'pdfcpu.zip'
+  $url = "https://github.com/pdfcpu/pdfcpu/releases/download/v$PdfcpuSurum/pdfcpu_${PdfcpuSurum}_Windows_x86_64.zip"
+  if (Indir $url $zip) {
+    Expand-Archive -Path $zip -DestinationPath (Join-Path $Gecici 'pdfcpu') -Force
+    $bul = Get-ChildItem -Path (Join-Path $Gecici 'pdfcpu') -Recurse -Filter 'pdfcpu.exe' | Select-Object -First 1
+    New-Item -ItemType Directory -Force -Path $Araclar | Out-Null
+    Copy-Item $bul.FullName $Pdfcpu -Force
+    Unblock-File $Pdfcpu -ErrorAction SilentlyContinue
+    if (& $Pdfcpu version 2>$null) { Bilgi "PDF araci kuruldu." } else { Uyari "PDF araci calismadi. PDF birlestirme ve sayfa isleri yapilamaz." }
+  } else { Uyari "PDF araci indirilemedi. PDF birlestirme ve sayfa isleri yapilamaz." }
+}
+# Turkce harfler icin yazi tipi (bir kez).
+if ((Test-Path $Pdfcpu) -and -not ((& $Pdfcpu fonts list 2>$null | Out-String) -match 'ArialMT')) {
+  $arial = Join-Path $env:WINDIR 'Fonts\arial.ttf'
+  if (Test-Path $arial) { & $Pdfcpu fonts install $arial 2>$null | Out-Null }
 }
 
 # ---------------------------------------------------------------- 4
@@ -166,7 +189,7 @@ if (Test-Path $Hedef) {
 # Ayarlar Divit'e aittir, her kurulumda yenilenir. Hocanın "bir daha sorma"
 # izinleri settings.local.json'da durur; ona dokunulmaz.
 $pandocYolu = $Pandoc -replace '\\', '/'
-$ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu)
+$ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu).Replace('__PDFCPU__', ($Pdfcpu -replace '\\', '/'))
 YazUtf8 (Join-Path $Hedef '.claude\settings.json') $ayar
 $yerel = Join-Path $Hedef '.claude\settings.local.json'
 if (-not (Test-Path $yerel)) { YazUtf8 $yerel "{`n  `"enabledPlugins`": { `"divit@divit`": true }`n}`n" }

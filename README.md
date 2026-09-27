@@ -38,6 +38,7 @@ Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
 | `dekanlığa dilekçe yazalım` | Dilekçe, referans mektubu, hakem cevap tablosu ve mektubu (`yazisma`) |
 | `bunu Word'e çevir` | Word/PDF çıktısı, dergi stili (`disa-aktar`) |
 | `bölüm yazalım` | Yapı, itiraz, eksik tespiti (`bolum-yaz`) |
+| `bu PDF'leri birleştir` | PDF birleştirme, sayfa çıkarma/silme/döndürme, kontrol listesi ve form işaretleme, PDF'ten Word'e, fotoğraftan PDF — bilgisayarda, siteye yüklemeden (`pdf`) |
 | `geri al` | Önceki sürüme dönme (`geri-al`) |
 | `geri bildirim gönder` | Notları onayla geliştiriciye iletme (`paylas`) |
 | `yardım` | Kılavuzu açar (`yardim`) |
@@ -59,7 +60,7 @@ veya "yapay zekâ yazmış" hükmü · veri analizi ve istatistik yorumu
 
 Gereken tek şey: **Claude Pro** (ya da üstü) hesabı. Git, Python,
 Homebrew ya da yönetici hakkı gerekmez. Kurulum Claude uygulamasını,
-Claude Code'u, Word dönüştürücüsünü (pandoc) ve `Belgeler/Divit`
+Claude Code'u, Word dönüştürücüsünü (pandoc), PDF aracını (pdfcpu) ve `Belgeler/Divit`
 klasörünü hazırlar. Yeniden çalıştırmak güvenlidir; dosyalarınıza dokunmaz.
 
 ### Seçenek 1 — Tek komut
@@ -123,7 +124,7 @@ divit/
 ├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
 ├── dagitim/                         yayınlanmış eklenti zip'leri
 ├── plugins/divit/                   eklentinin kaynağı
-│   ├── skills/                      on beş skill
+│   ├── skills/                      on altı skill
 │   ├── alan/                        örnek alan kılavuzları (başlangıç noktası)
 │   └── scripts/                     yardımcı betik (isteğe bağlı)
 ├── hoca-paketi/Divit/               hocanın Belgeler/Divit klasörü şablonu

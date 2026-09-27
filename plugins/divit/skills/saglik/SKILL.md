@@ -30,6 +30,11 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
    Read ile oku; içinde "Divit PDF deneme" yazmalı. PDF çıktısı Divit'te
    Word'ün "PDF olarak kaydet" özelliğiyle yapılır; onu deneme, yalnızca
    Word okuma-yazma denemesinin geçtiğini bil.
+   **PDF aracı:** deneme PDF'ini iki kez birleştir ve sayfa sayısına bak:
+   - Mac: `"$DIVIT_PDFCPU" merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
+   - Windows: `& $env:DIVIT_PDFCPU merge ".divit/gecici/saglik.pdf" "$env:CLAUDE_PLUGIN_ROOT/scripts/deneme.pdf" "$env:CLAUDE_PLUGIN_ROOT/scripts/deneme.pdf"`
+   `.divit/gecici/saglik.pdf` önceden varsa araç üstüne yazmaz; adına saat ekle.
+   Sonra `info` ile bak: 2 sayfa olmalı.
 4. **Profil:** `.divit/profil/` dosyaları var mı, `kimlik.md` doldurulmuş mu.
 5. **Klasörler:** `tez-kontrol/`, `yazilar/`, `kaynaklar/`, `cikti/` var mı.
    Eksik olanı `gorevler.md`'ye bakmadan oluşturma; yalnızca not et.
@@ -42,7 +47,8 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
 
 Her şey yolundaysa:
 > "Kontrol ettim; her şey çalışıyor. Word ve PDF dosyalarınızı
-> okuyabiliyor, Word dosyası hazırlayabiliyorum."
+> okuyabiliyor, Word dosyası hazırlayabiliyorum. PDF birleştirme ve
+> sayfa işleri de çalışıyor."
 
 Sorun varsa yalnızca hocayı ilgilendiren sonucu ve tek adımı söyle:
 
@@ -50,6 +56,7 @@ Sorun varsa yalnızca hocayı ilgilendiren sonucu ve tek adımı söyle:
 |---|---|
 | pandoc çalışmıyor | "Word dosyalarını şu an okuyamıyorum. Kurulum komutunu bir kez daha çalıştırmak düzeltir; yardım gerekirse Mehmet Bey'e yazın. O zamana kadar PDF verebilirsiniz." |
 | PDF okunamıyor | "PDF dosyalarını şu an okuyamıyorum. Word hâlini verebilir misiniz?" |
+| PDF aracı çalışmıyor | "PDF birleştirme ve sayfa işlerini şu an yapamıyorum. Kurulum komutunu bir kez daha çalıştırmak düzeltir." |
 | profil boş | `kurulum` skill'ine geç. |
 | CLAUDE.md'de kural satırı yok | "Klasör ayarlarımdan biri eksik. Kurulum komutunu yeniden çalıştırmak düzeltir." |
 | klasör eksik | "Şu klasör yok: … Açayım mı?" Onayla oluştur. |

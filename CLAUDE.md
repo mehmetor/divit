@@ -20,7 +20,7 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
    yalnızca `./yayinla.sh` ile yapılır (belirleyici zip, doğrulama).
 5. **Hook yok.** Hook komutları Mac'te bash, Windows'ta PowerShell ile
    çalışır; ortak betik yazılamaz. Skill'ler iş için önce Read, Write,
-   Edit, Glob, Grep araçlarını kullanır; kabuk yalnızca pandoc ve dosya
+   Edit, Glob, Grep araçlarını kullanır; kabuk yalnızca pandoc, pdfcpu ve dosya
    açmak için, iki sistemin komutu yan yana yazılarak.
 6. **Yedek = önceki sürüm kuralı.** Word/PDF yerinde değiştirilmez; metin
    dosyası değiştirilmeden önce `.divit/onceki-surumler/` altına kopyalanır.

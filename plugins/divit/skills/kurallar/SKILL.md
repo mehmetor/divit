@@ -107,6 +107,7 @@ misiniz?" de.
 | "geri bildirim gönder", "sorunları ilet", "paylaş" | `paylas` |
 | "düzenini gözden geçir", "bakım yap" | `bakim` |
 | "e-posta olarak hazırla", "öğrenciye gönder", "taslak oluştur" | `eposta` |
+| "PDF'leri birleştir", "sayfaları çıkar", "listeyi işaretle" | `pdf` |
 | "çalışıyor musun", "Word'ü okuyamıyorsun", dosya işlemi hatası | `saglik` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `kaynak-dogrula`.

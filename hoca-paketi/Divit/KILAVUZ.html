@@ -29,6 +29,7 @@ main{max-width:760px;margin:0 auto;padding:40px 16px 80px}
 header{border-bottom:3px solid var(--vurgu);padding-bottom:18px;margin-bottom:28px}
 header h1{margin:0;font-size:34px;color:var(--vurgu);letter-spacing:.5px}
 header p{margin:4px 0 0;color:var(--soluk)}
+header p.baglanti{margin-top:10px;font-size:15px}
 nav{background:var(--kagit);border:1px solid var(--cizgi);border-radius:10px;padding:14px 18px;margin-bottom:32px}
 nav b{display:block;margin-bottom:6px}
 nav ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
@@ -80,6 +81,7 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
 <header>
   <h1>Divit Kılavuzu</h1>
   <p>Akademik yazım tezgâhı · Makale, tez, kitap</p>
+  <p class="baglanti">Ayrıntılı tanıtım: <a href="https://divit.simetri.app">divit.simetri.app</a> · Kaynak: <a href="https://github.com/mehmetor/divit">github.com/mehmetor/divit</a></p>
 </header>
 
 <nav>
@@ -189,6 +191,15 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td>Word çıktısı</td>
     <td><span class="yaz">bunu Word'e çevir</span></td>
     <td><code>cikti</code></td></tr>
+<tr><td>PDF birleştirme, sayfa çıkarma, döndürme</td>
+    <td><span class="yaz">bu üç PDF'i birleştir</span><br><span class="yaz">5-9. sayfaları ayrı PDF yap</span></td>
+    <td><code>cikti</code></td></tr>
+<tr><td>Kontrol listesini ya da formu işaretleme</td>
+    <td><span class="yaz">bu listeyi işaretle: hepsi evet, 12 hayır</span></td>
+    <td><code>cikti</code></td></tr>
+<tr><td>PDF'i Word'e çevirme</td>
+    <td><span class="yaz">bu PDF'i Word'e çevir</span></td>
+    <td><code>cikti</code></td></tr>
 <tr><td>Önceki sürüme dönme</td>
     <td><span class="yaz">geri al</span></td>
     <td>Aynı dosya</td></tr>
@@ -199,6 +210,8 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
     <td><span class="yaz">yardım</span></td>
     <td>Bu sayfa</td></tr>
 </tbody></table></div>
+<div class="kutu not"><b class="etiket">NOT</b>
+PDF işleri için internetteki "ücretsiz PDF" sitelerini kullanmayın. Divit bu işleri bilgisayarınızda yapar. Dosyanız hiçbir siteye yüklenmez. Asıl PDF değişmez; sonuç <code>cikti</code> klasörüne yeni dosya olarak yazılır.</div>
 </section>
 
 <section id="izin">
