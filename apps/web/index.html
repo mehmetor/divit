@@ -56,6 +56,10 @@ details{background:var(--kart);border:1px solid var(--cizgi);border-radius:12px;
 summary{cursor:pointer;font-weight:600}
 details p{margin:10px 0 0;color:var(--soluk)}
 footer{border-top:1px solid var(--cizgi);padding:28px 0 48px;color:var(--soluk);font-size:15px}
+.cizelge{width:100%;border-collapse:collapse;background:var(--kart);border:1px solid var(--cizgi);border-radius:12px;overflow:hidden;font-size:16px}
+.cizelge td{padding:10px 14px;border-top:1px solid var(--cizgi);vertical-align:top}
+.cizelge tr:first-child td{border-top:none}
+.cizelge code{font-family:Consolas,Menlo,monospace;font-size:14px;color:var(--vurgu);white-space:nowrap}
 @media (max-width:640px){nav{display:none}.kahraman{padding:32px 0 24px}body{font-size:16px}}
 </style>
 </head>
@@ -63,7 +67,7 @@ footer{border-top:1px solid var(--cizgi);padding:28px 0 48px;color:var(--soluk);
 <div class="kap">
 <header class="ust">
   <a class="logo" href="#">Divit</a>
-  <nav><a href="#neler">Neler yapar</a><a href="#guven">Güven</a><a href="#kurulum">Kurulum</a><a href="#sss">Sorular</a></nav>
+  <nav><a href="#neler">Neler yapar</a><a href="#guven">Güven</a><a href="#kurulum">Kurulum</a><a href="#komutlar">Komutlar</a><a href="#sss">Sorular</a></nav>
 </header>
 
 <div class="kahraman">
@@ -123,7 +127,7 @@ footer{border-top:1px solid var(--cizgi);padding:28px 0 48px;color:var(--soluk);
   </div>
   <div class="pano" id="win" role="tabpanel">
     <ol><li>Başlat menüsüne <b>PowerShell</b> yazın ve açın.</li><li>Aşağıdaki satırı kopyalayın, pencereye yapıştırın, <b>Enter</b>'a basın.</li><li>"Kurulum bitti" yazısını bekleyin. Kılavuz kendiliğinden açılır.</li><li>Claude açıksa tamamen kapatıp yeniden açın.</li></ol>
-    <div class="kod"><button class="kopyala">Kopyala</button><pre>irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex</pre></div>
+    <div class="kod"><button class="kopyala">Kopyala</button><pre>irm divit.simetri.app/kur.ps1 | iex</pre></div>
   </div>
   <div class="pano" id="mac" role="tabpanel" hidden>
     <ol><li>Spotlight'a (⌘ + boşluk) <b>Terminal</b> yazın ve açın.</li><li>Aşağıdaki satırı kopyalayın, pencereye yapıştırın, <b>Enter</b>'a basın.</li><li>"Kurulum bitti" yazısını bekleyin. Kılavuz kendiliğinden açılır.</li></ol>
@@ -154,6 +158,28 @@ Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.</pre>
     <li><b>merhaba</b> yazın. Divit gerisini kendisi sorar.</li>
   </ol>
   <p class="not">Klasörünüzde bir <a href="kilavuz.html">kılavuz</a> ve masanızda tutabileceğiniz tek sayfalık bir kart da bulunur. Divit kendiliğinden güncellenir; yenilikleri size kendisi söyler.</p>
+</section>
+
+<section id="komutlar">
+  <h2>Komut ezberlemeyin, ama isterseniz var</h2>
+  <p class="alt">Divit'e kendi cümlenizle yazmanız yeter. Bir işi doğrudan seçmek isterseniz yazı kutusuna <code>/</code> yazın, ardından <code>divit</code>. Liste açılır; komutu seçip kısa bir açıklama ekleyin: <code>/divit:pdf bu üç dosyayı birleştir</code></p>
+  <div style="overflow-x:auto"><table class="cizelge">
+<tr><td><code>/divit:tez-kontrol</code></td><td>Öğrenci tezini, ödevini ya da raporunu okur, bulgu raporu yazar.</td></tr>
+<tr><td><code>/divit:yayin-oncesi</code></td><td>Kendi makalenizi göndermeden önce kontrol eder: çizelge, birim, dergi kuralları.</td></tr>
+<tr><td><code>/divit:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder.</td></tr>
+<tr><td><code>/divit:yazisma</code></td><td>Dilekçe, kurul yazısı, referans mektubu, hakem cevabı yazar.</td></tr>
+<tr><td><code>/divit:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
+<tr><td><code>/divit:disa-aktar</code></td><td>Metni Word dosyasına çevirir.</td></tr>
+<tr><td><code>/divit:pdf</code></td><td>PDF birleştirir, sayfa çıkarır, döndürür, kontrol listesi işaretler.</td></tr>
+<tr><td><code>/divit:eposta</code></td><td>Hazırlanan metni e-postanızda taslak olarak açar. Göndermez.</td></tr>
+<tr><td><code>/divit:geri-al</code></td><td>Bir dosyayı önceki hâline döndürür.</td></tr>
+<tr><td><code>/divit:yardim</code></td><td>Kılavuzu açar ve kısa bir özet verir.</td></tr>
+<tr><td><code>/divit:saglik</code></td><td>Divit'in düzgün çalışıp çalışmadığını denetler.</td></tr>
+<tr><td><code>/divit:guncelleme</code></td><td>Yenilikleri anlatır, gerekirse güncellemeyi yapar.</td></tr>
+<tr><td><code>/divit:bakim</code></td><td>Divit'in kendi notlarını toparlar (ayda bir).</td></tr>
+<tr><td><code>/divit:kurulum</code></td><td>Divit'in sizi tanıdığı ilk görüşmeyi yeniden başlatır.</td></tr>
+<tr><td><code>/effort high</code></td><td>Uzun işlerde daha dikkatli okuma. Kullanım kotasını daha hızlı harcar.</td></tr>
+  </table></div>
 </section>
 
 <section id="yapmaz">

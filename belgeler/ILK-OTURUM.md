@@ -39,7 +39,7 @@ varsayımıyla yazıldı. Branş netleşince:
 ### 3. Kurulum
 
 ```bash
-irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex   # Windows
+irm divit.simetri.app/kur.ps1 | iex   # Windows
 curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash   # Mac
 ```
 

@@ -75,16 +75,17 @@ klasörünü hazırlar. Yeniden çalıştırmak güvenlidir; dosyalarınıza dok
 
 **Windows:** Başlat → "PowerShell" yazın → açın → yapıştırın → Enter.
 ```powershell
-irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex
+irm divit.simetri.app/kur.ps1 | iex
 ```
 
 **Mac:** Spotlight → "Terminal" → yapıştırın → Enter.
 ```bash
-curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash
+curl -fsSL divit.simetri.app/kur.sh | bash
 ```
 
-Kısa adres de çalışır: `irm https://divit.simetri.app/kur.ps1 | iex` ·
-`curl -fsSL https://divit.simetri.app/kur.sh | bash`.
+Kısa adres GitHub'daki asıl betiği çalıştırır. Site erişilemezse doğrudan:
+`irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex` ·
+`curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash`.
 
 Windows'ta kurulumdan sonra Claude'u tamamen kapatıp yeniden açın.
 

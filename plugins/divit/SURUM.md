@@ -5,6 +5,9 @@ Her sürüm hocanın anlayacağı dille yazılır. Başlık biçimi:
 Divit hocaya kurulum komutunu yeniden çalıştırmayı önerir (klasör
 ayarları, kılavuz ya da araçlar değiştiğinde). En yeni sürüm en üstte.
 
+## 1.7 · 2026-09-27 · kurulum gerekir
+- Kılavuzda "/" ile komut seçme anlatıldı; her komutun ne yaptığı yazıldı.
+
 ## 1.6 · 2026-09-27 · kurulum gerekir
 - Divit yenilikleri kendisi söyler; gerekirse güncellemeyi sizin onayınızla yapar.
 - İzin soruları çok çıkıyorsa daha rahat çalışma kipini önerir.

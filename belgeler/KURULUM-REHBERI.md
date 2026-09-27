@@ -27,7 +27,7 @@ Hocanın **Claude Pro** (ya da Max) hesabı olmalıdır.
 2. `PowerShell` yazın. <kbd>Enter</kbd> tuşuna basın.
 3. Şu satırı yapıştırın. <kbd>Enter</kbd> tuşuna basın:
    ```powershell
-   irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex
+   irm divit.simetri.app/kur.ps1 | iex
    ```
 
 **Mac**
