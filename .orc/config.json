@@ -5,8 +5,8 @@
   "tmuxSession": "orc",
   "baseBranch": "main",
   "tracker": {
-    "kind": "none",
-    "prefix": ""
+    "kind": "plane",
+    "prefix": "DVT"
   },
   "budget": {
     "defaultRunUsd": 6,
