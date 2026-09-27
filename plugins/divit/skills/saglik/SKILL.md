@@ -27,7 +27,9 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
      ve `& $env:DIVIT_PANDOC ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
    Geri gelen metinde "deneme" var mı, bak.
 3. **PDF okuma:** `${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf` dosyasını
-   Read ile oku; içinde "Divit PDF deneme" yazmalı. PDF çıktısı Divit'te
+   `kurallar`'daki "PDF'ten metin" komutuyla `.divit/gecici/saglik.txt`'ye
+   çevir ve oku; içinde "Divit PDF deneme" yazmalı. Sonra aynı dosyayı
+   Read ile de aç. PDF çıktısı Divit'te
    Word'ün "PDF olarak kaydet" özelliğiyle yapılır; onu deneme, yalnızca
    Word okuma-yazma denemesinin geçtiğini bil.
    **PDF aracı:** deneme PDF'ini iki kez birleştir ve sayfa sayısına bak:

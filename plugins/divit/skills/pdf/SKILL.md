@@ -1,6 +1,6 @@
 ---
 name: pdf
-description: PDF dosyalarıyla işler — birleştirme, sayfa çıkarma ya da silme, sayfa döndürme, PDF'i Word'e çevirme, kontrol listesi ya da form işaretleme, PDF'e not/yazı ekleme, fotoğrafları PDF yapma, PDF küçültme. Hoca "PDF'leri birleştir", "şu sayfaları çıkar", "bu PDF'i Word'e çevir", "listeyi işaretle", "formu doldur", "PDF'e yaz", "fotoğrafları PDF yap", "PDF çok büyük" dediğinde kullan.
+description: PDF dosyalarıyla işler — birleştirme, sayfa çıkarma ya da silme, sayfa döndürme, PDF'i Word'e çevirme, kontrol listesi ya da form işaretleme, PDF'e not/yazı ekleme, fotoğrafları PDF yapma, PDF küçültme. Hoca "PDF'leri birleştir", "şu sayfaları çıkar", "listeyi işaretle", "formu doldur", "PDF'e yaz", "fotoğrafları PDF yap", "PDF çok büyük" dediğinde kullan.
 ---
 
 # PDF işleri
@@ -81,12 +81,8 @@ Evet derse `eposta` skill'ine geç.
 
 ## PDF'i Word'e çevirme
 
-- **Windows ve Word kurulu:** Word PDF'i kendisi Word'e çevirir; düzen
-  en iyi korunan yol budur.
-  ```powershell
-  $w = New-Object -ComObject Word.Application; $w.Visible = $false; $d = $w.Documents.Open((Resolve-Path "girdi.pdf").Path, $false, $true); $d.SaveAs2((Join-Path (Resolve-Path "cikti").Path "<ad>.docx"), 16); $d.Close(); $w.Quit()
-  ```
-- **Mac ya da Word açılamazsa:** PDF'i Read ile oku, metni başlık,
+- PDF'i `kurallar`'daki yolla metne çevir (Mac: pdf-metin.js, Windows:
+  pdftotext), metni başlık,
   paragraf ve çizelgeleriyle md olarak `.divit/gecici/`'ye yaz, pandoc
   ile `cikti/<ad>.docx` üret. Hocaya söyle: "Metin ve çizelgeler geldi;
   sayfa düzeni ve resimler aynı olmayabilir."

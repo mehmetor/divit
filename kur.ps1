@@ -20,6 +20,7 @@ $Repo        = if ($env:DIVIT_REPO) { $env:DIVIT_REPO } else { 'mehmetor/divit' 
 $Dal         = if ($env:DIVIT_DAL)  { $env:DIVIT_DAL }  else { 'main' }
 $PandocSurum = '3.11'
 $PdfcpuSurum = '0.15.0'
+$PopplerSurum = '26.09.0-0'
 $Test        = [bool]$env:DIVIT_TEST
 $Belgeler    = [Environment]::GetFolderPath('MyDocuments')     # OneDrive yönlendirmesini de bilir
 $Hedef       = if ($env:DIVIT_HEDEF) { $env:DIVIT_HEDEF } else { Join-Path $Belgeler 'Divit' }
@@ -145,6 +146,32 @@ else {
     if (& $Pdfcpu version 2>$null) { Bilgi "PDF araci kuruldu." } else { Uyari "PDF araci calismadi. PDF birlestirme ve sayfa isleri yapilamaz." }
   } else { Uyari "PDF araci indirilemedi. PDF birlestirme ve sayfa isleri yapilamaz." }
 }
+# PDF okuyucu (Poppler): metin cikarma ve sayfa goruntusu. Claude'un PDF
+# okumasi da sayfa goruntusu icin pdftoppm'i PATH'te arar.
+$Poppler = Join-Path $Araclar 'poppler'
+$Pdftotext = Join-Path $Poppler 'pdftotext.exe'
+if ((Test-Path $Pdftotext) -and (Test-Path (Join-Path $Poppler "surum-$PopplerSurum.txt"))) { Bilgi "PDF okuyucu kurulu." }
+else {
+  $zip = Join-Path $Gecici 'poppler.zip'
+  $url = "https://github.com/oschwartz10612/poppler-windows/releases/download/v$PopplerSurum/Release-$PopplerSurum.zip"
+  if (Indir $url $zip) {
+    Expand-Archive -Path $zip -DestinationPath (Join-Path $Gecici 'poppler') -Force
+    $bin = Get-ChildItem -Path (Join-Path $Gecici 'poppler') -Recurse -Filter 'pdftotext.exe' | Select-Object -First 1
+    New-Item -ItemType Directory -Force -Path $Poppler | Out-Null
+    Copy-Item (Join-Path $bin.DirectoryName '*') $Poppler -Recurse -Force
+    Get-ChildItem $Poppler -Recurse -File | Unblock-File -ErrorAction SilentlyContinue
+    Set-Content -Path (Join-Path $Poppler "surum-$PopplerSurum.txt") -Value $PopplerSurum
+    if (& $Pdftotext -v 2>&1 | Out-String) { Bilgi "PDF okuyucu kuruldu." } else { Uyari "PDF okuyucu calismadi. PDF yerine Word hali verilmeli." }
+  } else { Uyari "PDF okuyucu indirilemedi. PDF yerine Word hali verilmeli." }
+}
+if (Test-Path $Pdftotext) {
+  $yol = [Environment]::GetEnvironmentVariable('Path', 'User')
+  if (-not $yol) { $yol = '' }
+  if (($yol -split ';') -notcontains $Poppler) {
+    [Environment]::SetEnvironmentVariable('Path', ($yol.TrimEnd(';') + ';' + $Poppler).TrimStart(';'), 'User')
+  }
+}
+
 # Turkce harfler icin yazi tipi (bir kez).
 if ((Test-Path $Pdfcpu) -and -not ((& $Pdfcpu fonts list 2>$null | Out-String) -match 'ArialMT')) {
   $arial = Join-Path $env:WINDIR 'Fonts\arial.ttf'
@@ -189,7 +216,7 @@ if (Test-Path $Hedef) {
 # Ayarlar Divit'e aittir, her kurulumda yenilenir. Hocanın "bir daha sorma"
 # izinleri settings.local.json'da durur; ona dokunulmaz.
 $pandocYolu = $Pandoc -replace '\\', '/'
-$ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu).Replace('__PDFCPU__', ($Pdfcpu -replace '\\', '/'))
+$ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu).Replace('__PDFCPU__', ($Pdfcpu -replace '\\', '/')).Replace('__PDFTOTEXT__', ($Pdftotext -replace '\\', '/'))
 YazUtf8 (Join-Path $Hedef '.claude\settings.json') $ayar
 $yerel = Join-Path $Hedef '.claude\settings.local.json'
 if (-not (Test-Path $yerel)) { YazUtf8 $yerel "{`n  `"enabledPlugins`": { `"divit@divit`": true }`n}`n" }
@@ -241,7 +268,7 @@ else { Write-Host "Kurulum bitti." -ForegroundColor White }
 Write-Host @"
 
 Simdi:
-  1. Claude uygulamasini acin (Baslat menusu > Claude). Hocanin hesabiyla giris yapin.
+  1. Claude aciksa tamamen kapatin. Sonra Claude uygulamasini acin (Baslat menusu > Claude). Hocanin hesabiyla giris yapin.
   2. Ustteki "Code" sekmesine tiklayin.
   3. "Local" secin > "Select folder" > Belgeler > Divit.
   4. "merhaba" yazin. Divit gerisini kendisi sorar.

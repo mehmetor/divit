@@ -12,7 +12,8 @@
   "effortLevel": "low",
   "env": {
     "DIVIT_PANDOC": "__PANDOC__",
-    "DIVIT_PDFCPU": "__PDFCPU__"
+    "DIVIT_PDFCPU": "__PDFCPU__",
+    "DIVIT_PDFTOTEXT": "__PDFTOTEXT__"
   },
   "permissions": {
     "defaultMode": "acceptEdits",
@@ -30,7 +31,8 @@
       "PowerShell(*pandoc*)",
       "Bash(*pdfcpu*)",
       "PowerShell(*pdfcpu*)",
-      "PowerShell(*Word.Application*)",
+      "PowerShell(*pdftotext*)",
+      "Bash(osascript -l JavaScript *)",
       "Bash(open *)",
       "PowerShell(Invoke-Item *)",
       "PowerShell(Start-Process *)",

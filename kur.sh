@@ -159,7 +159,7 @@ else
 fi
 # Ayarlar Divit'e aittir, her kurulumda yenilenir. Hocanın "bir daha sorma"
 # izinleri settings.local.json'da durur; ona dokunulmaz.
-sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
+sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__||" "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
 [ -f "$HEDEF/.claude/settings.local.json" ] || \
   printf '{\n  "enabledPlugins": { "divit@divit": true }\n}\n' > "$HEDEF/.claude/settings.local.json"
 xattr -dr com.apple.quarantine "$HEDEF" 2>/dev/null
