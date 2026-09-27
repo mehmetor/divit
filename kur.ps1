@@ -218,6 +218,11 @@ if (Test-Path $Hedef) {
 $pandocYolu = $Pandoc -replace '\\', '/'
 $ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu).Replace('__PDFCPU__', ($Pdfcpu -replace '\\', '/')).Replace('__PDFTOTEXT__', ($Pdftotext -replace '\\', '/'))
 YazUtf8 (Join-Path $Hedef '.claude\settings.json') $ayar
+$surumDosyasi = Join-Path (Split-Path (Split-Path $S)) 'plugins\divit\SURUM.md'
+if (Test-Path $surumDosyasi) {
+  $ilk = Select-String -Path $surumDosyasi -Pattern '^## ([0-9.]+) ' | Select-Object -First 1
+  if ($ilk) { YazUtf8 (Join-Path $Hedef '.divit\kurulum-surumu.txt') ($ilk.Matches[0].Groups[1].Value + "`n") }
+}
 $yerel = Join-Path $Hedef '.claude\settings.local.json'
 if (-not (Test-Path $yerel)) { YazUtf8 $yerel "{`n  `"enabledPlugins`": { `"divit@divit`": true }`n}`n" }
 Get-ChildItem $Hedef -Recurse -File -ErrorAction SilentlyContinue | Unblock-File -ErrorAction SilentlyContinue

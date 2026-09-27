@@ -17,6 +17,15 @@ DAGITIM="dagitim"
 
 claude plugin validate "$EKLENTI" >/dev/null || { echo "HATA: eklenti doğrulanamadı."; claude plugin validate "$EKLENTI"; exit 1; }
 
+# Hocaya giden sürüm notu: plugins/divit/SURUM.md en üstteki başlık.
+SURUM="$(sed -n 's/^## \([0-9][0-9.]*\) ·.*/\1/p' "$EKLENTI/SURUM.md" | head -1)"
+[ -n "$SURUM" ] || { echo "HATA: $EKLENTI/SURUM.md içinde sürüm başlığı yok."; exit 1; }
+if git log --format=%s | grep -q "^yayın: divit $SURUM "; then
+  echo "HATA: $SURUM daha önce yayınlandı. $EKLENTI/SURUM.md en üstüne yeni bir sürüm ekleyin"
+  echo "      (hocanın anlayacağı dille; klasör/araç değiştiyse başlığa ' · kurulum gerekir')."
+  exit 1
+fi
+
 GECICI="$(mktemp -d)"; trap 'rm -rf "$GECICI"' EXIT
 cp -R "$EKLENTI" "$GECICI/divit"
 find "$GECICI/divit" \( -name '.DS_Store' -o -name '__pycache__' \) -prune -exec rm -rf {} +
@@ -50,8 +59,8 @@ PY
 claude plugin validate . >/dev/null || { echo "HATA: marketplace doğrulanamadı."; claude plugin validate .; exit 1; }
 
 git add "$ZIP" .claude-plugin/marketplace.json "$EKLENTI"
-git commit -q -m "yayın: divit $KISA" -m "Eklenti zip'i ve marketplace.json güncellendi."
-echo "Hazır: $ZIP ($KISA)"
+git commit -q -m "yayın: divit $SURUM ($KISA)" -m "Eklenti zip'i ve marketplace.json güncellendi."
+echo "Hazır: sürüm $SURUM, $ZIP ($KISA)"
 
 if [ "${1:-}" = "--gonder" ]; then
   git push -q origin main && echo "GitHub'a gönderildi. Hocalar birkaç saat içinde güncellemeyi alır."

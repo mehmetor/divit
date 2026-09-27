@@ -1,5 +1,5 @@
 ---
-name: paylas
+name: gelistirici-paylas
 description: Divit'in çalışırken tuttuğu notları (iş günlüğü, karşılaşılan sorunlar, ihtiyaç notu) Divit'i geliştiren kişiye geri bildirim olarak gönderir. Önce ne gönderileceğini açıklar, dosyayı gösterir ve açık onay ister. Hoca "geri bildirim gönder", "sorunları ilet", "paylaş", "Mehmet Bey'e gönder", "Divit'i geliştirene yaz" dediğinde kullan.
 ---
 

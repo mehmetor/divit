@@ -43,6 +43,10 @@ irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex   # Wind
 curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash   # Mac
 ```
 
+Windows'ta kurulum bitince Claude'u tamamen kapatıp yeniden aç
+(yeni PDF araçları ancak böyle görünür). Sonra `çalışıyor musun`
+yazdır; Divit Word, PDF, izin kipi ve modeli denetler.
+
 Hocanın makinesinde, hocanın yanında yap. Kurulumu izlemesi
 "bu benim bilgisayarımda çalışıyor" hissini veriyor — bu hissin
 değeri küçümsenmemeli.
@@ -55,7 +59,7 @@ değeri küçümsenmemeli.
 | 10-25 | `kurulum` skill'i: tanışma, CV okuma, üslup, **alan kuralları doğrulaması** |
 | 25-45 | **Gerçek iş:** elindeki öğrenci metniyle `tez-kontrol` |
 | 45-55 | Raporu birlikte okuyun. **Hangi maddeyi sildiğini not al.** |
-| 55-60 | `ihtiyac-gorusmesi` teklifi — kabul ederse ikinci oturuma |
+| 55-60 | `gelistirici-ihtiyac-gorusmesi` teklifi — kabul ederse ikinci oturuma |
 
 ### Oturumda senin işin
 
@@ -75,7 +79,7 @@ on saniye bekle. Nerede takıldığı, ne dediğinden daha değerli.
    olamadığım yere işaret koyarım."*
 2. *"Öğrenci dosyalarınıza yazma iznim yok. Okurum, rapor yazarım,
    metne dokunmam."*
-3. *"Her oturumda yedek alıyorum. Bozulursa 'geri al' demeniz yeter."*
+3. *"Bir dosyayı değiştirmeden önce önceki sürümünü saklarım. Bozulursa 'geri al' demeniz yeter."*
 4. *"Deneme sonuçlarınızı yorumlamam, istatistik yapmam. Metnin
    kendi içinde tutarlı olup olmadığına bakarım."*
 
@@ -89,7 +93,7 @@ geniş tutup geri çekilmekten iyidir.
 2. Alan kılavuzunda düzelttiklerini `plugins/divit/alan/ziraat.md`
    dosyasına geri işle. **Bir sonraki ziraatçı hoca bunu hazır bulur.**
    Ürünün ölçeklenme mekanizması bu.
-3. İki hafta dokunma. İkinci haftanın sonunda vault'un kayıtlarına bak:
+3. İki hafta dokunma. İkinci haftanın sonunda Divit klasörünün kayıtlarına bak:
 
 ```bash
 # Hocanın Belgeler/Divit/.divit/gunluk.md dosyasını (izniyle) birlikte açın

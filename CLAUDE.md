@@ -38,11 +38,20 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
     `CLAUDE.md` kendiliğinden güncellenmez; eklenti güncellenir. Bu yüzden
     çalışma kuralları `skills/kurallar` içindedir ve klasördeki CLAUDE.md
     yalnızca "önce kuralları yükle" satırıyla güvenlik çekirdeğini taşır.
-    Kural değişikliği → `kurallar` skill'i → `./yayinla.sh --gonder`.
+    Kural değişikliği → `kurallar` skill'i → `SURUM.md` → `./yayinla.sh --gonder`.
 12. **Geri bildirim onaylı ve anonim.** Divit `.divit/gunluk.md` ve
-    `.divit/sorunlar.md` tutar; `paylas` bunları öğrenci bilgisi
+    `.divit/sorunlar.md` tutar; `gelistirici-paylas` bunları öğrenci bilgisi
     çıkarılmış hâlde hocaya gösterir, açık onaydan sonra e-postayı hoca
     gönderir. Oturum dökümleri kullanılmaz.
+
+13. **Sürüm notu hocanın dilinde.** Teknik sürüm zip özetidir; hocaya
+    görünen sürüm `plugins/divit/SURUM.md` en üst başlığıdır. Her yayında
+    yeni başlık zorunlu (`yayinla.sh` denetler). Klasör ayarı, kılavuz ya
+    da araç değiştiyse başlığa `· kurulum gerekir` eklenir; `guncelleme`
+    skill'i hocaya bunu önerip onayla kurulumu çalıştırır.
+14. **Geliştiriciye dönük komutlar `gelistirici-` önekiyle.** Hocanın
+    menüsünde ayrı dursun. İç kural skill'leri (`kurallar`)
+    `user-invocable: false` ile menüden gizlenir.
 
 ## Skill yazarken
 

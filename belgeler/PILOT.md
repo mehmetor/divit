@@ -39,7 +39,7 @@ fazla şey öğretir.
 | Ölçüt | Nasıl ölçülür | Eşik |
 |---|---|---|
 | Kurulumu yardımsız tamamlama | Gözlem | Evet |
-| 2. haftada kendiliğinden açma | Commit tarihleri | Evet |
+| 2. haftada kendiliğinden açma | `gunluk.md` tarihleri | Evet |
 | Rapordan silinen oran | Hocayla raporu birlikte okuma | < %40 |
 | Doğrulanamayan atıf | `kaynaklar/dogrulama.md` | **0** |
 | Word'e dönülen iş | Görüşme notu | Kayıt altına alınır |
@@ -50,7 +50,7 @@ başlamaz; sebebi bulunur ve mimariyle kapatılır.
 ## Aşama 2 — Üç hoca, farklı alanlar (4 hafta)
 
 Aşama 1 eşikleri tutarsa. `yazisma` ve `kaynak-dogrula` açılır.
-Her hocayla `ihtiyac-gorusmesi` yapılır; notlar birleştirilip
+Her hocayla `gelistirici-ihtiyac-gorusmesi` yapılır; notlar birleştirilip
 `IHTIYAC-ANALIZI.md` §2'deki alan varsayımları güncellenir.
 
 **Bu aşamadan önce yapılacak teknik iş:**

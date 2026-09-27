@@ -1,5 +1,5 @@
 ---
-name: ihtiyac-gorusmesi
+name: gelistirici-ihtiyac-gorusmesi
 description: Hocanın gerçek iş akışını ve ihtiyaçlarını tespit eden yapılandırılmış görüşme; çıktısı geliştiriciye giden bir ihtiyaç notudur. Kurulumdan sonra, "beni daha iyi tanı", "bunu bana göre ayarla" dendiğinde veya pilot geri bildirimi toplanırken kullan.
 ---
 

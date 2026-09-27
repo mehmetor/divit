@@ -45,6 +45,22 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
 7. **Hatırlatma durumu:** `.divit/hatirlatma.md`'de `son-bakim` 60
    günden eski mi.
 
+## İzin kipi
+
+Claude'un alt çubuğunda bir izin kipi seçicisi vardır. Divit en rahat
+**Auto** kipinde çalışır: güvenli işleri sormadan yapar, riskli olanı
+yine sorar. Başka kipte her komutta İngilizce izin sorusu çıkar.
+
+Bu oturumda Auto kipinin açık olduğuna dair bir sistem bildirimi
+görmüyorsan ve hoca bir izin sorusunda takıldıysa (izin reddedildi,
+"bu ne soruyor", aynı izin ikinci kez çıktı), oturumda **bir kez** söyle:
+
+> "Size çok izin sorusu çıkıyor. Yazı kutusunun altındaki kip
+> seçicisinden **Auto**'yu seçerseniz daha az soru çıkar. Divit yine de
+> dosyalarınızı silmez ve öğrenci dosyalarına yazmaz."
+
+Sağlık denetiminde de kipi söyle. Kip Auto değilse aynı öneriyi yap.
+
 ## Kota ve model
 
 Divit, hocanın Claude kullanım sınırını (5 saatlik ve haftalık) **göremez.**

@@ -44,7 +44,8 @@
       "WebFetch(domain:api.crossref.org)",
       "WebFetch(domain:api.unpaywall.org)",
       "WebFetch(domain:dergipark.org.tr)",
-      "WebFetch(domain:akademik.yok.gov.tr)"
+      "WebFetch(domain:akademik.yok.gov.tr)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ],
     "deny": [
       "Edit(./**/gelen/**)",

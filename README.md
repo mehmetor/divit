@@ -24,7 +24,8 @@ Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
 - **Sınırını bilir.** Not vermez, hakemlik yapmaz, intihal hükmü vermez.
 - **Terminal yok.** Claude masaüstü uygulamasında sohbetle çalışır.
   Windows ve Mac'te aynı.
-- **Kendiliğinden güncellenir.** Düzeltmeler hocanın makinesine kendisi gider.
+- **Kendiliğinden güncellenir.** Düzeltmeler hocanın makinesine kendisi gider;
+  Divit yenilikleri kendisi söyler, kurulum gerekirse onayla yeniden çalıştırır.
 - **Geri bildirim sizin elinizde.** Divit sorunları not eder; yalnız
   onayınızla, öğrenci bilgisi çıkarılmış hâlde gönderilir.
 
@@ -40,15 +41,21 @@ Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
 | `bölüm yazalım` | Yapı, itiraz, eksik tespiti (`bolum-yaz`) |
 | `bu PDF'leri birleştir` | PDF birleştirme, sayfa çıkarma/silme/döndürme, kontrol listesi ve form işaretleme, PDF'ten Word'e, fotoğraftan PDF — bilgisayarda, siteye yüklemeden (`pdf`) |
 | `geri al` | Önceki sürüme dönme (`geri-al`) |
-| `geri bildirim gönder` | Notları onayla geliştiriciye iletme (`paylas`) |
+| `geri bildirim gönder` | Notları onayla geliştiriciye iletme (`gelistirici-paylas`) |
 | `yardım` | Kılavuzu açar (`yardim`) |
-
 | `e-posta olarak hazırla` | Hocanın e-postasında taslak açar, izinle; göndermez (`eposta`) |
-| `çalışıyor musun` | Word okuma, izin ve profil denetimi (`saglik`) |
+| `çalışıyor musun` | Word ve PDF okuma, PDF aracı, izin kipi, model ve profil denetimi (`saglik`) |
+| `yenilikler neler` | Sürüm notlarını anlatır, gerekirse kurulumu onayla yeniden çalıştırır (`guncelleme`) |
 
 Kendiliğinden çalışanlar: `kurulum` (ilk açılışta hocayı tanır),
 `kurallar` (her oturumda), `bakim` (ayda bir, izinle profil ve hafıza
-düzeni; haftalık geri bildirim hatırlatması). `ihtiyac-gorusmesi` pilot içindir.
+düzeni; haftalık geri bildirim hatırlatması), `guncelleme` (haftada bir
+yeni sürüm denetimi). `gelistirici-ihtiyac-gorusmesi` pilot içindir.
+Sürüm notları: [`plugins/divit/SURUM.md`](plugins/divit/SURUM.md).
+
+Varsayılan model Opus 5.5, düşük çaba (klasör ayarı). Ağır işlerde Divit
+`/effort high` önerir. Divit hocanın kullanım sınırını göremez. İzin
+sorusu çok çıkarsa kip seçicisinde **Auto** önerir.
 
 ## Ne yapmaz
 
@@ -60,7 +67,8 @@ veya "yapay zekâ yazmış" hükmü · veri analizi ve istatistik yorumu
 
 Gereken tek şey: **Claude Pro** (ya da üstü) hesabı. Git, Python,
 Homebrew ya da yönetici hakkı gerekmez. Kurulum Claude uygulamasını,
-Claude Code'u, Word dönüştürücüsünü (pandoc), PDF aracını (pdfcpu) ve `Belgeler/Divit`
+Claude Code'u, Word dönüştürücüsünü (pandoc), PDF aracını (pdfcpu; Windows'ta
+ayrıca PDF okuyucu Poppler, Mac'te sistemin PDFKit'i) ve `Belgeler/Divit`
 klasörünü hazırlar. Yeniden çalıştırmak güvenlidir; dosyalarınıza dokunmaz.
 
 ### Seçenek 1 — Tek komut
@@ -74,6 +82,11 @@ irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex
 ```bash
 curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash
 ```
+
+Kısa adres de çalışır: `irm https://divit.simetri.app/kur.ps1 | iex` ·
+`curl -fsSL https://divit.simetri.app/kur.sh | bash`.
+
+Windows'ta kurulumdan sonra Claude'u tamamen kapatıp yeniden açın.
 
 ### Seçenek 2 — Yapay zekâ sizin yerinize kursun
 
@@ -124,15 +137,17 @@ divit/
 ├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
 ├── dagitim/                         yayınlanmış eklenti zip'leri
 ├── plugins/divit/                   eklentinin kaynağı
-│   ├── skills/                      on altı skill
+│   ├── skills/                      on yedi skill
+│   ├── SURUM.md                     hocaya anlatılan sürüm notları
 │   ├── alan/                        örnek alan kılavuzları (başlangıç noktası)
-│   └── scripts/                     yardımcı betik (isteğe bağlı)
+│   └── scripts/                     yardımcı betikler (Mac PDF okuma, harf denetimi)
 ├── hoca-paketi/Divit/               hocanın Belgeler/Divit klasörü şablonu
 │   ├── CLAUDE.md                    Divit'in hocayla çalışma kuralları
 │   ├── KILAVUZ.html                 hocanın kılavuzu
+│   ├── KART.html                    tek sayfalık kart
 │   └── .divit/profil/               Divit'in hocayı tanıdığı dosyalar
 ├── araclar/pano.py                  pilot panosu (geri bildirimleri toplar)
-├── apps/web/                        divit.simetri.app tek sayfalık site
+├── apps/web/                        divit.simetri.app tek sayfalık site (+ kısa kurulum adresi)
 └── belgeler/                        ihtiyaç analizi, pilot planı, rehberler
 ```
 

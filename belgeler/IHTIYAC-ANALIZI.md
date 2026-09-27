@@ -10,7 +10,7 @@ var — ilk hocayla yapılacak görüşmede bunlar sorulur.
 Hocaya "AI'dan ne beklersiniz" diye sorma. Cevabı ya "her şeyi yazsın"
 ya "hiçbir şeye güvenmem" olur; ikisi de kullanılamaz. Bunun yerine
 **geçen haftayı** sordur: dün akşam bilgisayar başında ne yaptın, ne
-kadar sürdü, hangisinde sıkıldın. `ihtiyac-gorusmesi` skill'i bu
+kadar sürdü, hangisinde sıkıldın. `gelistirici-ihtiyac-gorusmesi` skill'i bu
 formatta yazıldı.
 
 ## 1. Akademisyenin gerçek zaman dağılımı (varsayım)

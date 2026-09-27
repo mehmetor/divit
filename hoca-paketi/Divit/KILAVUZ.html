@@ -185,7 +185,7 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td>Dilekçe, kurul yazısı, referans mektubu</td>
     <td><span class="yaz">dekanlığa izin dilekçesi yazalım</span></td>
     <td><code>yazilar</code></td></tr>
-<tr><td>Hakemlere cevap mektubu</td>
+<tr><td>Hakem yorumlarına cevap tablosu ve mektubu</td>
     <td><span class="yaz">hakem yorumlarına cevap mektubu hazırla</span></td>
     <td><code>yazilar</code></td></tr>
 <tr><td>Word çıktısı</td>
@@ -200,18 +200,29 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td>PDF'i Word'e çevirme</td>
     <td><span class="yaz">bu PDF'i Word'e çevir</span></td>
     <td><code>cikti</code></td></tr>
+<tr><td>E-posta taslağı hazırlama</td>
+    <td><span class="yaz">e-posta olarak hazırla</span></td>
+    <td>E-postanızdaki taslaklar</td></tr>
 <tr><td>Önceki sürüme dönme</td>
     <td><span class="yaz">geri al</span></td>
     <td>Aynı dosya</td></tr>
 <tr><td>Geri bildirim gönderme</td>
     <td><span class="yaz">geri bildirim gönder</span></td>
     <td>E-posta</td></tr>
+<tr><td>Divit'in çalışıp çalışmadığını denetleme</td>
+    <td><span class="yaz">çalışıyor musun</span></td>
+    <td>Sohbette</td></tr>
+<tr><td>Yenilikleri öğrenme</td>
+    <td><span class="yaz">yenilikler neler</span></td>
+    <td>Sohbette</td></tr>
 <tr><td>Bu kılavuzu açma</td>
     <td><span class="yaz">yardım</span></td>
     <td>Bu sayfa</td></tr>
 </tbody></table></div>
 <div class="kutu not"><b class="etiket">NOT</b>
 PDF işleri için internetteki "ücretsiz PDF" sitelerini kullanmayın. Divit bu işleri bilgisayarınızda yapar. Dosyanız hiçbir siteye yüklenmez. Asıl PDF değişmez; sonuç <code>cikti</code> klasörüne yeni dosya olarak yazılır.</div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit e-postayı kendisi göndermez. Divit yalnızca taslak açar. Bunun için bir kez izin ister. Taslağı okuyun. Göndermeyi siz yaparsınız.</div>
 </section>
 
 <section id="izin">
@@ -227,7 +238,9 @@ PDF işleri için internetteki "ücretsiz PDF" sitelerini kullanmayın. Divit bu
 <div class="kutu uyari"><b class="etiket">UYARI</b>
 Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye sorun.</div>
 <p>Divit dosya okumak ve kendi klasörlerine yazmak için izin istemez. Bu işlemlere önceden izin verildi.</p>
-<p>Mesaj kutusunun yanında bir mod seçici vardır. <b>Accept edits</b> seçili kalsın. Bu ayarı değiştirmeyin.</p>
+<h3>Çok izin sorusu çıkıyorsa</h3>
+<p>Mesaj kutusunun altında bir kip seçici vardır. Bu seçiciden <b>Auto</b>'yu seçin. Divit güvenli işleri sormadan yapar. Divit riskli işlerde yine sorar.</p>
+<p>Auto kipinde de Divit dosyalarınızı silmez. Divit öğrenci dosyalarına yazmaz.</p>
 </section>
 
 <section id="klasor">
@@ -240,7 +253,7 @@ Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye soru
 <tr><td><code>tez-kontrol/rapor</code></td><td>Divit'in yazdığı değerlendirme raporları.</td></tr>
 <tr><td><code>yazilar</code></td><td>Sizin metinleriniz ve yazışmalarınız.</td></tr>
 <tr><td><code>kaynaklar</code></td><td>Kaynak PDF'leriniz. Divit yalnızca buradaki kaynaklara atıf yapar.</td></tr>
-<tr><td><code>cikti</code></td><td>Word çıktıları.</td></tr>
+<tr><td><code>cikti</code></td><td>Word ve PDF çıktıları.</td></tr>
 <tr><td><code>arsiv</code></td><td>Biten işler.</td></tr>
 </tbody></table></div>
 <div class="kutu uyari"><b class="etiket">UYARI</b>
@@ -309,8 +322,12 @@ Bir hafta geri bildirim göndermezseniz Divit bir kez hatırlatır. İstemiyorsa
 <h3>Aylık bakım</h3>
 <p>Divit ayda bir kendi notlarını toparlamak için izin ister. Bu iş birkaç dakika sürer. Divit dosyalarınıza dokunmaz. Değişiklikleri önce size gösterir.</p>
 <h3>Kullanım sınırı</h3>
-<p>Claude'un 5 saatlik ve haftalık bir kullanım sınırı vardır. Sınıra gelirseniz ekranda İngilizce bir uyarı çıkar ve yeniden açılma saati yazar. İşiniz kaybolmaz. O saatte Divit'e <span class="yaz">kaldığımız yerden devam</span> yazın.</p>
+<p>Claude'un 5 saatlik ve haftalık bir kullanım sınırı vardır. Divit bu sınırı göremez. Sınıra gelirseniz ekranda İngilizce bir uyarı çıkar ve yeniden açılma saati yazar. İşiniz kaybolmaz. O saatte Divit'e <span class="yaz">kaldığımız yerden devam</span> yazın.</p>
 <p>Divit uzun bir işe başlarken daha dikkatli okuma önerebilir. Kabul ederseniz sohbet kutusuna <span class="yaz">/effort high</span> yazın.</p>
+<h3>Yenilikler</h3>
+<p>Divit kendiliğinden güncellenir. Yeni bir özellik geldiğinde Divit size söyler.</p>
+<p>Bazı yenilikler için kısa bir güncelleme gerekir. Divit önce sizden izin ister. Kabul ederseniz <b>evet</b> yazın. Güncelleme dosyalarınıza dokunmaz.</p>
+<p>Güncelleme bitince Claude'u tamamen kapatın. Sonra Claude'u yeniden açın.</p>
 <h3>Her iş için yeni sohbet</h3>
 <p>Başka bir işe geçtiğinizde soldaki <b>New session</b> düğmesine tıklayın. Divit her işte daha iyi çalışır. Önceki işleriniz klasörde kalır.</p>
 </section>

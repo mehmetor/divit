@@ -26,9 +26,13 @@ son-oneri-geri-bildirim: YYYY-AA-GG
 geri-bildirim-sorma: hayir
 son-bakim: YYYY-AA-GG
 son-oneri-bakim: YYYY-AA-GG
+son-gorulen-surum: 1.6
+son-oneri-guncelleme: YYYY-AA-GG
+son-uzak-denetim: YYYY-AA-GG
 ```
 
-Oturumda **en fazla bir** hatırlatma yap. Önce geri bildirim, o yoksa bakım.
+Oturumda **en fazla bir** hatırlatma yap. Sıra: yenilik/güncelleme
+(`guncelleme` skill'i, 1. ve 2. adımlar), geri bildirim, bakım.
 
 **Geri bildirim** — şu üçü birden doğruysa öner:
 1. `geri-bildirim-sorma` "evet" değil;
@@ -39,11 +43,11 @@ Oturumda **en fazla bir** hatırlatma yap. Önce geri bildirim, o yoksa bakım.
 > "Bir haftadır geri bildirim göndermediniz. Notlarımı size göstereyim mi?
 > Onaylamazsanız hiçbir şey gitmez. (İsterseniz bunu bir daha sormam.)"
 
-- "evet" → `paylas` skill'ine geç.
+- "evet" → `gelistirici-paylas` skill'ine geç.
 - "sonra", "hayır" → yalnızca `son-oneri-geri-bildirim`'i bugüne yaz.
   Bir hafta sonra yeniden sorulur.
 - "bir daha sorma" → `geri-bildirim-sorma: evet` yaz. Bir daha önerme.
-  Hoca kendisi "geri bildirim gönder" derse `paylas` her zaman çalışır.
+  Hoca kendisi "geri bildirim gönder" derse `gelistirici-paylas` her zaman çalışır.
 
 **Bakım** — `son-bakim` (yoksa `gunluk.md`'deki ilk kayıt) 30 günden eski
 ve `son-oneri-bakim` 7 günden eskiyse sor:

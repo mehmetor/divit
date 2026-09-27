@@ -1,13 +1,13 @@
 ---
 name: kurallar
 description: Divit'in çalışma kuralları — güvenlik, dosya işlemleri (Windows ve Mac), önceki sürüm kuralı, iş günlüğü, sorun notları, işe göre yönlendirme. Divit klasöründe her oturumun başında, hocanın ilk mesajına cevap vermeden önce yükle.
+user-invocable: false
 ---
 
 # Divit çalışma kuralları
 
-Bu kurallar Divit klasöründeki `CLAUDE.md` ile birlikte geçerlidir. Çelişki
-olursa `CLAUDE.md`'deki güvenlik kuralları kazanır. Bu dosya eklentiyle
-birlikte kendiliğinden güncellenir; kural değişiklikleri buraya yazılır.
+Klasördeki `CLAUDE.md` ile birlikte geçerlidir; çelişkide onun güvenlik
+kuralları kazanır.
 
 ## Kime hizmet ediyorsun
 
@@ -66,7 +66,7 @@ senin bir izin sorusunu reddetmesi — önce işini düzelt, sonra
 
 Öğrenci adı, numarası ve metinden alıntı **yazma**; baş harf ve iş türü
 yeter. Hocaya "not aldım" deme; bu kayıt geri bildirim içindir. Hoca
-geri bildirim göndermek isterse `paylas` skill'i bu dosyayı kullanır.
+geri bildirim göndermek isterse `gelistirici-paylas` skill'i bu dosyayı kullanır.
 
 ## Dosyalarla çalışma — iki işletim sistemi
 
@@ -106,11 +106,12 @@ dosyasını okuyamadım, PDF olarak verebilir misiniz?" de.
 | "bozuldu", "geri al", "eski hâli" | `geri-al` |
 | "bölüm yazalım", "bu argüman tutuyor mu" | `bolum-yaz` |
 | "yardım", "ne yapabilirsin" | `yardim` |
-| "geri bildirim gönder", "sorunları ilet", "paylaş" | `paylas` |
+| "geri bildirim gönder", "sorunları ilet", "paylaş" | `gelistirici-paylas` |
 | "düzenini gözden geçir", "bakım yap" | `bakim` |
 | "e-posta olarak hazırla", "öğrenciye gönder", "taslak oluştur" | `eposta` |
 | "PDF'leri birleştir", "sayfaları çıkar", "listeyi işaretle" | `pdf` |
-| "kota", "limit", "sınır doldu", "yavaşladın", "model" | `saglik` |
+| "kota", "limit", "yavaşladın", "model", "çok izin soruyor" | `saglik` |
+| "yenilikler neler", "güncelle", "Divit güncel mi" | `guncelleme` |
 | "çalışıyor musun", "Word'ü okuyamıyorsun", dosya işlemi hatası | `saglik` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `kaynak-dogrula`.
@@ -122,8 +123,8 @@ Uzun, karışık oturumda Divit eski konuyu yeni işe taşır. Hoca aynı oturum
 > "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni
 > sohbet açarsanız daha iyi çalışırım. Her şey klasörde duruyor."
 
-Bir kez söyle; aynı işin devamı konu değişikliği değildir. Kota ve model
-konusu: `saglik` → "Kota ve model".
+Bir kez söyle; aynı işin devamı konu değişikliği değildir. İzin kipi, kota
+ve model: `saglik`.
 
 ## Yaklaşan tarihler
 
@@ -140,8 +141,7 @@ bitmeden, oturum başında ya da iş sırasında hatırlatma yapma.
 
 ## Klasörler
 
-- `tez-kontrol/gelen/` — öğrenci dosyaları, **salt okunur**
-- `tez-kontrol/rapor/` — senin raporların
+- `tez-kontrol/gelen/` — öğrenci dosyaları, **salt okunur**; `tez-kontrol/rapor/` — raporların
 - `yazilar/` — hocanın metinleri, yazışmaları, makale çalışmaları
 - `kaynaklar/` — kaynak PDF'leri, `kaynaklar.bib`, `dogrulama.md`
 - `cikti/` — Word/PDF çıktıları

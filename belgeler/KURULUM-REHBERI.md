@@ -45,13 +45,16 @@ Komut altı adımı kendisi yapar:
 |---|---|
 | 1 | Claude uygulamasını kurar (kurulu değilse) |
 | 2 | Claude Code'u kurar (eklentiyi kurmak için) |
-| 3 | Word dönüştürücüyü (pandoc) kurar |
-| 4 | `Belgeler/Divit` klasörünü oluşturur |
+| 3 | Word ve PDF araçlarını kurar: pandoc, pdfcpu; Windows'ta ayrıca Poppler (`pdftotext`, `pdftoppm` kullanıcı PATH'ine eklenir). Mac'te PDF okuma sistemin PDFKit'iyle olur |
+| 4 | `Belgeler/Divit` klasörünü oluşturur, `.divit/kurulum-surumu.txt` yazar |
 | 5 | Divit eklentisini kurar ve otomatik güncellemeyi açar |
 | 6 | Masaüstüne Divit kısayolu koyar, kılavuzu açar |
 
 > **NOT:** Windows'ta Claude uygulaması kurulurken ayrı bir kurulum
 > penceresi açılabilir. Pencere kapanana kadar bekleyin.
+
+> **UYARI:** Windows'ta kurulum bitince Claude açıksa tamamen kapatın
+> ve yeniden açın. Yoksa Claude yeni PDF araçlarını görmez.
 
 > **NOT:** Komut "UYARI" yazdıysa kuruluma devam edin. Uyarının ne
 > olduğunu not alın. Çoğu uyarı ilk açılışta kendiliğinden çözülür.
@@ -107,9 +110,12 @@ Eklenti hocalara kendiliğinden güncellenir.
 > hocaları aynı anda etkiler. `yayinla.sh` göndermeden önce eklentiyi
 > doğrular; doğrulama başarısız olursa göndermez.
 
-Divit klasörünün kendisini (`CLAUDE.md`, kılavuz, ayarlar) güncellemek
-için hoca makinesinde kurulum komutunu yeniden çalıştırın. Komut hocanın
-dosyalarına ve profiline dokunmaz.
+Divit klasörünün kendisini (`CLAUDE.md`, kılavuz, ayarlar) ve araçları
+güncellemek için kurulum komutu yeniden çalışmalıdır. Komut hocanın
+dosyalarına ve profiline dokunmaz. Bunu elle yapmanız gerekmez:
+`plugins/divit/SURUM.md`'ye yeni sürüm başlığı yazın; başlığın sonuna
+` · kurulum gerekir` ekleyin. `guncelleme` skill'i yenilikleri hocaya
+anlatır ve kurulumu hocanın onayıyla yeniden çalıştırır.
 
 ---
 
@@ -120,8 +126,8 @@ dosyalarına ve profiline dokunmaz.
 | PowerShell "irm tanınmıyor" diyor | CMD açmışsınız. PowerShell'i açın. |
 | **Code** sekmesi "upgrade" istiyor | Hesap ücretsiz. Pro hesaba geçin. |
 | Divit özgeçmiş istemiyor, sıradan cevap veriyor | Yanlış klasör seçildi. **Select folder** → Belgeler → Divit. |
-| Divit her kayıtta izin soruyor | Mod seçici **Accept edits** değil. Mesaj kutusunun yanından seçin. |
-| Word dosyasını okuyamıyor | Kurulum komutunu yeniden çalıştırın (pandoc yeniden iner). |
+| Divit çok izin soruyor | Mesaj kutusunun altındaki kip seçiciden **Auto**'yu seçin. |
+| Word ya da PDF okuyamıyor | Divit'e `çalışıyor musun` yazın. Araç eksikse kurulum komutunu yeniden çalıştırın; Windows'ta sonra Claude'u tamamen kapatıp açın. |
 | Eklenti yok (`yardım` kılavuzu açmıyor) | Kurulum komutunu yeniden çalıştırın. |
 
 Hâlâ çözülmediyse hoca makinesinde şu komutu çalıştırın ve çıktıyı
