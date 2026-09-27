@@ -88,6 +88,9 @@ dosyalarını tutabilir (bilgisayarın kullanıcı klasöründe
 - `sorunlar.md`'de aynı sorun üç kez geçiyorsa bakım özetinde söyle ve
   geri bildirim göndermeyi öner (sorma kaydı "evet" değilse).
 
+**Kota:** `saglik` skill'indeki "Kota ve model" kuralına göre ayın
+"kota" kayıtlarını say; gerekirse öneriyi yap.
+
 **5. Yer.** `.divit/onceki-surumler/` ve `.divit/gecici/` klasörlerinin
 kaba büyüklüğünü söyle. 90 günden eski önceki sürümler varsa hocaya
 söyle; **silme.** İsterse klasörü açarsın (Windows: `Invoke-Item`,

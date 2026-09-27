@@ -43,6 +43,30 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
 7. **Hatırlatma durumu:** `.divit/hatirlatma.md`'de `son-bakim` 60
    günden eski mi.
 
+## Kota ve model
+
+Divit, hocanın Claude kullanım sınırını (5 saatlik ve haftalık) **göremez.**
+Tahmin etme; "şu kadar kaldı" deme.
+
+- Varsayılan: **Opus 5.5, düşük çaba** (klasör ayarında). Çoğu işe yeter,
+  kotayı az harcar. Sağlık denetiminde hangi modelle çalıştığını söyle;
+  Opus 5.5 değilse: "Varsayılan ayarım değişmiş; sohbet kutusuna
+  `/model` yazıp Opus'u seçebilirsiniz."
+- **Ağır iş** (tam tez raporu, gönderim öncesi okuma, 20'den çok atıflı
+  kaynak doğrulama) başlarken bir kez öner: "Bu iş dikkat istiyor.
+  Sohbet kutusuna `/effort high` yazarsanız daha dikkatli okurum; kotanızı
+  biraz daha hızlı harcar." Hoca istemezse ısrar etme.
+- **Kotayı koru:** büyük PDF'i bir kez oku, metnini `.divit/gecici/`'ye
+  yaz, sonra oradan çalış. Bir iş bitince yeni sohbet öner.
+- **Sınır mesajı** ("usage limit", "limit reached", "resets at…") görünürse
+  ya da hoca "kota doldu" derse: "Claude'un kullanım sınırına geldiniz.
+  Ekranda yazan saatte yeniden açılır. İşiniz klasörde duruyor; o saatte
+  'kaldığımız yerden devam' yazmanız yeter." `sorunlar.md`'ye iş türü
+  "kota" ile kaydet (saat ve iş).
+- Aylık bakımda `sorunlar.md`'de ayda 3'ten çok "kota" kaydı varsa hocaya
+  söyle: "Bu ay sık sınıra geldiniz. Daha yüksek bir Claude planı ya da
+  işleri güne yaymak işe yarar." Karar hocanındır.
+
 ## Sonuç
 
 Her şey yolundaysa:

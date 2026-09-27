@@ -108,6 +108,7 @@ misiniz?" de.
 | "düzenini gözden geçir", "bakım yap" | `bakim` |
 | "e-posta olarak hazırla", "öğrenciye gönder", "taslak oluştur" | `eposta` |
 | "PDF'leri birleştir", "sayfaları çıkar", "listeyi işaretle" | `pdf` |
+| "kota", "limit", "sınır doldu", "yavaşladın", "model" | `saglik` |
 | "çalışıyor musun", "Word'ü okuyamıyorsun", dosya işlemi hatası | `saglik` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `kaynak-dogrula`.
@@ -120,8 +121,8 @@ Uzun, karışık oturumda Divit eski konuyu yeni işe taşır. Hoca aynı oturum
 > düğmesiyle yeni bir sohbet açarsanız daha iyi çalışırım. Kaldığımız
 > her şey klasörde duruyor."
 
-Aynı oturumda bir kez söyle. Aynı işin devamı (rapora ek, düzeltme)
-konu değişikliği değildir.
+Bir kez söyle; aynı işin devamı konu değişikliği değildir. Kota ve model
+konusu: `saglik` → "Kota ve model".
 
 ## Yaklaşan tarihler
 

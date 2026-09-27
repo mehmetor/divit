@@ -8,6 +8,8 @@
       "autoUpdate": true
     }
   },
+  "model": "claude-opus-5-5",
+  "effortLevel": "low",
   "env": {
     "DIVIT_PANDOC": "__PANDOC__",
     "DIVIT_PDFCPU": "__PDFCPU__"
