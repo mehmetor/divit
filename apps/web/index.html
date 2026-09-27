@@ -17,7 +17,8 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--zemin);color:var(--metin);font:17px/1.6 -apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 a{color:var(--vurgu)}
 .kap{max-width:980px;margin:0 auto;padding:0 20px}
-header.ust{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+header.ust{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:14px 0;background:var(--zemin);border-bottom:1px solid var(--cizgi)}
+section{scroll-margin-top:64px}
 .logo{font:700 22px Georgia,serif;color:var(--vurgu);text-decoration:none}
 nav a{margin-left:18px;color:var(--soluk);text-decoration:none;font-size:15px}
 nav a:hover{color:var(--vurgu)}
@@ -60,7 +61,7 @@ footer{border-top:1px solid var(--cizgi);padding:28px 0 48px;color:var(--soluk);
 .cizelge td{padding:10px 14px;border-top:1px solid var(--cizgi);vertical-align:top}
 .cizelge tr:first-child td{border-top:none}
 .cizelge code{font-family:Consolas,Menlo,monospace;font-size:14px;color:var(--vurgu);white-space:nowrap}
-@media (max-width:640px){nav{display:none}.kahraman{padding:32px 0 24px}body{font-size:16px}}
+@media (max-width:640px){nav{display:flex;gap:14px;overflow-x:auto}nav a{margin-left:0;white-space:nowrap;font-size:14px}.logo{margin-right:14px}.kahraman{padding:32px 0 24px}body{font-size:16px}}
 </style>
 </head>
 <body>
