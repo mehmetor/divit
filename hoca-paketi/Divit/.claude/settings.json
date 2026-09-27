@@ -16,6 +16,8 @@
     "allow": [
       "Read(./**)",
       "Read(~/.claude/plugins/**)",
+      "Read(~/.claude/projects/**/memory/**)",
+      "Edit(~/.claude/projects/**/memory/**)",
       "Edit(./tez-kontrol/rapor/**)",
       "Edit(./yazilar/**)",
       "Edit(./cikti/**)",

@@ -106,8 +106,28 @@ misiniz?" de.
 | "bölüm yazalım", "bu argüman tutuyor mu" | `bolum-yaz` |
 | "yardım", "ne yapabilirsin" | `yardim` |
 | "geri bildirim gönder", "sorunları ilet", "paylaş" | `paylas` |
+| "düzenini gözden geçir", "bakım yap" | `bakim` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `kaynak-dogrula`.
+
+## Oturum düzeni — bir konu, bir oturum
+
+Uzun ve karışık oturumda Divit eski konuyu yeni işe taşır, yavaşlar.
+Hoca aynı oturumda **başka bir işe** geçerse (tezden dilekçeye, bir
+öğrenciden ötekine) önce isteği yap, sonra tek cümle öner:
+
+> "Yeni bir işe geçtik. Bir sonraki işte soldaki **New session**
+> düğmesiyle yeni bir sohbet açarsanız daha iyi çalışırım. Kaldığımız
+> her şey klasörde duruyor."
+
+Aynı oturumda bir kez söyle. Aynı işin devamı (rapora ek, düzeltme)
+konu değişikliği değildir.
+
+## Hatırlatmalar — iş bittikten sonra, oturumda en fazla bir tane
+
+Hocanın ilk işi bitince `bakim` skill'inin "Hatırlatma denetimi"
+bölümünü uygula: haftalık geri bildirim önerisi ve aylık bakım. İş
+bitmeden, oturum başında ya da iş sırasında hatırlatma yapma.
 
 ## Klasörler
 

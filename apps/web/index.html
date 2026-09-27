@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divit — akademik yazım tezgâhı</title>
+<meta name="description" content="Üniversite hocaları için Claude tabanlı yazım ve değerlendirme yardımcısı. Uydurmaz, dosyanızı bozmaz, sizi kendisi tanır.">
+<meta property="og:title" content="Divit — akademik yazım tezgâhı">
+<meta property="og:description" content="Tez okur, makalenizi göndermeden kontrol eder, atıfları doğrular. Uydurmaz, dosyanızı bozmaz.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f4e3d'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia'%3ED%3C/text%3E%3C/svg%3E">
+<style>
+:root{--zemin:#fbfaf7;--kart:#fff;--metin:#1d2521;--soluk:#5b6660;--vurgu:#1f4e3d;--vurgu2:#2f6f58;--acik:#e6efe9;--cizgi:#dfe5e1;--kod:#f2f4f1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--zemin:#121714;--kart:#1a211d;--metin:#e7ece9;--soluk:#9fb0a7;--vurgu:#7cc4a4;--vurgu2:#9fd8bd;--acik:#1f2d26;--cizgi:#2b3731;--kod:#0e1311}}
+:root[data-theme="dark"]{--zemin:#121714;--kart:#1a211d;--metin:#e7ece9;--soluk:#9fb0a7;--vurgu:#7cc4a4;--vurgu2:#9fd8bd;--acik:#1f2d26;--cizgi:#2b3731;--kod:#0e1311}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--zemin);color:var(--metin);font:17px/1.6 -apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--vurgu)}
+.kap{max-width:980px;margin:0 auto;padding:0 20px}
+header.ust{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.logo{font:700 22px Georgia,serif;color:var(--vurgu);text-decoration:none}
+nav a{margin-left:18px;color:var(--soluk);text-decoration:none;font-size:15px}
+nav a:hover{color:var(--vurgu)}
+.kahraman{padding:56px 0 40px}
+.kahraman h1{font:700 clamp(34px,6vw,54px)/1.12 Georgia,serif;margin:0 0 18px;letter-spacing:-.5px}
+.kahraman h1 em{color:var(--vurgu);font-style:normal}
+.kahraman p.ozet{font-size:20px;color:var(--soluk);max-width:640px;margin:0 0 28px}
+.dugme{display:inline-block;background:var(--vurgu);color:var(--zemin);padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:600;margin:0 10px 10px 0}
+.dugme.ikincil{background:transparent;color:var(--vurgu);border:2px solid var(--vurgu)}
+.koken{font-size:15px;color:var(--soluk);margin-top:22px;font-style:italic}
+section{padding:48px 0;border-top:1px solid var(--cizgi)}
+h2{font:700 30px/1.2 Georgia,serif;margin:0 0 8px}
+.alt{color:var(--soluk);margin:0 0 28px}
+.izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:16px}
+.kart{background:var(--kart);border:1px solid var(--cizgi);border-radius:14px;padding:20px}
+.kart h3{margin:0 0 6px;font-size:18px}
+.kart p{margin:0;color:var(--soluk);font-size:16px}
+.kart code,.ornek{font-family:Consolas,Menlo,monospace;font-size:14px;background:var(--acik);color:var(--vurgu);padding:2px 8px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.adimlar{counter-reset:a;list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:16px}
+.adimlar li{counter-increment:a;background:var(--kart);border:1px solid var(--cizgi);border-radius:14px;padding:20px 20px 20px 64px;position:relative}
+.adimlar li::before{content:counter(a);position:absolute;left:20px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--vurgu);color:var(--zemin);display:grid;place-items:center;font-weight:700}
+.sekmeler{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:-1px}
+.sekmeler button{font:inherit;font-size:15px;padding:10px 16px;border:1px solid var(--cizgi);border-bottom:none;background:var(--zemin);color:var(--soluk);border-radius:10px 10px 0 0;cursor:pointer}
+.sekmeler button[aria-selected="true"]{background:var(--kart);color:var(--metin);font-weight:600}
+.pano{background:var(--kart);border:1px solid var(--cizgi);border-radius:0 14px 14px 14px;padding:22px}
+.pano[hidden]{display:none}
+.pano ol{padding-left:22px;margin:0 0 14px}
+.kod{position:relative;background:var(--kod);border:1px solid var(--cizgi);border-radius:10px;margin:10px 0 14px}
+.kod pre{margin:0;padding:16px 16px 16px 16px;overflow-x:auto;font:14px/1.5 Consolas,Menlo,monospace;white-space:pre-wrap;word-break:break-word}
+.kod.uzun pre{max-height:260px;overflow-y:auto}
+.kopyala{position:absolute;top:8px;right:8px;font:600 13px inherit;font-family:inherit;padding:6px 12px;border-radius:8px;border:1px solid var(--cizgi);background:var(--kart);color:var(--metin);cursor:pointer}
+.not{font-size:15px;color:var(--soluk)}
+.yok{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:10px;list-style:none;padding:0;margin:0}
+.yok li{padding:12px 16px;border-radius:10px;background:var(--acik)}
+details{background:var(--kart);border:1px solid var(--cizgi);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{margin:10px 0 0;color:var(--soluk)}
+footer{border-top:1px solid var(--cizgi);padding:28px 0 48px;color:var(--soluk);font-size:15px}
+@media (max-width:640px){nav{display:none}.kahraman{padding:32px 0 24px}body{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="kap">
+<header class="ust">
+  <a class="logo" href="#">Divit</a>
+  <nav><a href="#neler">Neler yapar</a><a href="#guven">Güven</a><a href="#kurulum">Kurulum</a><a href="#sss">Sorular</a></nav>
+</header>
+
+<div class="kahraman">
+  <h1>Metni siz yazarsınız.<br><em>Divit okur, denetler, hazırlar.</em></h1>
+  <p class="ozet">Üniversite hocaları için akademik yazım tezgâhı. Öğrenci tezini okur, makalenizi göndermeden kontrol eder, atıfları kaynağına kadar doğrular. Windows ve Mac'te, Claude uygulaması içinde, sohbet ederek.</p>
+  <a class="dugme" href="#kurulum">Kurulum</a>
+  <a class="dugme ikincil" href="kilavuz.html">Kılavuzu okuyun</a>
+  <p class="koken">Divit: kâtibin kuşağına taktığı kalem-hokka takımı. Yazının kendisi değil, yazmak için yanınızda taşıdığınız alet.</p>
+</div>
+
+<section id="neler">
+  <h2>Siz yazarsınız, Divit iş görür</h2>
+  <p class="alt">Komut ezberlemezsiniz. Ne istediğinizi kendi sözlerinizle yazarsınız.</p>
+  <div class="izgara">
+    <div class="kart"><span class="ornek">bu tezi değerlendir</span><h3>Tez ve ödev raporu</h3><p>Öğrencinin dosyasına dokunmadan, bulgu listesi hâlinde yapılandırılmış rapor. Karar sizde kalır.</p></div>
+    <div class="kart"><span class="ornek">göndermeden kontrol et</span><h3>Gönderim öncesi okuma</h3><p>Çizelge ile metin tutarlı mı, birimler doğru mu, istatistik harfleri uyuyor mu, yöntem eksik mi.</p></div>
+    <div class="kart"><span class="ornek">atıfları kontrol et</span><h3>Kaynak doğrulama</h3><p>Her atıfı kaynaktaki pasaja bağlar, künyeleri Crossref'te denetler. Uydurma atıf bırakmaz.</p></div>
+    <div class="kart"><span class="ornek">dekanlığa dilekçe yazalım</span><h3>Yazışma</h3><p>Dilekçe, kurul yazısı, hakem cevap mektubu, referans mektubu. Sizin üslubunuzla.</p></div>
+    <div class="kart"><span class="ornek">bunu Word'e çevir</span><h3>Word ve PDF çıktısı</h3><p>Çalışmanız dergiye gidecek Word dosyasına dönüşür. Aslına dokunulmaz.</p></div>
+    <div class="kart"><span class="ornek">geri al</span><h3>Önceki sürüm</h3><p>Her değişiklikten önce eski hâli saklanır. Tek cümleyle geri dönersiniz.</p></div>
+  </div>
+</section>
+
+<section id="tanir">
+  <h2>Sizi kendisi tanır</h2>
+  <p class="alt">Kimse sizin için form doldurmaz. İlk açılışta Divit sorar, siz onaylarsınız.</p>
+  <ol class="adimlar">
+    <li><b>Özgeçmişinizi okur.</b> Dosyayı sürüklersiniz ya da AVESİS adresinizi verirsiniz.</li>
+    <li><b>Alanınızı çıkarır.</b> Bahçe bitkileri, kamu hukuku, Osmanlı tarihi… Alanınızın kurallarını kendisi yazar, size doğrulatır.</li>
+    <li><b>Üslubunuzu öğrenir.</b> Yayımlanmış makalelerinizi bulur. Sizin bilerek seçtiğiniz üslubu hata saymaz.</li>
+    <li><b>İşlerinizi sorar.</b> Öğrencileriniz, projeleriniz, yayına hazırladığınız metin. Klasörleri buna göre açar.</li>
+  </ol>
+</section>
+
+<section id="guven">
+  <h2>İtibarınız önce gelir</h2>
+  <p class="alt">Bir uydurma atıf, kazandırılan yüz saati siler. Divit bu yüzden hızlı değil, doğrulanabilir çalışır.</p>
+  <div class="izgara">
+    <div class="kart"><h3>Uydurmaz</h3><p>Kaynaklarınızda olmayan künye yazmaz. Emin olmadığı sayı ve tarihe işaret koyar.</p></div>
+    <div class="kart"><h3>Dosyanızı bozmaz</h3><p>Word ve PDF dosyalarınızı yerinde değiştirmez. Öğrenci dosyalarına yazamaz; bu bir izin kuralıdır, söz değil.</p></div>
+    <div class="kart"><h3>Gizliliği bilir</h3><p>Hakemlik, jüri ve komisyon dosyalarını okumaz. Başkasının gizli belgesidir.</p></div>
+    <div class="kart"><h3>Hüküm vermez</h3><p>Not, puan, kabul-ret, intihal ya da "yapay zekâ yazmış" kararı vermez. Bulguyu gösterir, karar sizindir.</p></div>
+    <div class="kart"><h3>Sizin bilgisayarınızda</h3><p>Dosyalarınız kendi klasörünüzde durur. Metinler yalnızca işlenmek için Claude'a gider.</p></div>
+    <div class="kart"><h3>Geri bildirim onaylı</h3><p>Divit sorunları not eder. Notlar yalnız siz görüp onaylarsanız, öğrenci bilgisi çıkarılmış hâlde gönderilir.</p></div>
+  </div>
+</section>
+
+<section id="kurulum">
+  <h2>Kurulum</h2>
+  <p class="alt">Gereken tek şey bir <b>Claude Pro</b> hesabı. Git, Python ya da yönetici hakkı gerekmez. Kurulum Claude uygulamasını, Word dönüştürücüsünü ve Belgeler'deki <b>Divit</b> klasörünü hazırlar. Yeniden çalıştırmak güvenlidir.</p>
+  <div class="sekmeler" role="tablist">
+    <button role="tab" aria-selected="true" data-p="win">Windows</button>
+    <button role="tab" aria-selected="false" data-p="mac">Mac</button>
+    <button role="tab" aria-selected="false" data-p="ajan">Yapay zekâ kursun</button>
+  </div>
+  <div class="pano" id="win" role="tabpanel">
+    <ol><li>Başlat menüsüne <b>PowerShell</b> yazın ve açın.</li><li>Aşağıdaki satırı kopyalayın, pencereye yapıştırın, <b>Enter</b>'a basın.</li><li>"Kurulum tamamlandı" yazısını bekleyin. Kılavuz kendiliğinden açılır.</li></ol>
+    <div class="kod"><button class="kopyala">Kopyala</button><pre>irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex</pre></div>
+  </div>
+  <div class="pano" id="mac" role="tabpanel" hidden>
+    <ol><li>Spotlight'a (⌘ + boşluk) <b>Terminal</b> yazın ve açın.</li><li>Aşağıdaki satırı kopyalayın, pencereye yapıştırın, <b>Enter</b>'a basın.</li><li>"Kurulum tamamlandı" yazısını bekleyin. Kılavuz kendiliğinden açılır.</li></ol>
+    <div class="kod"><button class="kopyala">Kopyala</button><pre>curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash</pre></div>
+  </div>
+  <div class="pano" id="ajan" role="tabpanel" hidden>
+    <p style="margin-top:0">Claude uygulaması zaten kuruluysa kurulumu Claude'a yaptırabilirsiniz. Claude kurulumu okur, ne yapacağını anlatır ve onayınızı bekler.</p>
+    <ol><li>Claude uygulamasında <b>Code</b> sekmesini açın ve herhangi bir klasörle yeni oturum başlatın.</li><li>Aşağıdaki metni kopyalayıp yapıştırın.</li><li>Claude'un sorularına cevap verin.</li></ol>
+    <div class="kod uzun"><button class="kopyala">Kopyala</button><pre>Divit&#x27;i bu bilgisayara kurmanı istiyorum. Divit, Claude için akademik yazım eklentisidir: https://github.com/mehmetor/divit
+
+Ben teknik biri değilim. Lütfen şöyle ilerle:
+
+1. Bilgisayarın Windows mu Mac mi olduğunu anla.
+2. Kurulum betiğini indir ve oku (Windows: https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 — Mac: https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh). Ne yapacağını bana sade Türkçeyle, en çok beş maddede anlat. Onayımı bekle.
+3. Onaylarsam betiği çalıştır:
+   - Windows: powershell -NoProfile -ExecutionPolicy Bypass -Command &quot;irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex&quot;
+   - Mac: curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash
+   Kurulum birkaç dakika sürebilir; bitmesini bekle.
+4. Sonucu denetle: &quot;claude plugin list&quot; çıktısında &quot;divit@divit&quot; görünmeli, Belgeler klasöründe &quot;Divit&quot; klasörü oluşmuş olmalı. Hata varsa çıktının son satırlarını oku ve düzeltmeyi dene. Çözemezsen bana ne olduğunu tek cümleyle söyle.
+5. Bitince bana şunu söyle: Claude uygulamasında &quot;Code&quot; sekmesine geç, &quot;Select folder&quot; ile Belgeler → Divit klasörünü seç, &quot;merhaba&quot; yaz.
+
+Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.</pre></div>
+  </div>
+  <h3 style="margin-top:32px">Kurulumdan sonra</h3>
+  <ol class="adimlar">
+    <li>Claude uygulamasını açın, üstte <b>Code</b>'a tıklayın.</li>
+    <li><b>Select folder</b> → Belgeler → <b>Divit</b>. Güven sorusuna <b>Yes</b> deyin.</li>
+    <li><b>merhaba</b> yazın. Divit gerisini kendisi sorar.</li>
+  </ol>
+  <p class="not">Klasörünüzde bir <a href="kilavuz.html">kılavuz</a> ve masanızda tutabileceğiniz tek sayfalık bir kart da bulunur. Divit kendiliğinden güncellenir.</p>
+</section>
+
+<section id="yapmaz">
+  <h2>Divit'in yapmadığı işler</h2>
+  <p class="alt">Sınırını bilen araç güvenilir araçtır.</p>
+  <ul class="yok">
+    <li>Sizin yerinize makale yazmaz</li><li>Hakemlik yapmaz</li><li>Not ya da puan vermez</li>
+    <li>İntihal hükmü vermez</li><li>İstatistik yorumlamaz</li><li>Kaynaksız atıf üretmez</li>
+  </ul>
+</section>
+
+<section id="sss">
+  <h2>Sorular</h2>
+  <details><summary>Ücretli mi?</summary><p>Divit ücretsizdir. Çalışması için bir Claude Pro aboneliği gerekir; bu abonelik Anthropic'e ödenir.</p></details>
+  <details><summary>Bilgisayar bilgim az. Kullanabilir miyim?</summary><p>Divit bunun için yapıldı. Kurulumdan sonra terminal görmezsiniz. Divit'le Türkçe yazışırsınız; o da size sade Türkçeyle cevap verir.</p></details>
+  <details><summary>Öğrencilerimin tezleri nereye gidiyor?</summary><p>Dosyalar kendi bilgisayarınızda kalır. Divit bir metni okurken metin işlenmek için Claude'a gönderilir. Öğrenci metinlerini verip vermemek sizin kararınızdır.</p></details>
+  <details><summary>Word kullanıyorum, LaTeX bilmiyorum.</summary><p>Sorun değil. Divit Word dosyalarınızı okur ve çıktısını Word olarak verir. Aslı hiçbir zaman değişmez.</p></details>
+  <details><summary>Benim alanım için uygun mu?</summary><p>Divit alanınızı özgeçmişinizden çıkarır ve alanın kurallarını makalelerinizden yazar. İlk kullanıcılar ziraat alanında; sosyal bilimler, hukuk ve eğitim alanlarında da çalışır.</p></details>
+  <details><summary>Bir şey bozulursa?</summary><p>Divit'e "geri al" yazın. Her değişiklikten önceki sürüm saklanır. Divit hiçbir dosyayı silmez.</p></details>
+</section>
+
+<footer>
+  Divit · <a href="https://github.com/mehmetor/divit">Kaynak kodu</a> · <a href="kilavuz.html">Kılavuz</a><br>
+  Mehmet Akif Orakçı · <a href="mailto:mehmetakiforakci@gmail.com">mehmetakiforakci@gmail.com</a> · <a href="https://simetri.app">Simetri</a>
+</footer>
+</div>
+<script>
+document.querySelectorAll('.sekmeler button').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('.sekmeler button').forEach(function(x){x.setAttribute('aria-selected',x===b)});
+  document.querySelectorAll('.pano').forEach(function(p){p.hidden=p.id!==b.dataset.p});
+})});
+if(/Mac/.test(navigator.platform||navigator.userAgent)&&!/iPhone|iPad/.test(navigator.userAgent)){document.querySelector('[data-p=mac]').click()}
+document.querySelectorAll('.kopyala').forEach(function(b){b.addEventListener('click',function(){
+  var t=b.parentNode.querySelector('pre').innerText;
+  function ok(){b.textContent='Kopyalandı ✓';setTimeout(function(){b.textContent='Kopyala'},2000)}
+  try{navigator.clipboard.writeText(t).then(ok,function(){})}catch(e){}
+})});
+</script>
+</body>
+</html>
