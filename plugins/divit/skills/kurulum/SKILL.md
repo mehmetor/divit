@@ -124,6 +124,9 @@ Kapanışta tek paragraf:
 > olmayan bir kaynağa atıf yapmam, emin olmadığım yere işaret koyarım.
 > Bir şey ters giderse 'geri al' demeniz yeter."
 
+Güvenceden önce `saglik` skill'ini sessizce çalıştır. Sorun çıkarsa
+hocaya yalnız o tek adımı söyle.
+
 Sonra gerçek bir işe geç: `gorevler.md`'de en yakın tarihli iş hangisiyse
 onu öner. Hiç iş yoksa `yardim` skill'inin özetini göster.
 

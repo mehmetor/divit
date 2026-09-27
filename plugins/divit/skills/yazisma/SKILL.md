@@ -40,6 +40,18 @@ değişen metnin yeni yeri (sayfa/satır). Katılmadığın maddede saygılı
 ama net gerekçe; "ekledik" deyip eklememek en büyük hatadır.
 Kabul edilmeyen her öneri için gerekçe zorunlu.
 
+Mektuptan önce **cevap tablosu** çıkar: hakem yorumlarını madde madde
+ayır, `yazilar/<makale>/hakem-cevap-tablosu.md` olarak yaz:
+
+| # | Hakem | Yorum (aynen) | Karar (kabul / kısmen / ret) | Ne değişti | Yeni metinde yeri |
+|---|---|---|---|---|---|
+
+"Karar" ve "Ne değişti" sütunlarını **hoca doldurur** ya da onaylar;
+sen öneri yazarsın. Revize metin verilmişse "Yeni metinde yeri"
+sütununu metinde arayarak doldur; bulamadığını `[DOĞRULA]` bırak.
+"Ne değişti" dolu ama metinde karşılığı yoksa işaretle — bu, "ekledik
+deyip eklememek" hatasını yakalar. Tablo onaylanınca mektubu tablodan yaz.
+
 **Editöre kapak mektubu**
 Makalenin tek cümlelik katkısı → derginin kapsamına neden uyduğu →
 etik beyanlar (çıkar çatışması, veri erişimi, AI kullanımı) → önerilen
@@ -53,4 +65,5 @@ adım. Kişiye değil metne yönelik dil: "sen dağınık yazmışsın" değil,
 ## Çıktı
 
 `yazilar/<tür>-<konu>-<tarih>.md` olarak kaydet. Hoca Word isterse
-`disa-aktar` skill'ine geç.
+`disa-aktar` skill'ine geç. E-postayla gidecekse (öğrenciye, editöre)
+`eposta` skill'ine geç.

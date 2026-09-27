@@ -34,6 +34,14 @@ listesidir; metni yeniden yazmaz.
    çifti tek tek yaz ve hesapla; göz kararı geçme. Harf dizisinde atlama
    (a, b, f) da yazım hatasıdır.
 3. Aşağıdaki kontrol listesini uygula.
+   **Dergi uygunluğu:** hedef dergiyi sor (`alan.md`'de sık dergiler
+   varsa öner). Hoca derginin yazım kuralları sayfasının adresini ya da
+   PDF'ini verirse oku ve metni ölç: kelime sınırı (özet ve tam metin,
+   **say**, tahmin etme), özet yapısı, anahtar kelime sayısı, bölüm
+   düzeni, kaynak ve atıf biçimi, çizelge/şekil sınırı, zorunlu beyanlar.
+   Raporda ayrı bir "Dergi kuralları" çizelgesi: kural · metindeki durum ·
+   uyuyor mu. Kurallar verilmezse bu bölümü atla; kuralları hafızadan
+   yazma.
 4. `rapor/on-degerlendirme-<tarih>.md` yaz, `pandoc` ile .docx üret
    (hoca Word'de okur). Tablo sütun oranlarını içeriğe göre ayarla.
 5. Hocaya üç cümlelik özet ver; en ağır dört bulguyu say.

@@ -25,6 +25,8 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Hoca "
 
 3. Hocanın cevabını bekle. İlgili skill'e geç.
 
+Hoca bir şeyin çalışmadığını söylüyorsa özet yerine `saglik` skill'ine geç.
+
 ## Yazım kuralı
 
 Hocaya giden her cümle kılavuzdaki dille yazılır: kısa cümle, bir cümlede

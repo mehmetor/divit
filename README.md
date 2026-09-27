@@ -32,15 +32,18 @@ Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
 
 | Hoca şunu yazar | Divit |
 |---|---|
-| `bu tezi değerlendir` | Öğrenci dosyasına dokunmadan yapılandırılmış rapor (`tez-kontrol`) |
-| `göndermeden kontrol et` | Kendi makalenizin gönderim öncesi okuması, çizelge-metin tutarlılığı (`yayin-oncesi`) |
+| `bu tezi değerlendir` | Öğrenci dosyasına dokunmadan yapılandırılmış rapor ve öğrenciye e-posta taslağı (`tez-kontrol`) |
+| `göndermeden kontrol et` | Gönderim öncesi okuma: çizelge-metin tutarlılığı, hedef derginin kurallarına uygunluk (`yayin-oncesi`) |
 | `atıfları kontrol et` | Atıf ve kaynakça doğrulama (`kaynak-dogrula`) |
-| `dekanlığa dilekçe yazalım` | Dilekçe, hakem cevabı, referans mektubu (`yazisma`) |
+| `dekanlığa dilekçe yazalım` | Dilekçe, referans mektubu, hakem cevap tablosu ve mektubu (`yazisma`) |
 | `bunu Word'e çevir` | Word/PDF çıktısı, dergi stili (`disa-aktar`) |
 | `bölüm yazalım` | Yapı, itiraz, eksik tespiti (`bolum-yaz`) |
 | `geri al` | Önceki sürüme dönme (`geri-al`) |
 | `geri bildirim gönder` | Notları onayla geliştiriciye iletme (`paylas`) |
 | `yardım` | Kılavuzu açar (`yardim`) |
+
+| `e-posta olarak hazırla` | Hocanın e-postasında taslak açar, izinle; göndermez (`eposta`) |
+| `çalışıyor musun` | Word okuma, izin ve profil denetimi (`saglik`) |
 
 Kendiliğinden çalışanlar: `kurulum` (ilk açılışta hocayı tanır),
 `kurallar` (her oturumda), `bakim` (ayda bir, izinle profil ve hafıza
@@ -120,13 +123,14 @@ divit/
 ├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
 ├── dagitim/                         yayınlanmış eklenti zip'leri
 ├── plugins/divit/                   eklentinin kaynağı
-│   ├── skills/                      on üç skill
+│   ├── skills/                      on beş skill
 │   ├── alan/                        örnek alan kılavuzları (başlangıç noktası)
 │   └── scripts/                     yardımcı betik (isteğe bağlı)
 ├── hoca-paketi/Divit/               hocanın Belgeler/Divit klasörü şablonu
 │   ├── CLAUDE.md                    Divit'in hocayla çalışma kuralları
 │   ├── KILAVUZ.html                 hocanın kılavuzu
 │   └── .divit/profil/               Divit'in hocayı tanıdığı dosyalar
+├── araclar/pano.py                  pilot panosu (geri bildirimleri toplar)
 ├── apps/web/                        divit.simetri.app tek sayfalık site
 └── belgeler/                        ihtiyaç analizi, pilot planı, rehberler
 ```

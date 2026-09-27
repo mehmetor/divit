@@ -15,3 +15,14 @@ cp hoca-paketi/Divit/KART.html apps/web/kart.html
 
 Yapay zekâ kurulum metninin aslı `belgeler/AJAN-KURULUM-ISTEMI.md`
 dosyasındadır; değişirse `index.html` ve `README.md` içindeki kopyayı da güncelleyin.
+
+## Kısa kurulum adresi
+
+`_redirects` (Cloudflare Pages, Netlify) ve `vercel.json` (Vercel),
+`divit.simetri.app/kur.ps1` ve `/kur.sh` adreslerini GitHub'daki
+betiklere yönlendirir. Başka bir sunucu kullanılırsa aynı iki 302
+yönlendirmesini orada tanımlayın. Yayından sonra deneyin:
+
+```bash
+curl -sI divit.simetri.app/kur.sh | head -3    # 302 ve Location görünmeli
+```

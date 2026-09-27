@@ -91,6 +91,10 @@ Hoca "hayır" derse: "Tamam, hiçbir şey gönderilmedi. Dosya
 
 Konu: `Divit geri bildirim — <alan> — <YYYY-AA-GG>`
 
+Önce `eposta` skill'inin **a** yolunu dene: hocanın e-posta bağlayıcısı
+varsa izin iste, dosyanın içeriğini gövdeye koyarak taslak oluştur.
+Bağlayıcı yoksa ya da hoca izin vermezse aşağıdaki yollara geç.
+
 İlk çalışan yolu kullan, sırayla dene. **Bir yol başarısız olursa bir
 sonrakine geç; b'yi atlama.** Windows 11'deki yeni Outlook a'yı
 desteklemez ama b'de açılır.

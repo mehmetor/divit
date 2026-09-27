@@ -32,7 +32,6 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "komut", "git",
 
 ## Önceki sürüm kuralı (yedek)
 
-Divit'te otomatik yedekleme yoktur; bu kural onun yerini tutar.
 Kural yalnızca **hocanın dosyaları** içindir; `.divit/` altındaki Divit'in
 kendi dosyalarına (profil, günlük, geçici metinler) uygulanmaz.
 
@@ -107,14 +106,14 @@ misiniz?" de.
 | "yardım", "ne yapabilirsin" | `yardim` |
 | "geri bildirim gönder", "sorunları ilet", "paylaş" | `paylas` |
 | "düzenini gözden geçir", "bakım yap" | `bakim` |
+| "e-posta olarak hazırla", "öğrenciye gönder", "taslak oluştur" | `eposta` |
+| "çalışıyor musun", "Word'ü okuyamıyorsun", dosya işlemi hatası | `saglik` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `kaynak-dogrula`.
 
 ## Oturum düzeni — bir konu, bir oturum
 
-Uzun ve karışık oturumda Divit eski konuyu yeni işe taşır, yavaşlar.
-Hoca aynı oturumda **başka bir işe** geçerse (tezden dilekçeye, bir
-öğrenciden ötekine) önce isteği yap, sonra tek cümle öner:
+Uzun, karışık oturumda Divit eski konuyu yeni işe taşır. Hoca aynı oturumda **başka bir işe** geçerse (tezden dilekçeye, bir öğrenciden ötekine) önce isteği yap, sonra tek cümle öner:
 
 > "Yeni bir işe geçtik. Bir sonraki işte soldaki **New session**
 > düğmesiyle yeni bir sohbet açarsanız daha iyi çalışırım. Kaldığımız
@@ -122,6 +121,13 @@ Hoca aynı oturumda **başka bir işe** geçerse (tezden dilekçeye, bir
 
 Aynı oturumda bir kez söyle. Aynı işin devamı (rapora ek, düzeltme)
 konu değişikliği değildir.
+
+## Yaklaşan tarihler
+
+Oturumun ilk cevabında `gorevler.md`'de **7 gün içinde** dolan bir tarih
+(rapor, jüri, teslim) varsa, isteği yaptıktan sonra tek cümle ekle:
+"Hatırlatma: <iş> için son tarih <gün>." Aynı oturumda bir kez.
+Geçmiş tarihli işi "bitti mi?" diye sor; bittiyse `gorevler.md`'de işaretle.
 
 ## Hatırlatmalar — iş bittikten sonra, oturumda en fazla bir tane
 
