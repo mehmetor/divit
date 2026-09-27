@@ -26,25 +26,30 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
    - Windows: `& $env:DIVIT_PANDOC ".divit/gecici/saglik.md" -o ".divit/gecici/saglik.docx"`
      ve `& $env:DIVIT_PANDOC ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
    Geri gelen metinde "deneme" var mı, bak.
-3. **Profil:** `.divit/profil/` dosyaları var mı, `kimlik.md` doldurulmuş mu.
-4. **Klasörler:** `tez-kontrol/`, `yazilar/`, `kaynaklar/`, `cikti/` var mı.
+3. **PDF okuma:** `${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf` dosyasını
+   Read ile oku; içinde "Divit PDF deneme" yazmalı. PDF çıktısı Divit'te
+   Word'ün "PDF olarak kaydet" özelliğiyle yapılır; onu deneme, yalnızca
+   Word okuma-yazma denemesinin geçtiğini bil.
+4. **Profil:** `.divit/profil/` dosyaları var mı, `kimlik.md` doldurulmuş mu.
+5. **Klasörler:** `tez-kontrol/`, `yazilar/`, `kaynaklar/`, `cikti/` var mı.
    Eksik olanı `gorevler.md`'ye bakmadan oluşturma; yalnızca not et.
-5. **Kural yükü:** klasördeki `CLAUDE.md` "divit:kurallar" satırını
+6. **Kural yükü:** klasördeki `CLAUDE.md` "divit:kurallar" satırını
    içeriyor mu.
-6. **Hatırlatma durumu:** `.divit/hatirlatma.md`'de `son-bakim` 60
+7. **Hatırlatma durumu:** `.divit/hatirlatma.md`'de `son-bakim` 60
    günden eski mi.
 
 ## Sonuç
 
 Her şey yolundaysa:
-> "Kontrol ettim; her şey çalışıyor. Word dosyalarınızı okuyup
-> yazabiliyorum."
+> "Kontrol ettim; her şey çalışıyor. Word ve PDF dosyalarınızı
+> okuyabiliyor, Word dosyası hazırlayabiliyorum."
 
 Sorun varsa yalnızca hocayı ilgilendiren sonucu ve tek adımı söyle:
 
 | Bulgu | Hocaya |
 |---|---|
 | pandoc çalışmıyor | "Word dosyalarını şu an okuyamıyorum. Kurulum komutunu bir kez daha çalıştırmak düzeltir; yardım gerekirse Mehmet Bey'e yazın. O zamana kadar PDF verebilirsiniz." |
+| PDF okunamıyor | "PDF dosyalarını şu an okuyamıyorum. Word hâlini verebilir misiniz?" |
 | profil boş | `kurulum` skill'ine geç. |
 | CLAUDE.md'de kural satırı yok | "Klasör ayarlarımdan biri eksik. Kurulum komutunu yeniden çalıştırmak düzeltir." |
 | klasör eksik | "Şu klasör yok: … Açayım mı?" Onayla oluştur. |
