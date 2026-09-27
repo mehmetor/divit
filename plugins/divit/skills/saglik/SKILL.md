@@ -32,7 +32,7 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
    Word okuma-yazma denemesinin geçtiğini bil.
    **PDF aracı:** deneme PDF'ini iki kez birleştir ve sayfa sayısına bak:
    - Mac: `"$DIVIT_PDFCPU" merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
-   - Windows: `& $env:DIVIT_PDFCPU merge ".divit/gecici/saglik.pdf" "$env:CLAUDE_PLUGIN_ROOT/scripts/deneme.pdf" "$env:CLAUDE_PLUGIN_ROOT/scripts/deneme.pdf"`
+   - Windows: `& $env:DIVIT_PDFCPU merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
    `.divit/gecici/saglik.pdf` önceden varsa araç üstüne yazmaz; adına saat ekle.
    Sonra `info` ile bak: 2 sayfa olmalı.
 4. **Profil:** `.divit/profil/` dosyaları var mı, `kimlik.md` doldurulmuş mu.

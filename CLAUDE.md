@@ -60,6 +60,9 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
   `${CLAUDE_PLUGIN_ROOT}/scripts/<ad>` ile referans ver.
 - `CLAUDE.md`'yi `plugins/<ad>/` altına koyma — validate uyarısı verir.
 - Repo public kalsın: hocalar git'siz, kimlik bilgisiz indirir.
+- Skill'lerde eklenti yolu için yalnızca `${CLAUDE_PLUGIN_ROOT}` yaz: skill
+  yüklenirken metne gömülür. `$env:CLAUDE_PLUGIN_ROOT` Windows oturumunda
+  boş gelir (pilotta görüldü).
 - `.claude/` korumalı yoldur; Divit'in yazacağı hiçbir şey orada durmaz.
 
 ## Doğrulama ve yayın
