@@ -33,10 +33,10 @@ GECICI="$(mktemp -d)"; trap 'rm -rf "$GECICI"' EXIT
 if [ -n "$SURUM" ] && [ "$SIRADAKI" = "1" ]; then
   TARIH="$(TZ=Europe/Istanbul date +%Y-%m-%d)"
   python3 - "$EKLENTI/SURUM.md" "$SURUM" "$TARIH" <<'PY'
-import sys
+import re, sys
 p, surum, tarih = sys.argv[1:]
 s = open(p, encoding="utf-8").read()
-s = s.replace("## Sıradaki", f"## {surum} · {tarih}", 1)
+s = re.sub(r"^## Sıradaki", f"## {surum} · {tarih}", s, count=1, flags=re.M)
 open(p, "w", encoding="utf-8").write(s)
 PY
 fi
