@@ -1,0 +1,44 @@
+# develop'a her gönderimde release-please sürüm PR'ını açar/günceller.
+# PR birleşince: eklenti zip'i üretilir, develop main'e taşınır (hocalara gider).
+name: yayin
+on:
+  push:
+    branches: [develop]
+permissions:
+  contents: write
+  pull-requests: write
+concurrency: yayin
+jobs:
+  surum:
+    runs-on: ubuntu-latest
+    outputs:
+      yeni: ${{ steps.rp.outputs.release_created }}
+      surum: ${{ steps.rp.outputs.version }}
+    steps:
+      - id: rp
+        uses: googleapis/release-please-action@v4
+        with:
+          target-branch: develop
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  yayinla:
+    needs: surum
+    if: needs.surum.outputs.yeni == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install -g @anthropic-ai/claude-code
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - run: ./yayinla.sh --surum "${{ needs.surum.outputs.surum }}"
+      - run: |
+          git push origin develop
+          git push origin develop:main
