@@ -110,9 +110,9 @@ dosyasını okuyamadım, PDF olarak verebilir misiniz?" de.
 | "düzenini gözden geçir", "bakım yap" | `bakim` |
 | "e-posta olarak hazırla", "öğrenciye gönder", "taslak oluştur" | `eposta` |
 | "PDF'leri birleştir", "sayfaları çıkar", "listeyi işaretle" | `pdf` |
-| "kota", "limit", "yavaşladın", "model", "çok izin soruyor" | `saglik` |
 | "yenilikler neler", "güncelle", "Divit güncel mi" | `guncelleme` |
-| "çalışıyor musun", "Word'ü okuyamıyorsun", dosya işlemi hatası | `saglik` |
+| "çalışıyor musun", kota, model, izin, dosya işlemi hatası | `saglik` |
+| "sınav sorusu hazırla", "vize/final soruları", "cevap anahtarı" | `sinav` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `kaynak-dogrula`.
 
