@@ -37,6 +37,7 @@ Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
 | `göndermeden kontrol et` | Gönderim öncesi okuma: çizelge-metin tutarlılığı, hedef derginin kurallarına uygunluk (`yayin-oncesi`) |
 | `atıfları kontrol et` | Atıf ve kaynakça doğrulama (`kaynak-dogrula`) |
 | `dekanlığa dilekçe yazalım` | Dilekçe, referans mektubu, hakem cevap tablosu ve mektubu (`yazisma`) |
+| `ders notumdan vize hazırla` | Ders notundan sınav sorusu ve cevap anahtarı, Word çıktısı; her sorunun kaynaktaki yeri yazılır (`sinav`) |
 | `bunu Word'e çevir` | Word/PDF çıktısı, dergi stili (`disa-aktar`) |
 | `bölüm yazalım` | Yapı, itiraz, eksik tespiti (`bolum-yaz`) |
 | `bu PDF'leri birleştir` | PDF birleştirme, sayfa çıkarma/silme/döndürme, kontrol listesi ve form işaretleme, PDF'ten Word'e, fotoğraftan PDF — bilgisayarda, siteye yüklemeden (`pdf`) |
@@ -138,7 +139,7 @@ divit/
 ├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
 ├── dagitim/                         yayınlanmış eklenti zip'leri
 ├── plugins/divit/                   eklentinin kaynağı
-│   ├── skills/                      on yedi skill
+│   ├── skills/                      on sekiz skill
 │   ├── SURUM.md                     hocaya anlatılan sürüm notları
 │   ├── alan/                        örnek alan kılavuzları (başlangıç noktası)
 │   └── scripts/                     yardımcı betikler (Mac PDF okuma, harf denetimi)
