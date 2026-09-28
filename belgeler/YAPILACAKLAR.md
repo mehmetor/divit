@@ -18,6 +18,16 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
       planlanır (sınavdan önce soru hazırlığı, not girişinden önce
       değerlendirme hatırlatması). Hocaya sor: bu dosyalar elinizde var mı?
 
+- [ ] **Dosya düzeni — uzun vadede çöplük olmasın.**
+  - Hocanın çalışma dosyalarına tarih ve sürüm: `<ad>-YYYY-AA-GG-s2.docx`
+    gibi tek bir adlandırma kuralı; aynı işin yeni hâli sürüm artırır.
+  - Alt klasörle gruplama: iş türü → kişi/konu → dönem. Örnek:
+    `tez-kontrol/<öğrenci baş harfi>/<tarih>/` (gelen, rapor, ara dosyalar
+    bir arada).
+  - Ara dosyalar (metne çevrilmiş PDF, geçici md) `.divit/gecici/` dışına
+    çıkmasın; biten işin ara dosyaları arşive ya da silinmeye aday.
+  - `bakim` skill'i aylık düzen denetiminde dağınıklığı bulup önersin.
+
 ## Kaynak doğrulama — "sessiz hata sıfır"
 
 - [ ] 7. madde önce: bilerek hata konmuş **sınama seti**; her yayından önce
@@ -60,7 +70,8 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 - [ ] Varsayılan izin kipi: şimdi `acceptEdits` + Auto önerisi. Auto
       varsayılan yapılabilir mi, her hesapta açık mı?
-- [ ] Ücretlendirme — pilot sonrası.
+- [ ] Ücretlendirme — uygulama tamamen hazır olunca ücretli sürüm.
+      O zaman lisans değişir (şimdi PolyForm Noncommercial); avukata danışılır.
 
 ## Pilot
 
