@@ -135,7 +135,7 @@ Ayrıntı ve sorun giderme: [`belgeler/KURULUM-REHBERI.md`](belgeler/KURULUM-REH
 ```
 divit/
 ├── kur.ps1, kur.sh                  tek komutluk kurulum (Windows, Mac)
-├── yayinla.sh                       eklentiyi hocalara yayınlar
+├── yayinla.sh                       eklenti zip'i (yayını CI yapar)
 ├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
 ├── dagitim/                         yayınlanmış eklenti zip'leri
 ├── plugins/divit/                   eklentinin kaynağı
@@ -155,10 +155,14 @@ divit/
 
 ## Geliştirme
 
+`develop` dalında çalışılır; `main` hocalara giden hâldir. Commit'ler
+conventional commits biçimindedir (`feat:`, `fix:`, `docs:`). release-please
+sürüm PR'ını açar; PR birleşince CI eklenti zip'ini üretir ve `main`'i
+günceller. Hocaya giden notlar `plugins/divit/SURUM.md` → `## Sıradaki`.
+
 ```bash
 claude plugin validate plugins/divit
-./yayinla.sh            # zip + marketplace.json + commit
-./yayinla.sh --gonder   # ayrıca GitHub'a gönder → hocalara ulaşır
+./yayinla.sh            # deneme: zip özeti ve hocaya gidecek not
 ```
 
 Tasarım kararları ve gerekçeleri: [`CLAUDE.md`](CLAUDE.md).

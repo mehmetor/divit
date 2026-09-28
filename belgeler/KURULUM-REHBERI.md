@@ -99,16 +99,19 @@ kendisi öğrenir. Önceden hiçbir şey hazırlamanız gerekmez.
 
 Eklenti hocalara kendiliğinden güncellenir.
 
-1. Eklentide değişiklik yapın.
-2. Şu komutu çalıştırın:
-   ```bash
-   ./yayinla.sh --gonder
-   ```
-3. Hocalar güncellemeyi birkaç saat içinde alır.
+1. `develop` dalında çalışın. Hocaya gidecek notu `plugins/divit/SURUM.md`
+   içinde en üstteki `## Sıradaki` başlığına yazın.
+2. Denemek için: `./yayinla.sh` (hiçbir şeyi değiştirmez; zip özetini ve
+   hocaya gidecek notu gösterir).
+3. `develop`'u GitHub'a gönderin. release-please "divit X yayını" adlı bir
+   PR açar; her yeni commit'te PR güncellenir.
+4. Yayına hazırsanız PR'ı birleştirin. CI zip'i üretir ve `main`'i
+   günceller. Hocalar güncellemeyi birkaç saat içinde alır.
 
 > **UYARI:** Her yayın bütün hocalara gider. Hatalı bir değişiklik bütün
-> hocaları aynı anda etkiler. `yayinla.sh` göndermeden önce eklentiyi
-> doğrular; doğrulama başarısız olursa göndermez.
+> hocaları aynı anda etkiler. PR'ı yalnızca kendiniz denedikten sonra
+> birleştirin. CI eklentiyi doğrular; doğrulama başarısız olursa `main`
+> değişmez.
 
 Divit klasörünün kendisini (`CLAUDE.md`, kılavuz, ayarlar) ve araçları
 güncellemek için kurulum komutu yeniden çalışmalıdır. Komut hocanın

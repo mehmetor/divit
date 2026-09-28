@@ -16,8 +16,8 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
    çalıştırmak güvenlidir: hocanın dosyalarına ve profiline dokunmaz.
 4. **Dağıtım git'siz.** Pazar yeri `url` kaynağıyla (raw marketplace.json),
    eklenti `archive` kaynağıyla (zip + sha256) iner. Sürüm numarası
-   yazılmaz; Claude Code sürümü zip'in özetinden hesaplar. Yayın
-   yalnızca `./yayinla.sh` ile yapılır (belirleyici zip, doğrulama).
+   yazılmaz; Claude Code sürümü zip'in özetinden hesaplar. Zip'i yalnızca
+   `./yayinla.sh` üretir (belirleyici zip, doğrulama).
 5. **Hook yok.** Hook komutları Mac'te bash, Windows'ta PowerShell ile
    çalışır; ortak betik yazılamaz. Skill'ler iş için önce Read, Write,
    Edit, Glob, Grep araçlarını kullanır; kabuk yalnızca pandoc, pdfcpu ve dosya
@@ -38,15 +38,16 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
     `CLAUDE.md` kendiliğinden güncellenmez; eklenti güncellenir. Bu yüzden
     çalışma kuralları `skills/kurallar` içindedir ve klasördeki CLAUDE.md
     yalnızca "önce kuralları yükle" satırıyla güvenlik çekirdeğini taşır.
-    Kural değişikliği → `kurallar` skill'i → `SURUM.md` → `./yayinla.sh --gonder`.
+    Kural değişikliği → `kurallar` skill'i → `SURUM.md` → develop → yayın.
 12. **Geri bildirim onaylı ve anonim.** Divit `.divit/gunluk.md` ve
     `.divit/sorunlar.md` tutar; `gelistirici-paylas` bunları öğrenci bilgisi
     çıkarılmış hâlde hocaya gösterir, açık onaydan sonra e-postayı hoca
     gönderir. Oturum dökümleri kullanılmaz.
 
 13. **Sürüm notu hocanın dilinde.** Teknik sürüm zip özetidir; hocaya
-    görünen sürüm `plugins/divit/SURUM.md` en üst başlığıdır. Her yayında
-    yeni başlık zorunlu (`yayinla.sh` denetler). Klasör ayarı, kılavuz ya
+    görünen sürüm `plugins/divit/SURUM.md` en üst başlığıdır. Eklentiyi
+    değiştiren her iş, notunu en üstteki `## Sıradaki` başlığına yazar;
+    yayında CI bunu sürüm ve tarihle değiştirir (`yayinla.sh` denetler). Klasör ayarı, kılavuz ya
     da araç değiştiyse başlığa `· kurulum gerekir` eklenir; `guncelleme`
     skill'i hocaya bunu önerip onayla kurulumu çalıştırır.
 14. **Geliştiriciye dönük komutlar `gelistirici-` önekiyle.** Hocanın
@@ -74,13 +75,24 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
   boş gelir (pilotta görüldü).
 - `.claude/` korumalı yoldur; Divit'in yazacağı hiçbir şey orada durmaz.
 
-## Doğrulama ve yayın
+## Dallar ve yayın
+
+- **main = hocalara giden hâl.** Kurulum betikleri, klasör şablonu, site
+  (Railway) ve marketplace.json main'den okunur. main'e elle commit ve
+  push **yok.**
+- **develop'ta çalış.** Commit mesajı conventional commits biçiminde,
+  açıklaması Türkçe: `feat: sınav sorusu`, `fix: PDF okuma`, `docs: ...`,
+  `chore: ...`. Sürümü release-please bunlardan çıkarır.
+- Yeni işi Mehmet denemeden yayına alma.
+- **Yayın:** develop'a push → release-please "divit X yayını" PR'ını açar
+  (CHANGELOG.md geliştirici içindir; hocanın notu SURUM.md). PR birleşince
+  `.github/workflows/yayin.yml` `./yayinla.sh --surum X` çalıştırır ve
+  develop'u main'e taşır.
 
 ```bash
 claude plugin validate plugins/divit     # eklenti
 bash -n kur.sh                           # Mac kurulumu
-./yayinla.sh                             # zip + marketplace.json + commit
-./yayinla.sh --gonder                    # ayrıca GitHub'a gönder
+./yayinla.sh                             # deneme: özet ve hocaya gidecek not
 ```
 
 Kurulumu sınamak (gerçek sistemi değiştirmeden):
