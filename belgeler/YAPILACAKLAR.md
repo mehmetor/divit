@@ -28,6 +28,16 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
     çıkmasın; biten işin ara dosyaları arşive ya da silinmeye aday.
   - `bakim` skill'i aylık düzen denetiminde dağınıklığı bulup önersin.
 
+- [ ] **Bağlayıcılar (Gmail, Google Takvim, Google Drive).** İlk pilot
+      hocada Gmail kapalıydı. Divit kendisi açamaz (hesap ayarı, Google
+      girişi hocada); açık olup olmadığını anlar, kapalıysa adım adım tarif
+      eder. Takvim: son tarihleri izinle etkinlik yapmak. Drive bağlayıcısı
+      büyük ihtimalle yalnız okur; yedek için Drive/OneDrive masaüstü
+      eşitlemesi daha sağlam (Windows'ta Belgeler zaten OneDrive'da olabilir).
+- [ ] **PowerPoint ve Excel.** İlk pilot hoca kendi başına denedi, başarılı.
+      Claude ek araç kurmuş olabilir: günlükte ne kurulduğuna bak; kalıcı
+      bir `sunum`/`tablo` yolu gerekebilir (Python varsayılmaz).
+
 ## Kaynak doğrulama — "sessiz hata sıfır"
 
 - [ ] 7. madde önce: bilerek hata konmuş **sınama seti**; her yayından önce
