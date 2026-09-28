@@ -3,7 +3,7 @@
   "project": "divit",
   "defaultProvider": "claude",
   "tmuxSession": "orc",
-  "baseBranch": "main",
+  "baseBranch": "develop",
   "tracker": {
     "kind": "plane",
     "prefix": "DVT"
