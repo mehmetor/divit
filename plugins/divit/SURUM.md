@@ -5,9 +5,6 @@ Her sürüm hocanın anlayacağı dille yazılır. Başlık biçimi:
 Divit hocaya kurulum komutunu yeniden çalıştırmayı önerir (klasör
 ayarları, kılavuz ya da araçlar değiştiğinde). En yeni sürüm en üstte.
 
-## 1.8 · 2026-09-28 · kurulum gerekir
-- Sınav sorusu hazırlama: ders notunuzdan soru ve cevap anahtarı, Word olarak. "ders notumdan vize hazırla" yazın.
-
 ## 1.7 · 2026-09-27 · kurulum gerekir
 - Kılavuzda "/" ile komut seçme anlatıldı; her komutun ne yaptığı yazıldı.
 
