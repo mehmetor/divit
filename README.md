@@ -166,3 +166,11 @@ claude plugin validate plugins/divit
 ```
 
 Tasarım kararları ve gerekçeleri: [`CLAUDE.md`](CLAUDE.md).
+
+## Lisans
+
+[PolyForm Noncommercial 1.0.0](LICENSE.md). Hocalar, öğrenciler,
+üniversiteler ve kamu araştırma kurumları Divit'i ücretsiz kullanabilir,
+değiştirebilir ve paylaşabilir. Ticari kullanım (Divit'i ya da bir
+parçasını satmak, ücretli hizmete koymak) için yazılı izin gerekir:
+mehmetakiforakci@gmail.com.
