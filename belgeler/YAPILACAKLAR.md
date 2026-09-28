@@ -5,8 +5,9 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 ## Yeni işler — hocalardan gelen istekler
 
-- [ ] **Sınav sorusu — ilk hocayla dene** (`sinav` skill'i 1.8'de). Bak:
-      sorular nottan mı çıktı, doğru şıklar dengeli mi, Word düzeni.
+- [ ] **Sınav sorusu hazırlama.** İlk pilot hocanın kendi isteği. Netleştir:
+      hangi ders, soru türü (çoktan seçmeli / klasik), kaynak (ders notu,
+      kitap), cevap anahtarı, zorluk düzeyi, Word çıktısı.
 - [ ] **Takvim ve iş takibi.** Bugün yalnızca `gorevler.md`'de 7 gün içindeki
       tarih hatırlatılıyor. Seçenekler:
   - "bu hafta neler var" özeti
