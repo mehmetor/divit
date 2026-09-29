@@ -24,7 +24,7 @@ alanda ne varsa. Biçim tutarlılığı mekanik olarak denetlenebilir.
 
 ## Yöntem bölümünde bulunması zorunlu olanlar
 Tekrarlanabilirlik için eksik olmaması gerekenlerin listesi.
-`tez-kontrol` bunu doğrudan kontrol listesi olarak kullanır.
+`divit-akademik:tez-kontrol` bunu doğrudan kontrol listesi olarak kullanır.
 
 ## İstatistik / kanıt denetimi
 **Yorumlama değil tutarlılık denetimi.** Metnin kendi içinde
