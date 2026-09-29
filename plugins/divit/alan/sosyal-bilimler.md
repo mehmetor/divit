@@ -54,8 +54,8 @@
   derginin kurallarından say.
 - Türkçe dergilerde genişletilmiş İngilizce özet (extended abstract)
   sık istenir.
-- Kitap bölümü ve kitap, makale kadar ağırlıklıdır; `bolum-yaz` burada
-  daha çok kullanılır.
+- Kitap bölümü ve kitap, makale kadar ağırlıklıdır;
+  `divit-akademik:bolum-yaz` burada daha çok kullanılır.
 
 ## Makale dışı yazım yükü
 - Tez danışmanlığı ve jüri raporları (jüri dosyası okunmaz; hocanın
