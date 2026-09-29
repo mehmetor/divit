@@ -1,6 +1,6 @@
 ---
 name: saglik
-description: Divit'in bu bilgisayarda düzgün çalışıp çalışmadığını sessizce dener — Word okuma, dosya yazma, izinler, profil. Hoca "Divit çalışıyor mu", "bir sorun var", "Word'ü okuyamıyorsun", "kontrol et kendini" dediğinde, kurulumun sonunda ya da bir dosya işlemi beklenmedik biçimde başarısız olduğunda kullan.
+description: Divit'in bu bilgisayarda düzgün çalışıp çalışmadığını sessizce dener — Word okuma, dosya yazma, izinler, profil. Kullanıcı "Divit çalışıyor mu", "bir sorun var", "Word'ü okuyamıyorsun", "kontrol et kendini" dediğinde, kurulumun sonunda ya da bir dosya işlemi beklenmedik biçimde başarısız olduğunda kullan.
 ---
 
 # Sağlık denetimi
@@ -39,11 +39,14 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
    Sonra `info` ile bak: 2 sayfa olmalı.
 4. **Profil:** `.divit/profil/` dosyaları var mı, `kimlik.md` doldurulmuş mu.
 5. **Klasörler:** `tez-kontrol/`, `yazilar/`, `kaynaklar/`, `cikti/` var mı.
+   Tür yazarsa (`kurallar`) `tez-kontrol/` yerine `kitaplar/` aranır.
    Eksik olanı `gorevler.md`'ye bakmadan oluşturma; yalnızca not et.
 6. **Kural yükü:** klasördeki `CLAUDE.md` "divit:kurallar" satırını
    içeriyor mu.
 7. **Hatırlatma durumu:** `.divit/hatirlatma.md`'de `son-bakim` 60
    günden eski mi.
+8. **Akademik işler:** tür akademisyense `divit-akademik:` skill'leri
+   (ör. `divit-akademik:tez-kontrol`) bu oturumda görünüyor mu.
 
 ## İzin kipi
 
@@ -58,6 +61,9 @@ görmüyorsan ve hoca bir izin sorusunda takıldıysa (izin reddedildi,
 > "Size çok izin sorusu çıkıyor. Yazı kutusunun altındaki kip
 > seçicisinden **Auto**'yu seçerseniz daha az soru çıkar. Divit yine de
 > dosyalarınızı silmez ve öğrenci dosyalarına yazmaz."
+
+Tür yazarsa son cümle: "Divit yine de dosyalarınızı silmez ve kitabınızın
+asıl dosyasına yazmaz."
 
 Sağlık denetiminde de kipi söyle. Kip Auto değilse aynı öneriyi yap.
 
@@ -101,6 +107,7 @@ Sorun varsa yalnızca hocayı ilgilendiren sonucu ve tek adımı söyle:
 | PDF aracı çalışmıyor | "PDF birleştirme ve sayfa işlerini şu an yapamıyorum. Kurulum komutunu bir kez daha çalıştırmak düzeltir." |
 | profil boş | `kurulum` skill'ine geç. |
 | CLAUDE.md'de kural satırı yok | "Klasör ayarlarımdan biri eksik. Kurulum komutunu yeniden çalıştırmak düzeltir." |
+| akademik işler görünmüyor | "Bu iş için Divit'in kurulumunu bir kez yenilemek gerekiyor." Onay alırsan `guncelleme` skill'iyle kurulumu çalıştır. |
 | klasör eksik | "Şu klasör yok: … Açayım mı?" Onayla oluştur. |
 | bakım gecikmiş | `bakim` skill'inin bakım önerisini yap. |
 

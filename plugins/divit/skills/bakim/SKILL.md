@@ -1,6 +1,6 @@
 ---
 name: bakim
-description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyalarını, klasördeki CLAUDE.md'yi, Claude'un hafıza notlarını ve günlüğü sadeleştirir; ayrıca haftalık geri bildirim önerisinin ve aylık bakımın zamanını denetler. Hoca "bakım yap", "düzenini gözden geçir", "kendini toparla" dediğinde ya da kurallar skill'i hatırlatma denetimi istediğinde kullan.
+description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyalarını, klasördeki CLAUDE.md'yi, Claude'un hafıza notlarını ve günlüğü sadeleştirir; ayrıca haftalık geri bildirim önerisinin ve aylık bakımın zamanını denetler. Kullanıcı "bakım yap", "düzenini gözden geçir", "kendini toparla" dediğinde ya da kurallar skill'i hatırlatma denetimi istediğinde kullan.
 ---
 
 # Bakım ve hatırlatmalar
@@ -12,6 +12,8 @@ description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyala
   `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/` altına al.
 - Hocanın metinlerine, öğrenci dosyalarına, `gelen/` klasörlerine dokunma.
   Bakım yalnızca Divit'in kendi düzenidir.
+- `kimlik.md`'deki `Kullanıcı türü:` satırına **dokunma**; sadeleştirirken
+  de yerinde (ilk başlığın hemen altında) aynen kalır.
 - Klasördeki `CLAUDE.md`'nin "Her oturumun ilk mesajında" ve "Çekirdek
   kurallar" bölümlerini **değiştirme, kısaltma.**
 - Hocaya teknik ayrıntı anlatma. Sonucu üç satırda söyle.

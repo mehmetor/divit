@@ -1,6 +1,6 @@
 ---
 name: disa-aktar
-description: Metni Word (.docx) veya PDF'e çevirir, dergi stiline göre kaynakça biçimlendirir, AI kullanım beyanı taslağı üretir. Hoca "Word'e çevir", "PDF al", "dergiye göndereceğim", "APA'ya çevir", "çıktı al" dediğinde kullan.
+description: Metni Word ya da PDF olarak hazırlar — yayınevine teslim dosyası ya da dergi biçimi. Kaynakça stilini biçimlendirir, AI kullanım beyanı taslağı üretir. Kullanıcı "Word'e çevir", "PDF al", "dergiye göndereceğim", "APA'ya çevir", "çıktı al", "yayınevine göndereceğim" dediğinde kullan.
 ---
 
 # Dışa aktarma
@@ -22,10 +22,12 @@ Kaydet → PDF seçin."
 
 ## Akış
 
-1. **Önce `kaynak-dogrula` çalıştır.** Doğrulanmamış atıf varken
+1. **Önce `divit-akademik:kaynak-dogrula` çalıştır** (tür akademisyense). Doğrulanmamış atıf varken
    çıktı alma — çıktı alındıktan sonra hoca metni gönderir ve
    düzeltme şansı kalmaz. Sorunlu atıf varsa göster ve sor.
 2. Hedefi sor: Word mü PDF mi, hangi dergi/stil?
+   Tür yazarsa dergi/stil sorma; `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`
+   → "Yayınevine teslim" bölümüne göre çalış, 3–4. adımları atla.
 3. CSL stilini belirle. `.claude/stiller/` altında yoksa Zotero Style
    Repository'den (`https://www.zotero.org/styles/<stil-adı>`) indir —
    Mac'te `curl -fsSL -o`, Windows'ta `Invoke-WebRequest -OutFile`.
@@ -58,3 +60,4 @@ hocaya sun — derginin politikasına göre düzenlemesi gerektiğini söyle:
 > yorumu ve sonuçları yazar(lar)a aittir.
 
 Beyanı kendiliğinden metne gömme; ayrı sun, kararı hoca versin.
+Tür yazarsa beyan önerme; kullanıcı isterse "yayınevine not" olarak yaz.

@@ -1,6 +1,6 @@
 ---
 name: gelistirici-paylas
-description: Divit'in çalışırken tuttuğu notları (iş günlüğü, karşılaşılan sorunlar, ihtiyaç notu) Divit'i geliştiren kişiye geri bildirim olarak gönderir. Önce ne gönderileceğini açıklar, dosyayı gösterir ve açık onay ister. Hoca "geri bildirim gönder", "sorunları ilet", "paylaş", "Mehmet Bey'e gönder", "Divit'i geliştirene yaz" dediğinde kullan.
+description: Divit'in çalışırken tuttuğu notları (iş günlüğü, karşılaşılan sorunlar, ihtiyaç notu) Divit'i geliştiren kişiye geri bildirim olarak gönderir. Önce ne gönderileceğini açıklar, dosyayı gösterir ve açık onay ister. Kullanıcı "geri bildirim gönder", "sorunları ilet", "paylaş", "Mehmet Bey'e gönder", "Divit'i geliştirene yaz" dediğinde kullan.
 ---
 
 # Geri bildirim paylaşma
@@ -16,9 +16,11 @@ Alıcı: **Mehmet Akif Orakçı · mehmetakiforakci@gmail.com**
 - Oturum dökümlerini ve Claude'un kendi kayıtlarını **kullanma.** Yalnızca
   Divit'in `.divit/` altında kendi tuttuğu notlar gönderilir.
 - **Gönderilmeyenler:** hocanın metinleri, öğrenci dosyaları, özgeçmiş,
-  profil dosyaları (`kimlik.md`, `uslup.md`), kaynak PDF'leri.
+  profil dosyaları (`kimlik.md`, `uslup.md`), kaynak PDF'leri, kitap
+  dosyaları (`kitaplar/` altında `asil/`, `malzeme/`, `taslak/`).
 - Öğrenci adı, öğrenci numarası ve herhangi bir metinden alıntı dosyada
-  **bulunamaz.** Varsa çıkar; yerine baş harf ya da iş türü yaz.
+  **bulunamaz.** Varsa çıkar; yerine baş harf ya da iş türü yaz. Kitaptaki
+  kişi ve şirket adları için de aynısı.
 - Hoca "evet" demeden gönderme adımına geçme. "Olabilir", "bakarız" onay
   değildir; tekrar sor.
 - Hiçbir şeyi silme. Gönderilen notlar yerinde kalır.
@@ -33,6 +35,9 @@ Kısa ve sade:
 > yardımcı olur. Metinleriniz, öğrencilerinizin dosyaları ve
 > özgeçmişiniz gönderilmez. Önce size göstereceğim; onaylamazsanız hiçbir
 > şey gitmez."
+
+Tür yazarsa (`kurallar`) "öğrencilerinizin dosyaları" yerine "kitap
+dosyalarınız" de.
 
 ## 2. Topla
 
@@ -53,13 +58,13 @@ hiç işe yaramayan bir şey?" Cevabını olduğu gibi ekle.
 
 ```markdown
 # Divit geri bildirimi — <YYYY-AA-GG>
-Alan: <alan.md'deki alan adı> · Sistem: <Windows / Mac> · Dönem: <ilk–son tarih>
+Alan: <alan.md'deki alan adı> · Tür: <akademisyen / yazar> · Sistem: <Windows / Mac> · Dönem: <ilk–son tarih>
 
-## Hocanın notu
-<hocanın kendi sözleri; yoksa "—">
+## Kullanıcının notu
+<kullanıcının kendi sözleri; yoksa "—">
 
 ## Özet
-- <N> iş: <tez-kontrol 3, yazışma 2, …>
+- <N> iş: <iş türü ve sayısı: yazışma 2, …>
 - <M> sorun kaydı
 
 ## Sorunlar

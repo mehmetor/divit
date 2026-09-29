@@ -1,6 +1,6 @@
 ---
 name: geri-al
-description: Bozulan veya istenmeyen bir değişikliği geri alır, bir dosyanın önceki hâlini getirir. Hoca "geri al", "bozuldu", "eski hâline döndür", "az önce ne değişti", "kaybettim" dediğinde kullan.
+description: Bozulan veya istenmeyen bir değişikliği geri alır, bir dosyanın önceki hâlini getirir. Kullanıcı "geri al", "bozuldu", "eski hâline döndür", "az önce ne değişti", "kaybettim" dediğinde kullan.
 ---
 
 # Geri alma
