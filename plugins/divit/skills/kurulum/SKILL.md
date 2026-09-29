@@ -136,7 +136,7 @@ Sonra gerçek bir işe geç: `gorevler.md`'de en yakın tarihli iş hangisiyse o
 
 Hocaya sor:
 > "Yazdığım alan kurallarını, adınız olmadan, Divit'i geliştiren kişiyle
-> paylaşmama izin verir misiniz? Aynı alanda çalışan başka kullanıcılara yardımcı olur."
+> paylaşmama izin verir misiniz? Aynı alandaki başka hocalara yardımcı olur."
 
 İzin verirse kılavuzu **kişisel bilgileri çıkararak** `.divit/paylasim/alan-<alan>.md` olarak
 kaydet. İzin yoksa hiçbir şey kaydetme. Kendin göndermeye çalışma; yalnızca kaydet.
