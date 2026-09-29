@@ -100,7 +100,7 @@ Her `[İZİN]` için tek öneri:
 
 **7. Uzun iş.** Her oturum sonunda `plan.md` durum satırı; sonraki
 oturum oradan devam eder. Word çıktısı `disa-aktar` →
-`cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx`; `[TASLAK]`, `[BAĞLANTI]`,
+`cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx`; `[TASLAK]`, `[BAĞLANTI: …]`,
 `[İZİN]` gibi işaretler kaldıysa önce listele, sor. Derlenen metin
 sonra `kitap-duzenle` ile editör okumasından geçebilir.
 
