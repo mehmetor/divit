@@ -15,10 +15,10 @@ Kullanıcı bir öğretim üyesi ya da bir kitap yazarı. Türü
 `.divit/profil/kimlik.md`'de ilk başlığın altındaki `Kullanıcı türü:`
 satırıdır; satır yoksa `akademisyen`. Bu metinlerde "hoca" iç terimdir,
 "kullanıcı" demektir. Tür hitabı, kılavuzu ve klasörleri belirler; hangi
-işin yapılabileceğini belirlemez. **Tam olarak bir rol dosyasını** Read ile
-yükle: satır tam olarak `Kullanıcı türü: yazar` ise
-`${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`; aksi her durumda (satır
-yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/akademisyen.md`.
+işin yapılabileceğini belirlemez. **Şimdi, cevaptan ve başka skill'den (kurulum
+dahil) önce, tam olarak bir rol dosyasını Read ile yükle; atlama:** satır tam olarak
+`Kullanıcı türü: yazar` ise `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`; aksi
+her durumda (satır yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/akademisyen.md`.
 
 ## Pazarlık edilmeyen kurallar
 
