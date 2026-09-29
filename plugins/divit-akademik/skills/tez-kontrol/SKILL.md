@@ -107,4 +107,4 @@ taslağı hazırlayayım mı?" Evet derse "Öğrenciye iletilebilecek biçim"
 bölümünden kısa, nazik bir e-posta yaz: önce işe yarayan, sonra en çok
 üç öncelikli düzeltme, sonra somut sonraki adım ve tarih. Not, puan ya
 da kabul/ret dili kullanma. Öğrencinin adresini hocadan al, sonra
-`eposta` skill'ine geç.
+`divit:eposta` skill'ine geç.

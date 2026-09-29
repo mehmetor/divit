@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Divit — eklenti zip'ini üretir.
+# Divit — eklenti zip'lerini üretir (divit ve divit-akademik).
 #
-#   ./yayinla.sh                  deneme: doğrula, zip'i geçici üret, özeti ve
-#                                 hocaya gidecek notu göster. Hiçbir şey değişmez.
+#   ./yayinla.sh                  deneme: doğrula, zip'leri geçici üret, iki
+#                                 özeti ve hocaya gidecek notu göster. Hiçbir
+#                                 şey değişmez.
 #   ./yayinla.sh --surum 1.8.0    yayın (CI çalıştırır, elle çalıştırma):
 #                                 SURUM.md'de "Sıradaki" → "1.8.0 · tarih",
-#                                 dagitim/ zip'i, marketplace.json, commit.
+#                                 dagitim/ zip'leri, marketplace.json, commit.
 #
 # Yayın akışı: develop'ta çalışılır → release-please sürüm PR'ı açar →
 # PR birleşince .github/workflows/yayin.yml bu betiği --surum ile çalıştırır
@@ -15,16 +16,23 @@
 # zip olarak HTTPS üzerinden iner ("archive" kaynağı). Claude Code sürümü
 # zip'in SHA-256 özetinden hesaplar: özet değişince hocalara güncelleme gider.
 # Zip belirleyici üretilir: eklentide değişiklik yoksa özet de değişmez.
+#
+# İki eklenti aynı pazar yerindedir: divit (çekirdek, her kullanıcıda açık)
+# ve divit-akademik (yalnız akademisyen klasöründe açık). Sürüm notu tektir,
+# çekirdeğin SURUM.md'sinde durur ve iki eklentiyi birlikte anlatır.
 set -euo pipefail
 
 cd "$(dirname "$0")"
 REPO="mehmetor/divit"
+EKLENTILER=(divit divit-akademik)
 EKLENTI="plugins/divit"
 DAGITIM="dagitim"
 SURUM=""
 [ "${1:-}" = "--surum" ] && SURUM="${2:?sürüm numarası eksik}"
 
-claude plugin validate "$EKLENTI" >/dev/null || { echo "HATA: eklenti doğrulanamadı."; claude plugin validate "$EKLENTI"; exit 1; }
+for AD in "${EKLENTILER[@]}"; do
+  claude plugin validate "plugins/$AD" >/dev/null || { echo "HATA: $AD eklentisi doğrulanamadı."; claude plugin validate "plugins/$AD"; exit 1; }
+done
 
 SIRADAKI="$(grep -c '^## Sıradaki' "$EKLENTI/SURUM.md" || true)"
 
@@ -41,19 +49,33 @@ open(p, "w", encoding="utf-8").write(s)
 PY
 fi
 
-cp -R "$EKLENTI" "$GECICI/divit"
-find "$GECICI/divit" \( -name '.DS_Store' -o -name '__pycache__' \) -prune -exec rm -rf {} +
 # Belirleyici zip: sabit zaman damgası, sabit sıra, ek öznitelik yok.
-find "$GECICI/divit" -exec touch -h -t 202601010000 {} +
-(cd "$GECICI" && find divit -type f | LC_ALL=C sort | zip -q -X -D "$GECICI/divit.zip" -@)
+# Zip'in kök dizini eklentinin adıdır. Özeti basar.
+paketle() {
+  local ad="$1"
+  cp -R "plugins/$ad" "$GECICI/$ad"
+  find "$GECICI/$ad" \( -name '.DS_Store' -o -name '__pycache__' \) -prune -exec rm -rf {} +
+  find "$GECICI/$ad" -exec touch -h -t 202601010000 {} +
+  (cd "$GECICI" && find "$ad" -type f | LC_ALL=C sort | zip -q -X -D "$GECICI/$ad.zip" -@)
+  shasum -a 256 "$GECICI/$ad.zip" | cut -c1-64
+}
 
-OZET="$(shasum -a 256 "$GECICI/divit.zip" | cut -c1-64)"
-KISA="${OZET:0:12}"
-ZIP="$DAGITIM/divit-$KISA.zip"
+OZETLER=()
+ZIPLER=()
+DEGISEN=0
+for i in "${!EKLENTILER[@]}"; do
+  AD="${EKLENTILER[$i]}"
+  OZETLER[$i]="$(paketle "$AD")"
+  ZIPLER[$i]="$DAGITIM/$AD-${OZETLER[$i]:0:12}.zip"
+  [ -f "${ZIPLER[$i]}" ] || DEGISEN=1
+done
 
 if [ -z "$SURUM" ]; then
-  echo "Deneme: özet $KISA"
-  if [ -f "$ZIP" ]; then echo "Eklentide yayınlanmamış değişiklik yok."; fi
+  for i in "${!EKLENTILER[@]}"; do
+    DURUM="yayınlanmamış değişiklik var"
+    [ -f "${ZIPLER[$i]}" ] && DURUM="değişiklik yok"
+    echo "Deneme: ${EKLENTILER[$i]} özet ${OZETLER[$i]:0:12} (${OZETLER[$i]}) — $DURUM"
+  done
   if [ "$SIRADAKI" = "1" ]; then
     echo "Hocaya gidecek not:"
     sed -n '/^## Sıradaki/,/^## [0-9]/p' "$EKLENTI/SURUM.md" | sed '$d'
@@ -63,8 +85,8 @@ if [ -z "$SURUM" ]; then
   exit 0
 fi
 
-if [ -f "$ZIP" ]; then
-  echo "Eklentide değişiklik yok (özet $KISA). Yalnızca main güncellenecek."
+if [ "$DEGISEN" = "0" ]; then
+  echo "Eklentilerde değişiklik yok. Yalnızca main güncellenecek."
   exit 0
 fi
 if [ "$SIRADAKI" != "1" ]; then
@@ -74,23 +96,29 @@ if [ "$SIRADAKI" != "1" ]; then
 fi
 
 mkdir -p "$DAGITIM"
-cp "$GECICI/divit.zip" "$ZIP"
-URL="https://raw.githubusercontent.com/$REPO/main/$ZIP"
-
-python3 - "$URL" "$OZET" <<'PY'
+for i in "${!EKLENTILER[@]}"; do
+  AD="${EKLENTILER[$i]}"
+  [ -f "${ZIPLER[$i]}" ] || cp "$GECICI/$AD.zip" "${ZIPLER[$i]}"
+  URL="https://raw.githubusercontent.com/$REPO/main/${ZIPLER[$i]}"
+  python3 - "$AD" "$URL" "${OZETLER[$i]}" <<'PY'
 import json, sys
-url, ozet = sys.argv[1], sys.argv[2]
+ad, url, ozet = sys.argv[1:]
 p = ".claude-plugin/marketplace.json"
 d = json.load(open(p, encoding="utf-8"))
+kaynak = {"source": "archive", "url": url, "sha256": ozet}
 for e in d["plugins"]:
-    if e["name"] == "divit":
-        e["source"] = {"source": "archive", "url": url, "sha256": ozet}
+    if e["name"] == ad:
+        e["source"] = kaynak
+        break
+else:
+    d["plugins"].append({"name": ad, "source": kaynak})
 json.dump(d, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 open(p, "a").write("\n")
 PY
+done
 
 claude plugin validate . >/dev/null || { echo "HATA: marketplace doğrulanamadı."; claude plugin validate .; exit 1; }
 
-git add "$ZIP" .claude-plugin/marketplace.json "$EKLENTI"
-git commit -q -m "chore(yayin): divit $SURUM ($KISA)" -m "Eklenti zip'i ve marketplace.json güncellendi."
-echo "Hazır: sürüm $SURUM, $ZIP ($KISA)"
+git add "${ZIPLER[@]}" .claude-plugin/marketplace.json "${EKLENTILER[@]/#/plugins/}"
+git commit -q -m "chore(yayin): divit $SURUM (${OZETLER[0]:0:12} · ${OZETLER[1]:0:12})" -m "Eklenti zip'leri ve marketplace.json güncellendi."
+echo "Hazır: sürüm $SURUM, ${ZIPLER[*]}"
