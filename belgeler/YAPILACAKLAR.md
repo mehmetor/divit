@@ -50,6 +50,12 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
   - Ölçü: `sorunlar.md`'de "onu demedim" türü kayıtların sayısı
   - İlk madde küçük bir kurallar değişikliği; dosya düzeniyle aynı yayına girebilir
 
+- [ ] **LaTeX / Overleaf dışa aktarma.** Taslak → pandoc ile `\cite{}`
+      komutlu `.tex` + `kaynaklar.bib` (+ dergi şablonu) tek zip; hoca
+      Overleaf'te "Upload Project" ile açar. Tek tıkla Overleaf'e gönderme
+      denenmeli. Aktarımdan önce `kaynak-dogrula` zorunlu. Fen/mühendislik
+      hocalarını açar. (Benzer özellik: thesisai.io.)
+
 ## Kaynak doğrulama — "sessiz hata sıfır"
 
 - [ ] 7. madde önce: bilerek hata konmuş **sınama seti**; her yayından önce
