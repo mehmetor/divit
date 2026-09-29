@@ -1,6 +1,6 @@
 ---
 name: kurulum
-description: Divit'in sizi tanıdığı ilk kurulum. Hocayı tanır: özgeçmişi ister, alanı kendisi çıkarır, makalelerini bulur, alan kurallarını ve üslup profilini yazar, süren işleri öğrenip klasörleri hazırlar. Profil dosyaları "Henüz doldurulmadı" diyorsa, hoca ilk kez açtığında, "başlayalım", "beni tanı" dediğinde kullan. Kitap yazarını da tanır; "türümü değiştir", "ben hoca değilim", "üniversitedeyim" dendiğinde de kullan.
+description: Divit'in sizi tanıdığı ilk kurulum. Özgeçmişinizden ya da kitaplarınızdan sizi tanır, alanınızı çıkarır, yayımlanmış yazılarınızı bulur, alan kurallarını ve üslup profilini yazar, süren işleri öğrenip klasörleri hazırlar. Profil dosyaları "Henüz doldurulmadı" diyorsa, Divit ilk kez açıldığında, "başlayalım", "beni tanı" dediğinde kullan. Kitap yazarını da tanır; "türümü değiştir", "ben hoca değilim", "üniversitedeyim" dendiğinde de kullan.
 ---
 
 # İlk kurulum — Divit hocayı tanır

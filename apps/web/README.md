@@ -11,6 +11,8 @@ Kılavuz ya da kart değişince kopyaları yenileyin:
 ```bash
 cp hoca-paketi/Divit/KILAVUZ.html apps/web/kilavuz.html
 cp hoca-paketi/Divit/KART.html apps/web/kart.html
+cp hoca-paketi/Divit/KILAVUZ-YAZAR.html apps/web/kilavuz-yazar.html
+cp hoca-paketi/Divit/KART-YAZAR.html apps/web/kart-yazar.html
 ```
 
 Yapay zekâ kurulum metninin aslı `belgeler/AJAN-KURULUM-ISTEMI.md`
