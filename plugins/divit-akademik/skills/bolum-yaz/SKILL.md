@@ -1,6 +1,6 @@
 ---
 name: bolum-yaz
-description: Makale, kitap bölümü veya tez bölümü taslağı üzerinde çalışır — yapı kurma, argüman denetimi, eksik tespiti, bölüm genişletme. Hoca "bölüm yazalım", "şu kısmı geliştir", "bu argüman tutuyor mu", "makaleye başlayalım" dediğinde kullan.
+description: Makale, tez bölümü ya da kitap bölümü taslağı üzerinde çalışır — yapı kurma, argüman denetimi, eksik tespiti, bölüm genişletme. Hoca "bölüm yazalım", "şu kısmı geliştir", "bu argüman tutuyor mu", "makaleye başlayalım" dediğinde kullan. Bütün kitabın düzenlenmesi için değil (o `divit:kitap-duzenle`), yazılardan kitap derlemek için değil (o `divit:kitap-derle`).
 ---
 
 # Bölüm / makale üzerinde çalışma

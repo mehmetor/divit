@@ -4,7 +4,7 @@
     "name": "Mehmet Akif Orakçı",
     "email": "mehmetakiforakci@gmail.com"
   },
-  "description": "Divit — akademik yazım tezgâhı. Makale, tez, kitap.",
+  "description": "Divit — yazı tezgâhı: kitap, yazışma, Word/PDF",
   "plugins": [
     {
       "name": "divit",
@@ -13,7 +13,16 @@
         "url": "https://raw.githubusercontent.com/mehmetor/divit/main/dagitim/divit-658769f6be47.zip",
         "sha256": "658769f6be47475faf5f6413bfbfbdf40284f70b9745cb7d4f6231ce8a612e1f"
       },
-      "description": "Divit — akademik yazım tezgâhı. Tez değerlendirme, kaynak doğrulama, idari yazışma, dışa aktarma."
+      "description": "Divit — yazı tezgâhı: kitap, yazışma, Word/PDF"
+    },
+    {
+      "name": "divit-akademik",
+      "source": {
+        "source": "archive",
+        "url": "https://raw.githubusercontent.com/mehmetor/divit/main/dagitim/divit-akademik-8094459df0d4.zip",
+        "sha256": "8094459df0d4c80fe31472262dcaf0d940124bc6e9893e25186c132acc823749"
+      },
+      "description": "Divit akademik işler: tez değerlendirme, sınav, yayın öncesi okuma, kaynak doğrulama"
     }
   ]
 }
