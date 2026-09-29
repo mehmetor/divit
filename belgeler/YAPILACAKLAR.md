@@ -38,6 +38,18 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
       Claude ek araç kurmuş olabilir: günlükte ne kurulduğuna bak; kalıcı
       bir `sunum`/`tablo` yolu gerekebilir (Python varsayılmaz).
 
+- [ ] **Belirsiz istekler — yük hocada değil Divit'te.** İlk pilotta istekler
+      dağınık, sorular yarım cevaplandı. Hocaya "daha iyi yazın" denmez.
+  - İşe başlamadan tek cümle "Anladığım: … Doğru mu?"
+  - Tek soru; evet/hayır ya da numaralı seçenek ("1) Word 2) PDF")
+  - Parça mesajları tek istek olarak okuma
+  - Yerinde ipucu (Shift + Enter ile alt satır; ne + dosya + çıktı),
+    oturumda en fazla bir, her biri en fazla üç kez, "bir daha gösterme"
+  - Kılavuz ve kartta "İyi istek" kutusu; isteğe bağlı alıştırma
+    yalnız kılavuzda, Divit kendiliğinden önermez
+  - Ölçü: `sorunlar.md`'de "onu demedim" türü kayıtların sayısı
+  - İlk madde küçük bir kurallar değişikliği; dosya düzeniyle aynı yayına girebilir
+
 ## Kaynak doğrulama — "sessiz hata sıfır"
 
 - [ ] 7. madde önce: bilerek hata konmuş **sınama seti**; her yayından önce
