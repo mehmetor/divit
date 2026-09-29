@@ -1,6 +1,6 @@
 ---
 name: pdf
-description: PDF dosyalarıyla işler — birleştirme, sayfa çıkarma ya da silme, sayfa döndürme, PDF'i Word'e çevirme, kontrol listesi ya da form işaretleme, PDF'e not/yazı ekleme, fotoğrafları PDF yapma, PDF küçültme. Hoca "PDF'leri birleştir", "şu sayfaları çıkar", "listeyi işaretle", "formu doldur", "PDF'e yaz", "fotoğrafları PDF yap", "PDF çok büyük" dediğinde kullan.
+description: PDF dosyalarıyla işler — birleştirme, sayfa çıkarma ya da silme, sayfa döndürme, PDF'i Word'e çevirme, kontrol listesi ya da form işaretleme, PDF'e not/yazı ekleme, fotoğrafları PDF yapma, PDF küçültme. Kullanıcı "PDF'leri birleştir", "şu sayfaları çıkar", "listeyi işaretle", "formu doldur", "PDF'e yaz", "fotoğrafları PDF yap", "PDF çok büyük" dediğinde kullan.
 ---
 
 # PDF işleri

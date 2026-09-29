@@ -1,6 +1,6 @@
 ---
 name: guncelleme
-description: Divit'in yeniliklerini hocaya anlatır ve gerekirse kurulumu hocanın onayıyla yeniden çalıştırır. Hoca "yenilikler neler", "Divit güncel mi", "güncelle", "yeni ne var" dediğinde ya da bakim skill'inin hatırlatma denetimi yeni bir sürüm bulduğunda kullan.
+description: Divit'in yeniliklerini anlatır ve gerekirse kurulumu kullanıcının onayıyla yeniden çalıştırır. Kullanıcı "yenilikler neler", "Divit güncel mi", "güncelle", "yeni ne var" dediğinde ya da bakim skill'inin hatırlatma denetimi yeni bir sürüm bulduğunda kullan.
 ---
 
 # Güncelleme ve yenilikler
@@ -36,6 +36,10 @@ maddelerini topla ve **en çok dört madde** söyle:
 > "Divit güncellendi. Yenilikler:
 > - PDF'leri artık birleştirebiliyorum.
 > - …"
+
+Tür yazarsa (`kurallar`) tez, öğrenci, makale, dergi, sınav, hakem,
+kaynakça ya da akademik komutlarla ilgili maddeleri anlatma; madde
+kalmazsa "Divit'te küçük iyileştirmeler yapıldı." de.
 
 Sonra `son-gorulen-surum`'u yüklü sürüme yaz.
 

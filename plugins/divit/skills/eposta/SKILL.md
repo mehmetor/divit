@@ -1,6 +1,6 @@
 ---
 name: eposta
-description: Hazırlanan bir metni (öğrenciye geri bildirim, editöre mektup, hakem cevabı, geri bildirim dosyası) hocanın e-postasında taslak olarak açar. Hiçbir zaman kendisi göndermez. Hoca "e-posta olarak hazırla", "öğrenciye gönder", "mail at", "taslak oluştur" dediğinde ya da başka bir skill e-posta adımına geldiğinde kullan.
+description: Hazırlanan bir metni e-postanızda taslak olarak açar; kendisi hiç göndermez. Öğrenciye geri bildirim, editöre mektup, hakem cevabı, geri bildirim dosyası için de kullanılır. Kullanıcı "e-posta olarak hazırla", "öğrenciye gönder", "mail at", "taslak oluştur" dediğinde ya da başka bir skill e-posta adımına geldiğinde kullan.
 ---
 
 # E-posta taslağı
