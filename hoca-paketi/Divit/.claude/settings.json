@@ -24,6 +24,7 @@
       "Edit(~/.claude/projects/**/memory/**)",
       "Edit(./tez-kontrol/rapor/**)",
       "Edit(./yazilar/**)",
+      "Edit(./kitaplar/**)",
       "Edit(./cikti/**)",
       "Edit(./kaynaklar/dogrulama.md)",
       "Edit(./.divit/**)",
@@ -49,6 +50,8 @@
     ],
     "deny": [
       "Edit(./**/gelen/**)",
+      "Edit(./kitaplar/*/asil/**)",
+      "Edit(./kitaplar/*/malzeme/**)",
       "Read(./hakemlik/**)",
       "Edit(./hakemlik/**)",
       "Bash(rm *)",

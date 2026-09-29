@@ -1,0 +1,12 @@
+Kitaplarınız bu klasörde durur. Her kitap için bir klasör açılır.
+
+Var olan kitabınızın Word dosyasını o kitabın "asil" klasörüne koyun.
+Kitaba dönüşecek yazılarınızı, konuşma dökümlerini ve röportajları
+"malzeme" klasörüne koyun.
+
+Divit bu iki klasöre hiçbir şey yazmaz; yalnızca okur.
+Önerilerini ve düzenlediği metni ayrı klasörlere yazar.
+
+Klasörleri kendiniz açmanız gerekmez. Divit'e "kitabımı yeni baskı
+için düzenle" ya da "yazılarımdan kitap yapalım" yazın; klasörü
+onayınızla o açar.

@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
-# Divit — akademik yazım tezgâhı · macOS kurulumu
+# Divit — yazım tezgâhı · macOS kurulumu
 #
 # Tek komut (Terminal'e yapıştırın):
 #   curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash
+# Kitap yazarı için:
+#   curl -fsSL https://divit.simetri.app/kur.sh | DIVIT_TUR=yazar bash
 #
 # Git, Homebrew ya da yönetici parolası gerekmez. Yeniden çalıştırmak
-# güvenlidir: hocanın dosyalarına dokunmaz, yalnızca Divit'i günceller.
+# güvenlidir: kullanıcının dosyalarına dokunmaz, yalnızca Divit'i günceller.
+#
+# Kullanıcı türü (akademisyen | yazar) klasörleri, kılavuzu ve açık
+# eklentileri belirler. Öncelik: DIVIT_TUR > .divit/profil/kimlik.md'deki
+# "Kullanıcı türü:" satırı > akademisyen. Türü değiştirmek kurulum
+# skill'inin işidir; betik var olan satırı değiştirmez.
 #
 # Sınama değişkenleri (geliştirici için):
 #   DIVIT_TEST=1           Claude uygulaması ve komut satırı kurulmaz, kılavuz açılmaz
 #   DIVIT_KAYNAK_ZIP=yol   GitHub yerine yerel repo zip'i kullan
 #   DIVIT_HEDEF=yol        Divit klasörünün yeri (varsayılan: ~/Documents/Divit)
+#   DIVIT_TUR=yazar        kullanıcı türü (akademisyen | yazar)
 set -uo pipefail
 
 REPO="${DIVIT_REPO:-mehmetor/divit}"
@@ -30,7 +38,7 @@ UYARILAR=0
 [ "$(uname)" = "Darwin" ] || { echo "Bu betik macOS içindir. Windows'ta kur.ps1 kullanın."; exit 1; }
 GECICI="$(mktemp -d)"; trap 'rm -rf "$GECICI"' EXIT
 
-printf '\n\033[1mDivit — akademik yazım tezgâhı · kurulum\033[0m\n'
+printf '\n\033[1mDivit — yazım tezgâhı · kurulum\033[0m\n'
 
 # ---------------------------------------------------------------- 1
 adim "1/6 Claude uygulaması"
@@ -142,11 +150,39 @@ unzip -q "$GECICI/repo.zip" -d "$GECICI/repo"
 SABLON="$(find "$GECICI/repo" -maxdepth 3 -type d -path '*/hoca-paketi/Divit' | head -1)"
 [ -d "$SABLON" ] || { echo "HATA: Divit şablonu bulunamadı."; exit 1; }
 
+# Kullanıcı türü: DIVIT_TUR > kimlik.md satırı > akademisyen.
+KIMLIK="$HEDEF/.divit/profil/kimlik.md"
+TUR_VERILDI=""
+case "${DIVIT_TUR:-}" in
+  akademisyen|yazar) TUR="$DIVIT_TUR"; TUR_VERILDI=1 ;;
+  "") ;;
+  *) uyari "DIVIT_TUR='$DIVIT_TUR' tanınmadı (akademisyen ya da yazar olmalı); yok sayıldı." ;;
+esac
+if [ -z "$TUR_VERILDI" ]; then
+  TUR="$(sed -n 's/^Kullanıcı türü: *\([a-z]*\).*/\1/p' "$KIMLIK" 2>/dev/null | head -1)"
+  [ "$TUR" = "yazar" ] || TUR="akademisyen"
+fi
+if [ "$TUR" = "yazar" ]; then
+  KILAVUZ="KILAVUZ-YAZAR.html"; KART="KART-YAZAR.html"; TUR_KLASORU="kitaplar"; AKADEMIK=false
+else
+  KILAVUZ="KILAVUZ.html"; KART="KART.html"; TUR_KLASORU="tez-kontrol"; AKADEMIK=true
+fi
+bilgi "Kullanıcı türü: $TUR"
+
+# kimlik.md'de tür satırı yoksa ilk başlığın hemen altına yazar; varsa dokunmaz.
+tur_satiri_yaz() {
+  [ -f "$KIMLIK" ] || return
+  grep -q '^Kullanıcı türü:' "$KIMLIK" && return
+  awk -v s="Kullanıcı türü: $TUR" '{print} !y && /^# /{print s; y=1}' "$KIMLIK" > "$GECICI/kimlik.md" \
+    && cat "$GECICI/kimlik.md" > "$KIMLIK"
+}
+
 if [ -d "$HEDEF" ]; then
   bilgi "Klasör zaten var. Kişisel dosyalara dokunmadan Divit dosyaları güncelleniyor."
-  for f in CLAUDE.md KILAVUZ.html KART.html tez-kontrol/CLAUDE.md; do
-    mkdir -p "$HEDEF/$(dirname "$f")"; cp "$SABLON/$f" "$HEDEF/$f"
-  done
+  for f in CLAUDE.md "$KILAVUZ" "$KART"; do cp "$SABLON/$f" "$HEDEF/$f"; done
+  [ -d "$HEDEF/tez-kontrol" ] && cp "$SABLON/tez-kontrol/CLAUDE.md" "$HEDEF/tez-kontrol/CLAUDE.md"
+  # Türün klasörü yoksa eklenir; hiçbir klasör silinmez.
+  [ -d "$HEDEF/$TUR_KLASORU" ] || { cp -R "$SABLON/$TUR_KLASORU" "$HEDEF/" && bilgi "Eklendi: $TUR_KLASORU"; }
   mkdir -p "$HEDEF/.claude/rules" "$HEDEF/.divit"
   cp -R "$SABLON/.claude/rules/." "$HEDEF/.claude/rules/"
   cp -Rn "$SABLON/.divit/." "$HEDEF/.divit/" 2>/dev/null
@@ -154,17 +190,42 @@ if [ -d "$HEDEF" ]; then
     [ -f "$HEDEF/.divit/profil/$(basename "$f")" ] || cp "$f" "$HEDEF/.divit/profil/"
   done
 else
-  mkdir -p "$HEDEF" && cp -R "$SABLON/." "$HEDEF/"
+  mkdir -p "$HEDEF"
+  # Şablon türe göre: başka türün klasörü ve kılavuzu kopyalanmaz.
+  for f in "$SABLON"/* "$SABLON"/.[!.]*; do
+    [ -e "$f" ] || continue
+    case "$(basename "$f")" in
+      tez-kontrol|KILAVUZ.html|KART.html)       [ "$TUR" = "akademisyen" ] || continue ;;
+      kitaplar|KILAVUZ-YAZAR.html|KART-YAZAR.html) [ "$TUR" = "yazar" ] || continue ;;
+    esac
+    cp -R "$f" "$HEDEF/"
+  done
   bilgi "Oluşturuldu: $HEDEF"
 fi
-# Ayarlar Divit'e aittir, her kurulumda yenilenir. Hocanın "bir daha sorma"
-# izinleri settings.local.json'da durur; ona dokunulmaz.
+[ -n "$TUR_VERILDI" ] && tur_satiri_yaz
+# Ayarlar Divit'e aittir, her kurulumda yenilenir. Kullanıcının "bir daha sorma"
+# izinleri settings.local.json'da durur; orada yalnız iki eklenti anahtarı değişir.
 sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__||" "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
 sed -n "s/^## \([0-9][0-9.]*\) ·.*/\1/p" "$(dirname "$SABLON")/../plugins/divit/SURUM.md" | head -1 > "$HEDEF/.divit/kurulum-surumu.txt"
-[ -f "$HEDEF/.claude/settings.local.json" ] || \
-  printf '{\n  "enabledPlugins": { "divit@divit": true }\n}\n' > "$HEDEF/.claude/settings.local.json"
+# Hangi eklenti bu klasörde açık: akademik eklenti yalnız akademisyende.
+YEREL="$HEDEF/.claude/settings.local.json"
+if [ ! -f "$YEREL" ]; then
+  printf '{\n  "enabledPlugins": { "divit@divit": true, "divit-akademik@divit": %s }\n}\n' "$AKADEMIK" > "$YEREL"
+elif [ "$(tr -d ' \t\r\n' < "$YEREL" | head -c1)" != "{" ] || ! plutil -convert json -o /dev/null "$YEREL" 2>/dev/null; then
+  uyari "Klasör ayar dosyası okunamadı; dokunulmadı: .claude/settings.local.json"
+else
+  # plutil izinleri ve diğer anahtarları korur; önce kopyada denenir.
+  cp "$YEREL" "$GECICI/yerel.json"
+  plutil -insert enabledPlugins -json '{}' "$GECICI/yerel.json" >/dev/null 2>&1   # varsa hata verir, yok sayılır
+  if plutil -replace 'enabledPlugins.divit@divit' -bool true "$GECICI/yerel.json" >/dev/null 2>&1 \
+    && plutil -replace 'enabledPlugins.divit-akademik@divit' -bool "$AKADEMIK" "$GECICI/yerel.json" >/dev/null 2>&1; then
+    cat "$GECICI/yerel.json" > "$YEREL"
+  else
+    uyari "Klasör ayar dosyası güncellenemedi; dokunulmadı: .claude/settings.local.json"
+  fi
+fi
 xattr -dr com.apple.quarantine "$HEDEF" 2>/dev/null
-find "$HEDEF" -name .gitkeep -delete 2>/dev/null   # git kalıntısı; hocaya görünmesin
+find "$HEDEF" -name .gitkeep -delete 2>/dev/null   # git kalıntısı; kullanıcıya görünmesin
 
 # ---------------------------------------------------------------- 5
 adim "5/6 Divit eklentisi"
@@ -178,13 +239,25 @@ elif command -v claude >/dev/null 2>&1; then
   claude plugin marketplace update divit >>"$KAYIT" 2>&1
   claude plugin install divit@divit >>"$KAYIT" 2>&1
   claude plugin update divit@divit >>"$KAYIT" 2>&1
+  # Akademik eklenti her türde kurulur; klasörde yalnız akademisyende açıktır.
+  claude plugin install divit-akademik@divit >>"$KAYIT" 2>&1
+  claude plugin update divit-akademik@divit >>"$KAYIT" 2>&1
   LISTE="$(claude plugin list 2>&1)"
-  if printf '%s' "$LISTE" | grep -q 'divit@divit'; then
-    bilgi "Kurulu ve güncel (sürüm $(printf '%s' "$LISTE" | grep -A2 'divit@divit' | grep -oE 'Version: *[^ ]+' | awk '{print $2}'))."
+  CEKIRDEK='(^|[^-[:alnum:]])divit@divit'   # divit-akademik@divit ile karışmasın
+  if printf '%s' "$LISTE" | grep -qE "$CEKIRDEK"; then
+    bilgi "Kurulu ve güncel (sürüm $(printf '%s' "$LISTE" | grep -E -A2 "$CEKIRDEK" | grep -oE 'Version: *[^ ]+' | head -1 | awk '{print $2}'))."
   else
     uyari "Şimdi kurulamadı; uygulama ilk açıldığında kendiliğinden inecek."
     bilgi "Ayrıntı (geliştiriciye gönderin):"
     grep -v '^[[:space:]]*$' "$KAYIT" | tail -12 | sed 's/^/    /'
+  fi
+  if ! printf '%s' "$LISTE" | grep -q 'divit-akademik@divit'; then
+    # Henüz yayında olmayabilir; kurulum durmaz. Yazarda bu eklenti zaten kapalı.
+    if [ "$TUR" = "akademisyen" ]; then
+      uyari "Üniversite işleri eklentisi (divit-akademik) şimdi kurulamadı; kurulumu sonra yeniden çalıştırın."
+    else
+      bilgi "Ek eklenti (divit-akademik) kurulamadı; sizin işlerinizi etkilemez."
+    fi
   fi
 else
   bilgi "Uygulama ilk açıldığında kendiliğinden inecek."
@@ -195,7 +268,7 @@ adim "6/6 Masaüstü kısayolu ve kılavuz"
 if [ -d "$HOME/Desktop" ] && [ ! -e "$HOME/Desktop/Divit" ]; then
   ln -s "$HEDEF" "$HOME/Desktop/Divit" && bilgi "Masaüstüne 'Divit' klasör kısayolu kondu."
 fi
-[ -z "$TEST" ] && open "$HEDEF/KILAVUZ.html" 2>/dev/null
+[ -z "$TEST" ] && open "$HEDEF/$KILAVUZ" 2>/dev/null
 
 printf '\n\033[1mKurulum bitti.\033[0m'
 [ "$UYARILAR" -gt 0 ] && printf ' (%s uyarı — yukarıya bakın)' "$UYARILAR"
@@ -203,7 +276,7 @@ cat <<'MSG'
 
 
 Şimdi:
-  1. Claude uygulamasını açın. Hocanın hesabıyla giriş yapın.
+  1. Claude uygulamasını açın. Divit'i kullanacak kişinin hesabıyla giriş yapın.
   2. Üstteki "Code" sekmesine tıklayın.
   3. "Local" seçin → "Select folder" → Belgeler → Divit.
   4. "merhaba" yazın. Divit gerisini kendisi sorar.

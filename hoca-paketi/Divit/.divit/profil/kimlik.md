@@ -1,3 +1,3 @@
 # Kim
 
-Henüz doldurulmadı. `kurulum` skill'i hocanın özgeçmişinden doldurur.
+Henüz doldurulmadı. `kurulum` skill'i kullanıcının özgeçmişinden doldurur.

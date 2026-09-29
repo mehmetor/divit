@@ -9,7 +9,7 @@ olmasaydı da yapmazdın.
 
 ## Akış
 1. `gelen/` içindeki dosyayı oku (PDF: Read aracıyla; Word: pandoc ile metne çevir).
-2. `tez-kontrol` skill'indeki kontrol listesini uygula.
+2. `divit-akademik:tez-kontrol` skill'indeki kontrol listesini uygula.
 3. `rapor/<bashar>-<YYYY-AA-GG>.md` yaz.
 4. Hocaya raporun üç cümlelik özetini söyle, tamamını ekrana basma.
 
