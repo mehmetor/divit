@@ -177,12 +177,14 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <div class="tablo"><table>
 <thead><tr><th>Komut</th><th>Ne yapar</th></tr></thead>
 <tbody>
-<tr><td><code>/divit:tez-kontrol</code></td><td>Öğrenci tezini, ödevini ya da raporunu okur, bulgu raporu yazar.</td></tr>
-<tr><td><code>/divit:yayin-oncesi</code></td><td>Kendi makalenizi göndermeden önce kontrol eder: çizelge, birim, dergi kuralları.</td></tr>
-<tr><td><code>/divit:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder.</td></tr>
+<tr><td><code>/divit-akademik:tez-kontrol</code></td><td>Öğrenci tezini, ödevini ya da raporunu okur, bulgu raporu yazar.</td></tr>
+<tr><td><code>/divit-akademik:yayin-oncesi</code></td><td>Kendi makalenizi göndermeden önce kontrol eder: çizelge, birim, dergi kuralları.</td></tr>
+<tr><td><code>/divit-akademik:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder.</td></tr>
 <tr><td><code>/divit:yazisma</code></td><td>Dilekçe, kurul yazısı, referans mektubu, hakem cevabı yazar.</td></tr>
-<tr><td><code>/divit:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir.</td></tr>
-<tr><td><code>/divit:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
+<tr><td><code>/divit-akademik:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir.</td></tr>
+<tr><td><code>/divit-akademik:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
+<tr><td><code>/divit:kitap-duzenle</code></td><td>Var olan kitabınızı editör gözüyle okur: tekrar, çelişki, eskimiş bilgi. Onayladığınız değişiklikleri ayrı bir çalışma metnine işler.</td></tr>
+<tr><td><code>/divit:kitap-derle</code></td><td>Dağınık yazılarınızdan, konuşmalarınızdan kitap planı ve bölüm iskeleti çıkarır.</td></tr>
 <tr><td><code>/divit:disa-aktar</code></td><td>Metni Word dosyasına çevirir.</td></tr>
 <tr><td><code>/divit:pdf</code></td><td>PDF birleştirir, sayfa çıkarır, döndürür, kontrol listesi işaretler.</td></tr>
 <tr><td><code>/divit:eposta</code></td><td>Hazırlanan metni e-postanızda taslak olarak açar. Göndermez.</td></tr>
@@ -195,6 +197,8 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td><code>/divit:gelistirici-paylas</code></td><td>Notlarınızı onayınızla Divit'i geliştirene gönderir.</td></tr>
 <tr><td><code>/divit:gelistirici-ihtiyac-gorusmesi</code></td><td>Divit'i geliştiren kişi için ihtiyaç görüşmesi yapar.</td></tr>
 </tbody></table></div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Üniversite işlerine ait komutlar <code>/divit-akademik:</code> ile başlar. Listede <code>divit</code> yazdığınızda ikisi birlikte görünür.</div>
 <div class="kutu not"><b class="etiket">NOT</b>
 <code>gelistirici-</code> ile başlayan komutlar Divit'i geliştiren kişi içindir. Bunları kullanmanız gerekmez.</div>
 <h3>Claude'un kendi komutları</h3>
@@ -260,6 +264,18 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td>Bu kılavuzu açma</td>
     <td><span class="yaz">yardım</span></td>
     <td>Bu sayfa</td></tr>
+</tbody></table></div>
+<h3>Kitap işleri</h3>
+<p>Kitap yazıyorsanız Divit şu iki işte yardım eder. Kitap için klasörü Divit ilk kitap işinde onayınızla açar: <code>kitaplar</code>. Kitabınızın asıl Word dosyası o klasörün <code>asil</code> bölümünde durur; Divit ona hiç yazmaz.</p>
+<div class="tablo"><table>
+<thead><tr><th>İş</th><th>Şöyle yazın</th><th>Sonuç nerede</th></tr></thead>
+<tbody>
+<tr><td>Var olan kitabınızı editör gözüyle okuma, yeni baskıya hazırlama</td>
+    <td><span class="yaz">kitabımı yeni baskı için düzenle</span><br><span class="yaz">kitabıma editör gözüyle bak</span><br><span class="yaz">tekrarları ve çelişkileri bul</span></td>
+    <td><code>kitaplar/&lt;kitabınız&gt;/duzenleme</code></td></tr>
+<tr><td>Dağınık yazılarınızdan yeni bir kitap planı</td>
+    <td><span class="yaz">yazılarımdan kitap yapalım</span><br><span class="yaz">bu yazıları bir araya getir</span><br><span class="yaz">konuşmalarımı kitaba çevir</span></td>
+    <td><code>kitaplar/&lt;kitabınız&gt;/plan.md</code></td></tr>
 </tbody></table></div>
 <div class="kutu not"><b class="etiket">NOT</b>
 PDF işleri için internetteki "ücretsiz PDF" sitelerini kullanmayın. Divit bu işleri bilgisayarınızda yapar. Dosyanız hiçbir siteye yüklenmez. Asıl PDF değişmez; sonuç <code>cikti</code> klasörüne yeni dosya olarak yazılır.</div>
