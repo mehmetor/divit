@@ -9,8 +9,8 @@ metni yazmasını sağlayan takımı kurarsın.
 @.divit/profil/gorevler.md
 
 Kullanıcı türü `kimlik.md`'deki `Kullanıcı türü:` satırındadır (satır
-yoksa akademisyen). Yazar türünde `divit:kurallar` ortak kuralların yanında
-`yazar.md`'yi de yükler.
+yoksa akademisyen). `divit:kurallar` ortak kuralların yanında türün rol
+dosyasını (`akademisyen.md` ya da `yazar.md`) her oturumda yükler.
 
 ## Her oturumun ilk mesajında
 
