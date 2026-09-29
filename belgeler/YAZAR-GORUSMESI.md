@@ -74,39 +74,97 @@ kurgusu ve "bu bölüm için sizin anlatmanız gerekir" boşlukları.
 Karşılaştırma: `belgeler/demo-yazar/beklenen-bulgular.md` (yazara
 gösterme; yanında kâğıt olarak dursun).
 
-### Demo hazırlığı (taslak)
+### Demo hazırlığı
 
-Karar: demo yayınlamadan, Mehmet'in Mac'inde terminalden `claude
+Karar: demo yayınsız, Mehmet'in Mac'inde terminalden `claude
 --plugin-dir` ile. Code sekmesi ve yayın bu buluşmada yok. Aşağıdaki
-adımlar taslaktır; son hâlini entegrasyon parçası denenmiş komutlarla
-yazar.
+komutlar 2026-09-29'da birleşik dalda (`orc/yonetici-kitap-yazarlari-i/entegrasyon`)
+denendi; kanıtı `belgeler/demo-yazar/prova/`.
 
-1. Eklenti kopyası repo dışında, bu işi içeren daldan (ör.
-   `~/divit-demo-eklenti`). Yalnız `plugins/divit` yüklenir;
-   `divit-akademik` **yüklenmez**.
-2. Demo klasörü repo dışında (ör. `~/divit-demo-yazar`): klasör ayarı
-   (`CLAUDE.md`, `.claude/settings.json` izinleri) yazar kurulumunun
-   ürettiği gibi olmalı; en kısası kurulum betiğini sınama kipinde
-   `DIVIT_TUR=yazar` ile bu klasöre çalıştırmak.
-3. `.claude/settings.local.json` — yayındaki kopyalar kapalı:
-   `{"enabledPlugins": {"divit@divit": false, "divit-akademik@divit": false}}`
-4. `.divit/profil/kimlik.md`: ilk başlığın altında
-   `Kullanıcı türü: yazar`, kurgusal bir ad. Profilin geri kalanı
-   "Henüz doldurulmadı" kalırsa Divit kurulumla açılır; demodan önce
-   bir kez dene.
-5. Örnekler: `asil/ornek-bolum.docx` →
-   `kitaplar/sahada-yonetmek/asil/`; `malzeme/*.md` →
-   `kitaplar/dinlemek-uzerine/malzeme/`. `beklenen-bulgular.md`
-   kopyalanmaz.
-6. Word okuma için `DIVIT_PANDOC` tanımlı olmalı (kurulum yapar; elle:
-   `export DIVIT_PANDOC="$(command -v pandoc)"`).
-7. Başlat: demo klasöründe `claude --plugin-dir
-   ~/divit-demo-eklenti/plugins/divit`. `/` yaz: akademik komut
-   görünmemeli; `kitap-duzenle` ve `kitap-derle` görünmeli.
-8. Menüde Mehmet'in kendi başka eklentilerinin komutları görünebilir;
-   önlemi entegrasyon parçası buraya yazar.
-9. Bir gün önce iki demoyu baştan sona bir kez çalıştır, sonucu
-   `beklenen-bulgular.md` ile karşılaştır. Demo sonrası klasörü sıfırla.
+**Önkoşullar:** Mac'te `claude` girişli, `pandoc` yolda (`which pandoc`),
+birleşik dal GitHub'da. **Süre:** hazırlık 15 dk (pandoc inerken 2-3 dk
+bekleme), kitap düzenleme yaklaşık 2 dk (iki soru + rapor), kitap derleme
+yaklaşık 1,5 dk. Maliyet: bir koşu yaklaşık 0,6 $.
+
+**Bir gün önce — hazırlık (Mehmet'in kendi terminalinde):**
+
+1. Eklentinin kalıcı kopyası, repo ve iş klasörleri dışında (worktree
+   temizliği bunu silmez):
+   ```bash
+   git -C ~/Simetri/Develop/divit fetch origin
+   git -C ~/Simetri/Develop/divit worktree add ~/divit-demo-eklenti origin/orc/yonetici-kitap-yazarlari-i/entegrasyon
+   ```
+   Yalnız `~/divit-demo-eklenti/plugins/divit` yüklenir; `divit-akademik`
+   **yüklenmez.**
+2. Demo klasörü repo dışında, kurulum betiğinin sınama kipiyle (ayrı bir
+   ev klasörü: masaüstüne kısayol konmaz, pandoc oraya iner):
+   ```bash
+   EV=~/divit-demo-ev; DEMO=~/Divit-Demo; EK=~/divit-demo-eklenti
+   mkdir -p "$EV"
+   git -C "$EK" archive --format=zip --prefix=divit/ HEAD -o "$EV/divit.zip"
+   HOME="$EV" DIVIT_TEST=1 DIVIT_TUR=yazar DIVIT_KAYNAK_ZIP="$EV/divit.zip" DIVIT_HEDEF="$DEMO" bash "$EK/kur.sh"
+   ```
+   (Değişkenler şart: zsh'de `HOME=…` önekinden sonraki `~` yeni ev
+   klasörüne açılır.)
+   Beklenen: `Kullanıcı türü: yazar`, klasörde `KILAVUZ-YAZAR.html`,
+   `kitaplar/`, `tez-kontrol/` yok.
+3. Örnek dosyalar (`beklenen-bulgular.md` kopyalanmaz):
+   ```bash
+   cd ~/Divit-Demo
+   mkdir -p kitaplar/sahada-yonetmek/asil kitaplar/dinlemek-uzerine/malzeme
+   cp ~/divit-demo-eklenti/belgeler/demo-yazar/asil/ornek-bolum.docx kitaplar/sahada-yonetmek/asil/
+   cp ~/divit-demo-eklenti/belgeler/demo-yazar/malzeme/*.md kitaplar/dinlemek-uzerine/malzeme/
+   ```
+4. Profil — gerçek ad yok, tür satırı ve kurgusuz tek genel satır:
+   ```bash
+   printf '# Kim\nKullanıcı türü: yazar\n\nUzun yıllar sanayide yönetici olarak çalışmış, deneyimlerini kitaplaştıran bir yazar.\n' > .divit/profil/kimlik.md
+   ```
+5. Klasör ayarı: yayındaki kopyalar kapalı, eklenti kopyasını okuma izni
+   (yoksa yazarın ekranında izin sorusu çıkar), demoda görülen iki kabuk
+   sorusu önceden izinli:
+   ```bash
+   printf '{"enabledPlugins":{"divit@divit":false,"divit-akademik@divit":false},"permissions":{"allow":["Read(/%s/divit-demo-eklenti/plugins/**)","Bash(awk *)","Bash(wc *)"]}}\n' "$HOME" > .claude/settings.local.json
+   ```
+6. Başlatma komutu (her seferinde aynı; `--setting-sources project,local`
+   Mehmet'in kendi eklentilerini — `engineering:`,
+   `cowork-plugin-management:` — kişisel skill'lerini ve kullanıcı
+   ayarlarındaki hook'ları bu oturumdan çıkarır; denendi):
+   ```bash
+   cd ~/Divit-Demo && claude --setting-sources project,local --plugin-dir ~/divit-demo-eklenti/plugins/divit
+   ```
+   İlk açılışta **klasör güven sorusu** çıkar → kabul et (etmezsen
+   `.claude/settings.json` izinleri yok sayılır, Word okuma izin sorar).
+   Sonra `/` yaz: `divit:kitap-duzenle` ve `divit:kitap-derle` görünmeli,
+   `divit-akademik:` hiç görünmemeli. Kalan `/model`, `/config`,
+   `dataviz`, `code-review` gibi satırlar Claude'un kendi komutlarıdır;
+   Mehmet'e ait değildir. `/exit`.
+7. Prova: 6'daki komutla aç, B ve A'daki iki isteği yaz, sonucu
+   `beklenen-bulgular.md` ile karşılaştır. Sonra klasörü sıfırla:
+   `rm -rf ~/Divit-Demo` ve 2-5'i yeniden çalıştır (güven sorusu bir
+   kez daha çıkar; 6'yı da yinele).
+
+**Demo günü:**
+
+- Önce ekranı temizle: yalnız bir Terminal penceresi, tam ekran; öteki
+  uygulamalar, tarayıcı sekmeleri ve masaüstü kapalı ya da gizli;
+  bildirimler kapalı (Rahatsız Etme). Terminal'i **doğrudan demo
+  klasöründe** aç (6. adımdaki komut `cd` ile başlar); ev klasöründe ya
+  da repoda açma — repodaki geliştirici `CLAUDE.md`'si yüklenir.
+- Karşılama ekranında hesap adı/e-postası görünür; sorun değilse geç,
+  değilse komutu yazmadan önce ekranı çevirme.
+- Divit raporu `.md` olarak açmaya çalışabilir (`open`); `.md`
+  dosyalarının Mac'te hangi uygulamayla açıldığına önceden bak
+  (TextEdit iyi; kişisel bir editör projeleri gösterebilir).
+- Yazarın kendi yazacağı iki istek:
+  1. `kitabımı yeni baskı için düzenle` → Divit iki soru sorar: neye
+     bakılsın (`5` hepsi) ve yeni baskının amacı (`1` güncellemek).
+  2. `yazılarımdan kitap yapalım` → envanter ve içindekiler seçenekleri.
+- Divit Word'ü okurken bir izin sorusu çıkarsa (değişkenli pandoc
+  komutu) "Yes" de; Divit sonra yoldaki `pandoc`'a geçer.
+- İş bitince Divit "birkaç yazınızı paylaşır mısınız" diye üslup
+  isteyebilir (profil boş olduğu için); geçmek yeterli.
+- Demo sonrası: `rm -rf ~/Divit-Demo ~/divit-demo-ev`; eklenti kopyası
+  için `git -C ~/Simetri/Develop/divit worktree remove ~/divit-demo-eklenti`.
 
 ## 4. Vaat edilmeyecekler ve riskler
 

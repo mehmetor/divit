@@ -104,6 +104,14 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
       doldurulabilir form yolu.
 - [ ] `guncelleme` akışı: yenilikleri söyleme, onayla kurulumu çalıştırma.
 - [ ] Mac kısa adres + Windows kısa adres (Windows'ta kullanıldı, çalışıyor).
+- [ ] Yazar kurulumu `kur.ps1` Windows'ta: `DIVIT_TUR`, yeniden kurulum
+      (settings.local.json'da yalnız iki eklenti anahtarı değişir, izinler
+      kalır), türün kılavuzunun açılması. Mac'te sınandı, `pwsh` yok.
+- [ ] Code sekmesinde '/' menüsü: yazar klasöründe `divit-akademik:` yok,
+      akademisyen klasöründe var mı (terminalde ölçüldü, Code sekmesinde
+      bakılmadı).
+- [ ] Kurulu hocada iki eklentiye geçiş (`belgeler/GECIS-IKI-EKLENTI.md`),
+      yayın günü.
 
 ## Kararlar
 
