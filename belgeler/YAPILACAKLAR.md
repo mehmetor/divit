@@ -71,6 +71,17 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 ## Kapsam
 
+- [ ] **Kitap yazarları (akademik olmayan)** — ilk görüşme:
+      `belgeler/YAZAR-GORUSMESI.md`; demo örnekleri `belgeler/demo-yazar/`.
+  - yazar için tanıtım sayfası (`apps/web`)
+  - editörlü (çok yazarlı) kitap derleme — bugün `kitap-derle` yalnız
+    kullanıcının kendi yazılarıyla çalışır
+  - Word'de değişiklik izleme ile öneri (bugün öneri listesi ya da yeni dosya)
+  - ses kaydını yazıya dökme (bugün yazıya dökülmüş hâli gerekir)
+  - iki eklentiye geçişin Code sekmesinin '/' menüsünde elle doğrulanması
+    ve tek kurulu hocanın makinesinde geçiş (yayından sonra;
+    `belgeler/GECIS-IKI-EKLENTI.md`)
+  - yazar kurulumunun Windows'ta denenmesi
 - [ ] **Öğretmenler / okul rehberliği (PDR).** Aday: lise PDR bölüm başkanı,
       uzman psikolojik danışman; CV'si gelecek.
   - kurulum: yayını olmayanlar için örnek metin isteme yolu
