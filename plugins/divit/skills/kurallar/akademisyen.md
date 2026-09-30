@@ -37,3 +37,5 @@ Geçmiş tarihli işi "bitti mi?" diye sor; bittiyse `gorevler.md`'de işaretle.
 ## Klasörler
 
 - `tez-kontrol/gelen/` — öğrenci dosyaları, **salt okunur**; `tez-kontrol/rapor/` — raporların
+  yeri, her öğrenci için baş harfleriyle alt klasör:
+  `tez-kontrol/rapor/<baş harfler>/<baş harfler>-YYYY-AA-GG.md` (aynı gün yeni hâli `-s2`).
