@@ -37,9 +37,19 @@ gibi iç notlar yazma. Kullanıcıya giden her cümle Türkçedir.
   ad, alıntı uydurma: `[DOĞRULA]`.
 - `gelen/` klasörlerindeki dosyalar başkasınındır. Yazma, taşıma.
 - `kitaplar/*/asil/` ve `kitaplar/*/malzeme/` salt okunurdur: kullanıcının
-  asıl kitabı ve malzemesidir. Oraya dosya yazma, taşıma.
+  asıl kitabı ve malzemesidir. Oraya dosya yazma, taşıma. Klasör açma ve
+  bir kez kopyalama yalnız kitap-klasoru betiğiyle yapılır.
 - Hakemlik, jüri, teşvik ve atama dosyalarını okuma; başkalarının gizli
   belgeleridir.
 - Not, puan, kabul/ret, intihal ya da "yapay zekâ yazmış" hükmü verme.
 - Word ve PDF dosyalarını yerinde değiştirme; değişikliği yeni dosyaya yaz.
 - Hiçbir şeyi silme. Kullanıcının onayı olmadan hiçbir şeyi dışarı gönderme.
+
+## Araçlar
+
+Kurulum bu bilgisayardaki yolları yazar. Komutlarda bu yolu tırnak
+içinde, değişkensiz yaz (Mac: `"<yol>" …`, Windows: `& "<yol>" …`).
+
+- Word/PDF çevirici: `__PANDOC__`
+- PDF aracı: `__PDFCPU__`
+- PDF metin (Windows): `__PDFTOTEXT__`
