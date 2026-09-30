@@ -22,8 +22,8 @@
 
 **Soru:** Kitap yazmayı düşünüyor musunuz?
 
+**Cevap:** Notlarım var, yazılarım var; 1987'de fabrikaya girdiğim günden beri defter tutarım. Bir gün toparlarım belki. Ama kitap yazmak fabrika yönetmekten zor; fabrikada en azından ne zaman bittiğini biliyorsunuz.
+
 **Soru:** Teknolojinin fabrikaları değiştirdiği söyleniyor. Siz ne gördünüz?
 
 **Cevap:** Makineler değişti, ölçüm değişti, raporlar değişti. Ama bir vardiyanın iyi mi kötü mü geçeceğini hâlâ vardiyanın başındaki ustanın o sabahki keyfi belirliyor. Bunu hiçbir ekran göstermiyor. Teknolojiye yatırım yapan her şirket, aynı parayı o ustayı yetiştirmeye de ayırmalı. Yoksa pahalı makinelerin başında, ne yaptığını bilmeyen insanlar olur. Bizde bunun tersini yapmaya çalıştık; her yeni makineyle birlikte bir de eğitim bütçesi açtık.
-
-**Cevap:** Notlarım var, yazılarım var. Bir gün toparlarım belki. Ama kitap yazmak fabrika yönetmekten zor; fabrikada en azından ne zaman bittiğini biliyorsunuz.

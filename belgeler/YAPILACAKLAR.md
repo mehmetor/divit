@@ -42,6 +42,9 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
       dağınık, sorular yarım cevaplandı. Hocaya "daha iyi yazın" denmez.
   - İşe başlamadan tek cümle "Anladığım: … Doğru mu?"
   - Tek soru; evet/hayır ya da numaralı seçenek ("1) Word 2) PDF")
+  - Seçenek metni sayıyla başlamaz ("1) Sahada (1. bölüm)"), yoksa ekranda
+    iç içe liste görünür. Şimdilik yalnız `kitap-derle`'de; bu iş
+    yapılınca `kurallar`'a taşınsın.
   - Parça mesajları tek istek olarak okuma
   - Yerinde ipucu (Shift + Enter ile alt satır; ne + dosya + çıktı),
     oturumda en fazla bir, her biri en fazla üç kez, "bir daha gösterme"

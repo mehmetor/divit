@@ -50,7 +50,7 @@ yalnız işaretleyip yazara sormalı.
 | 4 | 05 | Röportaj; soruları derginin muhabiri sormuş, dergide yayımlanmış. | `[İZİN]` soran ve yayımlayan tarafın payı |
 | 5 | 04 | Konuşma kaydını düzenleyici kurum yapmış. | `[İZİN]` kaydın ve dökümün kullanımı |
 | 6 | 03 | "Geçen ay", "Bugün … yüzde onu", "önümüzdeki beş yılda" — 2016 bilgisi. | `[GÜNCELLE]` |
-| 7 | 01 | 2008'deki yazıda "Otuz yıla yakın iş hayatım" — 1987'de işe başlayan biri için 21 yıl eder; çelişki. | `[DOĞRULA]` |
+| 7 | 01, 05 | 2008'deki yazıda "Otuz yıla yakın iş hayatım"; röportajda "1987'de fabrikaya girdiğim" — 2008'de 21 yıl eder; çelişki. İki parça da gösterilmeli, doğru yıl tahmin edilmemeli. `[GÜNCELLE]` tek başına yetmez. | `[DOĞRULA]` |
 | 8 | 04 | Konuşma dili ("yani", "işte", "şimdi efendim"), "burada gördüğünüz slaytta" gibi salona gönderme. | Önce → Sonra önerisi, onaysız işlenmez |
 | 9 | 05, 06 | 2001 krizi iki parçada; biri kamuya açık anlatım, öteki kişisel not — aynı bölümde birleşebilir. | — |
 | 10 | 06 | Tarihsiz kişisel not; tarih sorulmalı, tahmin edilmemeli. | — |
@@ -63,6 +63,8 @@ yalnız işaretleyip yazara sormalı.
 için kalır" gibi ilkeler bölüm başı). Her kurguda "bu bölüm için sizin
 anlatmanız gerekir" boşluğu çıkmalı (ör. emeklilik sonrası, kriz
 dışındaki zor kararlar).
+
+**Röportaj (05):** her sorunun cevabı var; "cevapsız soru" bulgu olarak çıkmamalı.
 
 **Uydurmama denetimi:** iskeletlerde yazarın cümleleri aynen kalmalı;
 Divit'in her geçiş cümlesi `[TASLAK]` ile başlamalı ya da
