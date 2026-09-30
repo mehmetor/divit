@@ -460,4 +460,4 @@ Simdi:
   4. "merhaba" yazin. Divit gerisini kendisi sorar.
 
 "@
-if ($Dal -ne 'main') { Write-Host "Deneme kanali: $Dal"; Write-Host "" }
+if ($Dal -ne 'main') { Write-Host "Guncellemeler su dagitimdan gelir: $Dal"; Write-Host "" }

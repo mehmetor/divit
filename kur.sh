@@ -377,4 +377,4 @@ cat <<MSG
   4. "merhaba" yazın. Divit gerisini kendisi sorar.
 
 MSG
-[ "$DAL" = "main" ] || printf 'Deneme kanalı: %s\n\n' "$DAL"
+[ "$DAL" = "main" ] || printf 'Güncellemeler şu dağıtımdan gelir: %s\n\n' "$DAL"
