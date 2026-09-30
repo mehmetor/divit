@@ -3,7 +3,7 @@
     "divit": {
       "source": {
         "source": "url",
-        "url": "https://raw.githubusercontent.com/mehmetor/divit/main/.claude-plugin/marketplace.json"
+        "url": "https://raw.githubusercontent.com/mehmetor/divit/deneme/.claude-plugin/marketplace.json"
       },
       "autoUpdate": true
     }
