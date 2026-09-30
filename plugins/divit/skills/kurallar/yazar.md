@@ -48,8 +48,8 @@ yeni baskı, taslak. Serbest olanlar: "dergi" (gazete ya da dergide
   - `asil/` — kitabın kullanıcıya ait Word/PDF'i. **Salt okunur.**
   - `malzeme/` — derlenecek yazılar, konuşma dökümleri, röportajlar.
     **Salt okunur.**
-  - `duzenleme/` — editör raporu `rapor-<YYYY-AA-GG>.md`, öneriler
-    `oneriler-<bolum-no>.md`.
+  - `raporlar/` — editör raporu `rapor-<YYYY-AA-GG>.md` (aynı gün yeni hâli `-s2`).
+  - `duzenleme/` — öneriler `oneriler-<bolum-no>.md`.
   - `taslak/` — bölüm iskeletleri ve onaylı değişikliklerin çalışma metni.
   - `plan.md` — en üstte tek satır:
     `Durum: <aşama> · <sıradaki iş> · <YYYY-AA-GG>`.
