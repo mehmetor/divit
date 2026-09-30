@@ -50,7 +50,10 @@ Sonra `son-gorulen-surum`'u yüklü sürüme yaz.
   sürüm var;
 - yayındaki sürüm yüklü sürümden yeni (Divit'in kendisi henüz inmemiş).
 
-`son-oneri-guncelleme` 7 günden eskiyse sor:
+`son-oneri-guncelleme` 7 günden eskiyse sor. Hoca kendisi istediyse
+("güncelle" dedi ya da bir iş için kurulumu yenilemeye "evet" dedi) bu
+bekleme yok: bu sohbette henüz sormadıysan şimdi sor; "evet" dediyse
+doğrudan 3. adım.
 
 > "Bu yeniliklerin tamamı için kısa bir güncelleme gerekiyor. Birkaç
 > dakika sürer; dosyalarınıza ve ayarlarınıza dokunmaz. Şimdi

@@ -30,6 +30,7 @@ Toplam: <n> parça · yaklaşık <kelime> kelime
 
 ### Birbirini tutmayanlar
 - <ne>: <parça no> "<alıntı>" ↔ <parça no> "<alıntı>"
+- <parça no>: "<zaman ifadesi>" [DOĞRULA] — <parça tarihi> ↔ <parça no> "<alıntı>": <hesap, ör. 2008 − 1987 = 21 yıl>
 
 ### Eskimiş olabilecekler
 - <parça no>: "<alıntı>" [GÜNCELLE] — <neden>

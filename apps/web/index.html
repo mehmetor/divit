@@ -28,6 +28,7 @@ nav a:hover{color:var(--vurgu)}
 .kahraman p.ozet{font-size:20px;color:var(--soluk);max-width:640px;margin:0 0 28px}
 .dugme{display:inline-block;background:var(--vurgu);color:var(--zemin);padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:600;margin:0 10px 10px 0}
 .dugme.ikincil{background:transparent;color:var(--vurgu);border:2px solid var(--vurgu)}
+.yon{font-size:16px;margin:6px 0 0}.yon a{font-weight:600}
 .koken{font-size:15px;color:var(--soluk);margin-top:22px;font-style:italic}
 section{padding:48px 0;border-top:1px solid var(--cizgi)}
 h2{font:700 30px/1.2 Georgia,serif;margin:0 0 8px}
@@ -68,7 +69,7 @@ footer{border-top:1px solid var(--cizgi);padding:28px 0 48px;color:var(--soluk);
 <div class="kap">
 <header class="ust">
   <a class="logo" href="#">Divit</a>
-  <nav><a href="#neler">Neler yapar</a><a href="#guven">Güven</a><a href="#kurulum">Kurulum</a><a href="#komutlar">Komutlar</a><a href="#sss">Sorular</a></nav>
+  <nav><a href="#neler">Neler yapar</a><a href="#guven">Güven</a><a href="#kurulum">Kurulum</a><a href="#komutlar">Komutlar</a><a href="#kitap">Kitap</a><a href="#sss">Sorular</a></nav>
 </header>
 
 <div class="kahraman">
@@ -76,6 +77,7 @@ footer{border-top:1px solid var(--cizgi);padding:28px 0 48px;color:var(--soluk);
   <p class="ozet">Üniversite hocaları için akademik yazım tezgâhı. Öğrenci tezini okur, makalenizi göndermeden kontrol eder, atıfları kaynağına kadar doğrular. Windows ve Mac'te, Claude uygulaması içinde, sohbet ederek.</p>
   <a class="dugme" href="#kurulum">Kurulum</a>
   <a class="dugme ikincil" href="kilavuz.html">Kılavuzu okuyun</a>
+  <p class="yon">Akademisyen misiniz, kitap mı yazıyorsunuz? <a href="#neler">Akademisyenim</a> · <a href="#kitap">Kitap yazıyorum</a></p>
   <p class="koken">Divit: kâtibin kuşağına taktığı kalem-hokka takımı. Yazının kendisi değil, yazmak için yanınızda taşıdığınız alet.</p>
 </div>
 
@@ -172,6 +174,8 @@ Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.</pre>
 <tr><td><code>/divit:yazisma</code></td><td>Dilekçe, kurul yazısı, referans mektubu, hakem cevabı yazar.</td></tr>
 <tr><td><code>/divit-akademik:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir.</td></tr>
 <tr><td><code>/divit-akademik:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
+<tr><td><code>/divit:kitap-duzenle</code></td><td>Kitabınızı editör gözüyle okur, yeni baskıya hazırlar; öneriler onayınızla işlenir.</td></tr>
+<tr><td><code>/divit:kitap-derle</code></td><td>Dağınık yazılarınızdan kitap planı ve bölüm iskeleti çıkarır.</td></tr>
 <tr><td><code>/divit:disa-aktar</code></td><td>Metni Word dosyasına çevirir.</td></tr>
 <tr><td><code>/divit:pdf</code></td><td>PDF birleştirir, sayfa çıkarır, döndürür, kontrol listesi işaretler.</td></tr>
 <tr><td><code>/divit:eposta</code></td><td>Hazırlanan metni e-postanızda taslak olarak açar. Göndermez.</td></tr>
@@ -194,6 +198,28 @@ Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.</pre>
   </ul>
 </section>
 
+<section id="kitap">
+  <h2>Kitap yazıyorsanız</h2>
+  <p class="alt">Divit bir kitabı editör gözüyle okur ve yıllar içinde biriken yazılardan kitap çıkarır. Metin sizindir; Divit okur, düzenler, sorar.</p>
+  <div class="izgara">
+    <div class="kart"><span class="ornek">kitabımı yeni baskı için düzenle</span><h3>Editör raporu</h3><p>Kitabınızı bir editör sırasıyla okur: önce yapı, sonra anlatım, sonra tutarlılık, en son yazım. Tekrarı, çelişkiyi, eskimiş bilgiyi gösterir. Öneriler tek tek gelir; yalnız onayladığınız işlenir.</p></div>
+    <div class="kart"><span class="ornek">yazılarımdan kitap yapalım</span><h3>Yazılardan kitap</h3><p>Yazılarınızı, konuşma ve röportaj dökümlerinizi listeler, konulara ayırır, iki üç içindekiler seçeneği sunar. Seçtiğiniz planla bölüm iskeletini sizin cümlelerinizle kurar; eksik geçişleri işaretler.</p></div>
+    <div class="kart"><span class="ornek">yayınevine yazı hazırla</span><h3>Yazışma ve çıktı</h3><p>Yayınevine, editöre yazı; alıntı için izin yazısı. Metni Word'e çevirir, PDF işlerini kendi bilgisayarınızda yapar.</p></div>
+  </div>
+  <h3 style="margin-top:28px">Divit ne yapmaz</h3>
+  <ul class="yok">
+    <li>Sizin yerinize yazmaz</li><li>Sesinizi değiştirmez</li><li>Bilgi uydurmaz; emin olmadığını işaretler</li><li>Asıl dosyanıza dokunmaz</li>
+  </ul>
+  <h3 style="margin-top:28px">Kurulum</h3>
+  <p class="not" style="margin-top:0">Yukarıdaki kurulumla aynıdır; yalnız satır farklıdır. Divit klasörü kitaplarınız için hazırlanır ve kitap kılavuzu açılır.</p>
+  <div class="izgara">
+    <div><b>Windows</b> · PowerShell'e yapıştırın, Enter'a basın.<div class="kod"><button class="kopyala">Kopyala</button><pre>$env:DIVIT_TUR='yazar'; irm https://divit.simetri.app/kur.ps1 | iex</pre></div></div>
+    <div><b>Mac</b> · Terminal'e yapıştırın, Enter'a basın.<div class="kod"><button class="kopyala">Kopyala</button><pre>curl -fsSL https://divit.simetri.app/kur.sh | DIVIT_TUR=yazar bash</pre></div></div>
+  </div>
+  <a class="dugme" href="kilavuz-yazar.html">Kitap kılavuzu</a>
+  <a class="dugme ikincil" href="kart-yazar.html">Masa kartı</a>
+</section>
+
 <section id="sss">
   <h2>Sorular</h2>
   <details><summary>Ücretli mi?</summary><p>Divit ücretsizdir. Çalışması için bir Claude Pro aboneliği gerekir; bu abonelik Anthropic'e ödenir.</p></details>
@@ -207,7 +233,7 @@ Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.</pre>
 </section>
 
 <footer>
-  Divit · <a href="https://github.com/mehmetor/divit">Kaynak kodu</a> · <a href="kilavuz.html">Kılavuz</a><br>
+  Divit · <a href="https://github.com/mehmetor/divit">Kaynak kodu</a> · <a href="kilavuz.html">Kılavuz</a> · <a href="kilavuz-yazar.html">Kitap kılavuzu</a><br>
   Mehmet Akif Orakçı · <a href="mailto:mehmetakiforakci@gmail.com">mehmetakiforakci@gmail.com</a> · <a href="https://simetri.app">Simetri</a>
 </footer>
 </div>

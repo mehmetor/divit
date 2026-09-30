@@ -23,7 +23,7 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "komut", "git",
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `divit-akademik:kaynak-dogrula`.
 
 Akademik iş istendiğinde `divit-akademik:` skill'i yüklenemiyorsa işi başka
-skill'le yapmaya çalışma. Hocaya sade dille "Bu iş için Divit'in kurulumunu
+skill'le ya da kendin yapmaya çalışma, dosya hakkında yorum yapma. Hocaya sade dille "Bu iş için Divit'in kurulumunu
 bir kez yenilemek gerekiyor." de ve `guncelleme` skill'iyle, onayını alarak
 kurulumu çalıştır.
 
