@@ -106,8 +106,8 @@ yaklaşık 1,5 dk. Maliyet: bir koşu yaklaşık 0,6 $.
    ```
    (Değişkenler şart: zsh'de `HOME=…` önekinden sonraki `~` yeni ev
    klasörüne açılır.)
-   Beklenen: `Kullanıcı türü: yazar`, klasörde `KILAVUZ-YAZAR.html`,
-   `kitaplar/`, `tez-kontrol/` yok.
+   Beklenen: `Kullanıcı türü: yazar`, klasörde `KILAVUZ.html`
+   (`data-rol="yazar"`), `.divit/kanal.txt`, `kitaplar/`; `tez-kontrol/` yok.
 3. Örnek dosyalar (`beklenen-bulgular.md` kopyalanmaz):
    ```bash
    cd ~/Divit-Demo
@@ -152,15 +152,15 @@ yaklaşık 1,5 dk. Maliyet: bir koşu yaklaşık 0,6 $.
   da repoda açma — repodaki geliştirici `CLAUDE.md`'si yüklenir.
 - Karşılama ekranında hesap adı/e-postası görünür; sorun değilse geç,
   değilse komutu yazmadan önce ekranı çevirme.
-- Divit raporu `.md` olarak açmaya çalışabilir (`open`); `.md`
-  dosyalarının Mac'te hangi uygulamayla açıldığına önceden bak
-  (TextEdit iyi; kişisel bir editör projeleri gösterebilir).
+- Divit raporu `.html` olarak da yazar ve iki dosyanın tam yolunu düz
+  metin verir; yola tıklayınca Mac tarayıcıda açar. Tarayıcıda kişisel
+  sekmeler açıksa önceden kapat.
 - Yazarın kendi yazacağı iki istek:
   1. `kitabımı yeni baskı için düzenle` → Divit iki soru sorar: neye
      bakılsın (`5` hepsi) ve yeni baskının amacı (`1` güncellemek).
   2. `yazılarımdan kitap yapalım` → envanter ve içindekiler seçenekleri.
-- Divit Word'ü okurken bir izin sorusu çıkarsa (değişkenli pandoc
-  komutu) "Yes" de; Divit sonra yoldaki `pandoc`'a geçer.
+- Divit Word'ü `~/.divit/araclar/pandoc` ile okur (Mehmet'in Mac'inde
+  var); izin sorusu beklenmez. Çıkarsa "Yes" de ve not al.
 - İş bitince Divit "birkaç yazınızı paylaşır mısınız" diye üslup
   isteyebilir (profil boş olduğu için); geçmek yeterli.
 - Demo sonrası: `rm -rf ~/Divit-Demo ~/divit-demo-ev`; eklenti kopyası

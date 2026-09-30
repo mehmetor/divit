@@ -43,6 +43,8 @@
       "Bash(mkdir *)",
       "Bash(sh */scripts/kitap-klasoru.sh *)",
       "PowerShell(*kitap-klasoru.ps1*)",
+      "Skill(divit:*)",
+      "Skill(divit-akademik:*)",
       "WebSearch",
       "WebFetch(domain:api.crossref.org)",
       "WebFetch(domain:api.unpaywall.org)",

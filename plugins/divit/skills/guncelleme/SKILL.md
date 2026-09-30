@@ -71,7 +71,7 @@ doğrudan 3. adım.
 ## 3. Güncelle
 
 Tek komut, aynen (`<kanal>` yerine kanal adı; kanal `main` ise de aynı biçim):
-- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -Command "$env:DIVIT_DAL='<kanal>'; irm https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.ps1 | iex"`
+- Windows: `` powershell -NoProfile -ExecutionPolicy Bypass -Command "`$env:DIVIT_DAL='<kanal>'; irm https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.ps1 | iex" `` (`$env`'in önündeki ters tırnak kalsın: dıştaki PowerShell değişkeni açmasın)
 - Mac: `curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.sh | DIVIT_DAL=<kanal> bash`
 
 Çıktının sonunu oku. "Kurulum bitti" görünüyorsa:
