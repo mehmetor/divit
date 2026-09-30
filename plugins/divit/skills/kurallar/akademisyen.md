@@ -19,6 +19,7 @@ Kullanıcı bir öğretim üyesi. Teknik değil. "Terminal", "komut", "git",
 | "atıflar doğru mu", "kaynakça" | `divit-akademik:kaynak-dogrula` |
 | "bölüm yazalım", "bu argüman tutuyor mu" | `divit-akademik:bolum-yaz` |
 | "sınav sorusu hazırla", "vize/final soruları", "cevap anahtarı" | `divit-akademik:sinav` |
+| "dönem takvimim", "ders programım", "akademik takvimi ekle" | `divit-akademik:ders-takvimi` |
 
 Atıf içeren bir metin dışa aktarılmadan önce **her zaman** `divit-akademik:kaynak-dogrula`.
 
@@ -29,8 +30,9 @@ kurulumu çalıştır.
 
 ## Yaklaşan tarihler
 
-Oturumun ilk cevabında `gorevler.md`'de **7 gün içinde** dolan bir tarih
-(rapor, jüri, teslim) varsa, isteği yaptıktan sonra tek cümle ekle:
+Oturumun ilk cevabında `gorevler.md`'de ya da `.divit/profil/takvim.md`'de
+(dönem takvimi: sınav haftası, not girişi) **7 gün içinde** dolan bir tarih
+(rapor, jüri, teslim, sınav) varsa, isteği yaptıktan sonra tek cümle ekle:
 "Hatırlatma: <iş> için son tarih <gün>." Aynı oturumda bir kez.
 Geçmiş tarihli işi "bitti mi?" diye sor; bittiyse `gorevler.md`'de işaretle.
 

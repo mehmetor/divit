@@ -43,7 +43,9 @@ Gelen her dosyayı aynı betikle `koy <kitap-adi> malzeme "<dosya>"` ile
 yerleştir; HATA verirse `kurallar`'daki sıraya uy. Kullanıcı dosyaları
 kendisi `malzeme/`'ye koyduysa doğrudan oku.
 
-Word ve PDF okuma `kurallar`'daki yolla, metin `.divit/gecici/` altına.
+Word ve PDF okuma `kurallar`'daki yolla, metin `.divit/gecici/<ad>-<YYYY-AA-GG>.md`'ye.
+Fotoğraftan çıkmış malzemede (`notlar/malzeme-metin/*.md`) "Kaynak türü:" satırına uy:
+başka kitaptan alıntı kitaba kopyalanmaz (kısa alıntı + künye + `[İZİN]`), esin cümlesi aktarılmaz.
 `plan.md` en üst satırı her zaman:
 `Durum: <adım> · <sıradaki iş> · <YYYY-AA-GG>`.
 

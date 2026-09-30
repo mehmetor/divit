@@ -28,12 +28,12 @@ Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçme
 
 1. `tez-kontrol/gelen/` içindeki dosyayı oku. PDF'i Read aracıyla
    doğrudan oku (uzunsa `pages` ile parça parça). Word dosyasını
-   `divit:kurallar`'daki pandoc komutuyla `.divit/gecici/` altına metne çevir.
+   `divit:kurallar`'daki pandoc komutuyla `.divit/gecici/<bashar>-<YYYY-AA-GG>.md`'ye çevir.
 2. Uzunsa önce yapıyı çıkar (başlıklar Grep ile, bölüm uzunlukları; kabukla
    sayma), sonra
    bölüm bölüm oku. Tamamını okumadan rapor yazma.
 3. Aşağıdaki listeyi sırayla uygula.
-4. `tez-kontrol/rapor/<bashar>-<YYYY-AA-GG>.md` yaz; `divit:kurallar`'daki
+4. `tez-kontrol/rapor/<bashar>/<bashar>-<YYYY-AA-GG>.md` yaz (aynı gün yeni hâli `-s2`); `divit:kurallar`'daki
    "Rapor gösterme" kuralıyla `.html` hâlini üret, iki tam yolu ver.
 5. Hocaya raporun **üç cümlelik özetini** söyle, tamamını ekrana basma.
 

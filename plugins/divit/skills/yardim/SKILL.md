@@ -21,8 +21,11 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Kullan
    > - Yazışma hazırlarım: *"dekanlığa dilekçe yazalım"*
    > - Kitabınıza editör gözüyle bakarım: *"kitabımı yeni baskı için düzenle"*
    > - Yazılarınızdan kitap planı çıkarırım: *"yazılarımdan kitap yapalım"*
-   > - Word'e çeviririm: *"bunu Word'e çevir"*
-   > - Bozulanı geri alırım: *"geri al"*
+   > - Word'e, sunuma, Excel'e çeviririm: *"bunu Word'e çevir"*, *"sunum hazırla"*
+   > - Haftanızı özetlerim: *"bu hafta neler var"*
+   > - Çeviri, grafik, fotoğraftan metin: *"şunu Türkçeye çevir"*, *"grafik çiz"*, *"el yazımı oku"*
+   > - Gmail ve takviminize bağlanırım: *"Gmail'imi bağla"*
+   > - Bozulanı geri alırım, isterseniz ayrıntılı geçmiş tutarım: *"geri al"*, *"kaydet"*
    > - Sorunlarınızı Divit'i geliştirene iletirim: *"geri bildirim gönder"*
    >
    > Ne yapmak istersiniz?
