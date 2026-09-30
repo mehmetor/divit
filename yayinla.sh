@@ -7,10 +7,13 @@
 #   ./yayinla.sh --surum 1.8.0    yayın (CI çalıştırır, elle çalıştırma):
 #                                 SURUM.md'de "Sıradaki" → "1.8.0 · tarih",
 #                                 dagitim/ zip'leri, marketplace.json, commit.
-#   ./yayinla.sh --deneme deneme  deneme kanalı: zip'leri ve bu dalı gösteren
-#                                 marketplace.json'u GitHub'daki deneme dalına
-#                                 gönderir. Mevcut dal ve SURUM.md değişmez.
-#                                 Adım adım: belgeler/DENEME-KANALI.md
+#   ./yayinla.sh --kanal yeni     yayın kanalı: zip'leri ve bu dalı gösteren
+#                                 marketplace.json'u GitHub'daki kanal dalına
+#                                 gönderir. Mevcut dal, main ve SURUM.md
+#                                 değişmez. İzinli dallar: deneme, deneme-*,
+#                                 yeni. (--deneme <dal> eski adıdır, aynıdır.)
+#                                 Adım adım: belgeler/DENEME-KANALI.md,
+#                                 belgeler/YENI-KURULUM.md
 #
 # Yayın akışı: develop'ta çalışılır → release-please sürüm PR'ı açar →
 # PR birleşince .github/workflows/yayin.yml bu betiği --surum ile çalıştırır
@@ -32,16 +35,16 @@ EKLENTILER=(divit divit-akademik)
 EKLENTI="plugins/divit"
 DAGITIM="dagitim"
 SURUM=""
-DENEME=""
+KANAL=""
 [ "${1:-}" = "--surum" ] && SURUM="${2:?sürüm numarası eksik}"
-if [ "${1:-}" = "--deneme" ]; then
-  DENEME="${2:?deneme dalı eksik (ör. --deneme deneme)}"
-  case "$DENEME" in
-    main|develop) echo "HATA: '$DENEME' deneme dalı olamaz."; exit 1 ;;
-    deneme|deneme-*) ;;
-    *) echo "HATA: deneme dalının adı 'deneme' ya da 'deneme-' ile başlamalı."; exit 1 ;;
+if [ "${1:-}" = "--kanal" ] || [ "${1:-}" = "--deneme" ]; then
+  KANAL="${2:?kanal dalı eksik (ör. --kanal yeni ya da --kanal deneme)}"
+  case "$KANAL" in
+    main|develop) echo "HATA: '$KANAL' kanal dalı olamaz; hocalara giden yayın --surum ile yapılır."; exit 1 ;;
+    deneme|deneme-*|yeni) ;;
+    *) echo "HATA: kanal dalı 'deneme', 'deneme-…' ya da 'yeni' olmalı."; exit 1 ;;
   esac
-  git check-ref-format --branch "$DENEME" >/dev/null 2>&1 || { echo "HATA: '$DENEME' geçerli bir dal adı değil."; exit 1; }
+  git check-ref-format --branch "$KANAL" >/dev/null 2>&1 || { echo "HATA: '$KANAL' geçerli bir dal adı değil."; exit 1; }
   [ -z "$(git status --porcelain)" ] || { echo "HATA: çalışma ağacı temiz değil; önce commit'leyin."; git status --short; exit 1; }
 fi
 
@@ -85,11 +88,11 @@ for i in "${!EKLENTILER[@]}"; do
   [ -f "${ZIPLER[$i]}" ] || DEGISEN=1
 done
 
-# Deneme kanalı: mevcut dala dokunmadan HEAD'in ağacına zip'leri ve deneme
+# Yayın kanalı: mevcut dala dokunmadan HEAD'in ağacına zip'leri ve kanal
 # dalını gösteren iki adresi (marketplace.json, şablonun settings.json'u)
 # ekleyen bir commit üretir; uzaktaki dala hızlı ileri gönderir.
-if [ -n "$DENEME" ]; then
-  HAM="https://raw.githubusercontent.com/$REPO/$DENEME"
+if [ -n "$KANAL" ]; then
+  HAM="https://raw.githubusercontent.com/$REPO/$KANAL"
   PAZAR="$GECICI/pazar/.claude-plugin/marketplace.json"
   AYAR="hoca-paketi/Divit/.claude/settings.json"
   mkdir -p "$(dirname "$PAZAR")"
@@ -130,35 +133,47 @@ PY
   AGAC="$(git write-tree)"
   unset GIT_INDEX_FILE
 
-  if git ls-remote --exit-code --heads origin "$DENEME" >/dev/null 2>&1; then
-    git fetch -q origin "+refs/heads/$DENEME:refs/remotes/origin/$DENEME"
-    EBEVEYN="$(git rev-parse "refs/remotes/origin/$DENEME")"
+  if git ls-remote --exit-code --heads origin "$KANAL" >/dev/null 2>&1; then
+    git fetch -q origin "+refs/heads/$KANAL:refs/remotes/origin/$KANAL"
+    EBEVEYN="$(git rev-parse "refs/remotes/origin/$KANAL")"
   else
     EBEVEYN="$(git rev-parse HEAD)"
   fi
   KAYNAK="$(git rev-parse --short=12 HEAD) ($(git rev-parse --abbrev-ref HEAD))"
   if [ "$(git rev-parse "$EBEVEYN^{tree}")" = "$AGAC" ]; then
-    echo "Deneme dalı '$DENEME' zaten güncel: $(git rev-parse --short=12 "$EBEVEYN")"
+    echo "Kanal dalı '$KANAL' zaten güncel: $(git rev-parse --short=12 "$EBEVEYN")"
   else
     COMMIT="$(git commit-tree "$AGAC" -p "$EBEVEYN" \
-      -m "chore(deneme): $DENEME ← $KAYNAK" \
-      -m "Deneme kanalı (./yayinla.sh --deneme $DENEME). main'e ya da develop'a birleştirilmez.")"
-    git push -q origin "$COMMIT:refs/heads/$DENEME"
-    echo "Gönderildi: $DENEME → $(git rev-parse --short=12 "$COMMIT") (kaynak $KAYNAK)"
+      -m "chore(kanal): $KANAL ← $KAYNAK" \
+      -m "Yayın kanalı (./yayinla.sh --kanal $KANAL). main'e ya da develop'a birleştirilmez.")"
+    git push -q origin "$COMMIT:refs/heads/$KANAL"
+    echo "Gönderildi: $KANAL → $(git rev-parse --short=12 "$COMMIT") (kaynak $KAYNAK)"
   fi
   for i in "${!EKLENTILER[@]}"; do
     echo "  ${EKLENTILER[$i]} sürümü ${OZETLER[$i]:0:12}"
   done
+  # Deneme kanalında ikinci tür ayrı klasöre kurulur (aynı Mac'te iki tür
+  # denenir); yeni kanalı gerçek kullanıcıya gider: varsayılan klasör.
+  if [ "$KANAL" = "yeni" ]; then
+    REHBER="belgeler/YENI-KURULUM.md"
+    AKADEMIK_MAC="curl -fsSL $HAM/kur.sh | DIVIT_DAL=$KANAL bash"
+    AKADEMIK_WIN="\$env:DIVIT_DAL='$KANAL'; irm $HAM/kur.ps1 | iex"
+  else
+    REHBER="belgeler/DENEME-KANALI.md"
+    AKADEMIK_MAC="curl -fsSL $HAM/kur.sh | DIVIT_DAL=$KANAL DIVIT_TUR=akademisyen DIVIT_HEDEF=~/Documents/Divit-Akademik bash"
+    AKADEMIK_WIN="\$env:DIVIT_DAL='$KANAL'; \$env:DIVIT_TUR='akademisyen'; \$env:DIVIT_HEDEF=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Divit-Akademik'; irm $HAM/kur.ps1 | iex"
+  fi
   cat <<MSG
 
 GitHub ham adresleri ~5 dakika önbellekte kalır; hemen kurarsanız eski hâl inebilir.
-Mac (Terminal):
-  curl -fsSL $HAM/kur.sh | DIVIT_DAL=$DENEME DIVIT_TUR=yazar bash
-  curl -fsSL $HAM/kur.sh | DIVIT_DAL=$DENEME DIVIT_TUR=akademisyen DIVIT_HEDEF=~/Documents/Divit-Akademik bash
-Windows (PowerShell):
-  \$env:DIVIT_DAL='$DENEME'; \$env:DIVIT_TUR='yazar'; irm $HAM/kur.ps1 | iex
-  \$env:DIVIT_DAL='$DENEME'; \$env:DIVIT_TUR='akademisyen'; \$env:DIVIT_HEDEF=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Divit-Akademik'; irm $HAM/kur.ps1 | iex
-Rehber: belgeler/DENEME-KANALI.md
+Mac (Terminal) — yazar, akademisyen:
+  curl -fsSL $HAM/kur.sh | DIVIT_DAL=$KANAL DIVIT_TUR=yazar bash
+  $AKADEMIK_MAC
+Windows (PowerShell) — yazar, akademisyen:
+  \$env:DIVIT_DAL='$KANAL'; \$env:DIVIT_TUR='yazar'; irm $HAM/kur.ps1 | iex
+  $AKADEMIK_WIN
+Bu bilgisayarda Divit başka kaynaktan kuruluysa önce: claude plugin marketplace remove divit
+Rehber: $REHBER
 MSG
   exit 0
 fi
