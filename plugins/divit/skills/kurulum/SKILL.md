@@ -29,20 +29,22 @@ ya da cevapta üniversite unvanı yoksa ya da kullanıcı "hoca değilim", "kita
 > "Divit'le daha çok hangi işleri yapacaksınız? 1) Üniversite işleri: öğrenci, ders, makale, proje 2) Kitap ve yazı işleri: kitaplarınız, yazılarınız, yayınevi — numarayı yazmanız yeterli, sonra değiştirebilirsiniz."
 
 2 → `yazar.md`'ye geç, gelen özgeçmişi onun 1. adımında kullan. Unvanı olan kitap yazarı
-`akademisyen` kalır. Tür kesinleşince satırı `kimlik.md`'de ilk başlığın hemen altına yaz.
+`akademisyen` kalır. Okulda öğretmen ya da rehber öğretmense (özgeçmişte ya da cevapta)
+soruyu sorma: tür `akademisyen`. Tür kesinleşince satırı `kimlik.md`'de ilk başlığın altına yaz.
 
 ## 1. Tanışma ve özgeçmiş
 
-Kendini üç cümleyle tanıt: ne yaparsın, ne yapmazsın (not vermem, sizin
-yerinize yazmam, kaynaklarınızda olmayan atıf üretmem).
+Kendini üç cümleyle tanıt: ne yaparsın, ne yapmazsın (not vermem, sizin yerinize yazmam,
+kaynaklarınızda olmayan atıf üretmem).
 
 Sonra iste:
 > "Özgeçmişinizi bu pencereye sürükler misiniz? PDF ya da Word olabilir.
 > Elinizde yoksa AVESİS ya da YÖK Akademik sayfanızın adresi de yeter."
+Okulda çalışana AVESİS deme: "Elinizde yoksa kendinizi birkaç cümleyle anlatmanız da yeter."
 
 - Dosya gelirse oku (PDF → Read; Word → `kurallar`'daki pandoc komutu).
-- Adres gelirse WebFetch ile oku. Yalnız ad gelirse WebSearch ile
-  "<ad> AVESİS" ara; bulduğun sayfayı hocaya gösterip "bu siz misiniz?" diye sor.
+- Adres gelirse WebFetch ile oku. Yalnız ad gelirse WebSearch ile "<ad> AVESİS" ara;
+  bulduğun sayfayı gösterip "bu siz misiniz?" diye sor.
 
 Özgeçmişten çıkar: unvan, bölüm, üniversite, alan ve alt alanlar, çalışma konuları, yayın dilleri (oranıyla),
 sık gönderdiği dergiler, danışmanlıklar, projeler, idari görevler, jüri/komisyon görevleri.
@@ -50,11 +52,15 @@ sık gönderdiği dergiler, danışmanlıklar, projeler, idari görevler, jüri/
 `kimlik.md`'yi yaz (tür satırıyla), **hocaya göster, onaylat.** Jüri, hakemlik ya da komisyon görevi
 varsa şunu da söyle: "Bu dosyaları bana vermeyin; başkasının gizli belgeleri."
 
+**Yayın yoksa** (özgeçmişte makale, kitap bölümü, bildiri yok; ya da hoca "yayınım yok" der)
+ya da hoca okulda çalışıyorsa `${CLAUDE_PLUGIN_ROOT}/skills/kurulum/yayinsiz.md`'yi Read ile yükle;
+3, 5 ve 6. adımları onunla yap. Yayınsızlığı eksiklik gibi anlatma.
+
 ## 2. Alanı belirle
 
 Özgeçmişten alanı **sen** çıkar ve öner:
-> "Çalışmalarınız ağırlıklı olarak bahçe bitkileri — sebze yetiştiriciliği
-> ve hasat sonrası. Bir de kadın çalışmaları alanında yazıyorsunuz. Doğru mu?"
+> "Çalışmalarınız ağırlıklı olarak bahçe bitkileri — sebze yetiştiriciliği ve hasat sonrası.
+> Bir de kadın çalışmaları alanında yazıyorsunuz. Doğru mu?"
 
 **Birden fazla kimlik olabilir** (ör. ziraat deneme makaleleri + sosyal
 bilim metinleri). Her birini ayrı ele al; kuralları karıştırma.
@@ -64,13 +70,9 @@ bilim metinleri). Her birini ayrı ele al; kuralları karıştırma.
 Üslup ve alan kuralları için hocanın **ilk yazar olduğu** 2-3 yakın tarihli makalesi gerekir. Çok
 yazarlı makalelerde metni çoğu zaman ilk yazar (öğrenci) yazar; o metin hocanın üslubunu vermez.
 
-1. Önce kendin bul: özgeçmişteki makale başlıklarını DergiPark'ta ya da
-   Crossref'te (`api.crossref.org/works?query.bibliographic=...`) ara.
-   Açık erişimli olanların PDF'ini `kaynaklar/hoca-makaleleri/` altına indir.
-   **Her dosya için ayrı ve tek bir komut kullan; `;`, `|` ya da çift `&`
-   ile zincirleme yok, `cd` yok.** Zincirlenmiş komut ön izinle eşleşmez ve hocaya
-   İngilizce izin sorusu çıkar. Klasör, dosya indirilirken yoksa önce ayrı
-   bir komutla oluşturulur.
+1. Önce kendin bul: özgeçmişteki başlıkları DergiPark'ta ya da Crossref'te
+   (`api.crossref.org/works?query.bibliographic=...`) ara. Açık erişimli olanları
+   `kaynaklar/hoca-makaleleri/` altına indir; **her dosyaya ayrı, tek komut** (zincir, `cd` yok).
    - Windows: `Invoke-WebRequest -Uri "<adres>" -OutFile "kaynaklar/hoca-makaleleri/<ad>.pdf"`
    - Mac: `curl -fsSL -o "kaynaklar/hoca-makaleleri/<ad>.pdf" "<adres>"`
 2. Bulamadığın ya da erişimi kapalı olanlar için hocadan iste:
@@ -80,7 +82,8 @@ yazarlı makalelerde metni çoğu zaman ilk yazar (öğrenci) yazar; o metin hoc
 ## 4. Alan kurallarını yaz
 
 `${CLAUDE_PLUGIN_ROOT}/alan/` klasörüne bak. Hocanın alanına uyan hazır bir kılavuz varsa (ör.
-`ziraat.md`) başlangıç olarak kullan, hocanın alt alanına göre daralt.
+`ziraat.md`; okul, öğretmenlik, rehberlik için `okul-rehberligi.md`) başlangıç olarak kullan,
+hocanın alt alanına göre daralt.
 
 Uyan kılavuz yoksa **kendin yaz.** Yapı olarak `${CLAUDE_PLUGIN_ROOT}/alan/ORNEK-SABLON.md`
 dosyasını izle. İçeriği hafızadan değil, 3. adımda okuduğun makalelerden çıkar:
@@ -95,8 +98,7 @@ dosyasını izle. İçeriği hafızadan değil, 3. adımda okuduğun makalelerde
 - **Divit'in bu alandaki sınırı** — mutlaka yaz
 
 Sonra hocaya 3-5 kısa soruyla doğrulat. Örnek:
-> "Makalelerinizde tablolara 'Çizelge' diyorsunuz; öğrencilerinizden de
-> bunu mu bekliyorsunuz?"
+> "Makalelerinizde tablolara 'Çizelge' diyorsunuz; öğrencilerinizden de bunu mu bekliyorsunuz?"
 
 Hocanın cevabı yazdığını ezer. Sonucu `alan.md`'ye yaz. Birden fazla kimlik varsa her biri ayrı başlık olsun.
 
@@ -108,10 +110,8 @@ koy: hocanın bilerek seçtiği üslup ile gerçek hatayı ayır. Hocaya kısa b
 
 ## 6. Süren işler ve klasörler
 
-Üç soru sor, tek tek:
-1. "Şu an danışmanlığını yaptığınız öğrenciler var mı?"
-2. "Yürüyen projelerinizde yaklaşan bir rapor tarihi var mı?"
-3. "Yayına hazırladığınız bir metin var mı?"
+Üç soru sor, tek tek: 1) "Şu an danışmanlığını yaptığınız öğrenciler var mı?" 2) "Yürüyen
+projelerinizde yaklaşan bir rapor tarihi var mı?" 3) "Yayına hazırladığınız bir metin var mı?"
 
 Cevaplara göre `gorevler.md`'yi yaz: iş, kişi (öğrenci için baş harfler), tarih, durum. Gerekirse
 klasör öner, onay alınca oluştur: `tez-kontrol/gelen/<baş harfler>/`, `yazilar/<makale-adı>/`,
@@ -122,12 +122,14 @@ Windows `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_RO
 ## 7. Güvence ve ilk iş
 
 Kapanışta tek paragraf:
-> "Öğrenci dosyalarınıza yazmam, yalnızca okurum. Word dosyalarınızı hiç
-> değiştirmem; değişikliği yeni bir dosyaya yazarım. Kaynaklarınızda
-> olmayan bir kaynağa atıf yapmam, emin olmadığım yere işaret koyarım.
-> Bir şey ters giderse 'geri al' demeniz yeter."
+> "Öğrenci dosyalarınıza yazmam, yalnızca okurum. Word dosyalarınızı hiç değiştirmem; değişikliği
+> yeni bir dosyaya yazarım. Kaynaklarınızda olmayan bir kaynağa atıf yapmam, emin olmadığım yere
+> işaret koyarım. Bir şey ters giderse 'geri al' demeniz yeter."
 
 Güvenceden önce `saglik` skill'ini sessizce çalıştır. Sorun çıkarsa hocaya yalnız o tek adımı söyle.
+
+Sonra tek cümle:
+> "İzin soruları çok mu? Yazı kutusunun yanındaki seçiciden Auto'yu seçin; bir kez yeter."
 
 Sonra gerçek bir işe geç: `gorevler.md`'de en yakın tarihli iş hangisiyse onu öner (ör. tez için
 `divit-akademik:tez-kontrol`). Hiç iş yoksa `yardim` skill'inin özetini göster.
@@ -135,11 +137,11 @@ Sonra gerçek bir işe geç: `gorevler.md`'de en yakın tarihli iş hangisiyse o
 ## 8. Geri bildirim (isteğe bağlı)
 
 Hocaya sor:
-> "Yazdığım alan kurallarını, adınız olmadan, Divit'i geliştiren kişiyle
-> paylaşmama izin verir misiniz? Aynı alandaki başka hocalara yardımcı olur."
+> "Yazdığım alan kurallarını, adınız olmadan, Divit'i geliştiren kişiyle paylaşmama izin
+> verir misiniz? Aynı alandaki başka hocalara yardımcı olur."
 
 İzin verirse kılavuzu **kişisel bilgileri çıkararak** `.divit/paylasim/alan-<alan>.md` olarak
-kaydet. İzin yoksa hiçbir şey kaydetme. Kendin göndermeye çalışma; yalnızca kaydet.
+kaydet; izin yoksa hiçbir şey kaydetme. Kendin gönderme.
 
 ## Tür değiştirme
 
