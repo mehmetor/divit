@@ -1,6 +1,9 @@
 {
   "redirects": [
     { "source": "/kur.ps1", "destination": "https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1", "permanent": false },
-    { "source": "/kur.sh", "destination": "https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh", "permanent": false }
+    { "source": "/kur.sh", "destination": "https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh", "permanent": false },
+    { "source": "/kilavuz-yazar.html", "destination": "/kilavuz.html#yazar", "permanent": true },
+    { "source": "/kart.html", "destination": "/kilavuz.html", "permanent": true },
+    { "source": "/kart-yazar.html", "destination": "/kilavuz.html#yazar", "permanent": true }
   ]
 }

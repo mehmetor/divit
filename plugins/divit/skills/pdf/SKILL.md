@@ -5,6 +5,8 @@ description: PDF dosyalarıyla işler — birleştirme, sayfa çıkarma ya da si
 
 # PDF işleri
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Hocalar bu işler için internetteki "ücretsiz PDF" sitelerine gidiyor:
 dosyaları yabancı sunucuya yükleniyor, virüs riski var, sonunda üyelik
 isteniyor. Divit bu işleri **hocanın bilgisayarında** yapar; dosya hiçbir
@@ -21,13 +23,13 @@ siteye yüklenmez.
 - Şifreli PDF'in şifresini kırmaya çalışma. Hoca şifreyi biliyorsa ve
   isterse kaldırılmış kopyayı `cikti/`'ya yaz.
 - İmza, kaşe ya da ıslak imza taklidi yapma.
-- Bir komutu `;` ya da `&&` ile zincirleme; her komut ayrı.
+- Bir komutu `;`, `|` ya da çift `&` ile zincirleme, `cd` kullanma; her komut ayrı.
 
 ## Araç
 
-PDF aracının yeri `DIVIT_PDFCPU` ortam değişkenindedir.
-- Mac: `"$DIVIT_PDFCPU" <komut> ...`
-- Windows: `& $env:DIVIT_PDFCPU <komut> ...`
+PDF aracı her zaman tam yoluyla yazılır (değişkenle değil; yoksa izin sorusu çıkar):
+- Mac: `~/.divit/araclar/pdfcpu <komut> ...`
+- Windows: `& "<pdfcpu tam yolu>" <komut> ...` — yol klasördeki `CLAUDE.md`'nin "Araçlar" bölümünde.
 
 Aşağıda `P` yerine bunu yaz. Araç çalışmazsa `saglik` skill'ine geç.
 

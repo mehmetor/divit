@@ -5,14 +5,16 @@ description: Metni Word ya da PDF olarak hazırlar — yayınevine teslim dosyas
 
 # Dışa aktarma
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Pandoc + CSL. Dergi değişince değişen tek şey stil dosyasıdır,
 metin değil. Kazanç burada: aynı makale üç dergiye üç biçimde,
 elle düzeltme olmadan.
 
 ## Ön kontrol
 
-pandoc kurulumda Divit'le birlikte gelir; yeri `DIVIT_PANDOC` ortam
-değişkenindedir. Çalışmazsa hocaya teknik ayrıntı anlatma: "Word çıktısı
+pandoc kurulumda Divit'le birlikte gelir: Mac'te `~/.divit/araclar/pandoc`,
+Windows'ta `& "<pandoc>"` (`kurallar`'daki "Araç yolları"). Çalışmazsa hocaya teknik ayrıntı anlatma: "Word çıktısı
 için gereken araç bu bilgisayarda çalışmıyor; Divit'i kuran kişiye
 haber verin" de ve metni md olarak `cikti/` altına bırak.
 
@@ -32,8 +34,8 @@ Kaydet → PDF seçin."
    Repository'den (`https://www.zotero.org/styles/<stil-adı>`) indir —
    Mac'te `curl -fsSL -o`, Windows'ta `Invoke-WebRequest -OutFile`.
 4. Çalıştır (tek satır):
-   - Mac: `"$DIVIT_PANDOC" taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
-   - Windows: `& $env:DIVIT_PANDOC taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
+   - Mac: `~/.divit/araclar/pandoc taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
+   - Windows: `& "<pandoc>" taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
 
 5. Çıktıyı `cikti/` altına koy, kaynak markdown'a dokunma.
 

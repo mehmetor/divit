@@ -13,12 +13,12 @@ her Terminal komutu yalıtılmış bir ortamda denendi.
 1. Denenecek dalda, temiz çalışma ağacıyla:
 
    ```bash
-   ./yayinla.sh --deneme deneme
+   ./yayinla.sh --kanal deneme
    ```
 
    **Beklenen:** `Gönderildi: deneme → <commit> …`, iki eklentinin
    sürümü (zip özetinin ilk 12 hanesi) ve Mac/Windows kurulum komutları.
-   Değişiklik yoksa `Deneme dalı 'deneme' zaten güncel`. Bulunduğunuz dal
+   Değişiklik yoksa `Kanal dalı 'deneme' zaten güncel`. Bulunduğunuz dal
    ve `SURUM.md` değişmez.
 2. GitHub ham adresleri ~5 dakika önbellekte kalır. Şu komut az önce
    basılan sürümü gösterene kadar bekleyin:
@@ -29,17 +29,45 @@ her Terminal komutu yalıtılmış bir ortamda denendi.
 
    **Beklenen:** iki satır, ikisi de `/deneme/dagitim/…-<sürüm>.zip`.
 
-`main`, `develop` ve adı `deneme`/`deneme-` ile başlamayan dallar
-reddedilir. Farklı denemeler yan yana gerekirse `deneme-yazar` gibi bir ad
+`main` ve `develop` reddedilir; izinli kanallar `deneme`, `deneme-*` ve
+`yeni` (gerçek kullanıcıya giden ayrı kanal: `belgeler/YENI-KURULUM.md`).
+Eski yazım `--deneme deneme` aynı işi yapar.
+Farklı denemeler yan yana gerekirse `deneme-yazar` gibi bir ad
 verin; komutlarda `deneme` yerine o ad yazılır.
+
+### Kanal klasörde kalır
+
+Kurulum betiği kanalı (dal adını) klasörde `.divit/kanal.txt`'ye yazar.
+Öncelik: `DIVIT_DAL` > var olan `.divit/kanal.txt` > `main`. İzinli adlar
+`main`, `yeni`, `deneme`, `deneme-*`; başka bir ad uyarıyla `main` olur.
+Bu yüzden:
+
+- `DIVIT_DAL` yalnız ilk kurulumda gerekir; aynı klasörde yeniden kurulum
+  (ve kanalı okuyan `guncelleme` skill'i) aynı kanalda kalır. Çıktıda
+  `Kanal: deneme` ve en sonda `Deneme kanalı: deneme` satırı görünür.
+- Klasörü main'e geri almak için `DIVIT_DAL=main` **açıkça** verilir.
+- Klasör ayarındaki pazar yeri adresi de kanalın adresidir.
+- main'deki hocanın klasöründe `kanal.txt` = `main`; hiçbir şey değişmez.
 
 ## 1. Neden ayrı macOS kullanıcısı
 
 Deneme kurulumu `divit` pazar yerini deneme dalına bağlar. Kendi
-hesabınızda yaparsanız bu sizin Divit'inizi de etkiler (ya da kendi
-ayarınızdaki main adresiyle çakışıp kurulum yarım kalır). Ayrı bir macOS
-kullanıcısının kendi `~/.claude`'u, kendi anahtar zinciri ve boş
-Belgeler'i vardır: hocanın yeni bilgisayarı gibidir.
+hesabınızda `divit` pazar yeri başka adresle (ör. main) kayıtlıysa
+kurulum betiği bunu görür, "Kurulum bitti" **demez**, "Divit bu
+bilgisayarda başka bir kaynaktan kurulu" der ve 0 dışı kodla biter.
+Kendi hesabınızda denemek isterseniz önce
+`claude plugin marketplace remove divit` çalıştırın (kurulu Divit
+eklentileri de kalkar; klasörlere dokunmaz), sonra kurulumu yapın. Bu
+sizin Divit'inizi de deneme kanalına taşır.
+
+Ayrıca `Belgeler/Divit` başka bir türle kurulmuş dolu bir profil
+taşıyorsa (ör. eski bir hoca kopyası) `DIVIT_TUR` ile kurulum durur ve
+yeni klasör için tam komutu verir (`DIVIT_HEDEF=...`); o klasöre ve
+profile dokunmaz.
+
+Ayrı bir macOS kullanıcısının kendi `~/.claude`'u, kendi anahtar zinciri
+ve boş Belgeler'i vardır: hocanın yeni bilgisayarı gibidir. Temiz deneme
+için bu yol önerilir.
 
 1. `[Mehmet elle]` Sistem Ayarları → Kullanıcılar ve Gruplar → Kullanıcı
    Ekle. Ad: **Divit Deneme**, tür: Standart. Yönetici parolası bir kez
@@ -58,10 +86,12 @@ Belgeler'i vardır: hocanın yeni bilgisayarı gibidir.
    curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/deneme/kur.sh | DIVIT_DAL=deneme DIVIT_TUR=yazar bash
    ```
 
-   **Beklenen:** 6 adım, `Kullanıcı türü: yazar`,
+   **Beklenen:** 6 adım, `Kullanıcı türü: yazar`, `Kanal: deneme`,
    `Oluşturuldu: …/Documents/Divit`, `Kurulu ve güncel (sürüm <deneme
-   sürümü>)`, "Kurulum bitti." Kılavuz tarayıcıda açılır, masaüstünde
-   `Divit` kısayolu olur.
+   sürümü>)`, "Kurulum bitti.", 3. adımda `Belgeler → Divit`, en sonda
+   `Deneme kanalı: deneme`. Kılavuz (`KILAVUZ.html`, yazar sekmesinde)
+   tarayıcıda açılır, masaüstünde `Divit` kısayolu olur. Claude Code
+   2.1.280'den eskiyse önce güncellenir; olmazsa açık bir uyarı çıkar.
 2. `[Mehmet elle]` Claude uygulamasını açın, **kendi** Claude
    hesabınızla giriş yapın (aynı hesap iki macOS oturumunda açık
    kalabilir).
@@ -100,8 +130,8 @@ Belgeler'i vardır: hocanın yeni bilgisayarı gibidir.
    ```
 
    **Beklenen:** `Kullanıcı türü: akademisyen`,
-   `Oluşturuldu: …/Documents/Divit-Akademik`, yine `Kurulu ve güncel`.
-   Yazar klasörü değişmez.
+   `Oluşturuldu: …/Documents/Divit-Akademik`, yine `Kurulu ve güncel`,
+   3. adımda `Belgeler → Divit-Akademik`. Yazar klasörü değişmez.
 2. `[Mehmet elle]` Claude → Code → Local → Belgeler → Divit-Akademik,
    klasöre güvenin, `/` yazıp `divit` diye süzün.
    **Beklenen:** `divit-akademik:tez-kontrol`, `divit-akademik:sinav`,
@@ -113,16 +143,20 @@ Belgeler'i vardır: hocanın yeni bilgisayarı gibidir.
 ## 4. Tazeleme (yeni bir düzeltmeyi denemek)
 
 1. Geliştirme makinesinde, entegrasyon dalının güncel hâlinden:
-   `./yayinla.sh --deneme deneme`, sonra 0.2'deki gibi önbelleği bekleyin.
+   `./yayinla.sh --kanal deneme`, sonra 0.2'deki gibi önbelleği bekleyin.
    **Beklenen:** Yeni sürüm numaraları.
 2. Divit Deneme hesabında 2.1'deki kurulum komutunu (akademisyen için
-   3.1'i) yeniden çalıştırın. Klasördeki dosyalara dokunmaz.
+   3.1'i) yeniden çalıştırın. Klasördeki dosyalara dokunmaz. `DIVIT_DAL`
+   vermeseniz de klasörün `kanal.txt`'si kanalı korur; `DIVIT_TUR`
+   klasörün türüyle aynı olmalı (farklıysa kurulum durur).
    **Beklenen:** `Kurulu ve güncel (sürüm <yeni sürüm>)`.
 3. `[Mehmet elle]` Claude uygulamasını kapatıp açın (ya da açık oturumda
    `/reload-plugins`).
 
-Deneme hesabında Divit'e **"güncelle" demeyin**: `guncelleme` skill'i
-kurulumu main'den çalıştırır, klasör ayarlarını main'e geri yazar.
+`guncelleme` skill'i klasörün `kanal.txt`'sini okur; yayındaki sürümü ve
+kurulum komutunu o kanaldan kurar (`DIVIT_DAL=<kanal>`). Bu davranış
+skill parçası birleşmeden önceki eklentide yoktu: o sürümlerde deneme
+hesabında "güncelle" demeyin, kurulumu main'den çalıştırır.
 
 ## 5. Temizlik
 
@@ -158,11 +192,11 @@ cd ~; claude plugin marketplace remove divit
 ```
 
 `$env:` değişkenleri pencere kapanana kadar kalır; türü değiştirirken yeni
-pencere açın.
+pencere açın. Kanal Windows'ta da `.divit\kanal.txt`'ye yazılır.
 
 ## 7. Kural
 
 `deneme` ve `deneme-*` dalları **asla** main'e ya da develop'a
-birleştirilmez, PR açılmaz. Her `--deneme` çalışması dala yalnızca hızlı
+birleştirilmez, PR açılmaz. Her `--kanal` çalışması dala yalnızca hızlı
 ileri bir commit ekler (zip'ler ve deneme adresleri); iş develop'a normal
 yoldan gider.

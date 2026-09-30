@@ -17,13 +17,17 @@ Sürüm notları: `${CLAUDE_PLUGIN_ROOT}/SURUM.md`.
 
 ## Sürümleri bul
 
+- **Kanal:** `.divit/kanal.txt`'nin ilk satırı (Read). Yalnız `main`, `yeni`,
+  `deneme` ya da `deneme-` ile başlayan bir ad geçerlidir; dosya yoksa ya
+  da başka bir şey yazıyorsa `main`. Aşağıda `<kanal>` bu değerdir; hocaya
+  anlatma.
 - **Yüklü Divit:** `SURUM.md`'deki ilk `## <sürüm>` başlığı.
 - **Hocanın gördüğü son sürüm:** `.divit/hatirlatma.md` → `son-gorulen-surum`
   (yoksa `.divit/kurulum-surumu.txt`; o da yoksa "0").
 - **Klasörün kurulum sürümü:** `.divit/kurulum-surumu.txt` (yoksa "0").
 - **Yayındaki en yeni sürüm** (haftada en çok bir kez, `son-uzak-denetim`
   7 günden eskiyse): WebFetch ile
-  `https://raw.githubusercontent.com/mehmetor/divit/main/plugins/divit/SURUM.md`
+  `https://raw.githubusercontent.com/mehmetor/divit/<kanal>/plugins/divit/SURUM.md`
   ilk başlığını oku, tarihi `son-uzak-denetim`'e yaz. Okunamazsa sessizce geç.
 
 Sürümleri sayı olarak karşılaştır (1.10 > 1.9).
@@ -66,9 +70,9 @@ doğrudan 3. adım.
 
 ## 3. Güncelle
 
-Tek komut, zincirleme yok:
-- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -Command "irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex"`
-- Mac: `curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash`
+Tek komut, aynen (`<kanal>` yerine kanal adı; kanal `main` ise de aynı biçim):
+- Windows: `` powershell -NoProfile -ExecutionPolicy Bypass -Command "`$env:DIVIT_DAL='<kanal>'; irm https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.ps1 | iex" `` (`$env`'in önündeki ters tırnak kalsın: dıştaki PowerShell değişkeni açmasın)
+- Mac: `curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.sh | DIVIT_DAL=<kanal> bash`
 
 Çıktının sonunu oku. "Kurulum bitti" görünüyorsa:
 
