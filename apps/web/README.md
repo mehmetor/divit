@@ -3,10 +3,11 @@
 Derleme adımı olmayan statik site. Klasörün tamamını yayınlayın
 (Cloudflare Pages, Netlify, GitHub Pages ya da herhangi bir sunucu).
 
-- `index.html` — tanıtım sayfası
+- `index.html` — tanıtım sayfası (akademisyen; sonda "Kitap yazıyorsanız" bölümü)
 - `kilavuz.html`, `kart.html` — `hoca-paketi/Divit/` kopyaları
+- `kilavuz-yazar.html`, `kart-yazar.html` — yazar kılavuzu ve kartı, aynı yerin kopyaları
 
-Kılavuz ya da kart değişince kopyaları yenileyin:
+Kılavuz ya da kart değişince kopyaları yenileyin (`diff` boş çıkmalı):
 
 ```bash
 cp hoca-paketi/Divit/KILAVUZ.html apps/web/kilavuz.html
