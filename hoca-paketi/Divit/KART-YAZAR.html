@@ -20,9 +20,10 @@ ol{margin:0;padding-left:24px} ol li{margin:0 0 5px}
 .ornek span{font-family:Consolas,Menlo,monospace;font-size:14px}
 table{width:100%;border-collapse:collapse} td{border:1px solid var(--cizgi);padding:6px 8px;vertical-align:top}
 td:first-child{width:34%;font-weight:700}
+.yer td{padding:4px 8px} .yer td:first-child{width:44%;font:600 13px Consolas,Menlo,monospace;word-break:break-word}
 .not{font-size:13px;color:var(--soluk);margin-top:14px;border-top:1px solid var(--cizgi);padding-top:8px}
 b.win{color:#1c4a7a} b.mac{color:#444}
-@page{size:A4;margin:8mm} @media print{.sayfa{padding:0} h2{-webkit-print-color-adjust:exact;print-color-adjust:exact} .ornek li{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+@page{size:A4;margin:8mm} @media print{.sayfa{padding:0} body{font-size:12.5px;line-height:1.3} h1{font-size:24px} .alt{margin:0 0 8px} h2{font-size:14px;margin:8px 0 4px;padding:3px 10px} ol li{margin:0 0 2px} .kutu{padding:6px 10px;margin:4px 0} .ornek{gap:4px 12px} .ornek li{padding:3px 8px} .ornek span{font-size:13px} .ornek b{font-size:11px} td{padding:3px 8px} .not{font-size:12px;margin-top:8px;padding-top:6px} h2{-webkit-print-color-adjust:exact;print-color-adjust:exact} .ornek li{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>
@@ -57,6 +58,16 @@ b.win{color:#1c4a7a} b.mac{color:#444}
     <li><b>Ne yapacağınızı bilemezseniz</b><span>yardım</span></li>
   </ul>
 
+  <h2>Dosyalarınız nerede</h2>
+  <table class="yer">
+    <tr><td>kitaplar/&lt;kitabınız&gt;/asil</td><td>Asıl kitabınız. Divit yalnız okur.</td></tr>
+    <tr><td>kitaplar/&lt;kitabınız&gt;/malzeme</td><td>Kitaba girecek yazılar, dökümler. Divit yalnız okur.</td></tr>
+    <tr><td>kitaplar/&lt;kitabınız&gt;/duzenleme</td><td>Editör raporu ve öneriler.</td></tr>
+    <tr><td>kitaplar/&lt;kitabınız&gt;/taslak</td><td>Onayladığınız değişiklikler, bölüm iskeletleri.</td></tr>
+    <tr><td>cikti</td><td>Word ve PDF çıktıları.</td></tr>
+  </table>
+  <div class="kutu">Divit önerileri tek tek gösterir: önce, sonra, neden. Numarasıyla onaylayın; onaylamadığınız işlenmez.</div>
+
   <h2>Ekranda İngilizce bir soru çıkarsa</h2>
   <table>
     <tr><td>Allow once</td><td>Bu kez izin ver. Emin değilseniz bunu seçin.</td></tr>
@@ -72,7 +83,7 @@ b.win{color:#1c4a7a} b.mac{color:#444}
   </ol>
 
   <p class="not">Divit asıl kitabınızı ve Word dosyalarınızı değiştirmez; değişikliği yeni bir dosyaya yazar.
-  Sizin yerinize yazmaz, bilgi uydurmaz; emin olmadığını <b>[DOĞRULA]</b> ile işaretler.<br>
+  Sizin yerinize yazmaz, sesinizi değiştirmez, bilgi uydurmaz; emin olmadığını <b>[DOĞRULA]</b> ile işaretler.<br>
   Yardım: Mehmet Akif Orakçı · mehmetakiforakci@gmail.com</p>
 </div>
 </body>
