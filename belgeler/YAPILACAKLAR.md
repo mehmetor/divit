@@ -5,13 +5,13 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 ## Geliştirme
 
-- [ ] **`gizli/` araması (kalan risk).** Kalıplar eklendi; `grep -n -r` ve
-      `Get-ChildItem` ile tek tek listeleme hâlâ açık.
+- [ ] Değişken ya da betik içinden yapılan arama izin kalıplarıyla kapatılamaz;
+      `gizli/` için son koruma kuraldaki yazılı yasak. Gerekirse işletim
+      sistemi izniyle (klasör kilidi) araştırılır.
 
 ## Kapsam
 
-- [ ] **Kitap yazarları (akademik olmayan)** — ilk görüşme:
-      `belgeler/YAZAR-GORUSMESI.md`; demo örnekleri `belgeler/demo-yazar/`.
+- [ ] Yazar kurulumu Windows'ta (ilk yazarla buluşmada): `belgeler/YENI-KURULUM.md`.
 
 ## Mehmet'e kalan
 
