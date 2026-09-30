@@ -80,7 +80,9 @@ echo "claude (eklenti işleri): $CLI $SV · konuşma: $KONUSMA_CLI $(surum_of "$
 GIRIS=""
 [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}${ANTHROPIC_API_KEY:-}" ] && GIRIS=1
 GERCEK=(~/.claude/settings.json ~/.claude/plugins/installed_plugins.json ~/.claude/plugins/known_marketplaces.json)
-gercek_ozet() { shasum "${GERCEK[@]}" 2>/dev/null; }
+# lastUpdated'i Claude Code gerçek girişle açılan her oturumda (karma yol, geliştiricinin
+# kendi oturumları) kendisi yazar; ayar değişikliği değildir, özete girmez.
+gercek_ozet() { for f in "${GERCEK[@]}"; do grep -v '"lastUpdated":' "$f" 2>/dev/null | shasum; done; }
 GERCEK_ONCE="$(gercek_ozet)"
 
 G="$(mktemp -d /tmp/divit-sinama.XXXXXX)"

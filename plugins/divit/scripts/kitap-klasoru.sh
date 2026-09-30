@@ -1,6 +1,7 @@
 #!/bin/sh
 # Mac: kitap klasörünü açar ve kullanıcının dosyasını bir kez yerleştirir.
-# Divit klasöründe çalışır; yollar klasöre göredir. Var olan dosyaya dokunmaz.
+# Divit klasörünün içinde (alt klasörde de) çalışır; kökü .divit klasöründen bulur,
+# yollar köke göredir. Var olan dosyaya dokunmaz.
 # Kullanım: sh kitap-klasoru.sh ac <kitap-adi>
 #           sh kitap-klasoru.sh koy <kitap-adi> asil|malzeme "<kaynak dosya>"
 # Çıktı tek satır: ACILDI <yol> | KOPYALANDI <yol> | VAR <yol> | HATA <neden>
@@ -20,6 +21,19 @@ case "$ad" in
     hata "Kitap adı yalnız küçük harf, rakam ve tire olabilir (ör. yonetim-notlari)." ;;
 esac
 
+# Kabuk bir alt klasörde kalmış olabilir: kök, .divit/ içeren ilk üst klasör.
+divit_koku() {
+  d=$(pwd)
+  while [ "$d" != "/" ]; do
+    [ -d "$d/.divit" ] && { echo "$d"; return 0; }
+    d=$(dirname "$d")
+  done
+  return 1
+}
+calisma=$(pwd)
+koku=$(divit_koku) || hata "Divit klasörü bulunamadı (.divit yok): $calisma"
+cd "$koku" || hata "Divit klasörüne geçilemedi: $koku"
+
 kok="kitaplar/$ad"
 
 klasorleri_ac() {
@@ -36,6 +50,10 @@ case "$islem" in
     [ $# -eq 4 ] || hata "Kullanım: koy <kitap-adi> asil|malzeme \"<dosya>\""
     bolum=$3
     kaynak=$4
+    case "$kaynak" in
+      /*) ;;
+      *) kaynak="$calisma/$kaynak" ;;
+    esac
     case "$bolum" in
       asil | malzeme) ;;
       *) hata "Yer yalnız asil ya da malzeme olabilir." ;;

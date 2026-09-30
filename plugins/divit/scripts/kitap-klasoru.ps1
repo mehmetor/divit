@@ -1,5 +1,6 @@
 ﻿# Windows: kitap klasörünü açar ve kullanıcının dosyasını bir kez yerleştirir.
-# Divit klasöründe çalışır; yollar klasöre göredir. Var olan dosyaya dokunmaz.
+# Divit klasörünün içinde (alt klasörde de) çalışır; kökü .divit klasöründen bulur,
+# yollar köke göredir. Var olan dosyaya dokunmaz.
 # Kullanım: powershell -NoProfile -ExecutionPolicy Bypass -File kitap-klasoru.ps1 ac <kitap-adi>
 #           powershell -NoProfile -ExecutionPolicy Bypass -File kitap-klasoru.ps1 koy <kitap-adi> asil|malzeme "<kaynak dosya>"
 # Çıktı tek satır: ACILDI <yol> | KOPYALANDI <yol> | VAR <yol> | HATA <neden>
@@ -19,6 +20,15 @@ $ad = if ($args.Count -ge 2) { [string]$args[1] } else { '' }
 if ($ad -cnotmatch '^[a-z0-9][a-z0-9-]*$') {
     Hata 'Kitap adı yalnız küçük harf, rakam ve tire olabilir (ör. yonetim-notlari).'
 }
+
+# Kabuk bir alt klasörde kalmış olabilir: kök, .divit içeren ilk üst klasör.
+$calisma = (Get-Location).ProviderPath
+$koku = $calisma
+while ($koku -and -not (Test-Path -LiteralPath (Join-Path $koku '.divit') -PathType Container)) {
+    $koku = Split-Path -Parent $koku
+}
+if (-not $koku) { Hata "Divit klasörü bulunamadı (.divit yok): $calisma" }
+Set-Location -LiteralPath $koku
 
 $kok = "kitaplar/$ad"
 
@@ -43,6 +53,7 @@ switch ($islem) {
         if ($args.Count -ne 4) { Hata 'Kullanım: koy <kitap-adi> asil|malzeme "<dosya>"' }
         $bolum = [string]$args[2]
         $kaynak = [string]$args[3]
+        if (-not [System.IO.Path]::IsPathRooted($kaynak)) { $kaynak = Join-Path $calisma $kaynak }
         if ($bolum -cne 'asil' -and $bolum -cne 'malzeme') { Hata 'Yer yalnız asil ya da malzeme olabilir.' }
         if (-not (Test-Path -LiteralPath $kaynak -PathType Leaf)) { Hata "Dosya bulunamadı: $kaynak" }
         Klasorleri-Ac

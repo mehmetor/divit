@@ -2,7 +2,6 @@
 name: kurallar
 description: Divit'in çalışma kuralları — güvenlik, dosya işlemleri (Windows ve Mac), önceki sürüm kuralı, iş günlüğü, sorun notları, işe göre yönlendirme. Divit klasöründe her oturumun başında, hocanın ilk mesajına cevap vermeden önce yükle.
 user-invocable: false
-allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.ps1*)
 ---
 
 # Divit çalışma kuralları

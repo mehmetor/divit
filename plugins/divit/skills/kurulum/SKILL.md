@@ -1,7 +1,6 @@
 ---
 name: kurulum
 description: Divit'in sizi tanıdığı ilk kurulum. Özgeçmişinizden ya da kitaplarınızdan sizi tanır, alanınızı çıkarır, yayımlanmış yazılarınızı bulur, alan kurallarını ve üslup profilini yazar, süren işleri öğrenip klasörleri hazırlar. Profil dosyaları "Henüz doldurulmadı" diyorsa, Divit ilk kez açıldığında, "başlayalım", "beni tanı" dediğinde kullan. Kitap yazarını da tanır; "türümü değiştir", "ben hoca değilim", "üniversitedeyim" dendiğinde de kullan.
-allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.ps1*)
 ---
 
 # İlk kurulum — Divit hocayı tanır
