@@ -5,36 +5,21 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 ## Geliştirme
 
-- [ ] **Kaynak sınaması yayına bağlanmadı.** `araclar/kaynak-sinama/calistir.sh`
-      elle koşuluyor; her yayından önce zorunlu olsun, tek kaçırma yayını
-      durdursun (`yayinla.sh` ya da CI; internet ve kota ister).
-- [ ] **Ara dosya adları.** `pdf` skill'indeki `.divit/gecici/form.json` ve
-      `saglik`'ın deneme dosyaları tarihsiz; `bakim` eskiyenleri tarihten
-      bulduğu için tarihli ada (`<ad>-YYYY-AA-GG`) çevrilsin.
-- [ ] **`gizli/` araması.** `Bash(*gizli*)` adı "gizli" geçmeyen genel
-      aramayı (`grep -r … .`) durdurmaz; kullanıcı onaylarsa ya da Auto kipi
-      geçirirse gizli klasör de taranır. Kural yazıyla da var; izinle kapatma
-      yolu aranacak.
+- [ ] **`gizli/` araması (kalan risk).** Kalıplar eklendi; `grep -n -r` ve
+      `Get-ChildItem` ile tek tek listeleme hâlâ açık.
 
 ## Kapsam
 
 - [ ] **Kitap yazarları (akademik olmayan)** — ilk görüşme:
       `belgeler/YAZAR-GORUSMESI.md`; demo örnekleri `belgeler/demo-yazar/`.
-  - yazar için tanıtım sayfası (`apps/web`)
-  - editörlü (çok yazarlı) kitap derleme — bugün `kitap-derle` yalnız
-    kullanıcının kendi yazılarıyla çalışır
-  - Word'de değişiklik izleme ile öneri (bugün öneri listesi ya da yeni dosya)
-  - ses kaydını yazıya dökme (bugün yazıya dökülmüş hâli gerekir)
-
-## Kararlar
-
-- [ ] Varsayılan izin kipi: şimdi `acceptEdits` + Auto önerisi. Auto
-      varsayılan yapılabilir mi, her hesapta açık mı?
 
 ## Mehmet'e kalan
 
 Bu Mac'ten yapılamayanlar; her satır ne beklendiğini söyler.
 
+- [ ] Yayın kapısını (`./yayinla.sh --surum`) bir kez dene (kayıt özeti uyuşmazsa durmalı).
+- [ ] Ses: Word 365'te Transkribe'ın Türkçe dil listesinde olduğunu doğrula (Apple'da Türkçe yok).
+- [ ] Kitap: izlenen değişiklikli docx'i Word'de açıp Kabul Et/Reddet dene.
 - [ ] Sınav sorusu — ilk hocayla dene: sorular nottan mı, şıklar dengeli mi, Word düzeni.
 - [ ] Dönem takvimi — hocaya sor: akademik takvim ve ders programı dosyası elinde var mı.
 - [ ] Bağlayıcılar — pilot makinede Gmail bağlıyken "bu taslağı gönder" de; izin reddetmeli; menü adları (+ → Connectors) ekranla aynı mı.

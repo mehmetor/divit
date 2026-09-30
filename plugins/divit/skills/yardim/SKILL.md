@@ -21,6 +21,7 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Kullan
    > - Yazışma hazırlarım: *"dekanlığa dilekçe yazalım"*
    > - Kitabınıza editör gözüyle bakarım: *"kitabımı yeni baskı için düzenle"*
    > - Yazılarınızdan kitap planı çıkarırım: *"yazılarımdan kitap yapalım"*
+   > - Ses kaydı: kaydınızı yazıya dökmenin yolunu anlatırım, çıkan metni temizlerim: *"ses kaydını yazıya dök"*
    > - Word'e, sunuma, Excel'e çeviririm: *"bunu Word'e çevir"*, *"sunum hazırla"*
    > - Haftanızı özetlerim: *"bu hafta neler var"*
    > - Çeviri, grafik, fotoğraftan metin: *"şunu Türkçeye çevir"*, *"grafik çiz"*, *"el yazımı oku"*
