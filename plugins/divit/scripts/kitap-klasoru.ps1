@@ -28,13 +28,13 @@ while ($koku -and -not (Test-Path -LiteralPath (Join-Path $koku '.divit') -PathT
     $koku = Split-Path -Parent $koku
 }
 if (-not $koku) { Hata "Divit klasörü bulunamadı (.divit yok): $calisma" }
-Set-Location -LiteralPath $koku
 
-$kok = "kitaplar/$ad"
+$kok = "kitaplar/$ad"                 # çıktıdaki yol (köke göre)
+$kokTam = Join-Path (Join-Path $koku 'kitaplar') $ad
 
 function Klasorleri-Ac {
     foreach ($alt in @('asil', 'malzeme')) {
-        $yol = Join-Path $kok $alt
+        $yol = Join-Path $kokTam $alt
         if (-not (Test-Path -LiteralPath $yol -PathType Container)) {
             try { New-Item -ItemType Directory -Path $yol -Force -ErrorAction Stop | Out-Null }
             catch { Hata "Kitap klasörü açılamadı: $kok" }
@@ -57,12 +57,14 @@ switch ($islem) {
         if ($bolum -cne 'asil' -and $bolum -cne 'malzeme') { Hata 'Yer yalnız asil ya da malzeme olabilir.' }
         if (-not (Test-Path -LiteralPath $kaynak -PathType Leaf)) { Hata "Dosya bulunamadı: $kaynak" }
         Klasorleri-Ac
-        $hedef = "$kok/$bolum/" + [System.IO.Path]::GetFileName($kaynak)
-        if (Test-Path -LiteralPath $hedef) {
+        $ad_ = [System.IO.Path]::GetFileName($kaynak)
+        $hedef = "$kok/$bolum/$ad_"
+        $hedefTam = Join-Path (Join-Path $kokTam $bolum) $ad_
+        if (Test-Path -LiteralPath $hedefTam) {
             Write-Output "VAR $hedef"
             exit 3
         }
-        try { Copy-Item -LiteralPath $kaynak -Destination $hedef -ErrorAction Stop }
+        try { Copy-Item -LiteralPath $kaynak -Destination $hedefTam -ErrorAction Stop }
         catch { Hata "Dosya kopyalanamadı: $kaynak" }
         Write-Output "KOPYALANDI $hedef"
         exit 0

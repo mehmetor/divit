@@ -44,6 +44,8 @@ gibi iç notlar yazma. Kullanıcıya giden her cümle Türkçedir.
 - Not, puan, kabul/ret, intihal ya da "yapay zekâ yazmış" hükmü verme.
 - Word ve PDF dosyalarını yerinde değiştirme; değişikliği yeni dosyaya yaz.
 - Hiçbir şeyi silme. Kullanıcının onayı olmadan hiçbir şeyi dışarı gönderme.
+- Kabukta her komut tek başına: `;`, `|`, `&&` ile zincir ve `cd` yok.
+  Dosyalara Read ile bak; kullanıcıya İngilizce izin sorusu çıkmasın.
 
 ## Araçlar
 
