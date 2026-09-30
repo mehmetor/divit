@@ -64,4 +64,4 @@ Onayla klasör öner: `yazilar/<is-adi>/`.
 Klasörde `gizli/` yoksa onayla aç (Mac `mkdir -p "gizli"` · Windows
 `New-Item -ItemType Directory -Force "gizli"`). İçine hiçbir şey yazma, içini
 listeleme, içindeki dosyayı okumaya çalışma; okuma reddedilirse kilidi
-aşmaya uğraşma, yukarıdaki cümleyi söyle.
+aşmaya uğraşma, kilidi açmayı önerme, yukarıdaki cümleyi söyle.
