@@ -13,6 +13,7 @@ araçlar değiştiğinde).
 - Yazılardan kitap: dağınık yazılarınızdan kitap planı ve bölüm iskeleti çıkarır. "yazılarımdan kitap yapalım" yazın.
 - Tez, sınav, makale ve atıf komutlarının adı değişti: artık "/divit-akademik:" ile başlıyor (ör. "/divit-akademik:tez-kontrol"). Bir kez kurulumu yenilemeniz gerekir.
 - Sınav sorusu hazırlama: ders notunuzdan soru ve cevap anahtarı, Word olarak. "ders notumdan vize hazırla" yazın.
+- Yazılardan kitap yaparken seçenekler daha okunaklı görünür; yazılar arasında birbirini tutmayan yıl ve süreler iki yazı da gösterilerek işaretlenir.
 
 ## 1.7 · 2026-09-27 · kurulum gerekir
 - Kılavuzda "/" ile komut seçme anlatıldı; her komutun ne yaptığı yazıldı.

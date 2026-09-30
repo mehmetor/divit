@@ -52,6 +52,14 @@ sor; tahmin etme. Toplam kelimeyi yaz (kitap için yetiyor mu, söyle).
 **2. Konu haritası** (`plan.md`'ye): parçaları konulara kümele. Ayrıca:
 aynı fikri ya da anekdotu anlatan parçalar, birbirini tutmayan bilgiler
 (yıl, sayı, ad), eskimiş olanlar `[GÜNCELLE]`, hiçbir kümeye girmeyenler.
+Zaman ifadelerini ("otuz yıla yakın", "on iki yıl sonra", "geçen yıl")
+parçanın tarihiyle ve öteki parçalardaki tarihlerle hesapla. Tutmuyorsa
+`[DOĞRULA]`: iki parçayı alıntıyla ve hesabı yaz; doğrusunu tahmin
+etme. Yalnız eskimişse `[GÜNCELLE]`.
+
+Numaralı sorularda seçenek metni sayıyla başlamaz; ad önce, sayı
+parantezde: "1) Sahada (1. bölüm), önerim". Yoksa ekranda iç içe liste
+gibi görünür.
 
 **3. İddia ve okur.** Haritadan 2-3 aday çıkar, tek soru sor:
 
@@ -67,7 +75,8 @@ olmayan yer ("bu bölüm için sizin anlatmanız gerekir"). Kurguların güçlü
 ve zayıf yanını birer cümleyle yaz; kullanıcı seçer. Seçilen `plan.md`'ye.
 
 **5. Bölüm iskeletleri** → `taslak/<bolum-no>-<kisa-ad>.md`, yalnız
-onaylı kurgu için. Parçalar kullanıcının cümleleriyle, sırayla; her
+onaylı kurgu için. Önce sor: "Hangi bölümle başlayalım? 1) Sahada
+(1. bölüm), önerim 2) <ad> (2. bölüm) — numarayı yazın." Parçalar kullanıcının cümleleriyle, sırayla; her
 parçanın kaynağı başlık altında. Aralarda eksik geçiş
 `[BAĞLANTI: <ne gerekiyor>]`. Aynı anekdot iki parçadaysa tek yerde
 kalır; hangisi, kullanıcıya sor. Konuşma dilinden yazı diline geçiş
