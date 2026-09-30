@@ -9,26 +9,32 @@
 # Git, Homebrew ya da yönetici parolası gerekmez. Yeniden çalıştırmak
 # güvenlidir: kullanıcının dosyalarına dokunmaz, yalnızca Divit'i günceller.
 #
-# Kullanıcı türü (akademisyen | yazar) klasörleri, kılavuzu ve açık
-# eklentileri belirler. Öncelik: DIVIT_TUR > .divit/profil/kimlik.md'deki
-# "Kullanıcı türü:" satırı > akademisyen. Türü değiştirmek kurulum
-# skill'inin işidir; betik var olan satırı değiştirmez.
+# Kullanıcı türü (akademisyen | yazar) klasörleri, kılavuzun açılış
+# sekmesini ve açık eklentileri belirler. Öncelik: DIVIT_TUR >
+# .divit/profil/kimlik.md'deki "Kullanıcı türü:" satırı > akademisyen.
+# Tür satırı yalnız doldurulmamış (şablon) profile yazılır. Dolu profilin
+# türüyle çelişen DIVIT_TUR verilirse betik hiçbir şeye dokunmadan durur:
+# aynı bilgisayarda ikinci kullanım ayrı klasördür (DIVIT_HEDEF).
+#
+# Kanal (yayın dalı): DIVIT_DAL > klasördeki .divit/kanal.txt > main.
+# İzinli: main, yeni, deneme, deneme-*. Klasör kanalını kanal.txt'de
+# hatırlar; "güncelle" aynı kanalda kalır.
 #
 # Sınama değişkenleri (geliştirici için):
 #   DIVIT_TEST=1           Claude uygulaması ve komut satırı kurulmaz, kılavuz açılmaz
 #   DIVIT_KAYNAK_ZIP=yol   GitHub yerine yerel repo zip'i kullan
 #   DIVIT_HEDEF=yol        Divit klasörünün yeri (varsayılan: ~/Documents/Divit)
 #   DIVIT_TUR=yazar        kullanıcı türü (akademisyen | yazar)
+#   DIVIT_DAL=deneme       kanal (yayın dalı)
 set -uo pipefail
 
 REPO="${DIVIT_REPO:-mehmetor/divit}"
-DAL="${DIVIT_DAL:-main}"
 PANDOC_SURUM="3.11"
 PDFCPU_SURUM="0.15.0"
 TEST="${DIVIT_TEST:-}"
 HEDEF="${DIVIT_HEDEF:-$HOME/Documents/Divit}"
+case "$HEDEF" in /*) ;; *) HEDEF="$PWD/$HEDEF" ;; esac
 ARACLAR="$HOME/.divit/araclar"
-PAZAR_URL="https://raw.githubusercontent.com/$REPO/$DAL/.claude-plugin/marketplace.json"
 
 adim()  { printf '\n\033[1;32m▸ %s\033[0m\n' "$1"; }
 bilgi() { printf '  %s\n' "$1"; }
@@ -39,6 +45,49 @@ UYARILAR=0
 GECICI="$(mktemp -d)"; trap 'rm -rf "$GECICI"' EXIT
 
 printf '\n\033[1mDivit — yazım tezgâhı · kurulum\033[0m\n'
+
+# Kanal: DIVIT_DAL > klasörün kanal.txt'si > main.
+KANAL_DOSYASI="$HEDEF/.divit/kanal.txt"
+if [ -n "${DIVIT_DAL:-}" ]; then
+  DAL="$DIVIT_DAL"
+elif [ -f "$KANAL_DOSYASI" ]; then
+  DAL="$(head -1 "$KANAL_DOSYASI" | tr -d ' \t\r')"
+else
+  DAL="main"
+fi
+case "$DAL" in
+  main|yeni|deneme|deneme-?*) ;;
+  *) uyari "'$DAL' bilinen bir kanal değil; main kullanılıyor."; DAL="main" ;;
+esac
+PAZAR_URL="https://raw.githubusercontent.com/$REPO/$DAL/.claude-plugin/marketplace.json"
+
+# Kullanıcı türü: DIVIT_TUR > kimlik.md satırı > akademisyen.
+KIMLIK="$HEDEF/.divit/profil/kimlik.md"
+PROFIL_DOLU=""
+[ -f "$KIMLIK" ] && ! grep -q 'Henüz doldurulmadı' "$KIMLIK" && PROFIL_DOLU=1
+PROFIL_TUR="$(sed -n 's/^Kullanıcı türü: *\([a-z]*\).*/\1/p' "$KIMLIK" 2>/dev/null | head -1)"
+[ -n "$PROFIL_TUR" ] || PROFIL_TUR="akademisyen"    # satır yoksa akademisyen
+TUR_VERILDI=""
+case "${DIVIT_TUR:-}" in
+  akademisyen|yazar) TUR="$DIVIT_TUR"; TUR_VERILDI=1 ;;
+  "") ;;
+  *) uyari "DIVIT_TUR='$DIVIT_TUR' tanınmadı (akademisyen ya da yazar olmalı); yok sayıldı." ;;
+esac
+[ -n "$TUR_VERILDI" ] || { [ "$PROFIL_TUR" = "yazar" ] && TUR="yazar" || TUR="akademisyen"; }
+
+# Dolu profil başka türdense hiçbir şeye dokunmadan dur: bu klasör
+# başka bir kullanıma ait (ör. aynı hesapta önceden kurulmuş bir Divit).
+if [ -n "$PROFIL_DOLU" ] && [ -n "$TUR_VERILDI" ] && [ "$TUR" != "$PROFIL_TUR" ]; then
+  [ "$TUR" = "yazar" ] && YENI_AD="Divit-Yazar" || YENI_AD="Divit-Akademik"
+  ONEK=""; [ "$DAL" = "main" ] || ONEK="DIVIT_DAL=$DAL "
+  printf '\n\033[1;31mKurulum yapılmadı.\033[0m\n'
+  printf 'Bu klasörde başka bir kullanım türüyle kurulmuş bir Divit var:\n  %s\n' "$HEDEF"
+  printf 'Klasöre ve içindeki bilgilere dokunulmadı.\n\n'
+  printf 'Aynı bilgisayarda ikinci bir kullanım için yeni klasör:\n'
+  printf '  curl -fsSL https://raw.githubusercontent.com/%s/%s/kur.sh | %sDIVIT_TUR=%s DIVIT_HEDEF="$HOME/Documents/%s" bash\n\n' \
+    "$REPO" "$DAL" "$ONEK" "$TUR" "$YENI_AD"
+  exit 2
+fi
 
 # ---------------------------------------------------------------- 1
 adim "1/6 Claude uygulaması"
@@ -69,20 +118,25 @@ fi
 # ---------------------------------------------------------------- 2
 adim "2/6 Claude Code (eklenti kurulumu için)"
 export PATH="$HOME/.local/bin:$PATH"
-EN_AZ="2.1.224"   # eklentinin zip olarak inmesi (archive kaynağı) bu sürümle geldi
+EN_AZ="2.1.280"   # klasör ayarındaki model bu sürümü istiyor (zip kaynağı 2.1.224'ten beri var)
 surum() { claude --version 2>/dev/null | head -1 | grep -oE '^[0-9]+\.[0-9]+\.[0-9]+'; }
 eski_mi() { [ "$(printf '%s\n%s\n' "$EN_AZ" "$1" | sort -V | head -1)" != "$EN_AZ" ]; }
 if command -v claude >/dev/null 2>&1; then
   SV="$(surum)"
-  if eski_mi "$SV"; then bilgi "Sürüm $SV eski; güncelleniyor…"; claude update >/dev/null 2>&1; SV="$(surum)"; fi
-  if eski_mi "$SV" && [ -z "$TEST" ]; then
-    # Eski kopya çoğu zaman npm kurulumudur ve npm'e ulaşamayınca güncellenemez.
-    bilgi "Güncellenemedi; resmî kurulum yapılıyor…"
-    curl -fsSL https://claude.ai/install.sh | bash >/dev/null 2>&1
-    hash -r; SV="$(surum)"     # ~/.local/bin PATH'in başında: yeni kopya öne geçer
+  if eski_mi "$SV" && [ -n "$TEST" ]; then
+    # Sınama geliştiricinin kendi Claude Code'unu değiştirmez.
+    bilgi "(sınama: sürüm $SV eski; güncelleme atlandı)"
+  elif eski_mi "$SV"; then
+    bilgi "Sürüm $SV eski; güncelleniyor…"; claude update >/dev/null 2>&1; SV="$(surum)"
+    if eski_mi "$SV"; then
+      # Eski kopya çoğu zaman npm kurulumudur ve npm'e ulaşamayınca güncellenemez.
+      bilgi "Güncellenemedi; resmî kurulum yapılıyor…"
+      curl -fsSL https://claude.ai/install.sh | bash >/dev/null 2>&1
+      hash -r; SV="$(surum)"     # ~/.local/bin PATH'in başında: yeni kopya öne geçer
+    fi
   fi
   if eski_mi "$SV"; then
-    uyari "Claude Code $SV eski (en az $EN_AZ gerekli) ve güncellenemedi. Eklenti kurulamaz."
+    uyari "Claude Code $SV eski (en az $EN_AZ gerekli) ve güncellenemedi. Divit klasörü açılınca 'model desteklenmiyor' hatası çıkabilir."
     bilgi "  Çözüm: curl -fsSL https://claude.ai/install.sh | bash   (sonra bu kurulumu yeniden çalıştırın)"
   else
     bilgi "Kurulu: $SV"
@@ -150,36 +204,34 @@ unzip -q "$GECICI/repo.zip" -d "$GECICI/repo"
 SABLON="$(find "$GECICI/repo" -maxdepth 3 -type d -path '*/hoca-paketi/Divit' | head -1)"
 [ -d "$SABLON" ] || { echo "HATA: Divit şablonu bulunamadı."; exit 1; }
 
-# Kullanıcı türü: DIVIT_TUR > kimlik.md satırı > akademisyen.
-KIMLIK="$HEDEF/.divit/profil/kimlik.md"
-TUR_VERILDI=""
-case "${DIVIT_TUR:-}" in
-  akademisyen|yazar) TUR="$DIVIT_TUR"; TUR_VERILDI=1 ;;
-  "") ;;
-  *) uyari "DIVIT_TUR='$DIVIT_TUR' tanınmadı (akademisyen ya da yazar olmalı); yok sayıldı." ;;
-esac
-if [ -z "$TUR_VERILDI" ]; then
-  TUR="$(sed -n 's/^Kullanıcı türü: *\([a-z]*\).*/\1/p' "$KIMLIK" 2>/dev/null | head -1)"
-  [ "$TUR" = "yazar" ] || TUR="akademisyen"
-fi
 if [ "$TUR" = "yazar" ]; then
-  KILAVUZ="KILAVUZ-YAZAR.html"; KART="KART-YAZAR.html"; TUR_KLASORU="kitaplar"; AKADEMIK=false
+  TUR_KLASORU="kitaplar"; AKADEMIK=false
 else
-  KILAVUZ="KILAVUZ.html"; KART="KART.html"; TUR_KLASORU="tez-kontrol"; AKADEMIK=true
+  TUR_KLASORU="tez-kontrol"; AKADEMIK=true
 fi
 bilgi "Kullanıcı türü: $TUR"
+[ "$DAL" = "main" ] || bilgi "Kanal: $DAL"
 
-# kimlik.md'de tür satırı yoksa ilk başlığın hemen altına yazar; varsa dokunmaz.
+# Tür satırı yalnız doldurulmamış profile yazılır (ilk başlığın altına ya da
+# var olan satırın yerine). Dolu profile hiç dokunulmaz.
 tur_satiri_yaz() {
   [ -f "$KIMLIK" ] || return
-  grep -q '^Kullanıcı türü:' "$KIMLIK" && return
-  awk -v s="Kullanıcı türü: $TUR" '{print} !y && /^# /{print s; y=1}' "$KIMLIK" > "$GECICI/kimlik.md" \
+  grep -q 'Henüz doldurulmadı' "$KIMLIK" || return
+  awk -v s="Kullanıcı türü: $TUR" '/^Kullanıcı türü:/{next} {print} !y && /^# /{print s; y=1}' "$KIMLIK" > "$GECICI/kimlik.md" \
     && cat "$GECICI/kimlik.md" > "$KIMLIK"
+}
+# Kılavuz tek dosyadır; açılış sekmesi kök etiketteki data-rol'dür.
+kilavuz_yaz() {
+  sed "s|<html lang=\"tr\" data-rol=\"\">|<html lang=\"tr\" data-rol=\"$TUR\">|" "$SABLON/KILAVUZ.html" > "$HEDEF/KILAVUZ.html"
+}
+# Klasörün CLAUDE.md'si: araç yolları kurulumda yazılır.
+claude_md_yaz() {
+  sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__|yok|" "$SABLON/CLAUDE.md" > "$HEDEF/CLAUDE.md"
 }
 
 if [ -d "$HEDEF" ]; then
   bilgi "Klasör zaten var. Kişisel dosyalara dokunmadan Divit dosyaları güncelleniyor."
-  for f in CLAUDE.md "$KILAVUZ" "$KART"; do cp "$SABLON/$f" "$HEDEF/$f"; done
+  claude_md_yaz
   [ -d "$HEDEF/tez-kontrol" ] && cp "$SABLON/tez-kontrol/CLAUDE.md" "$HEDEF/tez-kontrol/CLAUDE.md"
   # Türün klasörü yoksa eklenir; hiçbir klasör silinmez.
   [ -d "$HEDEF/$TUR_KLASORU" ] || { cp -R "$SABLON/$TUR_KLASORU" "$HEDEF/" && bilgi "Eklendi: $TUR_KLASORU"; }
@@ -195,17 +247,24 @@ else
   for f in "$SABLON"/* "$SABLON"/.[!.]*; do
     [ -e "$f" ] || continue
     case "$(basename "$f")" in
-      tez-kontrol|KILAVUZ.html|KART.html)       [ "$TUR" = "akademisyen" ] || continue ;;
-      kitaplar|KILAVUZ-YAZAR.html|KART-YAZAR.html) [ "$TUR" = "yazar" ] || continue ;;
+      tez-kontrol) [ "$TUR" = "akademisyen" ] || continue ;;
+      kitaplar)    [ "$TUR" = "yazar" ] || continue ;;
+      *.html|CLAUDE.md) continue ;;     # aşağıda yazılır; eski kart/kılavuzlar kopyalanmaz
     esac
     cp -R "$f" "$HEDEF/"
   done
+  claude_md_yaz
   bilgi "Oluşturuldu: $HEDEF"
 fi
+kilavuz_yaz
 [ -n "$TUR_VERILDI" ] && tur_satiri_yaz
+printf '%s\n' "$DAL" > "$KANAL_DOSYASI"
 # Ayarlar Divit'e aittir, her kurulumda yenilenir. Kullanıcının "bir daha sorma"
 # izinleri settings.local.json'da durur; orada yalnız iki eklenti anahtarı değişir.
-sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__||" "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
+# Pazar yeri adresi kanala göre (klasör açılınca uygulama da aynı kanaldan alır).
+sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__||" \
+  -e "s|https://raw.githubusercontent.com/[^\"]*/\.claude-plugin/marketplace\.json|$PAZAR_URL|" \
+  "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
 sed -n "s/^## \([0-9][0-9.]*\) ·.*/\1/p" "$(dirname "$SABLON")/../plugins/divit/SURUM.md" | head -1 > "$HEDEF/.divit/kurulum-surumu.txt"
 # Hangi eklenti bu klasörde açık: akademik eklenti yalnız akademisyende.
 YEREL="$HEDEF/.claude/settings.local.json"
@@ -233,6 +292,8 @@ if [ -n "$TEST" ] && [ -z "${CLAUDE_CONFIG_DIR:-}" ]; then
   bilgi "(sınama: atlandı)"
 elif command -v claude >/dev/null 2>&1; then
   KAYIT="$GECICI/eklenti.log"
+  # Ev klasöründen: bir klasörün kendi ayarı pazar yeri adresini karıştırmasın.
+  cd "$HOME" 2>/dev/null || cd /
   # Her çalıştırmada: ekle (yoksa), katalogu yenile, kur (yoksa), güncelle (varsa).
   # "Zaten kurulu" da başarı döndüğü için sonuç eklenti listesinden okunur.
   claude plugin marketplace add "$PAZAR_URL" >>"$KAYIT" 2>&1
@@ -244,7 +305,19 @@ elif command -v claude >/dev/null 2>&1; then
   claude plugin update divit-akademik@divit >>"$KAYIT" 2>&1
   LISTE="$(claude plugin list 2>&1)"
   CEKIRDEK='(^|[^-[:alnum:]])divit@divit'   # divit-akademik@divit ile karışmasın
-  if printf '%s' "$LISTE" | grep -qE "$CEKIRDEK"; then
+  # divit pazar yeri beklenen adreste mi? Başka kaynağa kayıtlıysa ekleme
+  # "source differs" ile düşer, güncelleme eski kaynaktan yapılır: başarı sanılmasın.
+  PAZARLAR="$(claude plugin marketplace list --json 2>/dev/null)"
+  if [ "$(printf '%s' "$PAZARLAR" | tr -d ' \t\r\n' | head -c1)" = "[" ]; then
+    DIVIT_PAZAR="$(printf '%s\n' "$PAZARLAR" | awk '/^  \{/{b=""} {b=b $0 "\n"} /^  \}/{if (b ~ /"name": "divit"/) printf "%s", b}')"
+    if [ -n "$DIVIT_PAZAR" ] && ! printf '%s' "$DIVIT_PAZAR" | grep -qF "\"url\": \"$PAZAR_URL\""; then
+      BASKA_KAYNAK="$(printf '%s' "$DIVIT_PAZAR" | sed -nE 's/.*"(url|repo|path)": "([^"]*)".*/\2/p' | head -1)"
+    fi
+  fi
+  if [ -z "${BASKA_KAYNAK:-}" ] && grep -q 'source differs' "$KAYIT"; then BASKA_KAYNAK="(bilinmiyor)"; fi
+  if [ -n "${BASKA_KAYNAK:-}" ]; then
+    printf '  \033[1;31mHATA:\033[0m Divit bu bilgisayarda başka bir kaynaktan kurulu:\n    %s\n' "$BASKA_KAYNAK"
+  elif printf '%s' "$LISTE" | grep -qE "$CEKIRDEK"; then
     bilgi "Kurulu ve güncel (sürüm $(printf '%s' "$LISTE" | grep -E -A2 "$CEKIRDEK" | grep -oE 'Version: *[^ ]+' | head -1 | awk '{print $2}'))."
   else
     uyari "Şimdi kurulamadı; uygulama ilk açıldığında kendiliğinden inecek."
@@ -263,22 +336,45 @@ else
   bilgi "Uygulama ilk açıldığında kendiliğinden inecek."
 fi
 
+# Pazar yeri başka kaynaktaysa kurulum bitmiş sayılmaz.
+if [ -n "${BASKA_KAYNAK:-}" ]; then
+  printf '\n\033[1;31mKurulum tamamlanmadı.\033[0m\n'
+  cat <<MSG
+Bu bilgisayarda Divit başka bir kaynaktan kurulu; yeni sürüm gelemedi.
+Önce şunu çalıştırın:
+
+  claude plugin marketplace remove divit
+
+sonra bu kurulumu yeniden çalıştırın. Klasördeki dosyalarınız silinmez.
+
+MSG
+  exit 1
+fi
+
 # ---------------------------------------------------------------- 6
 adim "6/6 Masaüstü kısayolu ve kılavuz"
 if [ -d "$HOME/Desktop" ] && [ ! -e "$HOME/Desktop/Divit" ]; then
   ln -s "$HEDEF" "$HOME/Desktop/Divit" && bilgi "Masaüstüne 'Divit' klasör kısayolu kondu."
 fi
-[ -z "$TEST" ] && open "$HEDEF/$KILAVUZ" 2>/dev/null
+[ -z "$TEST" ] && open "$HEDEF/KILAVUZ.html" 2>/dev/null
+
+# Klasör seçerken gösterilecek yer: Belgeler altındaysa kısa ad, değilse tam yol.
+if [ "$(cd "$(dirname "$HEDEF")" 2>/dev/null && pwd -P)" = "$(cd "$HOME/Documents" 2>/dev/null && pwd -P)" ]; then
+  KLASOR_YERI="Belgeler → $(basename "$HEDEF")"
+else
+  KLASOR_YERI="$(cd "$HEDEF" && pwd)"
+fi
 
 printf '\n\033[1mKurulum bitti.\033[0m'
 [ "$UYARILAR" -gt 0 ] && printf ' (%s uyarı — yukarıya bakın)' "$UYARILAR"
-cat <<'MSG'
+cat <<MSG
 
 
 Şimdi:
   1. Claude uygulamasını açın. Divit'i kullanacak kişinin hesabıyla giriş yapın.
   2. Üstteki "Code" sekmesine tıklayın.
-  3. "Local" seçin → "Select folder" → Belgeler → Divit.
+  3. "Local" seçin → "Select folder" → $KLASOR_YERI
   4. "merhaba" yazın. Divit gerisini kendisi sorar.
 
 MSG
+[ "$DAL" = "main" ] || printf 'Deneme kanalı: %s\n\n' "$DAL"
