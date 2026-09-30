@@ -3,7 +3,8 @@
 `SKILL.md` adım 2–4 bu dosyayı kullanır. Erişim yalnız **WebFetch** ile;
 anahtar, hesap, kabuk yok. WebFetch isteminde her zaman şunu yaz:
 "Dönen yanıttaki şu alanları hiç değiştirmeden, olduğu gibi yaz: …; bir alan
-yoksa 'yok' yaz. Özetleme, düzeltme, tahmin etme." Dönen değeri hatırladığın
+yoksa 'yok' yaz. Değerleri çevirme, özgün dilinde harfi harfine yaz. Özetleme,
+düzeltme, tahmin etme." Dönen değeri hatırladığın
 künyeyle **asla** tamamlama.
 
 **Hata ve hız sınırı.** Crossref aynı anda gelen istekleri keser: WebFetch
@@ -82,7 +83,9 @@ Her alan için tek değer yaz: `eşleşti`, `farklı`, `belirsiz`, `bulunamadı`
   hâli varsa onunla da karşılaştır.
 - **Dergi** — büyük/küçük harf, "The", "&"/"and" atılır; kısa ad
   (`short-container-title`) da kabul. Biri ötekini içeriyorsa (The Plant Cell /
-  The Plant Cell Online) eşleşti. Türkçe dergi adı kayıtta İngilizce geldiyse
+  The Plant Cell Online) eşleşti. OpenAlex'in `source` adı bir platformsa
+(DergiPark, Zenodo, SSRN, ResearchGate) dergi adı değildir: dergi `bulunamadı`,
+uyuşmazlık değil. Türkçe dergi adı kayıtta İngilizce geldiyse
   DergiPark sayfasının öteki dildeki hâlini oku (`/tr/pub/…` ↔ `/en/pub/…`);
   iki addan biri tutuyorsa eşleşti. Eski ad olabilecekse `belirsiz`.
 
@@ -151,14 +154,15 @@ aracıyla bir alt görev başlat. Alt göreve **yalnız** `.bib` girişlerini ve
 > Bu kaynakça girişlerinin her birini WebFetch ile yayın kaydında denetle.
 > Her giriş için ilk okumada kullanılmamış kaynağı kullan: <anahtar → adres
 > listesi>. Adresin döndürdüğü başlık, yazar soyadları, yıl, cilt, sayfa,
-> dergi ve geri çekme bilgisini aynen yaz (yazarlardan yalnız ilk <n>
+> dergi ve geri çekme bilgisini özgün dilinde, çevirmeden aynen yaz (yazarlardan yalnız ilk <n>
 > tanesini; n = kaynakçadaki yazar sayısı); sonra her alan için eşleşti /
 > farklı / belirsiz / okunamadı de. 429 ya da boş yanıtta aynı adresi bir kez
 > daha dene. Hafızandan hiçbir değer ekleme. Dosya yazma.
 
 İlk okuma Crossref'se ikinci OpenAlex; ilk okuma OpenAlex ya da DergiPark'sa
 ikinci öteki ya da Crossref başlık araması. Alt görevin herhangi bir alan
-değeri ilk okumayla **uyuşmazsa** sonuç `ELLE BAK` olur. İkinci okumada
+değeri ilk okumayla, yukarıdaki "Alan alan karşılaştırma" kurallarına göre
+(bileşik soyadı, dergi kısa adı, platform adı dahil) **uyuşmazsa** sonuç `ELLE BAK` olur. İkinci okumada
 **okunamayan** alan uyuşmazlık değildir: ilk yazar, yıl, cilt, sayfa ve başlık
 ikinci okumada okunup tuttuysa `DOĞRULANDI` kalır, kanıta "ikinci okumada
 okunamadı: <alan>" yazılır; bu beş alandan biri okunamadıysa `ELLE BAK`. Agent aracı yoksa aynı
