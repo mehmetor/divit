@@ -193,11 +193,11 @@ bolum "ix) Kanal"
 olc ix1 ".divit/kanal.txt = DIVIT_DAL (deneme / main)" \
   bash -c '[ "$(cat "$1")" = deneme ] && [ "$(cat "$2")" = main ]' _ "$Y/.divit/kanal.txt" "$A/.divit/kanal.txt"
 kur ix DIVIT_HEDEF="$Y" CLAUDE_CONFIG_DIR="$G/cfg-y"
-grep -E 'Kullanıcı türü|Kanal|Kurulu ve güncel|UYARI|HATA|Deneme kanalı' "$G/ix.txt" | sed 's/^/  kur.sh: /'
+grep -E 'Kullanıcı türü|Kanal|Kurulu ve güncel|UYARI|HATA|Güncellemeler şu dağıtımdan' "$G/ix.txt" | sed 's/^/  kur.sh: /'
 olc ix2 "DIVIT_DAL'sız yeniden kurulum deneme kanalında kaldı" \
-  bash -c '[ "$1" = 0 ] && grep -q "Kanal: deneme" "$2" && grep -q "Deneme kanalı: deneme" "$2" && grep -q "Kurulu ve güncel" "$2" && [ "$(cat "$3/.divit/kanal.txt")" = deneme ]' _ "$(kod ix)" "$G/ix.txt" "$Y"
+  bash -c '[ "$1" = 0 ] && grep -q "Kanal: deneme" "$2" && grep -q "Güncellemeler şu dağıtımdan gelir: deneme" "$2" && grep -q "Kurulu ve güncel" "$2" && [ "$(cat "$3/.divit/kanal.txt")" = deneme ]' _ "$(kod ix)" "$G/ix.txt" "$Y"
 olc ix3 "klasör ayarındaki pazar yeri adresi kanalın adresi" grep -qF "\"url\": \"$PAZAR_DENEME\"" "$Y/.claude/settings.json"
-olc ix4 "main kanalında 'Deneme kanalı' satırı yok" bash -c '! grep -q "Deneme kanalı" "$1"' _ "$G/iv.txt"
+olc ix4 "main kanalında dağıtım satırı yok" bash -c '! grep -q "Güncellemeler şu dağıtımdan" "$1"' _ "$G/iv.txt"
 kur ix5 DIVIT_HEDEF="$D" DIVIT_DAL=baska-dal
 olc ix5 "izinsiz dal adı → uyarı, main" bash -c 'grep -q "bilinen bir kanal değil" "$1" && [ "$(cat "$2/.divit/kanal.txt")" = main ]' _ "$G/ix5.txt" "$D"
 kur ix6 DIVIT_HEDEF="$B/Divit-Yeni" DIVIT_DAL=yeni
