@@ -24,9 +24,13 @@ description: Hazırlanan bir metni e-postanızda taslak olarak açar; kendisi hi
 
 ## 2. Yol seç — ilk çalışanı kullan
 
-**a. E-posta bağlantısı (Gmail, Outlook vb.)** — Claude'da hocanın
-e-posta bağlayıcısı kuruluysa (adı `gmail`, `outlook`, `mail` geçen ve
-taslak oluşturan bir araç görürsen) önce **izin iste**:
+**a. E-posta bağlantısı (Gmail)** — Gmail'in durumunu
+`${CLAUDE_PLUGIN_ROOT}/skills/baglanti/durum.md` ile anla (Read ile yükle;
+hiçbir aracı çağırmadan). **Giriş eksik** ya da **kapalıysa** bu oturumda
+bir kez sor: "Gmail'iniz bana bağlı değil. Bağlarsanız taslağı doğrudan
+e-postanızda hazırlarım; nasıl yapılacağını anlatayım mı? Ya da şimdilik
+e-posta programınızla devam edelim." Tarif isterse `divit:baglanti`
+skill'ini yükle; istemezse b'ye geç. **Açıksa** önce **izin iste**:
 
 > "E-posta hesabınız Claude'a bağlı görünüyor. Bu e-postayı hesabınızda
 > taslak olarak oluşturmama izin verir misiniz? Göndermem; taslaklar

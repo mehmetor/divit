@@ -82,9 +82,11 @@ Word ve PDF'i `kurallar`'daki yolla oku).
 
 ## 3. Takvime aktarma
 
-Önce araç listene bak: adında `calendar`, `takvim` ya da `outlook` geçen ve
-etkinlik oluşturan bir araç varsa (ör. Google Calendar `create_event`) **a**,
-yoksa **b**.
+Google Takvim'in durumunu `${CLAUDE_PLUGIN_ROOT}/skills/baglanti/durum.md`
+ile anla (Read ile yükle; aracı çağırmadan). **Açıksa** **a**. Giriş eksik ya
+da kapalıysa **b**; dosyayı verdikten sonra bir kez: "İsterseniz Google
+Takvim'inizi bana bağlamayı anlatayım; sonra doğrudan eklerim." → evetse
+`divit:baglanti`.
 
 **a. Bağlı takvim.** İzin iste:
 
