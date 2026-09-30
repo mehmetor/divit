@@ -42,6 +42,9 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
       dağınık, sorular yarım cevaplandı. Hocaya "daha iyi yazın" denmez.
   - İşe başlamadan tek cümle "Anladığım: … Doğru mu?"
   - Tek soru; evet/hayır ya da numaralı seçenek ("1) Word 2) PDF")
+  - Seçenek metni sayıyla başlamaz ("1) Sahada (1. bölüm)"), yoksa ekranda
+    iç içe liste görünür. Şimdilik yalnız `kitap-derle`'de; bu iş
+    yapılınca `kurallar`'a taşınsın.
   - Parça mesajları tek istek olarak okuma
   - Yerinde ipucu (Shift + Enter ile alt satır; ne + dosya + çıktı),
     oturumda en fazla bir, her biri en fazla üç kez, "bir daha gösterme"
@@ -89,6 +92,17 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 ## Kapsam
 
+- [ ] **Kitap yazarları (akademik olmayan)** — ilk görüşme:
+      `belgeler/YAZAR-GORUSMESI.md`; demo örnekleri `belgeler/demo-yazar/`.
+  - yazar için tanıtım sayfası (`apps/web`)
+  - editörlü (çok yazarlı) kitap derleme — bugün `kitap-derle` yalnız
+    kullanıcının kendi yazılarıyla çalışır
+  - Word'de değişiklik izleme ile öneri (bugün öneri listesi ya da yeni dosya)
+  - ses kaydını yazıya dökme (bugün yazıya dökülmüş hâli gerekir)
+  - iki eklentiye geçişin Code sekmesinin '/' menüsünde elle doğrulanması
+    ve tek kurulu hocanın makinesinde geçiş (yayından sonra;
+    `belgeler/GECIS-IKI-EKLENTI.md`)
+  - yazar kurulumunun Windows'ta denenmesi
 - [ ] **Öğretmenler / okul rehberliği (PDR).** Aday: lise PDR bölüm başkanı,
       uzman psikolojik danışman; CV'si gelecek.
   - kurulum: yayını olmayanlar için örnek metin isteme yolu
@@ -111,6 +125,14 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
       doldurulabilir form yolu.
 - [ ] `guncelleme` akışı: yenilikleri söyleme, onayla kurulumu çalıştırma.
 - [ ] Mac kısa adres + Windows kısa adres (Windows'ta kullanıldı, çalışıyor).
+- [ ] Yazar kurulumu `kur.ps1` Windows'ta: `DIVIT_TUR`, yeniden kurulum
+      (settings.local.json'da yalnız iki eklenti anahtarı değişir, izinler
+      kalır), türün kılavuzunun açılması. Mac'te sınandı, `pwsh` yok.
+- [ ] Code sekmesinde '/' menüsü: yazar klasöründe `divit-akademik:` yok,
+      akademisyen klasöründe var mı (terminalde ölçüldü, Code sekmesinde
+      bakılmadı).
+- [ ] Kurulu hocada iki eklentiye geçiş (`belgeler/GECIS-IKI-EKLENTI.md`),
+      yayın günü.
 
 ## Kararlar
 

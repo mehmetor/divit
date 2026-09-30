@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="tr">
+<html lang="tr" data-rol="">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Divit Kılavuzu</title>
+<script>document.documentElement.className+=' js'</script>
 <style>
 :root{
   --zemin:#fbfaf7; --kagit:#ffffff; --metin:#1d2521; --soluk:#5b6660; --cizgi:#dfe3df;
@@ -30,11 +31,11 @@ header{border-bottom:3px solid var(--vurgu);padding-bottom:18px;margin-bottom:28
 header h1{margin:0;font-size:34px;color:var(--vurgu);letter-spacing:.5px}
 header p{margin:4px 0 0;color:var(--soluk)}
 header p.baglanti{margin-top:10px;font-size:15px}
-nav{background:var(--kagit);border:1px solid var(--cizgi);border-radius:10px;padding:14px 18px;margin-bottom:32px}
-nav b{display:block;margin-bottom:6px}
-nav ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
-nav a{color:var(--vurgu);text-decoration:none}
-nav a:hover{text-decoration:underline}
+nav.icindekiler{background:var(--kagit);border:1px solid var(--cizgi);border-radius:10px;padding:14px 18px;margin-bottom:32px}
+nav.icindekiler b{display:block;margin-bottom:6px}
+nav.icindekiler ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
+nav.icindekiler a{color:var(--vurgu);text-decoration:none}
+nav.icindekiler a:hover{text-decoration:underline}
 h2{font-size:23px;color:var(--vurgu);margin:44px 0 12px;padding-top:8px;border-top:1px solid var(--cizgi)}
 h3{font-size:18px;margin:22px 0 8px}
 p{margin:0 0 12px}
@@ -58,9 +59,9 @@ th{background:var(--vurgu-acik)}
 td .yaz{margin:0;font-size:14px}
 code{font-family:ui-monospace,Menlo,monospace;font-size:15px;background:var(--kod);padding:1px 5px;border-radius:4px}
 footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid var(--cizgi);padding-top:14px}
-@media (max-width:560px){nav ol{columns:1} header h1{font-size:28px}}
+@media (max-width:560px){nav.icindekiler ol{columns:1} header h1{font-size:28px}}
 @media print{
-  body{background:#fff;color:#000;font-size:12pt} nav{display:none}
+  body{background:#fff;color:#000;font-size:12pt} nav.icindekiler,nav.roller{display:none}
   h2{break-after:avoid} ol.adim>li,.kutu,tr{break-inside:avoid}
   ol.adim>li::before{background:#000;color:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
@@ -73,6 +74,16 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
 .iki>div{background:var(--kagit);border:1px solid var(--cizgi);border-radius:8px;padding:10px 12px}
 @media (max-width:560px){.iki{grid-template-columns:1fr}}
 .tanim{background:var(--vurgu-acik);border-radius:10px;padding:14px 16px;margin:0 0 16px}
+main a{color:var(--vurgu)}
+.roller{position:sticky;top:0;z-index:5;display:flex;gap:6px;background:var(--zemin);padding:10px 0 0;margin:0 0 24px;border-bottom:2px solid var(--vurgu)}
+.roller a{flex:1;text-align:center;padding:10px 12px;border:1px solid var(--cizgi);border-bottom:none;border-radius:10px 10px 0 0;
+  background:var(--kagit);color:var(--soluk);text-decoration:none;font-weight:600}
+.roller a[aria-selected="true"]{background:var(--vurgu);border-color:var(--vurgu);color:var(--kagit)}
+.js .rol-bolum{display:none} .js .rol-bolum.secili{display:block}
+.rol-bolum{scroll-margin-top:60px} section{scroll-margin-top:60px}
+.rol-baslik{font-size:15px;color:var(--soluk);margin:0 0 16px}
+.ortak-baslik{margin:56px 0 0;padding:10px 14px;border-radius:8px;background:var(--vurgu-acik);color:var(--vurgu);font-weight:700}
+html:not(.js) .rol-bolum+.rol-bolum{margin-top:56px;padding-top:24px;border-top:3px solid var(--vurgu)}
 </style>
 </head>
 <body>
@@ -80,62 +91,46 @@ footer{margin-top:48px;color:var(--soluk);font-size:15px;border-top:1px solid va
 
 <header>
   <h1>Divit Kılavuzu</h1>
-  <p>Akademik yazım tezgâhı · Makale, tez, kitap</p>
+  <p>Yazım ve editörlük yardımcısı · Windows ve Mac</p>
   <p class="baglanti">Ayrıntılı tanıtım: <a href="https://divit.simetri.app">divit.simetri.app</a> · Kaynak: <a href="https://github.com/mehmetor/divit">github.com/mehmetor/divit</a></p>
 </header>
 
-<nav>
+<nav class="roller" role="tablist" aria-label="Kılavuz türü">
+  <a href="#akademisyen" id="sekme-akademisyen" role="tab" aria-selected="false">Akademisyen</a>
+  <a href="#yazar" id="sekme-yazar" role="tab" aria-selected="false">Yazar</a>
+</nav>
+
+<div class="rol-bolum" id="akademisyen" role="tabpanel" aria-labelledby="sekme-akademisyen">
+<p class="rol-baslik">Akademisyen kılavuzu · Makale, tez, yazışma, kitap</p>
+<nav class="icindekiler">
   <b>İçindekiler</b>
   <ol>
-    <li><a href="#nedir">Divit nedir</a></li>
+    <li><a href="#a-nedir">Divit nedir</a></li>
+    <li><a href="#a-ilk">İlk açılış</a></li>
+    <li><a href="#a-konus">Divit'e iş verin</a></li>
+    <li><a href="#a-isler">Divit'in yaptığı işler</a></li>
+    <li><a href="#a-klasor">Divit klasörü</a></li>
+    <li><a href="#a-guvenlik">Güvenlik</a></li>
+    <li><a href="#a-yapmaz">Divit'in yapmadığı işler</a></li>
     <li><a href="#ac">Divit'i açın</a></li>
-    <li><a href="#ilk">İlk açılış</a></li>
-    <li><a href="#konus">Divit'e iş verin</a></li>
-    <li><a href="#isler">Divit'in yaptığı işler</a></li>
     <li><a href="#izin">İzin soruları</a></li>
-    <li><a href="#klasor">Divit klasörü</a></li>
-    <li><a href="#guvenlik">Güvenlik</a></li>
     <li><a href="#geri">Bir şey bozulursa</a></li>
-    <li><a href="#yapmaz">Divit'in yapmadığı işler</a></li>
-    <li><a href="#geribildirim">Geri bildirim</a></li>
+    <li><a href="#geribildirim">Geri bildirim ve kullanım</a></li>
   </ol>
 </nav>
 
-<section id="nedir">
-<h2>1. Divit nedir</h2>
+<section id="a-nedir">
+<h2>Divit nedir</h2>
 <p>Divit, bilgisayarınızda çalışan bir yardımcıdır.</p>
 <p>Divit öğrenci tezlerini okur. Divit makalelerinizi göndermeden önce kontrol eder. Divit yazışmalarınızı hazırlar.</p>
 <p>Divit sizin yerinize karar vermez. Divit size bulgu ve öneri verir. Son karar sizindir.</p>
 <div class="tanim"><b>Divit nerede çalışır?</b><br>
 Divit, <b>Claude</b> uygulamasının içinde çalışır. Claude uygulamasında <b>Code</b> sekmesini açarsınız. Sonra <b>Divit klasörünü</b> seçersiniz. Bu kılavuzda buna <b>Divit sohbeti</b> diyoruz.</div>
+<p>Divit'i nasıl açacağınız aşağıda, <a href="#ac">Divit'i açın</a> bölümünde yazar.</p>
 </section>
 
-<section id="ac">
-<h2>2. Divit'i açın</h2>
-<ol class="adim">
-  <li>Claude uygulamasını açın.
-    <div class="iki" style="margin-top:8px">
-      <div><span class="isl win">WINDOWS</span>Başlat menüsünü açın. <b>Claude</b> yazın. <kbd>Enter</kbd> tuşuna basın.</div>
-      <div><span class="isl mac">MAC</span>Dock'ta Claude simgesine tıklayın. Ya da Uygulamalar klasöründe <b>Claude</b>'u açın.</div>
-    </div></li>
-  <li>Pencerenin üst ortasında <b>Code</b> sekmesine tıklayın.</li>
-  <li><b>Local</b> seçeneğini seçin.</li>
-  <li><b>Select folder</b> düğmesine tıklayın.</li>
-  <li><b>Belgeler</b> klasörünü açın. <b>Divit</b> klasörünü seçin.
-    <div class="iki" style="margin-top:8px">
-      <div><span class="isl win">WINDOWS</span><b>Klasör seç</b> düğmesine tıklayın.</div>
-      <div><span class="isl mac">MAC</span><b>Aç</b> düğmesine tıklayın.</div>
-    </div></li>
-  <li>Alttaki mesaj kutusuna yazın. <kbd>Enter</kbd> tuşuna basın.</li>
-</ol>
-<div class="kutu not"><b class="etiket">NOT</b>
-Claude uygulaması seçtiğiniz klasörü genellikle hatırlar. Sonraki açılışlarda adım 3–5'i yapmanız gerekmeyebilir. Soldaki listede önceki Divit sohbetleriniz görünür.</div>
-<div class="kutu not"><b class="etiket">NOT</b>
-Uygulama "Do you trust the files in this folder?" diye sorarsa <b>Yes</b> ya da <b>Trust</b> seçeneğini seçin. Bu soru yalnızca ilk seferde çıkar.</div>
-</section>
-
-<section id="ilk">
-<h2>3. İlk açılış</h2>
+<section id="a-ilk">
+<h2>İlk açılış</h2>
 <p>İlk açılışta Divit sizi tanımak ister. Divit sizden özgeçmişinizi ister.</p>
 <ol class="adim">
   <li>Özgeçmişinizi (PDF ya da Word) mesaj kutusuna sürükleyin. Ya da AVESİS sayfanızın adresini yazın.</li>
@@ -147,8 +142,8 @@ Uygulama "Do you trust the files in this folder?" diye sorarsa <b>Yes</b> ya da 
 <p>Bu işlem yaklaşık 15 dakika sürer. Yarıda bırakırsanız Divit bir sonraki açılışta kaldığı yerden devam eder.</p>
 </section>
 
-<section id="konus">
-<h2>4. Divit'e iş verin</h2>
+<section id="a-konus">
+<h2>Divit'e iş verin</h2>
 <p>Divit ile kendi cümlelerinizle konuşun. Özel komut bilmeniz gerekmez.</p>
 <h3>İyi bir istek nasıl yazılır</h3>
 <ol class="adim">
@@ -177,12 +172,14 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <div class="tablo"><table>
 <thead><tr><th>Komut</th><th>Ne yapar</th></tr></thead>
 <tbody>
-<tr><td><code>/divit:tez-kontrol</code></td><td>Öğrenci tezini, ödevini ya da raporunu okur, bulgu raporu yazar.</td></tr>
-<tr><td><code>/divit:yayin-oncesi</code></td><td>Kendi makalenizi göndermeden önce kontrol eder: çizelge, birim, dergi kuralları.</td></tr>
-<tr><td><code>/divit:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder.</td></tr>
+<tr><td><code>/divit-akademik:tez-kontrol</code></td><td>Öğrenci tezini, ödevini ya da raporunu okur, bulgu raporu yazar.</td></tr>
+<tr><td><code>/divit-akademik:yayin-oncesi</code></td><td>Kendi makalenizi göndermeden önce kontrol eder: çizelge, birim, dergi kuralları.</td></tr>
+<tr><td><code>/divit-akademik:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder.</td></tr>
 <tr><td><code>/divit:yazisma</code></td><td>Dilekçe, kurul yazısı, referans mektubu, hakem cevabı yazar.</td></tr>
-<tr><td><code>/divit:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir.</td></tr>
-<tr><td><code>/divit:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
+<tr><td><code>/divit-akademik:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir.</td></tr>
+<tr><td><code>/divit-akademik:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
+<tr><td><code>/divit:kitap-duzenle</code></td><td>Var olan kitabınızı editör gözüyle okur: tekrar, çelişki, eskimiş bilgi. Onayladığınız değişiklikleri ayrı bir çalışma metnine işler.</td></tr>
+<tr><td><code>/divit:kitap-derle</code></td><td>Dağınık yazılarınızdan, konuşmalarınızdan kitap planı ve bölüm iskeleti çıkarır.</td></tr>
 <tr><td><code>/divit:disa-aktar</code></td><td>Metni Word dosyasına çevirir.</td></tr>
 <tr><td><code>/divit:pdf</code></td><td>PDF birleştirir, sayfa çıkarır, döndürür, kontrol listesi işaretler.</td></tr>
 <tr><td><code>/divit:eposta</code></td><td>Hazırlanan metni e-postanızda taslak olarak açar. Göndermez.</td></tr>
@@ -196,6 +193,8 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td><code>/divit:gelistirici-ihtiyac-gorusmesi</code></td><td>Divit'i geliştiren kişi için ihtiyaç görüşmesi yapar.</td></tr>
 </tbody></table></div>
 <div class="kutu not"><b class="etiket">NOT</b>
+Üniversite işlerine ait komutlar <code>/divit-akademik:</code> ile başlar. Listede <code>divit</code> yazdığınızda ikisi birlikte görünür.</div>
+<div class="kutu not"><b class="etiket">NOT</b>
 <code>gelistirici-</code> ile başlayan komutlar Divit'i geliştiren kişi içindir. Bunları kullanmanız gerekmez.</div>
 <h3>Claude'un kendi komutları</h3>
 <div class="tablo"><table>
@@ -207,8 +206,8 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 </tbody></table></div>
 </section>
 
-<section id="isler">
-<h2>5. Divit'in yaptığı işler</h2>
+<section id="a-isler">
+<h2>Divit'in yaptığı işler</h2>
 <div class="tablo"><table>
 <thead><tr><th>İş</th><th>Şöyle yazın</th><th>Sonuç nerede</th></tr></thead>
 <tbody>
@@ -261,32 +260,26 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
     <td><span class="yaz">yardım</span></td>
     <td>Bu sayfa</td></tr>
 </tbody></table></div>
+<h3>Kitap işleri</h3>
+<p>Kitap yazıyorsanız Divit şu iki işte yardım eder. Adım adım anlatım <a href="#y-kitap">Yazar sekmesinde</a>. Kitap için klasörü Divit ilk kitap işinde onayınızla açar: <code>kitaplar</code>. Kitabınızın asıl Word dosyası o klasörün <code>asil</code> bölümünde durur; Divit ona hiç yazmaz.</p>
+<div class="tablo"><table>
+<thead><tr><th>İş</th><th>Şöyle yazın</th><th>Sonuç nerede</th></tr></thead>
+<tbody>
+<tr><td>Var olan kitabınızı editör gözüyle okuma, yeni baskıya hazırlama</td>
+    <td><span class="yaz">kitabımı yeni baskı için düzenle</span><br><span class="yaz">kitabıma editör gözüyle bak</span><br><span class="yaz">tekrarları ve çelişkileri bul</span></td>
+    <td><code>kitaplar/&lt;kitabınız&gt;/duzenleme</code></td></tr>
+<tr><td>Dağınık yazılarınızdan yeni bir kitap planı</td>
+    <td><span class="yaz">yazılarımdan kitap yapalım</span><br><span class="yaz">bu yazıları bir araya getir</span><br><span class="yaz">konuşmalarımı kitaba çevir</span></td>
+    <td><code>kitaplar/&lt;kitabınız&gt;/plan.md</code></td></tr>
+</tbody></table></div>
 <div class="kutu not"><b class="etiket">NOT</b>
 PDF işleri için internetteki "ücretsiz PDF" sitelerini kullanmayın. Divit bu işleri bilgisayarınızda yapar. Dosyanız hiçbir siteye yüklenmez. Asıl PDF değişmez; sonuç <code>cikti</code> klasörüne yeni dosya olarak yazılır.</div>
 <div class="kutu not"><b class="etiket">NOT</b>
 Divit e-postayı kendisi göndermez. Divit yalnızca taslak açar. Bunun için bir kez izin ister. Taslağı okuyun. Göndermeyi siz yaparsınız.</div>
 </section>
 
-<section id="izin">
-<h2>6. İzin soruları</h2>
-<p>Divit bazı işlemlerden önce sizden izin ister. Mesaj kutusunun üstünde bir soru çıkar. Soru İngilizce olabilir.</p>
-<div class="tablo"><table>
-<thead><tr><th>Seçenek</th><th>Anlamı</th></tr></thead>
-<tbody>
-<tr><td><b>Allow once</b></td><td>Bu işleme bir kez izin verin.</td></tr>
-<tr><td><b>Always allow</b></td><td>Bu işleme her zaman izin verin. Divit bir daha sormaz.</td></tr>
-<tr><td><b>Deny</b></td><td>İzin vermeyin. Divit başka bir yol dener ya da size sorar.</td></tr>
-</tbody></table></div>
-<div class="kutu uyari"><b class="etiket">UYARI</b>
-Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye sorun.</div>
-<p>Divit dosya okumak ve kendi klasörlerine yazmak için izin istemez. Bu işlemlere önceden izin verildi.</p>
-<h3>Çok izin sorusu çıkıyorsa</h3>
-<p>Mesaj kutusunun altında bir kip seçici vardır. Bu seçiciden <b>Auto</b>'yu seçin. Divit güvenli işleri sormadan yapar. Divit riskli işlerde yine sorar.</p>
-<p>Auto kipinde de Divit dosyalarınızı silmez. Divit öğrenci dosyalarına yazmaz.</p>
-</section>
-
-<section id="klasor">
-<h2>7. Divit klasörü</h2>
+<section id="a-klasor">
+<h2>Divit klasörü</h2>
 <p>Divit klasörü <b>Belgeler</b> klasörünüzdedir. Masaüstündeki <b>Divit</b> kısayolu da bu klasörü açar.</p>
 <div class="tablo"><table>
 <thead><tr><th>Klasör</th><th>İçindekiler</th></tr></thead>
@@ -302,8 +295,8 @@ Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye soru
 <code>.divit</code> ve <code>.claude</code> klasörlerine dokunmayın. Bu klasörler Divit'in kendi dosyalarıdır. Sizi tanıdığı bilgiler ve önceki sürümler buradadır.</div>
 </section>
 
-<section id="guvenlik">
-<h2>8. Güvenlik</h2>
+<section id="a-guvenlik">
+<h2>Güvenlik</h2>
 <div class="kutu uyari"><b class="etiket">UYARI</b>
 Hakemlik için gelen makaleleri Divit'e vermeyin. Jüri ve teşvik dosyalarını Divit'e vermeyin. Bu dosyalar başka kişilerin gizli belgeleridir.</div>
 <p>Divit öğrenci dosyalarını değiştiremez. Divit bu dosyaları yalnızca okur.</p>
@@ -314,8 +307,301 @@ Hakemlik için gelen makaleleri Divit'e vermeyin. Jüri ve teşvik dosyalarını
 Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gönderilir. Yayımlanmamış ve kişisel bilgi içeren metinlerde bunu göz önünde tutun.</div>
 </section>
 
+<section id="a-yapmaz">
+<h2>Divit'in yapmadığı işler</h2>
+<ul>
+  <li>Divit not vermez. Divit kabul ya da ret kararı vermez.</li>
+  <li>Divit intihal kararı vermez. Divit "yapay zekâ yazmış" kararı vermez.</li>
+  <li>Divit istatistik analizi yapmaz. Divit yalnızca metindeki sayıların tutarlılığını kontrol eder.</li>
+  <li>Divit sizin yerinize makale yazmaz. Divit yapıyı, eksikleri ve itirazları gösterir.</li>
+</ul>
+</section>
+</div>
+
+<div class="rol-bolum" id="yazar" role="tabpanel" aria-labelledby="sekme-yazar">
+<p class="rol-baslik">Yazar kılavuzu · Kitaplarınız ve yazılarınız</p>
+<nav class="icindekiler">
+  <b>İçindekiler</b>
+  <ol>
+    <li><a href="#y-nedir">Divit nedir</a></li>
+    <li><a href="#y-ilk">İlk açılış</a></li>
+    <li><a href="#y-konus">Divit'e iş verin</a></li>
+    <li><a href="#y-isler">Divit'in yaptığı işler</a></li>
+    <li><a href="#y-kitap">Kitap işleri adım adım</a></li>
+    <li><a href="#y-klasor">Dosyalarınız nerede</a></li>
+    <li><a href="#y-guvenlik">Güvenlik ve işaretler</a></li>
+    <li><a href="#y-yapmaz">Divit'in yapmadığı işler</a></li>
+    <li><a href="#ac">Divit'i açın</a></li>
+    <li><a href="#izin">İzin soruları</a></li>
+    <li><a href="#geri">Bir şey bozulursa</a></li>
+    <li><a href="#geribildirim">Geri bildirim ve kullanım</a></li>
+  </ol>
+</nav>
+
+<section id="y-nedir">
+<h2>Divit nedir</h2>
+<p>Divit, bilgisayarınızda çalışan bir yardımcıdır.</p>
+<p>Divit kitabınızı bir editör gözüyle okur. Divit dağınık yazılarınızı bir kitap planına dönüştürür. Divit yayınevine ve editöre gidecek yazılarınızı hazırlar.</p>
+<p>Divit sizin yerinize yazmaz. Divit size bulgu ve öneri verir. Sesiniz ve cümleleriniz sizindir; son karar sizindir.</p>
+<div class="tanim"><b>Divit nerede çalışır?</b><br>
+Divit, <b>Claude</b> uygulamasının içinde çalışır. Claude uygulamasında <b>Code</b> sekmesini açarsınız. Sonra <b>Divit klasörünü</b> seçersiniz. Bu kılavuzda buna <b>Divit sohbeti</b> diyoruz.</div>
+<p>Divit'i nasıl açacağınız aşağıda, <a href="#ac">Divit'i açın</a> bölümünde yazar.</p>
+</section>
+
+<section id="y-ilk">
+<h2>İlk açılış</h2>
+<p>İlk açılışta Divit sizi tanımak ister.</p>
+<ol class="adim">
+  <li>Kendinizi tanıtan bir belgeyi mesaj kutusuna sürükleyin: özgeçmişiniz, kısa biyografiniz ya da kitabınızın tanıtım yazısı. Bir internet sayfanız varsa adresini yazmanız da yeterlidir.</li>
+  <li>Divit belgeden çıkardıklarını gösterir. Doğru olup olmadığını söyleyin.</li>
+  <li>Divit yazdıklarınızdan birkaçını ister. Buradan üslubunuzu öğrenir.</li>
+  <li>Divit süren işlerinizi sorar: hangi kitap, hangi yazı, ne zamana yetişecek.</li>
+</ol>
+<p>Bu işlem yaklaşık 15 dakika sürer. Yarıda bırakırsanız Divit bir sonraki açılışta kaldığı yerden devam eder.</p>
+</section>
+
+<section id="y-konus">
+<h2>Divit'e iş verin</h2>
+<p>Divit ile kendi cümlelerinizle konuşun. Özel komut bilmeniz gerekmez.</p>
+<h3>İyi bir istek nasıl yazılır</h3>
+<ol class="adim">
+  <li>İşi söyleyin. Örnek: "düzenle", "bir araya getir", "yaz".</li>
+  <li>Dosyayı söyleyin. Örnek: "asil klasöründeki kitabım".</li>
+  <li>Gerekirse amacı söyleyin. Örnek: "yeni baskı için", "yayınevine göndereceğim".</li>
+</ol>
+<p>İyi istek örnekleri:</p>
+<span class="yaz">kitabımı yeni baskı için düzenle</span>
+<span class="yaz">yazılarımdan kitap yapalım</span>
+<span class="yaz">kitabımdaki tekrarları ve çelişkileri bul</span>
+<span class="yaz">yayınevine yeni baskı için kısa bir yazı hazırla</span>
+<h3>Divit'e dosya verin</h3>
+<p>İki yol vardır. İkisi de aynı sonucu verir.</p>
+<ul>
+  <li>Dosyayı mesaj kutusuna sürükleyin.</li>
+  <li>Dosyayı Divit klasöründeki ilgili klasöre koyun. Örnek: kitabınızın Word dosyasını <code>kitaplar/&lt;kitabınız&gt;/asil</code> klasörüne koyun.</li>
+</ul>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. Durdurmak isterseniz mesaj kutusunun yanındaki durdurma düğmesine tıklayın.</div>
+<h3>"/" ile komut seçin</h3>
+<p>Komut bilmeniz gerekmez. Kendi cümleniz yeterlidir. Ama bir işi doğrudan seçmek isterseniz bu yolu kullanın.</p>
+<ol class="adim">
+  <li>Mesaj kutusuna <span class="yaz">/</span> yazın. Bir liste açılır.</li>
+  <li><span class="yaz">divit</span> yazın. Liste Divit komutlarına daralır.</li>
+  <li>Komutu fareyle seçin. İsterseniz ardından kısa bir açıklama yazın. Örnek: <span class="yaz">/divit:pdf bu üç dosyayı birleştir</span></li>
+  <li><b>Enter</b> tuşuna basın.</li>
+</ol>
+<div class="tablo"><table>
+<thead><tr><th>Komut</th><th>Ne yapar</th></tr></thead>
+<tbody>
+<tr><td><code>/divit:kitap-duzenle</code></td><td>Var olan kitabınızı editör gözüyle okur: tekrar, çelişki, eskimiş bilgi. Rapor yazar; onayladığınız değişiklikleri ayrı bir çalışma metnine işler.</td></tr>
+<tr><td><code>/divit:kitap-derle</code></td><td>Dağınık yazılarınızdan, konuşmalarınızdan kitap planı ve bölüm iskeleti çıkarır.</td></tr>
+<tr><td><code>/divit:yazisma</code></td><td>Yayınevine, editöre yazı; izin isteme yazısı hazırlar.</td></tr>
+<tr><td><code>/divit:disa-aktar</code></td><td>Metni Word dosyasına çevirir.</td></tr>
+<tr><td><code>/divit:pdf</code></td><td>PDF birleştirir, sayfa çıkarır, döndürür, PDF'i Word'e çevirir.</td></tr>
+<tr><td><code>/divit:eposta</code></td><td>Hazırlanan metni e-postanızda taslak olarak açar. Göndermez.</td></tr>
+<tr><td><code>/divit:geri-al</code></td><td>Bir dosyayı önceki hâline döndürür.</td></tr>
+<tr><td><code>/divit:yardim</code></td><td>Bu kılavuzu açar ve kısa bir özet verir.</td></tr>
+<tr><td><code>/divit:saglik</code></td><td>Divit'in düzgün çalışıp çalışmadığını denetler.</td></tr>
+<tr><td><code>/divit:guncelleme</code></td><td>Yenilikleri anlatır, gerekirse güncellemeyi yapar.</td></tr>
+<tr><td><code>/divit:bakim</code></td><td>Divit'in kendi notlarını toparlar (ayda bir).</td></tr>
+<tr><td><code>/divit:kurulum</code></td><td>Divit'in sizi tanıdığı ilk görüşmeyi yeniden başlatır.</td></tr>
+<tr><td><code>/divit:gelistirici-paylas</code></td><td>Notlarınızı onayınızla Divit'i geliştirene gönderir.</td></tr>
+</tbody></table></div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Listede <code>gelistirici-</code> ile başlayan komutlar Divit'i geliştiren kişi içindir. Bunları kullanmanız gerekmez.</div>
+<h3>Claude'un kendi komutları</h3>
+<div class="tablo"><table>
+<thead><tr><th>Komut</th><th>Ne yapar</th></tr></thead>
+<tbody>
+<tr><td><code>/effort high</code></td><td>Divit daha dikkatli okur. Uzun işlerde kullanın. Kotanızı daha hızlı harcar.</td></tr>
+<tr><td><code>/effort low</code></td><td>Olağan ayara döner: hızlı ve tutumlu.</td></tr>
+<tr><td><code>/model</code></td><td>Yapay zekâ modelini seçer. Olağan model Opus'tur; değiştirmeniz gerekmez.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="y-isler">
+<h2>Divit'in yaptığı işler</h2>
+<div class="tablo"><table>
+<thead><tr><th>İş</th><th>Şöyle yazın</th><th>Sonuç nerede</th></tr></thead>
+<tbody>
+<tr><td>Var olan kitabınızı editör gözüyle okuma</td>
+    <td><span class="yaz">kitabımı yeni baskı için düzenle</span><br><span class="yaz">kitabıma editör gözüyle bak</span><br><span class="yaz">tekrarları ve çelişkileri bul</span></td>
+    <td><code>kitaplar/&lt;kitabınız&gt;/duzenleme</code></td></tr>
+<tr><td>Yazılarınızdan yeni bir kitap</td>
+    <td><span class="yaz">yazılarımdan kitap yapalım</span><br><span class="yaz">bu yazıları bir araya getir</span><br><span class="yaz">konuşmalarımı kitaba çevir</span></td>
+    <td><code>kitaplar/&lt;kitabınız&gt;/plan.md</code> ve <code>taslak</code></td></tr>
+<tr><td>Yayınevine ya da editöre yazı</td>
+    <td><span class="yaz">yayınevine yeni baskı için yazı hazırla</span></td>
+    <td><code>yazilar</code></td></tr>
+<tr><td>İzin isteme yazısı</td>
+    <td><span class="yaz">bu alıntı için izin yazısı hazırla</span></td>
+    <td><code>yazilar</code></td></tr>
+<tr><td>Word çıktısı</td>
+    <td><span class="yaz">bunu Word'e çevir</span></td>
+    <td><code>cikti</code></td></tr>
+<tr><td>PDF birleştirme, sayfa çıkarma, döndürme</td>
+    <td><span class="yaz">bu üç PDF'i birleştir</span><br><span class="yaz">5-9. sayfaları ayrı PDF yap</span></td>
+    <td><code>cikti</code></td></tr>
+<tr><td>PDF'i Word'e çevirme</td>
+    <td><span class="yaz">bu PDF'i Word'e çevir</span></td>
+    <td><code>cikti</code></td></tr>
+<tr><td>E-posta taslağı hazırlama</td>
+    <td><span class="yaz">e-posta olarak hazırla</span></td>
+    <td>E-postanızdaki taslaklar</td></tr>
+<tr><td>Önceki sürüme dönme</td>
+    <td><span class="yaz">geri al</span></td>
+    <td>Aynı dosya</td></tr>
+<tr><td>Geri bildirim gönderme</td>
+    <td><span class="yaz">geri bildirim gönder</span></td>
+    <td>E-posta</td></tr>
+<tr><td>Divit'in çalışıp çalışmadığını denetleme</td>
+    <td><span class="yaz">çalışıyor musun</span></td>
+    <td>Sohbette</td></tr>
+<tr><td>Yenilikleri öğrenme</td>
+    <td><span class="yaz">yenilikler neler</span></td>
+    <td>Sohbette</td></tr>
+<tr><td>Bu kılavuzu açma</td>
+    <td><span class="yaz">yardım</span></td>
+    <td>Bu sayfa</td></tr>
+</tbody></table></div>
+<div class="kutu not"><b class="etiket">NOT</b>
+PDF işleri için internetteki "ücretsiz PDF" sitelerini kullanmayın. Divit bu işleri bilgisayarınızda yapar. Dosyanız hiçbir siteye yüklenmez. Asıl PDF değişmez; sonuç <code>cikti</code> klasörüne yeni dosya olarak yazılır.</div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit e-postayı kendisi göndermez. Divit yalnızca taslak açar. Bunun için bir kez izin ister. Taslağı okuyun. Göndermeyi siz yaparsınız.</div>
+</section>
+
+<section id="y-kitap">
+<h2>Kitap işleri adım adım</h2>
+<h3>Var olan kitabınızı yeni baskıya hazırlama</h3>
+<ol class="adim">
+  <li>Divit'e yazın: <span class="yaz">kitabımı yeni baskı için düzenle</span></li>
+  <li>Divit kitabın adını sorar ve kitap için bir klasör açmayı önerir. Onaylayın. Klasör açılır. Kitabınızın Word dosyasını <code>asil</code> klasörüne bırakın.</li>
+  <li>Divit iki soru sorar: kitabın neresine bakılsın (yapı ve akış, anlatım, tutarlılık ve tekrarlar, yazım ve noktalama ya da hepsi) ve yeni baskıda amacınız ne (bilgileri güncellemek, kısaltmak, yeni bir okura seslenmek, genişletmek). Numarayı yazmanız yeterlidir.</li>
+  <li>Divit kitabı bölüm bölüm okur. İşi bir editör sırasıyla yapar: önce yapı, sonra anlatım, sonra tutarlılık, en son yazım ve noktalama. Her aşama bitince size gösterir.</li>
+  <li>Divit raporu <code>duzenleme</code> klasörüne yazar ve açar. Ekranda üç cümlelik bir özet verir. Somut öneriler bölüm bölüm ayrı dosyalardadır: önce, sonra, neden.</li>
+  <li>Divit önerileri tek tek gösterir. Numarasıyla kabul edin, reddedin ya da kendi sözünüzle değiştirin. Onaylamadığınız hiçbir öneri işlenmez.</li>
+  <li>Onayladıklarınız <code>taslak</code> klasöründeki çalışma metnine işlenir. Asıl Word dosyanız hiç değişmez.</li>
+  <li>Bitince <span class="yaz">bunu Word'e çevir</span> yazın. Yeni dosya <code>cikti</code> klasörüne gelir.</li>
+</ol>
+<div class="kutu not"><b class="etiket">NOT</b>
+Yeni Word dosyasında sayfa düzeni, resimler ve dipnotlar asıl dosyanızdaki gibi olmayabilir. Yayınevine iki yol daha uygundur: temiz metni verin ya da öneri listesini kendi Word dosyanızda uygulayın. Divit Word'de "değişiklikleri izle" kaydı üretmez.</div>
+<h3>Dağınık yazılarınızdan yeni bir kitap</h3>
+<ol class="adim">
+  <li>Divit'e yazın: <span class="yaz">yazılarımdan kitap yapalım</span></li>
+  <li>Divit kitap için bir çalışma adı sorar ve klasör açmayı önerir. Onaylayın. Kitaba girebilecek her şeyi <code>malzeme</code> klasörüne bırakın: yazılar, konuşma ve röportaj dökümleri, sunumların PDF hâli, notlar.</li>
+  <li>Divit her parçanın listesini çıkarır: başlık, tarih, tür, uzunluk, ana fikir, daha önce nerede yayımlandığı. Bilmediği tarihi tahmin etmez, size sorar. Malzemenin bir kitaba yetip yetmediğini söyler.</li>
+  <li>Divit parçaları konulara ayırır. Aynı anekdotu anlatan parçaları, birbirini tutmayan bilgileri ve eskimiş olabilecek yerleri gösterir.</li>
+  <li>Divit iki şey sorar: kitap okura tek cümleyle ne söylüyor ve okur kim. Seçeneklerden birini seçin ya da kendi cümlenizi yazın.</li>
+  <li>Divit iki ya da üç içindekiler seçeneği sunar: zamana göre, konuya göre, çıkardığınız derslere göre. Her bölüme hangi yazıların girdiğini ve hangi bölüm için malzeme olmadığını yazar. Siz seçersiniz.</li>
+  <li>Seçtiğiniz plana göre Divit bölüm iskeletlerini <code>taslak</code> klasörüne yazar. Sizin cümleleriniz olduğu gibi kalır. İki parça arasında geçiş eksikse <code>[BAĞLANTI: …]</code> işareti koyar. Aynı anekdot iki yerdeyse hangisinin kalacağını size sorar.</li>
+  <li>Daha önce bir gazetede yayımlanmış yazı, röportaj ya da konuşma kaydı için Divit yayın hakkı sorusu sorar. Hüküm vermez; yayınevi ya da bir hukukçuyla konuşmanızı önerir.</li>
+</ol>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit ses kaydını ve videoyu okuyamaz. Konuşmalarınızın yazıya dökülmüş hâlini verin. Sunumlarınızı PDF olarak verin.</div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Kitabın ne aşamada olduğu <code>plan.md</code> dosyasının ilk satırında yazar. Ara verip döndüğünüzde Divit'e <span class="yaz">kitapta nerede kaldık</span> yazmanız yeterlidir.</div>
+</section>
+
+<section id="y-klasor">
+<h2>Dosyalarınız nerede</h2>
+<p>Divit klasörü <b>Belgeler</b> klasörünüzdedir. Masaüstündeki <b>Divit</b> kısayolu da bu klasörü açar.</p>
+<div class="tablo"><table>
+<thead><tr><th>Klasör</th><th>İçindekiler</th></tr></thead>
+<tbody>
+<tr><td><code>kitaplar</code></td><td>Kitaplarınız. Her kitabın kendi klasörü vardır. Klasörü Divit onayınızla açar.</td></tr>
+<tr><td><code>kitaplar/&lt;kitabınız&gt;/asil</code></td><td>Kitabınızın asıl Word ya da PDF dosyası. Divit yalnızca okur, hiç yazmaz.</td></tr>
+<tr><td><code>kitaplar/&lt;kitabınız&gt;/malzeme</code></td><td>Kitaba dönüşecek yazılar, konuşma dökümleri, röportajlar. Divit yalnızca okur, hiç yazmaz.</td></tr>
+<tr><td><code>kitaplar/&lt;kitabınız&gt;/duzenleme</code></td><td>Divit'in editör raporları ve bölüm bölüm önerileri (önce, sonra, neden).</td></tr>
+<tr><td><code>kitaplar/&lt;kitabınız&gt;/envanter.md</code></td><td>Yazılarınızın listesi: başlık, tarih, tür, uzunluk, daha önce nerede yayımlandığı.</td></tr>
+<tr><td><code>kitaplar/&lt;kitabınız&gt;/taslak</code></td><td>Bölüm iskeletleri ve onayladığınız değişikliklerin işlendiği çalışma metni.</td></tr>
+<tr><td><code>kitaplar/&lt;kitabınız&gt;/plan.md</code></td><td>Kitabın planı. İlk satırda kitabın ne aşamada olduğu yazar.</td></tr>
+<tr><td><code>yazilar</code></td><td>Sizin diğer metinleriniz ve yazışmalarınız.</td></tr>
+<tr><td><code>kaynaklar</code></td><td>Kitapta dayandığınız belgeler: rapor, haber, istatistik.</td></tr>
+<tr><td><code>cikti</code></td><td>Word ve PDF çıktıları.</td></tr>
+<tr><td><code>arsiv</code></td><td>Biten işler.</td></tr>
+</tbody></table></div>
+<div class="kutu uyari"><b class="etiket">UYARI</b>
+<code>.divit</code> ve <code>.claude</code> klasörlerine dokunmayın. Bu klasörler Divit'in kendi dosyalarıdır. Sizi tanıdığı bilgiler ve önceki sürümler buradadır.</div>
+</section>
+
+<section id="y-guvenlik">
+<h2>Güvenlik ve işaretler</h2>
+<p>Divit asıl kitabınızı ve malzemenizi değiştiremez. Divit bu dosyaları yalnızca okur.</p>
+<p>Divit Word dosyalarınızı hiç değiştirmez. Divit değişikliği yeni bir dosyaya yazar.</p>
+<p>Divit metne bazı işaretler koyar. Bu işaretleri kontrol edin:</p>
+<div class="tablo"><table>
+<thead><tr><th>İşaret</th><th>Anlamı</th></tr></thead>
+<tbody>
+<tr><td><code>[DOĞRULA]</code></td><td>Kaynağı belli olmayan bir sayı, tarih, ad ya da alıntı. Doğru olduğunu siz onaylayın.</td></tr>
+<tr><td><code>[GÜNCELLE]</code></td><td>Yeni baskıda eskimiş olabilecek bilgi.</td></tr>
+<tr><td><code>[BAĞLANTI: …]</code></td><td>İki parça arasında geçiş eksik. Neyin gerektiği yanında yazar.</td></tr>
+<tr><td><code>[İZİN]</code></td><td>Yayın hakkı ya da izin sorusu olabilecek parça. Divit yalnızca soruyu işaretler; kararı siz ya da yayınevi verir.</td></tr>
+<tr><td><code>[TASLAK]</code></td><td>Divit'in kendi yazdığı cümle. Sizin cümleniz değildir; isterseniz silin ya da kendi sözünüzle yazın.</td></tr>
+</tbody></table></div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gönderilir. Yayımlanmamış ve kişisel bilgi içeren metinlerde bunu göz önünde tutun.</div>
+</section>
+
+<section id="y-yapmaz">
+<h2>Divit'in yapmadığı işler</h2>
+<ul>
+  <li>Divit sizin yerinize kitap yazmaz. Divit yapıyı, eksikleri ve tekrarları gösterir; cümleler sizindir.</li>
+  <li>Divit sesinizi değiştirmez. Konuşur gibi yazmanızı, anekdotlarınızı, deyimlerinizi düzeltmez; yalnız hatayı ve okuru yoran yeri gösterir.</li>
+  <li>Divit bilgi uydurmaz. Emin olmadığı her bilgiyi işaretler.</li>
+  <li>Divit asıl dosyanızı değiştirmez. Değişiklik her zaman yeni bir dosyaya yazılır.</li>
+  <li>Divit hukuki görüş vermez. Yayın hakkı ve izin konularını yalnızca soru olarak işaretler.</li>
+  <li>Divit satış ya da başarı vaadi vermez. Kitabın ne kadar satacağını söylemez.</li>
+  <li>Divit ses kaydını ve videoyu okuyamaz. Yazıya dökülmüş hâlini ister.</li>
+</ul>
+</section>
+</div>
+
+<p class="ortak-baslik" id="ortak">Herkes için</p>
+
+<section id="ac">
+<h2>Divit'i açın</h2>
+<ol class="adim">
+  <li>Claude uygulamasını açın.
+    <div class="iki" style="margin-top:8px">
+      <div><span class="isl win">WINDOWS</span>Başlat menüsünü açın. <b>Claude</b> yazın. <kbd>Enter</kbd> tuşuna basın.</div>
+      <div><span class="isl mac">MAC</span>Dock'ta Claude simgesine tıklayın. Ya da Uygulamalar klasöründe <b>Claude</b>'u açın.</div>
+    </div></li>
+  <li>Pencerenin üst ortasında <b>Code</b> sekmesine tıklayın.</li>
+  <li><b>Local</b> seçeneğini seçin.</li>
+  <li><b>Select folder</b> düğmesine tıklayın.</li>
+  <li><b>Belgeler</b> klasörünü açın. <b>Divit</b> klasörünü seçin.
+    <div class="iki" style="margin-top:8px">
+      <div><span class="isl win">WINDOWS</span><b>Klasör seç</b> düğmesine tıklayın.</div>
+      <div><span class="isl mac">MAC</span><b>Aç</b> düğmesine tıklayın.</div>
+    </div></li>
+  <li>Alttaki mesaj kutusuna yazın. <kbd>Enter</kbd> tuşuna basın.</li>
+</ol>
+<div class="kutu not"><b class="etiket">NOT</b>
+Claude uygulaması seçtiğiniz klasörü genellikle hatırlar. Sonraki açılışlarda adım 3–5'i yapmanız gerekmeyebilir. Soldaki listede önceki Divit sohbetleriniz görünür.</div>
+<div class="kutu not"><b class="etiket">NOT</b>
+Uygulama "Do you trust the files in this folder?" diye sorarsa <b>Yes</b> ya da <b>Trust</b> seçeneğini seçin. Bu soru yalnızca ilk seferde çıkar.</div>
+</section>
+
+<section id="izin">
+<h2>İzin soruları</h2>
+<p>Divit bazı işlemlerden önce sizden izin ister. Mesaj kutusunun üstünde bir soru çıkar. Soru İngilizce olabilir.</p>
+<div class="tablo"><table>
+<thead><tr><th>Seçenek</th><th>Anlamı</th></tr></thead>
+<tbody>
+<tr><td><b>Allow once</b></td><td>Bu işleme bir kez izin verin.</td></tr>
+<tr><td><b>Always allow</b></td><td>Bu işleme her zaman izin verin. Divit bir daha sormaz.</td></tr>
+<tr><td><b>Deny</b></td><td>İzin vermeyin. Divit başka bir yol dener ya da size sorar.</td></tr>
+</tbody></table></div>
+<div class="kutu uyari"><b class="etiket">UYARI</b>
+Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye sorun.</div>
+<p>Divit dosya okumak ve kendi klasörlerine yazmak için izin istemez. Bu işlemlere önceden izin verildi.</p>
+<h3>Çok izin sorusu çıkıyorsa</h3>
+<p>Mesaj kutusunun altında bir kip seçici vardır. Bu seçiciden <b>Auto</b>'yu seçin. Divit güvenli işleri sormadan yapar. Divit riskli işlerde yine sorar.</p>
+<p>Auto kipinde de Divit dosyalarınızı silmez. Divit'in yalnızca okuduğu klasörlere yazma yasağı her kipte geçerlidir. Bu klasörler yukarıdaki klasör çizelgesinde yazar.</p>
+</section>
+
 <section id="geri">
-<h2>9. Bir şey bozulursa</h2>
+<h2>Bir şey bozulursa</h2>
 <ol class="adim">
   <li>Divit sohbetine şunu yazın: <span class="yaz">geri al</span></li>
   <li>Divit önceki sürümleri tarih ve saatle gösterir.</li>
@@ -329,18 +615,8 @@ Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gö
 </div>
 </section>
 
-<section id="yapmaz">
-<h2>10. Divit'in yapmadığı işler</h2>
-<ul>
-  <li>Divit not vermez. Divit kabul ya da ret kararı vermez.</li>
-  <li>Divit intihal kararı vermez. Divit "yapay zekâ yazmış" kararı vermez.</li>
-  <li>Divit istatistik analizi yapmaz. Divit yalnızca metindeki sayıların tutarlılığını kontrol eder.</li>
-  <li>Divit sizin yerinize makale yazmaz. Divit yapıyı, eksikleri ve itirazları gösterir.</li>
-</ul>
-</section>
-
 <section id="geribildirim">
-<h2>11. Geri bildirim</h2>
+<h2>Geri bildirim ve kullanım</h2>
 <p>Divit yeni bir araçtır. Sizin deneyiminiz Divit'i geliştirir.</p>
 <p>Divit çalışırken iki şeyi not eder:</p>
 <ul>
@@ -356,7 +632,7 @@ Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gö
   <li>E-posta programınız açılır. <b>Gönder</b> düğmesine tıklayın.</li>
 </ol>
 <div class="kutu not"><b class="etiket">NOT</b>
-Divit metinlerinizi, öğrenci dosyalarını ve özgeçmişinizi göndermez. Divit onayınız olmadan hiçbir şey göndermez. Göndermeyi siz yaparsınız.</div>
+Divit metinlerinizi, dosyalarınızı ve özgeçmişinizi göndermez. Divit onayınız olmadan hiçbir şey göndermez. Göndermeyi siz yaparsınız.</div>
 <div class="kutu not"><b class="etiket">NOT</b>
 Bir sorun yaşadığınızda Divit'e doğrudan söyleyin. Örnek: "bu olmadı, raporu çok uzun yazdın". Divit sorunu düzeltir ve not eder.</div>
 <div class="kutu not"><b class="etiket">NOT</b>
@@ -365,7 +641,7 @@ Bir hafta geri bildirim göndermezseniz Divit bir kez hatırlatır. İstemiyorsa
 <p>Divit ayda bir kendi notlarını toparlamak için izin ister. Bu iş birkaç dakika sürer. Divit dosyalarınıza dokunmaz. Değişiklikleri önce size gösterir.</p>
 <h3>Kullanım sınırı</h3>
 <p>Claude'un 5 saatlik ve haftalık bir kullanım sınırı vardır. Divit bu sınırı göremez. Sınıra gelirseniz ekranda İngilizce bir uyarı çıkar ve yeniden açılma saati yazar. İşiniz kaybolmaz. O saatte Divit'e <span class="yaz">kaldığımız yerden devam</span> yazın.</p>
-<p>Divit uzun bir işe başlarken daha dikkatli okuma önerebilir. Kabul ederseniz sohbet kutusuna <span class="yaz">/effort high</span> yazın.</p>
+<p>Uzun bir metni ya da bir kitabı baştan sona okumak uzun bir iştir. Divit böyle bir işe başlarken daha dikkatli okuma önerebilir. Kabul ederseniz sohbet kutusuna <span class="yaz">/effort high</span> yazın.</p>
 <h3>Yenilikler</h3>
 <p>Divit kendiliğinden güncellenir. Yeni bir özellik geldiğinde Divit size söyler.</p>
 <p>Bazı yenilikler için kısa bir güncelleme gerekir. Divit önce sizden izin ister. Kabul ederseniz <b>evet</b> yazın. Güncelleme dosyalarınıza dokunmaz.</p>
@@ -381,5 +657,36 @@ Bir hafta geri bildirim göndermezseniz Divit bir kez hatırlatır. İstemiyorsa
 </footer>
 
 </main>
+<script>
+(function(){
+  var kok=document.documentElement, roller=['akademisyen','yazar'];
+  function gecerli(r){return roller.indexOf(r)>=0?r:null}
+  function kayitli(){try{return localStorage.getItem('divit-rol')}catch(e){return null}}
+  function kaydet(r){try{localStorage.setItem('divit-rol',r)}catch(e){}}
+  function parcadan(){
+    var h=location.hash.slice(1);
+    try{h=decodeURIComponent(h)}catch(e){}
+    if(gecerli(h))return h;
+    var el=h&&document.getElementById(h), p=el&&el.closest&&el.closest('.rol-bolum');
+    return p?p.id:null;
+  }
+  function sec(r){
+    roller.forEach(function(x){
+      document.getElementById(x).classList.toggle('secili',x===r);
+      document.getElementById('sekme-'+x).setAttribute('aria-selected',x===r?'true':'false');
+    });
+  }
+  sec(parcadan()||gecerli(kok.getAttribute('data-rol'))||gecerli(kayitli())||'akademisyen');
+  window.addEventListener('hashchange',function(){var r=parcadan();if(r){sec(r);kaydet(r)}});
+  roller.forEach(function(x){
+    document.getElementById('sekme-'+x).addEventListener('click',function(e){
+      e.preventDefault();sec(x);kaydet(x);
+      try{history.replaceState(null,'','#'+x)}catch(er){}
+      var ust=document.querySelector('.roller').offsetTop;
+      if(window.pageYOffset>ust)window.scrollTo(0,ust);
+    });
+  });
+})();
+</script>
 </body>
 </html>

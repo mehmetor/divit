@@ -5,6 +5,8 @@ description: Ders notundan, kitap bölümünden ya da sunumdan sınav sorusu ve 
 
 # Sınav sorusu hazırlama
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Soruyu Divit önerir, sınavı hoca yapar. Hoca her soruyu görür, değiştirir
 ya da siler.
 
@@ -46,7 +48,7 @@ sınavda tekrar sorma. Dosya yoksa oluştur:
 
 ## Akış
 
-1. Kaynağı oku (PDF ve Word: `kurallar` skill'indeki yol). Konu listesini
+1. Kaynağı oku (PDF ve Word: `divit:kurallar` skill'indeki yol). Konu listesini
    ve her konunun kaynaktaki yerini çıkar.
 2. Konulara soru dağıt: her konudan en az bir soru, ağırlık kaynaktaki
    yer kaplamasına göre. Dağılımı hocaya **tablo olarak** göster, onay al:
@@ -78,8 +80,9 @@ sınavda tekrar sorma. Dosya yoksa oluştur:
   her soru için doğru cevap, kaynaktaki yeri, düzeyi, puanı; klasik
   sorular için beklenen ana noktalar.
 
-Hoca onaylayınca ikisini de pandoc ile Word'e çevir → `cikti/`
-(`kurallar` skill'indeki komut). Klasör yoksa oluşturmayı öner.
+Onaydan önce ikisini `divit:kurallar`'daki "Rapor gösterme" kuralıyla
+göster (`.html` hâli, tam yollar). Hoca onaylayınca ikisini de pandoc ile
+Word'e çevir → `cikti/` (aynı skill'deki komut). Klasör yoksa oluşturmayı öner.
 İki sınav grubu (A/B) isterse aynı soruları şık ve soru sırası değişmiş
 olarak ikinci kâğıda yaz; cevap anahtarında iki grubu yan yana göster.
 

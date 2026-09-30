@@ -33,7 +33,14 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
    kılavuzlar yalnızca başlangıç noktasıdır.
 9. **Koruma yazıyla değil izinle.** `gelen/` ve `hakemlik/` kısıtları
    `settings.json` deny kurallarındadır (`Edit(...)`; `Write(...)` eşleşmez).
-10. **Tek plugin.** Erken bölme isim uzayı borcu yaratır.
+10. **İki eklenti: çekirdek + akademik.** Aynı pazar yerinde `divit`
+    (her kullanıcıda açık) ve `divit-akademik` (tez-kontrol, sinav,
+    yayin-oncesi, kaynak-dogrula, bolum-yaz; yalnız akademisyen
+    klasöründe açık). Roller '/' menüsünde karışmasın diye: tek eklentide
+    skill kullanıcıya göre gizlenemez, klasörde kapalı eklentinin
+    skill'leri menüden tamamen kalkar. Eklentiler arası ad tam yazılır
+    (`divit:kurallar`, `divit-akademik:tez-kontrol`); `dependencies` yok.
+    Yeni kullanıcı türü = gerekirse yeni eklenti; daha fazla bölme yok.
 11. **Kurallar eklentide, klasörde değil.** Hocanın klasöründeki
     `CLAUDE.md` kendiliğinden güncellenmez; eklenti güncellenir. Bu yüzden
     çalışma kuralları `skills/kurallar` içindedir ve klasördeki CLAUDE.md
@@ -87,13 +94,15 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
   açıklaması Türkçe: `feat: sınav sorusu`, `fix: PDF okuma`, `docs: ...`,
   `chore: ...`. Sürümü release-please bunlardan çıkarır.
 - Yeni işi Mehmet denemeden yayına alma.
+- Yayından önce deneme: `./yayinla.sh --deneme deneme` → belgeler/DENEME-KANALI.md
 - **Yayın:** develop'a push → release-please "divit X yayını" PR'ını açar
   (CHANGELOG.md geliştirici içindir; hocanın notu SURUM.md). PR birleşince
   `.github/workflows/yayin.yml` `./yayinla.sh --surum X` çalıştırır ve
   develop'u main'e taşır.
 
 ```bash
-claude plugin validate plugins/divit     # eklenti
+claude plugin validate plugins/divit            # çekirdek eklenti
+claude plugin validate plugins/divit-akademik   # akademik eklenti
 bash -n kur.sh                           # Mac kurulumu
 ./yayinla.sh                             # deneme: özet ve hocaya gidecek not
 ```

@@ -10,8 +10,8 @@ Metnin kendisi değil, metni üretmek için yanında taşıdığın alet.
 sağlayan takımı kurar.
 
 Web sitesi: **https://divit.simetri.app** ·
-Kılavuz: [`KILAVUZ.html`](hoca-paketi/Divit/KILAVUZ.html) ·
-Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
+Kılavuz: [`KILAVUZ.html`](hoca-paketi/Divit/KILAVUZ.html) — tek dosya, iki sekme:
+Akademisyen ve Yazar (sitede `divit.simetri.app/kilavuz.html#yazar`)
 
 ## Neden Divit
 
@@ -33,13 +33,13 @@ Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
 
 | Hoca şunu yazar | Divit |
 |---|---|
-| `bu tezi değerlendir` | Öğrenci dosyasına dokunmadan yapılandırılmış rapor ve öğrenciye e-posta taslağı (`tez-kontrol`) |
-| `göndermeden kontrol et` | Gönderim öncesi okuma: çizelge-metin tutarlılığı, hedef derginin kurallarına uygunluk (`yayin-oncesi`) |
-| `atıfları kontrol et` | Atıf ve kaynakça doğrulama (`kaynak-dogrula`) |
+| `bu tezi değerlendir` | Öğrenci dosyasına dokunmadan yapılandırılmış rapor ve öğrenciye e-posta taslağı (`divit-akademik:tez-kontrol`) |
+| `göndermeden kontrol et` | Gönderim öncesi okuma: çizelge-metin tutarlılığı, hedef derginin kurallarına uygunluk (`divit-akademik:yayin-oncesi`) |
+| `atıfları kontrol et` | Atıf ve kaynakça doğrulama (`divit-akademik:kaynak-dogrula`) |
 | `dekanlığa dilekçe yazalım` | Dilekçe, referans mektubu, hakem cevap tablosu ve mektubu (`yazisma`) |
-| `ders notumdan vize hazırla` | Ders notundan sınav sorusu ve cevap anahtarı, Word çıktısı; her sorunun kaynaktaki yeri yazılır (`sinav`) |
+| `ders notumdan vize hazırla` | Ders notundan sınav sorusu ve cevap anahtarı, Word çıktısı; her sorunun kaynaktaki yeri yazılır (`divit-akademik:sinav`) |
 | `bunu Word'e çevir` | Word/PDF çıktısı, dergi stili (`disa-aktar`) |
-| `bölüm yazalım` | Yapı, itiraz, eksik tespiti (`bolum-yaz`) |
+| `bölüm yazalım` | Yapı, itiraz, eksik tespiti (`divit-akademik:bolum-yaz`) |
 | `bu PDF'leri birleştir` | PDF birleştirme, sayfa çıkarma/silme/döndürme, kontrol listesi ve form işaretleme, PDF'ten Word'e, fotoğraftan PDF — bilgisayarda, siteye yüklemeden (`pdf`) |
 | `geri al` | Önceki sürüme dönme (`geri-al`) |
 | `geri bildirim gönder` | Notları onayla geliştiriciye iletme (`gelistirici-paylas`) |
@@ -47,6 +47,12 @@ Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html)
 | `e-posta olarak hazırla` | Hocanın e-postasında taslak açar, izinle; göndermez (`eposta`) |
 | `çalışıyor musun` | Word ve PDF okuma, PDF aracı, izin kipi, model ve profil denetimi (`saglik`) |
 | `yenilikler neler` | Sürüm notlarını anlatır, gerekirse kurulumu onayla yeniden çalıştırır (`guncelleme`) |
+| `kitabımı yeni baskı için düzenle` | Var olan kitaba editör raporu ve onaylı düzenleme; asıl dosyaya dokunmaz (`kitap-duzenle`) |
+| `yazılarımdan kitap yapalım` | Dağınık yazılardan kitap planı ve bölüm iskeleti (`kitap-derle`) |
+
+Üniversite işlerine ait skill'ler ayrı `divit-akademik` eklentisindedir;
+komutları `/divit-akademik:<ad>` biçimindedir ve yalnız akademisyen
+klasöründe açıktır.
 
 Kendiliğinden çalışanlar: `kurulum` (ilk açılışta hocayı tanır),
 `kurallar` (her oturumda), `bakim` (ayda bir, izinle profil ve hafıza
@@ -84,6 +90,14 @@ irm divit.simetri.app/kur.ps1 | iex
 curl -fsSL divit.simetri.app/kur.sh | bash
 ```
 
+**Kitap yazarı için** (akademik klasörler ve komutlar kurulmaz, kılavuz Yazar sekmesiyle açılır):
+```powershell
+$env:DIVIT_TUR='yazar'; irm https://divit.simetri.app/kur.ps1 | iex
+```
+```bash
+curl -fsSL https://divit.simetri.app/kur.sh | DIVIT_TUR=yazar bash
+```
+
 Kısa adres GitHub'daki asıl betiği çalıştırır. Site erişilemezse doğrudan:
 `irm https://raw.githubusercontent.com/mehmetor/divit/main/kur.ps1 | iex` ·
 `curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash`.
@@ -118,6 +132,7 @@ Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.
 ```bash
 claude plugin marketplace add https://raw.githubusercontent.com/mehmetor/divit/main/.claude-plugin/marketplace.json
 claude plugin install divit@divit
+claude plugin install divit-akademik@divit   # üniversite işleri (tez, sınav, yayın öncesi, kaynak)
 ```
 
 Bu yol yalnız eklentiyi kurar; `Belgeler/Divit` klasörünü ve izinleri
@@ -127,7 +142,8 @@ hazırlamaz. Hocalar için Seçenek 1 ya da 2 önerilir.
 
 Claude uygulaması → **Code** → **Local** → **Select folder** →
 Belgeler → **Divit** → `merhaba`. Divit sizi kendisi tanır.
-Klasördeki **KILAVUZ.html** ve **KART.html** kurulumla gelir.
+Klasördeki **KILAVUZ.html** kurulumla gelir; kurulum türüne göre
+Akademisyen ya da Yazar sekmesiyle açılır.
 Ayrıntı ve sorun giderme: [`belgeler/KURULUM-REHBERI.md`](belgeler/KURULUM-REHBERI.md).
 
 ## Yapı
@@ -138,15 +154,15 @@ divit/
 ├── yayinla.sh                       eklenti zip'i (yayını CI yapar)
 ├── .claude-plugin/marketplace.json  pazar yeri (eklenti zip + sha256)
 ├── dagitim/                         yayınlanmış eklenti zip'leri
-├── plugins/divit/                   eklentinin kaynağı
+├── plugins/divit/                   çekirdek eklentinin kaynağı (her türde açık)
+├── plugins/divit-akademik/          üniversite işleri eklentisi (yalnız akademisyende açık)
 │   ├── skills/                      on sekiz skill
 │   ├── SURUM.md                     hocaya anlatılan sürüm notları
 │   ├── alan/                        örnek alan kılavuzları (başlangıç noktası)
 │   └── scripts/                     yardımcı betikler (Mac PDF okuma, harf denetimi)
 ├── hoca-paketi/Divit/               hocanın Belgeler/Divit klasörü şablonu
 │   ├── CLAUDE.md                    Divit'in hocayla çalışma kuralları
-│   ├── KILAVUZ.html                 hocanın kılavuzu
-│   ├── KART.html                    tek sayfalık kart
+│   ├── KILAVUZ.html                 kılavuz (Akademisyen | Yazar sekmeleri)
 │   └── .divit/profil/               Divit'in hocayı tanıdığı dosyalar
 ├── araclar/pano.py                  pilot panosu (geri bildirimleri toplar)
 ├── apps/web/                        divit.simetri.app tek sayfalık site (+ kısa kurulum adresi)

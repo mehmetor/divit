@@ -1,0 +1,9 @@
+{
+  "name": "divit-akademik",
+  "displayName": "Divit — akademik işler",
+  "description": "Tez ve ödev değerlendirme, sınav sorusu, yayın öncesi okuma, kaynak doğrulama, makale ve bölüm taslağı. Hocanın kendi makinesinde, kendi dosyalarıyla çalışır.",
+  "author": {
+    "name": "Mehmet Akif Orakçı"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0"
+}

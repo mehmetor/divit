@@ -5,6 +5,8 @@ description: Hocanın kendi makale taslağını dergiye göndermeden önce hakem
 
 # Yayın öncesi ön okuma
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Amaç: hakemin soracağı soruları hakemden önce sormak. Rapor bir bulgu
 listesidir; metni yeniden yazmaz.
 
@@ -24,7 +26,7 @@ listesidir; metni yeniden yazmaz.
 
 ## Akış
 
-1. Metni düz metne çevir (`CLAUDE.md`'deki pandoc yolu, `-t plain
+1. Metni düz metne çevir (`divit:kurallar`'daki pandoc komutu, `-t plain
    --wrap=none`, çıktı `.divit/gecici/`). Tamamını oku.
 2. Harf–LSD denetimi: Mac'te Python varsa betiği çalıştır:
    `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/harf-lsd-denetimi.py" <dosya>`.
@@ -42,8 +44,10 @@ listesidir; metni yeniden yazmaz.
    Raporda ayrı bir "Dergi kuralları" çizelgesi: kural · metindeki durum ·
    uyuyor mu. Kurallar verilmezse bu bölümü atla; kuralları hafızadan
    yazma.
-4. `rapor/on-degerlendirme-<tarih>.md` yaz, `pandoc` ile .docx üret
-   (hoca Word'de okur). Tablo sütun oranlarını içeriğe göre ayarla.
+4. `rapor/on-degerlendirme-<tarih>.md` yaz; `divit:kurallar`'daki "Rapor
+   gösterme" kuralıyla `.html` hâlini üret, iki tam yolu ver. Hoca Word'de
+   okumak isterse aynı pandoc komutuyla .docx da üret (tablo sütun
+   oranlarını içeriğe göre ayarla).
 5. Hocaya üç cümlelik özet ver; en ağır dört bulguyu say.
 
 ## Kontrol listesi — öncelik sırasıyla

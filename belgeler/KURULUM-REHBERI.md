@@ -1,7 +1,8 @@
 # Divit — Kurulum Rehberi
 
 Bu rehberi kurulumu yapan kişi okur. Hoca bu rehberi okumaz. Hoca
-kurulumun sonunda açılan `KILAVUZ.html` dosyasını okur.
+kurulumun sonunda açılan `KILAVUZ.html` dosyasını okur. Kılavuz tek
+dosyadır; kurulum türüne göre Akademisyen ya da Yazar sekmesiyle açılır.
 
 Kurulum Windows'ta ve Mac'te aynıdır: **bir komut, sonra üç tıklama.**
 Git, Homebrew ya da yönetici parolası gerekmez.
@@ -39,6 +40,25 @@ Hocanın **Claude Pro** (ya da Max) hesabı olmalıdır.
    curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/main/kur.sh | bash
    ```
 
+**Kitap yazarı için** (üniversite hocası olmayan kullanıcı): komutun
+başına tür bilgisini ekleyin. Divit klasöründe akademik klasörler ve
+komutlar olmaz; `kitaplar` klasörü gelir, kılavuz Yazar sekmesiyle açılır.
+
+- Windows:
+  ```powershell
+  $env:DIVIT_TUR='yazar'; irm https://divit.simetri.app/kur.ps1 | iex
+  ```
+- Mac:
+  ```bash
+  curl -fsSL https://divit.simetri.app/kur.sh | DIVIT_TUR=yazar bash
+  ```
+
+Tür `.divit/profil/kimlik.md` içine `Kullanıcı türü: yazar` satırı olarak
+yazılır. Sonraki kurulumlar (güncelleme dahil) türü bu satırdan okur;
+değişkeni yeniden vermeniz gerekmez. Değişken verilmezse ve satır yoksa
+kullanıcı akademisyen sayılır. Türü sonradan değiştirmek için Divit'e
+"türümü değiştir" yazılır; hiçbir klasör silinmez.
+
 Komut altı adımı kendisi yapar:
 
 | Adım | Ne yapar |
@@ -46,9 +66,9 @@ Komut altı adımı kendisi yapar:
 | 1 | Claude uygulamasını kurar (kurulu değilse) |
 | 2 | Claude Code'u kurar (eklentiyi kurmak için) |
 | 3 | Word ve PDF araçlarını kurar: pandoc, pdfcpu; Windows'ta ayrıca Poppler (`pdftotext`, `pdftoppm` kullanıcı PATH'ine eklenir). Mac'te PDF okuma sistemin PDFKit'iyle olur |
-| 4 | `Belgeler/Divit` klasörünü oluşturur, `.divit/kurulum-surumu.txt` yazar |
-| 5 | Divit eklentisini kurar ve otomatik güncellemeyi açar |
-| 6 | Masaüstüne Divit kısayolu koyar, kılavuzu açar |
+| 4 | `Belgeler/Divit` klasörünü türe göre oluşturur (akademisyen: `tez-kontrol`; yazar: `kitaplar`), `.divit/kurulum-surumu.txt` yazar, klasörde hangi eklentinin açık olacağını ayarlar |
+| 5 | `divit` ve `divit-akademik` eklentilerini kurar, otomatik güncellemeyi açar (akademik eklenti yazar klasöründe kapalı kalır) |
+| 6 | Masaüstüne Divit kısayolu koyar, türün kılavuzunu açar |
 
 > **NOT:** Windows'ta Claude uygulaması kurulurken ayrı bir kurulum
 > penceresi açılabilir. Pencere kapanana kadar bekleyin.
@@ -146,4 +166,5 @@ claude doctor
 1. Masaüstündeki Divit kısayolunu silin.
 2. `Belgeler/Divit` klasörünü **silmeyin**; hocanın bütün çalışması
    oradadır. Hoca isterse başka bir yere taşısın.
-3. Eklentiyi kaldırmak için: `claude plugin uninstall divit@divit`
+3. Eklentileri kaldırmak için: `claude plugin uninstall divit@divit` ve
+   `claude plugin uninstall divit-akademik@divit`

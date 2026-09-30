@@ -1,13 +1,15 @@
 ---
 name: yardim
-description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Hoca "yardım", "kılavuz", "ne yapabilirsin", "nasıl kullanıyorum", "neler yapabilirim" dediğinde ya da ne isteyeceğini bilemediğinde kullan.
+description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Kullanıcı "yardım", "kılavuz", "ne yapabilirsin", "nasıl kullanıyorum", "neler yapabilirim" dediğinde ya da ne isteyeceğini bilemediğinde kullan.
 ---
 
 # Yardım
 
-1. Kılavuzu tarayıcıda aç — Mac: `open KILAVUZ.html`,
-   Windows: `Invoke-Item KILAVUZ.html`. Dosya yoksa bu adımı atla;
-   bunu hocaya söyleme.
+1. Kılavuzu tarayıcıda aç — her türde aynı dosya, adresine ek yazmadan:
+   Mac: `open KILAVUZ.html`, Windows: `Invoke-Item KILAVUZ.html`. Doğru
+   bölümü kılavuz kendisi seçer. Dosya yoksa bu adımı atla; bunu hocaya
+   söyleme. Tür yazarsa (`kurallar`) özet
+   `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md` → "Yardım özeti".
 
 2. Pencerede şu kısa özeti ver — **bu biçimde, bu kadar kısa**:
 
@@ -17,6 +19,8 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Hoca "
    > - Makalenizi göndermeden kontrol ederim: *"bu makaleyi göndermeden kontrol et"*
    > - Atıfları kontrol ederim: *"bu metindeki atıfları kontrol et"*
    > - Yazışma hazırlarım: *"dekanlığa dilekçe yazalım"*
+   > - Kitabınıza editör gözüyle bakarım: *"kitabımı yeni baskı için düzenle"*
+   > - Yazılarınızdan kitap planı çıkarırım: *"yazılarımdan kitap yapalım"*
    > - Word'e çeviririm: *"bunu Word'e çevir"*
    > - Bozulanı geri alırım: *"geri al"*
    > - Sorunlarınızı Divit'i geliştirene iletirim: *"geri bildirim gönder"*

@@ -1,6 +1,6 @@
 ---
 name: gelistirici-ihtiyac-gorusmesi
-description: Hocanın gerçek iş akışını ve ihtiyaçlarını tespit eden yapılandırılmış görüşme; çıktısı geliştiriciye giden bir ihtiyaç notudur. Kurulumdan sonra, "beni daha iyi tanı", "bunu bana göre ayarla" dendiğinde veya pilot geri bildirimi toplanırken kullan.
+description: Kullanıcının gerçek iş akışını ve ihtiyaçlarını tespit eden yapılandırılmış görüşme; çıktısı geliştiriciye giden bir ihtiyaç notudur. Kurulumdan sonra, "beni daha iyi tanı", "bunu bana göre ayarla" dendiğinde veya pilot geri bildirimi toplanırken kullan.
 ---
 
 # İhtiyaç görüşmesi
@@ -19,6 +19,10 @@ hatırlar.
 Tek tek sor, cevabı dinle, üstüne git. Anketmiş gibi okuma.
 
 ## Sorular
+
+Tür yazarsa (`kurallar`) bu sorular yerine
+`${CLAUDE_PLUGIN_ROOT}/skills/gelistirici-ihtiyac-gorusmesi/yazar.md`
+dosyasını Read ile yükle ve oradaki soruları sor.
 
 **Zaman**
 1. "Geçen hafta bilgisayar başında en çok zamanınızı yiyen üç iş neydi?"

@@ -1,12 +1,15 @@
 ---
 name: yazisma
-description: Akademik ve idari yazışma taslağı üretir — dilekçe, kurul/dekanlık yazısı, referans mektubu, hakem cevap mektubu (response to reviewers), editöre kapak mektubu, öğrenciye geri bildirim e-postası. Hoca "şu yazıyı yazar mısın", "dilekçe", "hakemlere cevap", "referans mektubu", "editöre mektup" dediğinde kullan.
+description: Yazışma taslağı hazırlar — dilekçe, mektup, yayınevine ya da kuruma yazı, izin yazısı. Akademik ve idari yazışmada kurul/dekanlık yazısı, referans mektubu, hakem cevap mektubu (response to reviewers), editöre kapak mektubu, öğrenciye geri bildirim e-postası da üretir. Kullanıcı "şu yazıyı yazar mısın", "dilekçe", "hakemlere cevap", "referans mektubu", "editöre mektup", "yayınevine yazı", "izin yazısı" dediğinde kullan.
 ---
 
 # Akademik ve idari yazışma
 
 Hocanın en çok zamanını yiyen, en az bilişsel değer taşıyan iş bu.
 Risk düşük, kazanç anında görünür — ürünün güven kazandığı yer burası.
+
+Tür yazarsa (`kurallar`) iskeletler `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`
+→ "Yazışma" bölümündedir; aşağıdaki ortak kurallar yine geçerlidir.
 
 ## Ortak kurallar
 

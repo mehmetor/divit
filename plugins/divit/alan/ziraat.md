@@ -85,7 +85,7 @@ Kontrol edilecekler:
   çeşit/materyal ve kaynağı, ekim-hasat tarihleri, parsel boyutu,
   ekim normu, gübreleme ve sulama programı.
   **Bunlardan eksik olan her biri tekrarlanabilirliği bozar** —
-  `tez-kontrol` raporunda ayrı madde olarak yaz.
+  `divit-akademik:tez-kontrol` raporunda ayrı madde olarak yaz.
 - İklim ve toprak verisinin kaynağı belirtilmiş mi (meteoroloji
   istasyonu, analiz laboratuvarı)?
 - Türkçe ve İngilizce özet birbirinin çevirisi mi, sayılar tutuyor mu?
@@ -136,7 +136,7 @@ Hocanın alt alanına göre ilgili öbekleri tut, gerisini `alan.md`'den sil.
 ## Türkçe → İngilizce çeviri tuzakları
 
 Ziraat makaleleri çoğu zaman Türkçe yazılıp çevriliyor. Aşağıdakiler
-çeviride sessizce anlam değiştirir; `yayin-oncesi` bunları arar.
+çeviride sessizce anlam değiştirir; `divit-akademik:yayin-oncesi` bunları arar.
 
 | Türkçe | Yanlış çeviri | Doğrusu |
 |---|---|---|
