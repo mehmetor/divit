@@ -28,9 +28,11 @@ kelimeler söyleme; "Overleaf dosyası" de.
    göndermeden önce kontrol edeyim mi?" Evet → `divit-akademik:kaynak-dogrula`,
    sonra devam. Hayır → "Doğrulanmadan göndermek istediğinizden emin misiniz?"
    diye bir kez daha sor; açık "evet" gelmeden paketi hazırlama. Kararı
-   günlüğe yaz.
-2. **Şablon.** Sor: "Derginin Overleaf ya da LaTeX şablonu var mı? Varsa
-   şablon dosyalarını klasöre koyun; yoksa standart biçimle hazırlarım."
+   günlüğe yaz. Her soruda cevabı bekle; 2. adımın sorusunu bununla
+   birlikte sorma.
+2. **Şablon.** 1. adım bittikten sonra tek soru sor: "Derginin Overleaf
+   şablonu var mı? (evet/hayır)" Hayır → standart biçimle devam. Evet →
+   "Şablon dosyalarını klasöre koyun, hazır olunca söyleyin." de ve bekle.
    Şablon zip içinde geldiyse hocadan zip'i açıp içindeki dosyaları
    sohbete sürüklemesini iste (zip açmak Divit'in işi değil). Kullanılacak
    dosyalar `.cls`, `.sty`, `.bst` uzantılılardır.

@@ -48,6 +48,26 @@ if [ "${1:-}" = "--kanal" ] || [ "${1:-}" = "--deneme" ]; then
   [ -z "$(git status --porcelain)" ] || { echo "HATA: çalışma ağacı temiz değil; önce commit'leyin."; git status --short; exit 1; }
 fi
 
+# Kaynak sınaması kapısı: CI'de ağ ve claude kotası yok, sınama geliştiricide
+# koşar (araclar/kaynak-sinama/calistir.sh GEÇTİ'de son-gecti.txt yazar,
+# geliştirici commit'ler). Kayıttaki ağaç özeti bugünkü kaynak-dogrula
+# skill'iyle aynı değilse yayın durur. DIVIT_KAYNAK_SINAMA_ATLA=1 açık atlamadır.
+if [ -n "$SURUM" ] || [ -n "$KANAL" ]; then
+  SINAMA="araclar/kaynak-sinama/son-gecti.txt"
+  BUGUN="$(git rev-parse HEAD:plugins/divit-akademik/skills/kaynak-dogrula)"
+  KAYITLI="$(awk '{print $2}' "$SINAMA" 2>/dev/null || true)"
+  if [ "$KAYITLI" != "$BUGUN" ]; then
+    if [ "${DIVIT_KAYNAK_SINAMA_ATLA:-}" = "1" ]; then
+      echo "UYARI: kaynak sınaması bu kaynak-dogrula ağacı için geçmedi; DIVIT_KAYNAK_SINAMA_ATLA=1 ile atlanıyor."
+    else
+      echo "HATA: kaynak sınaması bu kaynak-dogrula ağacı için geçmedi (${SINAMA} yok ya da eski)."
+      echo "      Önce araclar/kaynak-sinama/calistir.sh; GEÇTİ'de yazılan $SINAMA dosyasını commit'leyin."
+      echo "      Bilerek atlamak için: DIVIT_KAYNAK_SINAMA_ATLA=1"
+      exit 1
+    fi
+  fi
+fi
+
 for AD in "${EKLENTILER[@]}"; do
   claude plugin validate "plugins/$AD" >/dev/null || { echo "HATA: $AD eklentisi doğrulanamadı."; claude plugin validate "plugins/$AD"; exit 1; }
 done

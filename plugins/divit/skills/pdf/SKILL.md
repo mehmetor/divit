@@ -54,10 +54,10 @@ Sayfa numaralarını hocanın söylediği gibi kullan; emin değilsen önce
 Önce formun doldurulabilir alanları var mı, bak: `P form list "girdi.pdf"`.
 
 **a. Doldurulabilir form varsa** (kutular tıklanabiliyor):
-1. `P form export "girdi.pdf" ".divit/gecici/form.json"`
+1. `P form export "girdi.pdf" ".divit/gecici/form-<YYYY-AA-GG>.json"`
 2. JSON'u oku. Hocanın cevaplarına göre değerleri Edit ile değiştir
    (onay kutusu için `true`/`false`, metin alanı için metin).
-3. `P form fill "girdi.pdf" ".divit/gecici/form.json" "cikti/<ad>-dolu.pdf"`
+3. `P form fill "girdi.pdf" ".divit/gecici/form-<YYYY-AA-GG>.json" "cikti/<ad>-dolu.pdf"`
 
 **b. Düz PDF ise** (kutular yalnız çizim):
 1. PDF'i Read ile oku, maddeleri numarasıyla çıkar. Hocaya listeyi
