@@ -5,6 +5,8 @@ description: Bir metindeki atıfların gerçek olduğunu ve iddiayı gerçekten 
 
 # Kaynak doğrulama
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Akademisyen için tek gerçek felaket uydurma atıftır. İki katmanı var
 ve ikisi de burada kontrol edilir:
 
@@ -90,4 +92,5 @@ Bu dosya hocanın kanıt defteridir. Hakem sorduğunda açar, gösterir.
 
 İşin sonunda hocaya **yalnızca sorunlu olanları** göster. 40 atıfın
 38'i temizse "38 atıf doğrulandı, 2'sinde sorun var" de ve ikisini
-aç. Temiz olanları tek tek sayma.
+aç. Temiz olanları tek tek sayma. Sorunlar ayrı bir rapor dosyasına
+yazıldıysa `divit:kurallar`'daki "Rapor gösterme" kuralıyla ver.

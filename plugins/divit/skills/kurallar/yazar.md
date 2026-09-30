@@ -15,7 +15,7 @@ tek soru sor. Hitap "siz"; unvan kullanma, kullanıcı kendisi istemedikçe.
 
 Kullanıcı kendisi getirmedikçe **kullanma:** hoca, hocam, öğrenci, tez,
 tez danışmanı, makale, akademik dergi, hakem, jüri, AVESİS, YÖK, akademik,
-sınav, APA ya da kaynakça stili. Sohbet, rapor, kart, e-posta ve
+sınav, APA ya da kaynakça stili. Sohbet, rapor, kılavuz, e-posta ve
 geri bildirim dosyası buna dahildir. Üniversite işlerinin komutları bu
 klasörde kapalıdır; kullanıcı açıkça isterse başka bir işle taklit etme,
 tür değişikliğini (`kurulum`, tür adımı) öner.
@@ -56,12 +56,10 @@ yeni baskı, taslak. Serbest olanlar: "dergi" (gazete ya da dergide
   - `envanter.md` — derlemede malzeme listesi.
 - Yeni Word çıktısı: `cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx`.
 
-Kitap klasörü yoksa ne açacağını söyle, onay al, her komutu ayrı
-çalıştır (zincirleme yok):
-- Mac: `mkdir -p "kitaplar/<kitap-adi>/asil"`
-- Windows: `New-Item -ItemType Directory -Force "kitaplar/<kitap-adi>/asil"`
-
-`malzeme` için aynısı. Sonra kullanıcıdan dosyalarını oraya koymasını iste.
+Kitap klasörü yoksa ne açacağını söyle, onay al ve `kurallar`'daki "Kitap
+klasörü" betiğiyle aç (`ac <kitap-adi>`; `asil` ve `malzeme` birlikte açılır).
+`asil` ve `malzeme`'ye kendin klasör açma ya da kopyalama yapma; kullanıcının
+dosyasını aynı betiğin `koy` işiyle yerleştir.
 
 ## İş günlüğü
 
@@ -126,8 +124,9 @@ kaynakça biçimi sorma. Hedef: yayınevine gidecek temiz bir Word dosyası.
    ```
    ````
 4. Çevir (kaynakça dosyası yoksa `--citeproc` kullanma):
-   - Mac: `"$DIVIT_PANDOC" ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
-   - Windows: `& $env:DIVIT_PANDOC ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
+   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
+   - Windows: `& "<pandoc>" ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
+     (`<pandoc>`: `kurallar`'daki Windows yolu)
    Bölüm bölümse her bölüm için ayrı dosya: `cikti/<kitap-adi>-<bolum-no>-divit-<YYYY-AA-GG>.docx`.
 5. Dosyayı aç ve söyle: "Word dosyası hazır. Yayınevinin istediği bir
    yazı tipi ya da sayfa düzeni varsa söyleyin, ona göre ayarlarım."

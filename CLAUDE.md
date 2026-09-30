@@ -94,6 +94,7 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
   açıklaması Türkçe: `feat: sınav sorusu`, `fix: PDF okuma`, `docs: ...`,
   `chore: ...`. Sürümü release-please bunlardan çıkarır.
 - Yeni işi Mehmet denemeden yayına alma.
+- Yayından önce deneme: `./yayinla.sh --deneme deneme` → belgeler/DENEME-KANALI.md
 - **Yayın:** develop'a push → release-please "divit X yayını" PR'ını açar
   (CHANGELOG.md geliştirici içindir; hocanın notu SURUM.md). PR birleşince
   `.github/workflows/yayin.yml` `./yayinla.sh --surum X` çalıştırır ve

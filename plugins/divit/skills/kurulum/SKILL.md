@@ -40,7 +40,7 @@ Sonra iste:
 > "Özgeçmişinizi bu pencereye sürükler misiniz? PDF ya da Word olabilir.
 > Elinizde yoksa AVESİS ya da YÖK Akademik sayfanızın adresi de yeter."
 
-- Dosya gelirse oku (PDF → Read; Word → `CLAUDE.md`'deki pandoc yolu).
+- Dosya gelirse oku (PDF → Read; Word → `kurallar`'daki pandoc komutu).
 - Adres gelirse WebFetch ile oku. Yalnız ad gelirse WebSearch ile
   "<ad> AVESİS" ara; bulduğun sayfayı hocaya gösterip "bu siz misiniz?" diye sor.
 
@@ -67,8 +67,8 @@ yazarlı makalelerde metni çoğu zaman ilk yazar (öğrenci) yazar; o metin hoc
 1. Önce kendin bul: özgeçmişteki makale başlıklarını DergiPark'ta ya da
    Crossref'te (`api.crossref.org/works?query.bibliographic=...`) ara.
    Açık erişimli olanların PDF'ini `kaynaklar/hoca-makaleleri/` altına indir.
-   **Her dosya için ayrı ve tek bir komut kullan; komutları `;` ya da `&&`
-   ile zincirleme.** Zincirlenmiş komut ön izinle eşleşmez ve hocaya
+   **Her dosya için ayrı ve tek bir komut kullan; `;`, `|` ya da çift `&`
+   ile zincirleme yok, `cd` yok.** Zincirlenmiş komut ön izinle eşleşmez ve hocaya
    İngilizce izin sorusu çıkar. Klasör, dosya indirilirken yoksa önce ayrı
    bir komutla oluşturulur.
    - Windows: `Invoke-WebRequest -Uri "<adres>" -OutFile "kaynaklar/hoca-makaleleri/<ad>.pdf"`
@@ -115,9 +115,9 @@ koy: hocanın bilerek seçtiği üslup ile gerçek hatayı ayır. Hocaya kısa b
 
 Cevaplara göre `gorevler.md`'yi yaz: iş, kişi (öğrenci için baş harfler), tarih, durum. Gerekirse
 klasör öner, onay alınca oluştur: `tez-kontrol/gelen/<baş harfler>/`, `yazilar/<makale-adı>/`,
-`yazilar/proje-<ad>/`. Hoca kitap yazdığını söylerse tür değişmez; onayla `kitaplar/<kitap-adi>/asil/` aç
-(ad küçük harf, Türkçe karaktersiz, tireli): Mac `mkdir -p "kitaplar/<kitap-adi>/asil"` · Windows
-`New-Item -ItemType Directory -Force "kitaplar/<kitap-adi>/asil"`.
+`yazilar/proje-<ad>/`. Hoca kitap yazdığını söylerse tür değişmez; onayla kitap klasörünü aç
+(ad küçük harf, Türkçe karaktersiz, tireli): Mac `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <kitap-adi>` ·
+Windows `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <kitap-adi>`.
 
 ## 7. Güvence ve ilk iş
 

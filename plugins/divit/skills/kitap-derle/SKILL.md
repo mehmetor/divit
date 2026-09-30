@@ -1,9 +1,12 @@
 ---
 name: kitap-derle
 description: Yıllar içinde yazılmış yazılardan, konuşma ve röportaj dökümlerinden, sunumlardan yeni bir kitap çıkarır — malzeme listesi, konu haritası, içindekiler seçenekleri ve bölüm iskeletleri; yayın hakkı sorularını işaretler. Kullanıcı "yazılarımdan kitap yapalım", "bu yazıları bir araya getir", "konuşmalarımı kitaba çevir", "yeni kitap", "kitap derle" dediğinde kullan.
+allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.ps1*)
 ---
 
 # Kitap derleme — dağınık yazılardan yeni kitap
+
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
 
 Divit malzemeyi sayar, gruplar, kurgu önerir ve iskeleti kurar. Kitabın
 cümleleri kullanıcınındır; Divit onları sıraya koyar, eksiği gösterir.
@@ -12,7 +15,8 @@ cümleleri kullanıcınındır; Divit onları sıraya koyar, eksiği gösterir.
 
 1. **Yeni gövde metni uydurma.** Kullanıcının cümleleri korunur. Divit'in
    yazdığı her cümle (geçiş önerisi dahil) `[TASLAK]` ile başlar.
-2. **`malzeme/` ve `asil/` içine yazma**; izin de kapalıdır.
+2. **`malzeme/` ve `asil/` içine yazma**; izin de kapalıdır. Tek istisna:
+   kullanıcının dosyasını betik `koy` ile bir kez yerleştirir.
 3. **Olgu uydurma.** Kaynaksız sayı, tarih, kişi, alıntı → `[DOĞRULA]`.
 4. **Hukuki yorum yok.** Yayın hakkı yalnız soru olarak işaretlenir.
 5. **Ses ya da video dosyasını okuyabildiğini varsayma.** Okuyamazsın.
@@ -24,16 +28,20 @@ cümleleri kullanıcınındır; Divit onları sıraya koyar, eksiği gösterir.
 
 Tür satırını `.divit/profil/kimlik.md`'den oku; türe özgü ekler en sondadır.
 `kitaplar/<kitap-adi>/` yoksa çalışma adı sor (sonra değişebilir), adı
-küçük harf, Türkçe karaktersiz, tireli yaz, onay al, klasörü aç. Komutlar
-tek tek, zincirleme yok:
-- Mac: `mkdir -p "kitaplar/<kitap-adi>/malzeme"`
-- Windows: `New-Item -ItemType Directory -Force "kitaplar/<kitap-adi>/malzeme"`
+küçük harf, Türkçe karaktersiz, tireli yaz, onay al. Klasörü `kurallar`'daki
+"Kitap klasörü" betiğiyle aç; kendin klasör açma:
+- Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <kitap-adi>`
+- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <kitap-adi>`
 
-Klasörü aç (Mac `open`, Windows `Invoke-Item`) ve söyle:
+Sonra söyle:
 
-> "Kitaba girebilecek her şeyi bu klasöre bırakın: yazılar, konuşma
-> ve röportaj dökümleri, sunumların PDF hâli, notlar. Ben bunları
-> yalnız okurum, hiç değiştirmem."
+> "Kitaba girebilecek yazıları, konuşma ve röportaj dökümlerini,
+> sunumların PDF hâlini bu pencereye sürükleyin. Ben bunları yalnız
+> okurum, hiç değiştirmem."
+
+Gelen her dosyayı aynı betikle `koy <kitap-adi> malzeme "<dosya>"` ile
+yerleştir; HATA verirse `kurallar`'daki sıraya uy. Kullanıcı dosyaları
+kendisi `malzeme/`'ye koyduysa doğrudan oku.
 
 Word ve PDF okuma `kurallar`'daki yolla, metin `.divit/gecici/` altına.
 `plan.md` en üst satırı her zaman:
@@ -52,6 +60,14 @@ sor; tahmin etme. Toplam kelimeyi yaz (kitap için yetiyor mu, söyle).
 **2. Konu haritası** (`plan.md`'ye): parçaları konulara kümele. Ayrıca:
 aynı fikri ya da anekdotu anlatan parçalar, birbirini tutmayan bilgiler
 (yıl, sayı, ad), eskimiş olanlar `[GÜNCELLE]`, hiçbir kümeye girmeyenler.
+Zaman ifadelerini ("otuz yıla yakın", "on iki yıl sonra", "geçen yıl")
+parçanın tarihiyle ve öteki parçalardaki tarihlerle hesapla. Tutmuyorsa
+`[DOĞRULA]`: iki parçayı alıntıyla ve hesabı yaz; doğrusunu tahmin
+etme. Yalnız eskimişse `[GÜNCELLE]`.
+
+Numaralı sorularda seçenek metni sayıyla başlamaz; ad önce, sayı
+parantezde: "1) Sahada (1. bölüm), önerim". Yoksa ekranda iç içe liste
+gibi görünür.
 
 **3. İddia ve okur.** Haritadan 2-3 aday çıkar, tek soru sor:
 
@@ -67,7 +83,8 @@ olmayan yer ("bu bölüm için sizin anlatmanız gerekir"). Kurguların güçlü
 ve zayıf yanını birer cümleyle yaz; kullanıcı seçer. Seçilen `plan.md`'ye.
 
 **5. Bölüm iskeletleri** → `taslak/<bolum-no>-<kisa-ad>.md`, yalnız
-onaylı kurgu için. Parçalar kullanıcının cümleleriyle, sırayla; her
+onaylı kurgu için. Önce sor: "Hangi bölümle başlayalım? 1) Sahada
+(1. bölüm), önerim 2) <ad> (2. bölüm) — numarayı yazın." Parçalar kullanıcının cümleleriyle, sırayla; her
 parçanın kaynağı başlık altında. Aralarda eksik geçiş
 `[BAĞLANTI: <ne gerekiyor>]`. Aynı anekdot iki parçadaysa tek yerde
 kalır; hangisi, kullanıcıya sor. Konuşma dilinden yazı diline geçiş
@@ -107,7 +124,7 @@ sonra `kitap-duzenle` ile editör okumasından geçebilir.
 ## Kullanıcıya özet
 
 Her adımın sonunda üç cümle: ne çıktı, en önemli karar, sıradaki soru.
-Dosyayı aç; tabloyu ekrana basma.
+Dosyayı `kurallar`'daki "Rapor gösterme" kuralıyla ver; tabloyu ekrana basma.
 
 ## Tür akademisyense
 

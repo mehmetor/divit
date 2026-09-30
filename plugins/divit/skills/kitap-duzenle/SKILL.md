@@ -1,9 +1,12 @@
 ---
 name: kitap-duzenle
 description: Var olan, basılmış ya da basılacak bir kitabın tamamına editör gözüyle bakar ve yeni baskıya hazırlar — yapı, anlatım, tutarlılık ve son okuma raporu; önerileri yalnız onayla işler. Kullanıcı "kitabımı yeni baskı için düzenle", "kitabıma editör gözüyle bak", "tekrarları ve çelişkileri bul", "yeni baskı hazırlıyorum", "kitabımı toparla" dediğinde kullan. Tek bir yazı için değil, bütün kitap için.
+allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.ps1*)
 ---
 
 # Kitap düzenleme — editör raporu ve yeni baskı
+
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
 
 Divit bir yayınevi editörünün ilk okumasını yapar: bulgu listesi ve
 somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, sesini korur.
@@ -11,6 +14,7 @@ somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, sesini korur.
 ## Yasaklar
 
 1. **`asil/` ve `malzeme/` içine hiçbir şey yazma**; izin de kapalıdır.
+   Tek istisna: kullanıcının dosyasını betik `koy` ile bir kez yerleştirir.
    Word/PDF yerinde değiştirilmez. Çalışma `duzenleme/` ve `taslak/` içinde.
 2. **Kullanıcının yerine bölüm yazma.** Açıkça isterse kısa yaz, her
    cümlenin başına `[TASLAK]` koy.
@@ -25,20 +29,19 @@ somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, sesini korur.
 
 ## Başlangıç
 
-Tür satırını `.divit/profil/kimlik.md`'den oku; türe özgü ekler en sondadır.
+Tür satırını `.divit/profil/kimlik.md`'den Read ile oku; türe özgü ekler en sondadır.
 
 **Kitap klasörü.** `kitaplar/<kitap-adi>/` yoksa kitabın adını sor, adı
-küçük harf, Türkçe karaktersiz, tireli yaz (`yonetim-notlari`), onay al
-ve klasörü aç. Komutlar tek tek, zincirleme yok:
-- Mac: `mkdir -p "kitaplar/<kitap-adi>/asil"`
-- Windows: `New-Item -ItemType Directory -Force "kitaplar/<kitap-adi>/asil"`
+küçük harf, Türkçe karaktersiz, tireli yaz (`yonetim-notlari`), onay al.
+Klasörü `kurallar`'daki "Kitap klasörü" betiğiyle aç; kendin klasör açma:
+- Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <kitap-adi>`
+- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <kitap-adi>`
 
-Sonra klasörü aç (Mac `open`, Windows `Invoke-Item`) ve söyle:
-
-> "Kitabınızın Word dosyasını açılan klasöre bırakın. Ben o dosyayı
-> yalnız okurum, hiç değiştirmem."
-
-Dosya başka bir yerdeyse oradan da okunur; yolunu `plan.md`'ye yaz.
+Kitap dosyası: kullanıcı yolunu verdiyse ya da sohbete sürüklediyse aynı
+betikle `koy <kitap-adi> asil "<dosya>"`. Vermediyse: "Kitabınızın Word
+dosyasını bu pencereye sürükler misiniz? Ben onu yalnız okurum, hiç
+değiştirmem." Betik HATA verirse `kurallar`'daki sıraya uy; dosyanın
+yerini `plan.md`'ye yaz.
 
 **İki soru, sırayla, tek tek:**
 
@@ -55,10 +58,11 @@ Cevapları `kitaplar/<kitap-adi>/plan.md`'ye yaz. En üst satır her zaman:
 ## Okuma
 
 1. Word'ü metne çevir, çıktı `.divit/gecici/`:
-   - Mac: `"$DIVIT_PANDOC" "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>.md"`
-   - Windows: `& $env:DIVIT_PANDOC "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>.md"`
-   PDF ise `kurallar`'daki PDF'ten metin yolu.
-2. Önce yapıyı çıkar: bölüm ve başlık listesi, bölüm başına kelime.
+   - Mac: `~/.divit/araclar/pandoc "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>.md"`
+   - Windows: `& "<pandoc>" "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>.md"`
+   (`<pandoc>`: `kurallar`'daki Windows yolu). PDF ise `kurallar`'daki PDF'ten metin yolu.
+2. Önce yapıyı çıkar: bölüm ve başlık listesi, bölüm başına kelime. Başlıkları
+   Grep ile bul, metni Read ile oku; kabukla sayma (`sed`, `wc` yok).
 3. Uzun kitabı bölüm bölüm oku. Her bölümden sonra `plan.md`'deki
    "Bölüm notları"na yaz: ana fikir (tek cümle), anekdotlar, geçen
    sayılar, tarihler, kişi ve şirket adları. Bölümler arası tekrar ve
@@ -100,9 +104,9 @@ belirsiz ünlü sözler (yanlış kişiye mal edilmiş söz yaygındır) →
 2. Somut öneriler bölüm bölüm:
    `duzenleme/oneriler-<bolum-no>.md`, tablo: **Önce → Sonra → Neden**.
    "Sonra" sütunu kullanıcının cümlesinin en az değişmiş hâlidir.
-3. Kullanıcıya üç cümlelik özet: kitabın durumu, en ağır sorun, en
-   güçlü yanı. Raporu aç (Mac `open`, Windows `Invoke-Item`). Tamamını
-   ekrana basma.
+3. Raporu `kurallar`'daki "Rapor gösterme" kuralıyla ver (`.html` hâli,
+   iki tam yol). Kullanıcıya üç cümlelik özet: kitabın durumu, en ağır
+   sorun, en güçlü yanı. Tamamını ekrana basma.
 4. Rapora "Yeni baskıya önsöz" başlığı eklenebilir: ne değişti, neden —
    yalnız madde başlıkları; önsözü kullanıcı yazar.
 

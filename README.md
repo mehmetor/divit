@@ -10,10 +10,8 @@ Metnin kendisi değil, metni üretmek için yanında taşıdığın alet.
 sağlayan takımı kurar.
 
 Web sitesi: **https://divit.simetri.app** ·
-Kılavuz: [`KILAVUZ.html`](hoca-paketi/Divit/KILAVUZ.html) ·
-Tek sayfalık kart: [`KART.html`](hoca-paketi/Divit/KART.html) ·
-Kitap yazarları için: [`KILAVUZ-YAZAR.html`](hoca-paketi/Divit/KILAVUZ-YAZAR.html),
-[`KART-YAZAR.html`](hoca-paketi/Divit/KART-YAZAR.html)
+Kılavuz: [`KILAVUZ.html`](hoca-paketi/Divit/KILAVUZ.html) — tek dosya, iki sekme:
+Akademisyen ve Yazar (sitede `divit.simetri.app/kilavuz.html#yazar`)
 
 ## Neden Divit
 
@@ -92,7 +90,7 @@ irm divit.simetri.app/kur.ps1 | iex
 curl -fsSL divit.simetri.app/kur.sh | bash
 ```
 
-**Kitap yazarı için** (akademik klasörler ve komutlar kurulmaz, yazar kılavuzu açılır):
+**Kitap yazarı için** (akademik klasörler ve komutlar kurulmaz, kılavuz Yazar sekmesiyle açılır):
 ```powershell
 $env:DIVIT_TUR='yazar'; irm https://divit.simetri.app/kur.ps1 | iex
 ```
@@ -144,8 +142,8 @@ hazırlamaz. Hocalar için Seçenek 1 ya da 2 önerilir.
 
 Claude uygulaması → **Code** → **Local** → **Select folder** →
 Belgeler → **Divit** → `merhaba`. Divit sizi kendisi tanır.
-Klasördeki **KILAVUZ.html** ve **KART.html** (yazarda **KILAVUZ-YAZAR.html**
-ve **KART-YAZAR.html**) kurulumla gelir.
+Klasördeki **KILAVUZ.html** kurulumla gelir; kurulum türüne göre
+Akademisyen ya da Yazar sekmesiyle açılır.
 Ayrıntı ve sorun giderme: [`belgeler/KURULUM-REHBERI.md`](belgeler/KURULUM-REHBERI.md).
 
 ## Yapı
@@ -164,8 +162,7 @@ divit/
 │   └── scripts/                     yardımcı betikler (Mac PDF okuma, harf denetimi)
 ├── hoca-paketi/Divit/               hocanın Belgeler/Divit klasörü şablonu
 │   ├── CLAUDE.md                    Divit'in hocayla çalışma kuralları
-│   ├── KILAVUZ.html                 hocanın kılavuzu
-│   ├── KART.html                    tek sayfalık kart
+│   ├── KILAVUZ.html                 kılavuz (Akademisyen | Yazar sekmeleri)
 │   └── .divit/profil/               Divit'in hocayı tanıdığı dosyalar
 ├── araclar/pano.py                  pilot panosu (geri bildirimleri toplar)
 ├── apps/web/                        divit.simetri.app tek sayfalık site (+ kısa kurulum adresi)

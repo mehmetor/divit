@@ -8,16 +8,23 @@
 # Git ya da yönetici hakkı gerekmez. Yeniden çalıştırmak güvenlidir:
 # kullanıcının dosyalarına dokunmaz, yalnızca Divit'i günceller.
 #
-# Kullanıcı türü (akademisyen | yazar) klasörleri, kılavuzu ve açık
-# eklentileri belirler. Öncelik: DIVIT_TUR > .divit\profil\kimlik.md'deki
-# "Kullanıcı türü:" satırı > akademisyen. Türü değiştirmek kurulum
-# skill'inin işidir; betik var olan satırı değiştirmez.
+# Kullanıcı türü (akademisyen | yazar) klasörleri, kılavuzun açılış
+# sekmesini ve açık eklentileri belirler. Öncelik: DIVIT_TUR >
+# .divit\profil\kimlik.md'deki "Kullanıcı türü:" satırı > akademisyen.
+# Tür satırı yalnız doldurulmamış (şablon) profile yazılır. Dolu profilin
+# türüyle çelişen DIVIT_TUR verilirse betik hiçbir şeye dokunmadan durur:
+# aynı bilgisayarda ikinci kullanım ayrı klasördür (DIVIT_HEDEF).
+#
+# Kanal (yayın dalı): DIVIT_DAL > klasördeki .divit\kanal.txt > main.
+# İzinli: main, yeni, deneme, deneme-*. Klasör kanalını kanal.txt'de
+# hatırlar; "güncelle" aynı kanalda kalır.
 #
 # Sınama değişkenleri (geliştirici için):
 #   $env:DIVIT_TEST = "1"          Claude uygulaması ve komut satırı kurulmaz, kılavuz açılmaz
 #   $env:DIVIT_KAYNAK_ZIP = "yol"  GitHub yerine yerel repo zip'i kullan
 #   $env:DIVIT_HEDEF = "yol"       Divit klasörünün yeri (varsayılan: Belgeler\Divit)
 #   $env:DIVIT_TUR = "yazar"       kullanıcı türü (akademisyen | yazar)
+#   $env:DIVIT_DAL = "deneme"      kanal (yayın dalı)
 
 $ErrorActionPreference = 'Continue'
 $ProgressPreference = 'SilentlyContinue'            # indirmeler çok daha hızlı olur
@@ -25,17 +32,17 @@ try { [Console]::OutputEncoding = [Text.Encoding]::UTF8 } catch {}
 try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch {}
 
 $Repo        = if ($env:DIVIT_REPO) { $env:DIVIT_REPO } else { 'mehmetor/divit' }
-$Dal         = if ($env:DIVIT_DAL)  { $env:DIVIT_DAL }  else { 'main' }
 $PandocSurum = '3.11'
 $PdfcpuSurum = '0.15.0'
 $PopplerSurum = '26.09.0-0'
 $Test        = [bool]$env:DIVIT_TEST
 $Belgeler    = [Environment]::GetFolderPath('MyDocuments')     # OneDrive yönlendirmesini de bilir
 $Hedef       = if ($env:DIVIT_HEDEF) { $env:DIVIT_HEDEF } else { Join-Path $Belgeler 'Divit' }
+$Hedef       = [IO.Path]::GetFullPath($Hedef)
 $Ev          = if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME }
 $Araclar     = Join-Path $Ev '.divit\araclar'
-$PazarUrl    = "https://raw.githubusercontent.com/$Repo/$Dal/.claude-plugin/marketplace.json"
 $script:Uyarilar = 0
+$BaskaKaynak = $null                                # iex oturumu değişkenleri korur: önceki çalıştırmadan kalmasın
 
 function Adim($t)  { Write-Host ""; Write-Host "> $t" -ForegroundColor Green }
 function Bilgi($t) { Write-Host "  $t" }
@@ -52,6 +59,51 @@ New-Item -ItemType Directory -Force -Path $Gecici | Out-Null
 
 Write-Host ""
 Write-Host "Divit - yazim tezgahi / kurulum" -ForegroundColor White
+
+# Kanal: DIVIT_DAL > klasörün kanal.txt'si > main.
+$KanalDosyasi = Join-Path $Hedef '.divit\kanal.txt'
+if ($env:DIVIT_DAL) { $Dal = $env:DIVIT_DAL }
+elseif (Test-Path $KanalDosyasi) { $Dal = ([IO.File]::ReadAllLines($KanalDosyasi) | Select-Object -First 1).Trim() }
+else { $Dal = 'main' }
+if (-not ($Dal -ceq 'main' -or $Dal -ceq 'yeni' -or $Dal -cmatch '^deneme(-.+)?$')) {
+  Uyari "'$Dal' bilinen bir kanal degil; main kullaniliyor."; $Dal = 'main'
+}
+$PazarUrl = "https://raw.githubusercontent.com/$Repo/$Dal/.claude-plugin/marketplace.json"
+
+# Kullanıcı türü: DIVIT_TUR > kimlik.md satırı > akademisyen.
+$Kimlik = Join-Path $Hedef '.divit\profil\kimlik.md'
+$TurSatiri = [string][char]0x4B + 'ullan' + [char]0x131 + 'c' + [char]0x131 + ' t' + [char]0xFC + 'r' + [char]0xFC + ':'   # "Kullanıcı türü:" (betik ANSI okunsa da bozulmasın)
+$Doldurulmadi = 'Hen' + [char]0xFC + 'z doldurulmad' + [char]0x131                                                  # "Henüz doldurulmadı"
+$ProfilDolu = $false
+$ProfilTur = 'akademisyen'                                          # satır yoksa akademisyen
+if (Test-Path $Kimlik) {
+  $kimlikMetni = [IO.File]::ReadAllText($Kimlik)
+  $ProfilDolu = -not $kimlikMetni.Contains($Doldurulmadi)
+  $satir = [IO.File]::ReadAllLines($Kimlik) | Where-Object { $_.StartsWith($TurSatiri) } | Select-Object -First 1
+  if ($satir) { $v = ($satir.Substring($TurSatiri.Length).Trim() -split '\s')[0]; if ($v) { $ProfilTur = $v } }
+}
+$TurVerildi = $false
+if ($env:DIVIT_TUR -in @('akademisyen', 'yazar')) { $Tur = $env:DIVIT_TUR; $TurVerildi = $true }
+elseif ($env:DIVIT_TUR) { Uyari "DIVIT_TUR='$($env:DIVIT_TUR)' taninmadi (akademisyen ya da yazar olmali); yok sayildi." }
+if (-not $TurVerildi) { $Tur = if ($ProfilTur -eq 'yazar') { 'yazar' } else { 'akademisyen' } }
+
+# Dolu profil başka türdense hiçbir şeye dokunmadan dur: bu klasör
+# başka bir kullanıma ait (ör. aynı hesapta önceden kurulmuş bir Divit).
+if ($ProfilDolu -and $TurVerildi -and $Tur -ne $ProfilTur) {
+  $yeniAd = if ($Tur -eq 'yazar') { 'Divit-Yazar' } else { 'Divit-Akademik' }
+  $dalOnek = if ($Dal -ne 'main') { "`$env:DIVIT_DAL='$Dal'; " } else { '' }
+  Write-Host ""
+  Write-Host "Kurulum yapilmadi." -ForegroundColor Red
+  Write-Host "Bu klasorde baska bir kullanim turuyle kurulmus bir Divit var:"
+  Write-Host "  $Hedef"
+  Write-Host "Klasore ve icindeki bilgilere dokunulmadi."
+  Write-Host ""
+  Write-Host "Ayni bilgisayarda ikinci bir kullanim icin yeni klasor (yeni PowerShell penceresinde):"
+  Write-Host "  $dalOnek`$env:DIVIT_TUR='$Tur'; `$env:DIVIT_HEDEF=Join-Path ([Environment]::GetFolderPath('MyDocuments')) '$yeniAd'; irm https://raw.githubusercontent.com/$Repo/$Dal/kur.ps1 | iex"
+  Write-Host ""
+  Remove-Item $Gecici -Recurse -Force -ErrorAction SilentlyContinue
+  return
+}
 
 # ---------------------------------------------------------------- 1
 Adim "1/6 Claude uygulamasi"
@@ -81,7 +133,8 @@ else {
 # ---------------------------------------------------------------- 2
 Adim "2/6 Claude Code (eklenti kurulumu icin)"
 $env:Path = "$Ev\.local\bin;$env:Path"
-$EnAzSurum = [version]'2.1.224'      # eklentinin zip olarak inmesi (archive kaynağı) bu sürümle geldi
+$EnAzSurum = [version]'2.1.280'      # klasör ayarındaki model bu sürümü istiyor
+$ArsivEnAz = [version]'2.1.224'      # eklentinin zip olarak inmesi (archive kaynağı) bu sürümle geldi
 $YerelClaude = Join-Path $Ev '.local\bin\claude.exe'   # resmî (npm'siz) kurulumun yeri
 $Claude = $null                                         # eklenti adımında kullanılacak claude
 function ClaudeSurumu($exe) {
@@ -96,20 +149,24 @@ if (Test-Path $YerelClaude) { $Claude = $YerelClaude }
 elseif (Get-Command claude -ErrorAction SilentlyContinue) { $Claude = (Get-Command claude).Source }
 if ($Claude) {
   $sv = ClaudeSurumu $Claude
-  if ($sv -lt $EnAzSurum) {
+  if ($sv -lt $EnAzSurum -and $Test) {
+    # Sınama geliştiricinin kendi Claude Code'unu değiştirmez.
+    Bilgi "(sinama: surum $sv eski; guncelleme atlandi)"
+  } elseif ($sv -lt $EnAzSurum) {
     Bilgi "Surum $sv eski; guncelleniyor..."
     & $Claude update *> $null
     $sv = ClaudeSurumu $Claude
-  }
-  if ($sv -lt $EnAzSurum -and -not $Test) {
-    # Eski kopya çoğu zaman npm kurulumudur ve npm'e ulaşamayınca güncellenemez.
-    Bilgi "Guncellenemedi; resmi kurulum yapiliyor..."
-    ResmiKurulum
-    if (Test-Path $YerelClaude) { $Claude = $YerelClaude; $sv = ClaudeSurumu $Claude }
+    if ($sv -lt $EnAzSurum) {
+      # Eski kopya çoğu zaman npm kurulumudur ve npm'e ulaşamayınca güncellenemez.
+      Bilgi "Guncellenemedi; resmi kurulum yapiliyor..."
+      ResmiKurulum
+      if (Test-Path $YerelClaude) { $Claude = $YerelClaude; $sv = ClaudeSurumu $Claude }
+    }
   }
   if ($sv -lt $EnAzSurum) {
-    Uyari "Claude Code $sv eski (en az $EnAzSurum gerekli). Eklenti kurulamaz."
-    $Claude = $null
+    Uyari "Claude Code $sv eski (en az $EnAzSurum gerekli) ve guncellenemedi. Divit klasoru acilinca 'model desteklenmiyor' hatasi cikabilir."
+    Bilgi "  Cozum: powershell -NoProfile -ExecutionPolicy Bypass -Command `"irm https://claude.ai/install.ps1 | iex`"   (sonra bu kurulumu yeniden calistirin)"
+    if ($sv -lt $ArsivEnAz) { $Claude = $null }             # bu kopya eklentiyi hiç indiremez
   } else { Bilgi "Kurulu: $sv" }
 }
 elseif ($Test) { Bilgi "(sinama: atlandi)" }
@@ -199,40 +256,40 @@ $Sablon = Get-ChildItem -Path (Join-Path $Gecici 'repo') -Directory -Recurse -De
 if (-not $Sablon) { Write-Host "HATA: Divit sablonu bulunamadi." -ForegroundColor Red; return }
 $S = $Sablon.FullName
 
-# Kullanıcı türü: DIVIT_TUR > kimlik.md satırı > akademisyen.
-$Kimlik = Join-Path $Hedef '.divit\profil\kimlik.md'
-$TurSatiri = [string][char]0x4B + 'ullan' + [char]0x131 + 'c' + [char]0x131 + ' t' + [char]0xFC + 'r' + [char]0xFC + ':'   # "Kullanıcı türü:" (betik ANSI okunsa da bozulmasın)
-$TurVerildi = $false
-if ($env:DIVIT_TUR -in @('akademisyen', 'yazar')) { $Tur = $env:DIVIT_TUR; $TurVerildi = $true }
-elseif ($env:DIVIT_TUR) { Uyari "DIVIT_TUR='$($env:DIVIT_TUR)' taninmadi (akademisyen ya da yazar olmali); yok sayildi." }
-if (-not $TurVerildi) {
-  $Tur = 'akademisyen'
-  if (Test-Path $Kimlik) {
-    $satir = [IO.File]::ReadAllLines($Kimlik) | Where-Object { $_.StartsWith($TurSatiri) } | Select-Object -First 1
-    if ($satir -and $satir.Substring($TurSatiri.Length).Trim() -like 'yazar*') { $Tur = 'yazar' }
-  }
-}
-if ($Tur -eq 'yazar') { $Kilavuz = 'KILAVUZ-YAZAR.html'; $Kart = 'KART-YAZAR.html'; $TurKlasoru = 'kitaplar'; $Akademik = $false }
-else { $Kilavuz = 'KILAVUZ.html'; $Kart = 'KART.html'; $TurKlasoru = 'tez-kontrol'; $Akademik = $true }
+if ($Tur -eq 'yazar') { $TurKlasoru = 'kitaplar'; $Akademik = $false }
+else { $TurKlasoru = 'tez-kontrol'; $Akademik = $true }
 Bilgi "Kullanici turu: $Tur"
+if ($Dal -ne 'main') { Bilgi "Kanal: $Dal" }
 
-# kimlik.md'de tür satırı yoksa ilk başlığın hemen altına yazar; varsa dokunmaz.
+# Tür satırı yalnız doldurulmamış profile yazılır (ilk başlığın altına ya da
+# var olan satırın yerine). Dolu profile hiç dokunulmaz.
 function TurSatiriYaz {
   if (-not (Test-Path $Kimlik)) { return }
-  $satirlar = [IO.File]::ReadAllLines($Kimlik)
-  if ($satirlar | Where-Object { $_.StartsWith($TurSatiri) }) { return }
+  if (-not [IO.File]::ReadAllText($Kimlik).Contains($Doldurulmadi)) { return }
   $yeni = New-Object System.Collections.Generic.List[string]
   $yazildi = $false
-  foreach ($l in $satirlar) {
+  foreach ($l in [IO.File]::ReadAllLines($Kimlik)) {
+    if ($l.StartsWith($TurSatiri)) { continue }
     $yeni.Add($l)
     if (-not $yazildi -and $l.StartsWith('# ')) { $yeni.Add("$TurSatiri $Tur"); $yazildi = $true }
   }
   YazUtf8 $Kimlik (($yeni -join "`n") + "`n")
 }
+# Kılavuz tek dosyadır; açılış sekmesi kök etiketteki data-rol'dür.
+function KilavuzYaz {
+  $m = [IO.File]::ReadAllText((Join-Path $S 'KILAVUZ.html'))
+  YazUtf8 (Join-Path $Hedef 'KILAVUZ.html') $m.Replace('<html lang="tr" data-rol="">', "<html lang=`"tr`" data-rol=`"$Tur`">")
+}
+# Klasörün CLAUDE.md'si: araç yolları kurulumda yazılır.
+function ClaudeMdYaz {
+  $pt = if (Test-Path $Pdftotext) { $Pdftotext } else { 'yok' }
+  $m = [IO.File]::ReadAllText((Join-Path $S 'CLAUDE.md'))
+  YazUtf8 (Join-Path $Hedef 'CLAUDE.md') $m.Replace('__PANDOC__', $Pandoc).Replace('__PDFCPU__', $Pdfcpu).Replace('__PDFTOTEXT__', $pt)
+}
 
 if (Test-Path $Hedef) {
   Bilgi "Klasor zaten var. Kisisel dosyalara dokunmadan Divit dosyalari guncelleniyor."
-  foreach ($f in @('CLAUDE.md', $Kilavuz, $Kart)) { Copy-Item (Join-Path $S $f) (Join-Path $Hedef $f) -Force }
+  ClaudeMdYaz
   if (Test-Path (Join-Path $Hedef 'tez-kontrol')) {
     Copy-Item (Join-Path $S 'tez-kontrol\CLAUDE.md') (Join-Path $Hedef 'tez-kontrol\CLAUDE.md') -Force
   }
@@ -252,22 +309,27 @@ if (Test-Path $Hedef) {
   }
 } else {
   New-Item -ItemType Directory -Force -Path $Hedef | Out-Null
-  # Şablon türe göre: başka türün klasörü ve kılavuzu kopyalanmaz.
+  # Şablon türe göre: başka türün klasörü kopyalanmaz. Kılavuz ve CLAUDE.md
+  # aşağıda yazılır; eski kart/kılavuz dosyaları kopyalanmaz.
   # -Force gizli sayılan öğeleri (.claude, .divit) de kapsar.
-  $akademikOge = @('tez-kontrol', 'KILAVUZ.html', 'KART.html')
-  $yazarOge    = @('kitaplar', 'KILAVUZ-YAZAR.html', 'KART-YAZAR.html')
   Get-ChildItem $S -Force | ForEach-Object {
-    if ($Tur -ne 'akademisyen' -and $akademikOge -contains $_.Name) { return }
-    if ($Tur -ne 'yazar' -and $yazarOge -contains $_.Name) { return }
+    if ($Tur -ne 'akademisyen' -and $_.Name -eq 'tez-kontrol') { return }
+    if ($Tur -ne 'yazar' -and $_.Name -eq 'kitaplar') { return }
+    if ($_.Name -like '*.html' -or $_.Name -eq 'CLAUDE.md') { return }
     Copy-Item $_.FullName $Hedef -Recurse -Force
   }
+  ClaudeMdYaz
   Bilgi "Olusturuldu: $Hedef"
 }
+KilavuzYaz
 if ($TurVerildi) { TurSatiriYaz }
+YazUtf8 $KanalDosyasi "$Dal`n"
 # Ayarlar Divit'e aittir, her kurulumda yenilenir. Kullanıcının "bir daha sorma"
 # izinleri settings.local.json'da durur; orada yalnız iki eklenti anahtarı değişir.
 $pandocYolu = $Pandoc -replace '\\', '/'
 $ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu).Replace('__PDFCPU__', ($Pdfcpu -replace '\\', '/')).Replace('__PDFTOTEXT__', ($Pdftotext -replace '\\', '/'))
+# Pazar yeri adresi kanala göre (klasör açılınca uygulama da aynı kanaldan alır).
+$ayar = $ayar -replace 'https://raw\.githubusercontent\.com/[^"]*/\.claude-plugin/marketplace\.json', $PazarUrl
 YazUtf8 (Join-Path $Hedef '.claude\settings.json') $ayar
 $surumDosyasi = Join-Path (Split-Path (Split-Path $S)) 'plugins\divit\SURUM.md'
 if (Test-Path $surumDosyasi) {
@@ -302,6 +364,8 @@ Get-ChildItem $Hedef -Recurse -Force -Filter '.gitkeep' -ErrorAction SilentlyCon
 Adim "5/6 Divit eklentisi"
 if ($Test -and -not $env:CLAUDE_CONFIG_DIR) { Bilgi "(sinama: atlandi)" }
 elseif ($Claude) {
+  # Ev klasöründen: bir klasörün kendi ayarı pazar yeri adresini karıştırmasın.
+  Push-Location $Ev
   # Her çalıştırmada: ekle (yoksa), katalogu yenile, kur (yoksa), güncelle (varsa).
   # "Zaten kurulu" da başarı döndüğü için tek tek çıkış koduna bakılmaz;
   # sonuç kurulu eklentiler listesinden okunur.
@@ -315,7 +379,24 @@ elseif ($Claude) {
   $cikti += (& $Claude plugin update divit-akademik@divit 2>&1 | Out-String)
   $liste = (& $Claude plugin list 2>&1 | Out-String)
   $cekirdek = '(^|[^-\w])divit@divit'                  # divit-akademik@divit ile karışmasın
-  if ($liste -match $cekirdek) {
+  # divit pazar yeri beklenen adreste mi? Başka kaynağa kayıtlıysa ekleme
+  # "source differs" ile düşer, güncelleme eski kaynaktan yapılır: başarı sanılmasın.
+  $BaskaKaynak = $null
+  try {
+    $pazarlar = (& $Claude plugin marketplace list --json 2>$null | Out-String) | ConvertFrom-Json -ErrorAction Stop
+    $dp = @($pazarlar) | Where-Object { $_.name -eq 'divit' } | Select-Object -First 1
+    if ($dp -and $dp.url -ne $PazarUrl) {
+      $BaskaKaynak = @($dp.url, $dp.repo, $dp.path) | Where-Object { $_ } | Select-Object -First 1
+      if (-not $BaskaKaynak) { $BaskaKaynak = '(bilinmiyor)' }
+    }
+  } catch { }                                             # --json yoksa yalnız eklenti listesine bakılır
+  if (-not $BaskaKaynak -and (($cikti -join "`n") -match 'source differs')) { $BaskaKaynak = '(bilinmiyor)' }
+  Pop-Location
+  if ($BaskaKaynak) {
+    Write-Host "  HATA: Divit bu bilgisayarda baska bir kaynaktan kurulu:" -ForegroundColor Red
+    Write-Host "    $BaskaKaynak"
+  }
+  elseif ($liste -match $cekirdek) {
     $surum = if ($liste -match "$cekirdek[\s\S]*?Version:\s*(\S+)") { $Matches[2] } else { '?' }
     Bilgi "Kurulu ve guncel (surum $surum)."
   }
@@ -332,6 +413,24 @@ elseif ($Claude) {
   }
 } else { Bilgi "Uygulama ilk acildiginda kendiliginden inecek." }
 
+# Pazar yeri başka kaynaktaysa kurulum bitmiş sayılmaz.
+if ($BaskaKaynak) {
+  Remove-Item $Gecici -Recurse -Force -ErrorAction SilentlyContinue
+  Write-Host ""
+  Write-Host "Kurulum tamamlanmadi." -ForegroundColor Red
+  Write-Host @"
+Bu bilgisayarda Divit baska bir kaynaktan kurulu; yeni surum gelemedi.
+Once sunu calistirin:
+
+  claude plugin marketplace remove divit
+
+sonra bu kurulumu yeniden calistirin. Klasordeki dosyalariniz silinmez.
+
+"@
+  $global:LASTEXITCODE = 1
+  return
+}
+
 # ---------------------------------------------------------------- 6
 Adim "6/6 Masaustu kisayolu ve kilavuz"
 $masaustu = [Environment]::GetFolderPath('Desktop')
@@ -343,7 +442,10 @@ if ($masaustu -and -not (Test-Path $kisayol)) {
     Bilgi "Masaustune 'Divit' klasor kisayolu kondu."
   } catch { }
 }
-if (-not $Test) { Invoke-Item (Join-Path $Hedef $Kilavuz) }
+if (-not $Test) { Invoke-Item (Join-Path $Hedef 'KILAVUZ.html') }
+
+# Klasör seçerken gösterilecek yer: Belgeler altındaysa kısa ad, değilse tam yol.
+$KlasorYeri = if ((Split-Path $Hedef -Parent).TrimEnd('\') -eq $Belgeler.TrimEnd('\')) { "Belgeler > $(Split-Path $Hedef -Leaf)" } else { $Hedef }
 
 Remove-Item $Gecici -Recurse -Force -ErrorAction SilentlyContinue
 Write-Host ""
@@ -354,7 +456,8 @@ Write-Host @"
 Simdi:
   1. Claude aciksa tamamen kapatin. Sonra Claude uygulamasini acin (Baslat menusu > Claude). Divit'i kullanacak kisinin hesabiyla giris yapin.
   2. Ustteki "Code" sekmesine tiklayin.
-  3. "Local" secin > "Select folder" > Belgeler > Divit.
+  3. "Local" secin > "Select folder" > $KlasorYeri
   4. "merhaba" yazin. Divit gerisini kendisi sorar.
 
 "@
+if ($Dal -ne 'main') { Write-Host "Deneme kanali: $Dal"; Write-Host "" }

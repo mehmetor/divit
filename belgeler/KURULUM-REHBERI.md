@@ -1,8 +1,8 @@
 # Divit — Kurulum Rehberi
 
 Bu rehberi kurulumu yapan kişi okur. Hoca bu rehberi okumaz. Hoca
-kurulumun sonunda açılan `KILAVUZ.html` dosyasını okur (kitap yazarı
-`KILAVUZ-YAZAR.html` dosyasını).
+kurulumun sonunda açılan `KILAVUZ.html` dosyasını okur. Kılavuz tek
+dosyadır; kurulum türüne göre Akademisyen ya da Yazar sekmesiyle açılır.
 
 Kurulum Windows'ta ve Mac'te aynıdır: **bir komut, sonra üç tıklama.**
 Git, Homebrew ya da yönetici parolası gerekmez.
@@ -42,7 +42,7 @@ Hocanın **Claude Pro** (ya da Max) hesabı olmalıdır.
 
 **Kitap yazarı için** (üniversite hocası olmayan kullanıcı): komutun
 başına tür bilgisini ekleyin. Divit klasöründe akademik klasörler ve
-komutlar olmaz; `kitaplar` klasörü ve yazar kılavuzu gelir.
+komutlar olmaz; `kitaplar` klasörü gelir, kılavuz Yazar sekmesiyle açılır.
 
 - Windows:
   ```powershell

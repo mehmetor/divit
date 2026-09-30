@@ -8,11 +8,16 @@ komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
 ## Sıradaki · kurulum gerekir
+- Tez, sınav, makale ve atıf komutlarının adı değişti: artık "/divit-akademik:" ile başlıyor (ör. "/divit-akademik:tez-kontrol"). Bir kez kurulumu yenilemeniz gerekir.
 - Divit artık kitap yazarlarıyla da çalışır; kurulumda size göre klasör ve kılavuz hazırlanır.
 - Kitap düzenleme: var olan kitabınıza editör gözüyle bakar, önerileri onayınızla işler. "kitabımı yeni baskı için düzenle" yazın.
 - Yazılardan kitap: dağınık yazılarınızdan kitap planı ve bölüm iskeleti çıkarır. "yazılarımdan kitap yapalım" yazın.
-- Tez, sınav, makale ve atıf komutlarının adı değişti: artık "/divit-akademik:" ile başlıyor (ör. "/divit-akademik:tez-kontrol"). Bir kez kurulumu yenilemeniz gerekir.
 - Sınav sorusu hazırlama: ders notunuzdan soru ve cevap anahtarı, Word olarak. "ders notumdan vize hazırla" yazın.
+- Yazılardan kitap yaparken seçenekler daha okunaklı görünür; yazılar arasında birbirini tutmayan yıl ve süreler iki yazı da gösterilerek işaretlenir.
+- Word okurken ve kitabınızı incelerken İngilizce izin soruları çok azaldı.
+- Kitabınızın dosyasını pencereye sürüklemeniz yeter: Divit onu kitap klasörüne kendisi koyar, asıl dosyanıza hiç dokunmaz.
+- Raporlar artık Divit penceresinde açılır: rapor yoluna tıklamanız yeter.
+- Tek kılavuz: kılavuz size göre olan bölümle açılır.
 
 ## 1.7 · 2026-09-27 · kurulum gerekir
 - Kılavuzda "/" ile komut seçme anlatıldı; her komutun ne yaptığı yazıldı.
