@@ -20,25 +20,26 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
 
 ## Denemeler — sırayla, sessizce
 
-1. **Yazma:** `.divit/gecici/saglik.md` dosyasına bugünün tarihiyle
+1. **Yazma:** `.divit/gecici/saglik-<YYYY-AA-GG>.md` dosyasına (`<YYYY-AA-GG>` bugünün
+   tarihi; aşağıdaki bütün deneme dosyalarında aynı) bugünün tarihiyle
    `# deneme` yaz (Write), sonra oku (Read).
 2. **Word:** pandoc ile bu dosyayı Word'e, sonra geri metne çevir:
-   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/saglik.md" -o ".divit/gecici/saglik.docx"`
-     ve `~/.divit/araclar/pandoc ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
-   - Windows: `& "<pandoc>" ".divit/gecici/saglik.md" -o ".divit/gecici/saglik.docx"`
-     ve `& "<pandoc>" ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
+   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/saglik-<YYYY-AA-GG>.md" -o ".divit/gecici/saglik-<YYYY-AA-GG>.docx"`
+     ve `~/.divit/araclar/pandoc ".divit/gecici/saglik-<YYYY-AA-GG>.docx" -t gfm -o ".divit/gecici/saglik-geri-<YYYY-AA-GG>.md"`
+   - Windows: `& "<pandoc>" ".divit/gecici/saglik-<YYYY-AA-GG>.md" -o ".divit/gecici/saglik-<YYYY-AA-GG>.docx"`
+     ve `& "<pandoc>" ".divit/gecici/saglik-<YYYY-AA-GG>.docx" -t gfm -o ".divit/gecici/saglik-geri-<YYYY-AA-GG>.md"`
    (`<pandoc>`, `<pdfcpu>`: klasördeki `CLAUDE.md`'nin "Araçlar" bölümündeki tam yol.)
    Geri gelen metinde "deneme" var mı, bak.
 3. **PDF okuma:** `${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf` dosyasını
-   `kurallar`'daki "PDF'ten metin" komutuyla `.divit/gecici/saglik.txt`'ye
+   `kurallar`'daki "PDF'ten metin" komutuyla `.divit/gecici/saglik-<YYYY-AA-GG>.txt`'ye
    çevir ve oku; içinde "Divit PDF deneme" yazmalı. Sonra aynı dosyayı
    Read ile de aç. PDF çıktısı Divit'te
    Word'ün "PDF olarak kaydet" özelliğiyle yapılır; onu deneme, yalnızca
    Word okuma-yazma denemesinin geçtiğini bil.
    **PDF aracı:** deneme PDF'ini iki kez birleştir ve sayfa sayısına bak:
-   - Mac: `~/.divit/araclar/pdfcpu merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
-   - Windows: `& "<pdfcpu>" merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
-   `.divit/gecici/saglik.pdf` önceden varsa araç üstüne yazmaz; adına saat ekle.
+   - Mac: `~/.divit/araclar/pdfcpu merge ".divit/gecici/saglik-<YYYY-AA-GG>.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
+   - Windows: `& "<pdfcpu>" merge ".divit/gecici/saglik-<YYYY-AA-GG>.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
+   `.divit/gecici/saglik-<YYYY-AA-GG>.pdf` önceden varsa araç üstüne yazmaz; adına saat ekle.
    Sonra `info` ile bak: 2 sayfa olmalı.
 4. **Profil:** `.divit/profil/` dosyaları var mı, `kimlik.md` doldurulmuş mu.
 5. **Klasörler:** `tez-kontrol/`, `yazilar/`, `kaynaklar/`, `cikti/` var mı.

@@ -129,5 +129,16 @@ IGN="$(grep -c 'Ignoring' "$G/stderr.txt" 2>/dev/null || true)"
 } >"$G/rapor.md"
 cat "$G/rapor.md"
 [ -n "$MD" ] && cat "$G/rapor.md" >>"$MD"
+# GEÇTİ: yayın kapısı için kayıt (yayinla.sh --surum/--kanal okur; commit'lenmeli).
+# Yalnız repo'daki eklentiyle ve skill dizini commit'liyken yazılır.
+if [ "$KOD" = 0 ] && [ "$EK" = "$KOK/plugins" ]; then
+  YOL="plugins/divit-akademik/skills/kaynak-dogrula"
+  if [ -z "$(git -C "$KOK" status --porcelain -- "$YOL")" ]; then
+    printf '%s %s\n' "$(date +%Y-%m-%d)" "$(git -C "$KOK" rev-parse "HEAD:$YOL")" >"$BU/son-gecti.txt"
+    echo "Yazıldı: araclar/kaynak-sinama/son-gecti.txt (commit'leyin)"
+  else
+    echo "UYARI: $YOL commit'lenmemiş değişiklik içeriyor; son-gecti.txt yazılmadı."
+  fi
+fi
 echo "SONUÇ: $DURUM"
 exit $KOD
