@@ -121,7 +121,7 @@ Komut ve gösterme biçimi `dosya-duzeni.md`'nin "Rapor gösterme" bölümünde;
 | "yazılarımdan kitap yapalım", "bu yazıları bir araya getir", "konuşmalarımı kitaba çevir" | `kitap-derle` |
 | "dilekçe", "hakemlere cevap", "referans mektubu", "veliye mektup", "RAM'a yazı", "BEP" | `yazisma` |
 | "Word'e çevir", "dergiye göndereceğim", "Overleaf'e yükleyeceğim" | `disa-aktar` |
-| "bozuldu", "geri al", "eski hâli", "dünkü hâline dön", "kaydet", "ayrıntılı geçmiş" | `geri-al` |
+| "bozuldu", "geri al", "eski hâli", "dünkü hâline dön", "bu hâlini kaydet", "ayrıntılı geçmiş" | `geri-al` |
 | "bu hafta neler var", "takvime ekle", "hatırlat"; e-postada son tarih | `takvim` |
 | "şunu Türkçeye çevir", "bu bölümü çevir" | `ceviri` |
 | "grafik çiz", "akış şeması", "zaman çizelgesi" | `sekil` |

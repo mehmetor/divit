@@ -50,8 +50,8 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
    günden eski mi.
 8. **Akademik işler:** tür akademisyense `divit-akademik:` skill'leri
    (ör. `divit-akademik:tez-kontrol`) bu oturumda görünüyor mu.
-9. **Bağlantılar:** Gmail, Google Takvim, Drive açık mı; `divit:baglanti`'nın
-   `durum.md`'sindeki gibi yalnız araç adlarından bak, bağlantı aracı çağırma.
+9. **Bağlantılar:** Gmail, Google Takvim, Drive açık mı; `${CLAUDE_PLUGIN_ROOT}/skills/baglanti/durum.md`'yi
+   Read ile yükle, yalnız araç adlarından bak; bağlantı aracı çağırma.
    Sonuçta tek cümle; kapalıysa tarif yalnız kullanıcı isterse (`baglanti`).
 
 ## İzin kipi
