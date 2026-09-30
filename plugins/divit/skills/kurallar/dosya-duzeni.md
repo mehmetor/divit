@@ -41,7 +41,8 @@ dosyalar içindir.
 Genel klasörler: akademisyen `tez-kontrol/` (`gelen/` **salt okunur**,
 `rapor/` Divit'in); yazar `kitaplar/<ad>/` (`asil/`, `malzeme/` **salt okunur**;
 `raporlar/`, `duzenleme/`, `taslak/`, `plan.md` Divit'in); `yazilar/`,
-`kaynaklar/` (+ `.bib`, `dogrulama.md`), `cikti/`, `.divit/`. Yeni klasörü
+`kaynaklar/` (+ `.bib`, `dogrulama.md`), `notlar/` (`ses-metin/`, `malzeme-metin/`;
+yazarda `kitaplar/<ad>/notlar/`), `cikti/`, `.divit/`. Yeni klasörü
 öner, onayla aç, `gorevler.md`'ye yaz.
 
 ## Kitap klasörü betiği

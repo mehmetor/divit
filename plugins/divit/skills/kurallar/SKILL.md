@@ -117,8 +117,9 @@ Komut ve gösterme biçimi `dosya-duzeni.md`'nin "Rapor gösterme" bölümünde;
 | Hoca şunu derse | Kullan |
 |---|---|
 | ilk açılış, "beni tanı"; "türümü değiştir", "ben hoca değilim" | `kurulum` |
-| "kitabımı yeni baskı için düzenle", "kitabıma editör gözüyle bak", "tekrarları ve çelişkileri bul" | `kitap-duzenle` |
-| "yazılarımdan kitap yapalım", "bu yazıları bir araya getir", "konuşmalarımı kitaba çevir" | `kitap-derle` |
+| "kitabımı yeni baskı için düzenle", "kitabıma editör gözüyle bak", "tekrarları ve çelişkileri bul", "önerileri Word'de değişiklik izleme ile ver" | `kitap-duzenle` |
+| "yazılarımdan kitap yapalım", "bu yazıları bir araya getir", "konuşmalarımı kitaba çevir", "editörü olduğum kitap", "başka yazarların bölümleri", "ortak kitap" | `kitap-derle` |
+| "ses kaydını yazıya dök", "röportajı yazıya geçir", "görüşmeyi deşifre et", yapıştırılmış konuşma dökümü | `ses` |
 | "dilekçe", "hakemlere cevap", "referans mektubu", "veliye mektup", "RAM'a yazı", "BEP" | `yazisma` |
 | "Word'e çevir", "dergiye göndereceğim", "Overleaf'e yükleyeceğim" | `disa-aktar` |
 | "bozuldu", "geri al", "eski hâli", "dünkü hâline dön", "bu hâlini kaydet", "ayrıntılı geçmiş" | `geri-al` |

@@ -23,6 +23,10 @@ araçlar değiştiğinde).
 - Akademisyen: Raporlar her öğrenci için baş harfleriyle ayrı klasörde toplanır.
 - Yazar: Kitap raporları kitabın "raporlar" klasöründe toplanır.
 - Herkes: Aylık bakımda eskiyen ara dosyalar gösterilir; silmeye siz karar verirsiniz.
+- Herkes: Ses kaydını yazıya dökmenin yolunu adım adım anlatırım (Word 365 ile), çıkan metni konuşanlarıyla temiz bir nota çeviririm; isterseniz düzeltilmiş sürümünü de hazırlarım.
+- Yazar: Editörü olduğunuz ortak kitapta başka yazarların bölümlerini derler, kitap planı çıkarırım. "editörü olduğum kitap" yazın.
+- Herkes: Önerilerimi isterseniz Word'de Değişiklikleri İzle ile, ayrı bir dosyada veririm; asıl dosyanıza dokunmam.
+- Herkes: Gizli klasör, bütün klasörde yapılan aramalarda da korunur.
 - Herkes: "Bu hafta neler var" deyin, yaklaşan işlerinizi gün gün özetlerim. E-postadaki son tarihi bulur, onayınızla işler listenize ve isterseniz takviminize eklerim.
 - Akademisyen: Dönem takviminizi ve ders programınızı bir kez verin; sınavdan önce soru hazırlığını, not girişinden önce değerlendirmeyi hatırlatırım.
 - Akademisyen: Makalenizi Overleaf'e yüklenecek tek dosya olarak hazırlarım; kaynakça ve resimler içinde gelir. Atıflar kontrol edilmemişse önce onu öneririm.

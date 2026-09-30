@@ -27,7 +27,8 @@ Kaydet → PDF seçin."
 1. **Önce `divit-akademik:kaynak-dogrula` çalıştır** (tür akademisyense). Doğrulanmamış atıf varken
    çıktı alma — çıktı alındıktan sonra hoca metni gönderir ve
    düzeltme şansı kalmaz. Sorunlu atıf varsa göster ve sor.
-2. Hedefi sor: Word mü PDF mi, hangi dergi/stil?
+2. Hedefi sırayla, her mesajda tek soru sor: önce "Word mü, PDF mi?", cevaptan
+   sonra "Hangi dergi ya da stil?"
    Tür yazarsa dergi/stil sorma; `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`
    → "Yayınevine teslim" bölümüne göre çalış, 3–4. adımları atla.
 3. CSL stilini belirle. `.claude/stiller/` altında yoksa Zotero Style

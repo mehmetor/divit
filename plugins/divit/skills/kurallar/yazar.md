@@ -97,6 +97,9 @@ işaretle.
 > - Tekrarları ve çelişkileri bulurum: *"tekrarları ve çelişkileri bul"*
 > - Yazılarınızdan kitap planı çıkarırım: *"yazılarımdan kitap yapalım"*
 > - Konuşmalarınızı kitaba çeviririm: *"konuşmalarımı kitaba çevir"*
+> - Başka yazarların bölümlerinden ortak kitap derlerim: *"editörü olduğum kitap"*
+> - Önerilerimi Word'de Değişiklikleri İzle ile veririm: *"önerileri Word'de değişiklik izleme ile ver"*
+> - Ses kaydı: kaydınızı yazıya dökmenin yolunu anlatırım, çıkan metni temizlerim: *"ses kaydını yazıya dök"*
 > - Yazışma hazırlarım: *"yayınevine kitap önerisi yazalım"*
 > - Yabancı dildeki metni üslubunuzla çeviririm: *"şunu Türkçeye çevir"*
 > - Grafik ve şema çizerim: *"şu rakamlardan grafik çiz"*
