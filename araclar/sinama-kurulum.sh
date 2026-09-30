@@ -184,6 +184,17 @@ olc viii1 "settings.json: iki kitap-klasoru allow, asil/malzeme deny birebir; mk
   py 'import json,sys; p=json.load(open(sys.argv[1]))["permissions"]
 a,d=p["allow"],p["deny"]
 sys.exit(0 if {"Bash(sh */scripts/kitap-klasoru.sh *)","PowerShell(*kitap-klasoru.ps1*)","Bash(mkdir *)"}<=set(a) and {"Edit(./kitaplar/*/asil/**)","Edit(./kitaplar/*/malzeme/**)"}<=set(d) else 1)' "$Y/.claude/settings.json"
+olc viii4 "settings.json dalga 2: zip, uploads, openalex, geçmiş ve bağlayıcı allow; gizli, git ve gönderme/silme deny" \
+  py 'import json,sys; p=json.load(open(sys.argv[1]))["permissions"]
+a,d=set(p["allow"]),set(p["deny"])
+A={"Bash(zip *)","PowerShell(Compress-Archive *)","Read(~/.claude/uploads/**)","WebFetch(domain:api.openalex.org)","Edit(./sekiller/**)","Edit(./notlar/**)",
+"Bash(git -C * show *)","PowerShell(git -C * show *)","Bash(git -C * commit -m *)","PowerShell(git -C * commit -m *)",
+"mcp__claude_ai_Gmail__create_draft","mcp__claude_ai_Google_Calendar__create_event"}
+D={"Read(./gizli/**)","Edit(./gizli/**)","Bash(*gizli*)","PowerShell(*gizli*)",
+"Bash(git -C * push *)","PowerShell(git -C * push *)","Bash(git -C * reset *)","PowerShell(git -C * reset *)",
+"mcp__claude_ai_Gmail__send_message","mcp__claude_ai_Gmail__reply","mcp__claude_ai_Gmail__forward",
+"mcp__claude_ai_Gmail__trash_message","mcp__claude_ai_Gmail__trash_thread","mcp__claude_ai_Google_Calendar__delete_event"}
+sys.exit(0 if A<=a and D<=d and not (a&d) and len(d)>=44 else 1)' "$A/.claude/settings.json"
 olc viii2 "CLAUDE.md 'Araçlar' dolu (pandoc, pdfcpu tam yol; pdftotext 'yok'; yer tutucu yok)" \
   bash -c 'grep -qF "Word/PDF çevirici: \`$2/.divit/araclar/pandoc\`" "$1" && grep -qF "PDF aracı: \`$2/.divit/araclar/pdfcpu\`" "$1" && grep -qF "PDF metin (Windows): \`yok\`" "$1" && ! grep -q "__[A-Z]*__" "$1"' _ "$Y/CLAUDE.md" "$EV"
 olc viii3 "CLAUDE.md çekirdek kuralı: klasör açma ve kopyalama yalnız kitap-klasoru betiğiyle" grep -q 'yalnız kitap-klasoru betiğiyle' "$A/CLAUDE.md"

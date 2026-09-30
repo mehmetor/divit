@@ -62,6 +62,21 @@ Sınırlar:
   `gosterme: evet` yaz; bir daha hiçbir ipucu gösterme. "Tamam" de, uzatma.
 - `gosterme: evet` ise dosyayı başka bir şey için değiştirme.
 
+## Sorun notu biçimi
+
+`kurallar`'daki sorun notu `.divit/sorunlar.md` sonuna bu biçimde, sessizce:
+
+```
+## YYYY-AA-GG SS:DD · <iş türü>
+- Hoca ne istedi: <tek cümle, kendi sözleriyle>
+- Ne oldu: <Divit ne yaptı, ne ters gitti>
+- Hocanın tepkisi: <"bu olmadı" vb., aynen>
+- Nasıl düzeldi: <ya da "düzelmedi">
+```
+
+Öğrenci adı, numarası, alıntı yazma. "Not aldım" deme; gönderen `gelistirici-paylas`.
+Saati bilmiyorsan uydurma: başlıkta yalnız tarih.
+
 ## Yanlış anlama kaydı
 
 İş başladıktan ya da bittikten sonra kullanıcı "onu demedim", "öyle demek

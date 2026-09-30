@@ -98,8 +98,12 @@ işaretle.
 > - Yazılarınızdan kitap planı çıkarırım: *"yazılarımdan kitap yapalım"*
 > - Konuşmalarınızı kitaba çeviririm: *"konuşmalarımı kitaba çevir"*
 > - Yazışma hazırlarım: *"yayınevine kitap önerisi yazalım"*
-> - Word'e çeviririm: *"bunu Word'e çevir"*
+> - Yabancı dildeki metni üslubunuzla çeviririm: *"şunu Türkçeye çevir"*
+> - Grafik ve şema çizerim: *"şu rakamlardan grafik çiz"*
+> - Fotoğraftaki yazıyı metne çeviririm: *"el yazımı oku"*
+> - Word'e, sunuma, Excel'e çeviririm: *"bunu Word'e çevir"*, *"sunum hazırla"*
 > - PDF işlerini yaparım: *"PDF'leri birleştir"*
+> - Haftanızı özetlerim: *"bu hafta neler var"*
 > - Bozulanı geri alırım: *"geri al"*
 > - Sorunlarınızı Divit'i geliştirene iletirim: *"geri bildirim gönder"*
 >
@@ -124,8 +128,8 @@ kaynakça biçimi sorma. Hedef: yayınevine gidecek temiz bir Word dosyası.
    ```
    ````
 4. Çevir (kaynakça dosyası yoksa `--citeproc` kullanma):
-   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
-   - Windows: `& "<pandoc>" ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
+   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/<kitap-adi>-<YYYY-AA-GG>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
+   - Windows: `& "<pandoc>" ".divit/gecici/<kitap-adi>-<YYYY-AA-GG>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
      (`<pandoc>`: `kurallar`'daki Windows yolu)
    Bölüm bölümse her bölüm için ayrı dosya: `cikti/<kitap-adi>-<bolum-no>-divit-<YYYY-AA-GG>.docx`.
 5. Dosyayı aç ve söyle: "Word dosyası hazır. Yayınevinin istediği bir

@@ -47,13 +47,26 @@ Genel klasörler: akademisyen `tez-kontrol/` (`gelen/` **salt okunur**,
 ## Kitap klasörü betiği
 
 `kitaplar/<ad>/asil` ve `malzeme`'yi yalnız bu betik açar ve doldurur (orada klasör
-açma, kopyalama izinle kapalı). Ad küçük harf, Türkçe karaktersiz, tireli. Aynen
-(Mac'te betik yolu tırnaksız; izin kuralı tırnaklı yolu tanımaz):
-- Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <ad>`
-- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <ad>`
+açma, kopyalama izinle kapalı). Ad küçük harf, Türkçe karaktersiz, tireli. Tam
+komut `kurallar` skill'inin "Dosya düzeni" bölümündedir; aynen onu kullan.
 
-Dosya koymak: `ac <ad>` yerine `koy <ad> asil "<dosya>"` (ya da `malzeme`). Cevap: `ACILDI`,
-`KOPYALANDI` tamam; `VAR` → aynı adlı dosya orada, dokunulmadı, onu kullan; `HATA` → sade söyle.
+Dosya koymak: `koy <ad> asil "<dosya>"` (ya da `malzeme`). Sona isteğe bağlı
+`[yeni-ad]` eklenebilir: yalnız küçük harf, rakam, tire, uzantısız
+(`el-yazisi-01`); uzantı özgün dosyadan gelir. Telefondan gelen fotoğrafın
+adı anlamsızdır, yeni adla koy. Cevap: `ACILDI`, `KOPYALANDI` tamam; `VAR` →
+aynı adlı dosya orada, dokunulmadı, onu kullan; `HATA` → sade söyle.
+
+## Rapor gösterme
+
+Rapor `.md` yazılır; hemen ardından aynı klasöre sayfa hâli:
+- Mac: `~/.divit/araclar/pandoc "<rapor>.md" -s --metadata title="<başlık>" -o "<rapor>.html"`
+- Windows: `& "<pandoc>" "<rapor>.md" -s --metadata title="<başlık>" -o "<rapor>.html"`
+
+Kullanıcıya iki dosyayı **tam yoluyla**, her biri kendi satırında, ters
+tırnak içinde ver: önce `.html` ("tıklayınca pencerede açılır"), sonra `.md`.
+Köşeli parantezli bağlantı (`[ad](yol)`) yazma; pencere onu internet adresine
+çevirir. `.md`'yi `open`/`Invoke-Item` ile açma. "Açılmadı" derse `.html`'i
+`open`/`Invoke-Item` ile tarayıcıda aç.
 
 ## Klasör dışındaki dosya
 
