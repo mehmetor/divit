@@ -13,12 +13,12 @@ her Terminal komutu yalıtılmış bir ortamda denendi.
 1. Denenecek dalda, temiz çalışma ağacıyla:
 
    ```bash
-   ./yayinla.sh --deneme deneme
+   ./yayinla.sh --kanal deneme
    ```
 
    **Beklenen:** `Gönderildi: deneme → <commit> …`, iki eklentinin
    sürümü (zip özetinin ilk 12 hanesi) ve Mac/Windows kurulum komutları.
-   Değişiklik yoksa `Deneme dalı 'deneme' zaten güncel`. Bulunduğunuz dal
+   Değişiklik yoksa `Kanal dalı 'deneme' zaten güncel`. Bulunduğunuz dal
    ve `SURUM.md` değişmez.
 2. GitHub ham adresleri ~5 dakika önbellekte kalır. Şu komut az önce
    basılan sürümü gösterene kadar bekleyin:
@@ -29,8 +29,10 @@ her Terminal komutu yalıtılmış bir ortamda denendi.
 
    **Beklenen:** iki satır, ikisi de `/deneme/dagitim/…-<sürüm>.zip`.
 
-`main`, `develop` ve adı `deneme`/`deneme-` ile başlamayan dallar
-reddedilir. Farklı denemeler yan yana gerekirse `deneme-yazar` gibi bir ad
+`main` ve `develop` reddedilir; izinli kanallar `deneme`, `deneme-*` ve
+`yeni` (gerçek kullanıcıya giden ayrı kanal: `belgeler/YENI-KURULUM.md`).
+Eski yazım `--deneme deneme` aynı işi yapar.
+Farklı denemeler yan yana gerekirse `deneme-yazar` gibi bir ad
 verin; komutlarda `deneme` yerine o ad yazılır.
 
 ### Kanal klasörde kalır
@@ -141,7 +143,7 @@ için bu yol önerilir.
 ## 4. Tazeleme (yeni bir düzeltmeyi denemek)
 
 1. Geliştirme makinesinde, entegrasyon dalının güncel hâlinden:
-   `./yayinla.sh --deneme deneme`, sonra 0.2'deki gibi önbelleği bekleyin.
+   `./yayinla.sh --kanal deneme`, sonra 0.2'deki gibi önbelleği bekleyin.
    **Beklenen:** Yeni sürüm numaraları.
 2. Divit Deneme hesabında 2.1'deki kurulum komutunu (akademisyen için
    3.1'i) yeniden çalıştırın. Klasördeki dosyalara dokunmaz. `DIVIT_DAL`
@@ -195,6 +197,6 @@ pencere açın. Kanal Windows'ta da `.divit\kanal.txt`'ye yazılır.
 ## 7. Kural
 
 `deneme` ve `deneme-*` dalları **asla** main'e ya da develop'a
-birleştirilmez, PR açılmaz. Her `--deneme` çalışması dala yalnızca hızlı
+birleştirilmez, PR açılmaz. Her `--kanal` çalışması dala yalnızca hızlı
 ileri bir commit ekler (zip'ler ve deneme adresleri); iş develop'a normal
 yoldan gider.
