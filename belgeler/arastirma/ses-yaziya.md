@@ -20,11 +20,11 @@ oturumunda denetlenmeli. Skill bu yüzden kesin menü adına bağlanmaz,
 
 | Yol | Sistem | Türkçe | Not |
 |---|---|---|---|
-| Word → Dikte → **Transkribe et** (dosya yükle) | Word web (Microsoft 365); Windows masaüstü sürümünde de olabilir `[DOĞRULA]` | Dil listesinde Türkçe `[DOĞRULA]` | mp3, wav, m4a, mp4; aylık yükleme süresi sınırı (yaklaşık 300 dk) `[DOĞRULA]`. Konuşmacıları ayırır. Ses Microsoft bulutuna gider. M365 aboneliği gerekir. |
+| Word → Dikte → **Transkribe et** (dosya yükle) | Word web (Microsoft 365); Windows masaüstü sürümünde de olabilir `[DOĞRULA]` | 80+ dil (insider.office.com); Türkçe listede `[DOĞRULA]` | mp3, wav, m4a, mp4; aylık yükleme süresi sınırı (yaklaşık 300 dk) `[DOĞRULA]`. Konuşmacıları ayırır. Ses Microsoft bulutuna gider. M365 aboneliği gerekir. |
 | Word → Dikte (canlı) | Windows ve Mac Word 365 | Var | Kaydı hoparlörden çalıp dinletmek mümkün ama kalitesiz; son çare. |
 | Windows sesli yazma (Win+H) | Windows 10/11 | `[DOĞRULA]` | Canlı konuşma içindir. |
-| Mac Notlar: ses kaydı + transkript | macOS 15 ve sonrası | İlk çıkışta yalnız İngilizce; Türkçe `[DOĞRULA]` | Hazır dosyayı yükleme sınırlı `[DOĞRULA]`. Cihaz üstü. |
-| iPhone Sesli Notlar transkripti | iOS 18 ve sonrası | İlk çıkışta İngilizce; genişleme `[DOĞRULA]` | Cihaz üstü. |
+| Mac Notlar: ses kaydı + transkript | macOS 15 ve sonrası | Apple transkripti Türkçe desteklemiyor (aynı kaynak) | Hazır dosyayı yükleme sınırlı `[DOĞRULA]`. Cihaz üstü. |
+| iPhone Sesli Notlar transkripti | iOS 18 ve sonrası | 10 dilde, Türkçe YOK (vexascribe.com, 2026) | Cihaz üstü. |
 | Mac/iPhone Dikte | Güncel sürümler | Var | Canlı konuşma içindir. |
 | Google Kaydedici | Yalnız Pixel | `[DOĞRULA]` | Samsung Ses Kaydedici gibi diğerlerinde transkript modele göre değişir `[DOĞRULA]`. |
 | Claude uygulaması (masaüstü/mobil) | — | — | Sesli giriş var; **ses dosyası eki kabul edilmiyor** `[DOĞRULA]`. |
@@ -61,3 +61,5 @@ Canlı getirilmedi; pilotta açılıp tabloyla karşılaştırılmalı:
 - Google Pixel Yardım — Kaydedici, desteklenen diller.
 - Anthropic Destek — Claude uygulamasında desteklenen dosya türleri.
 - 6698 sayılı KVKK, md. 5 (açık rıza) ve md. 9 (yurt dışına aktarım).
+- https://insider.office.com/en-us/blog/transcribe-comes-to-word-for-windows
+- https://vexascribe.com/iphone-voice-memo-transcription
