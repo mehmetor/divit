@@ -43,6 +43,22 @@ klasörü yoksa `kurallar`'daki betikle `ac <kitap-adi>`. Kullanıcı fotoğraf�
 sohbete sürüklediyse ya da yolunu verdiyse `koy <kitap-adi> malzeme "<dosya>"`
 ile yerleştir, oradan oku. Diğer türde fotoğrafı bulunduğu yerden oku.
 
+## Telefondan gelen fotoğraf
+
+Kullanıcı "telefondan nasıl göndereceğim" derse aynen:
+> "Telefonda Claude uygulamasında Code'a dokunup bu sohbeti açın, fotoğrafı ekleyin; ben malzemeye koyarım.
+> Olmazsa fotoğrafı bilgisayara atın (iPhone'da AirDrop, Windows'ta OneDrive) ve buraya sürükleyin."
+
+Mesajda fotoğraf varsa ve yolu yazmıyorsa: Glob ile `~/.claude/uploads/**/*`
+altında en yeni dosyayı bul (adı `<kısa-kimlik>-image.jpg` gibi). Bulamazsan
+uydurma, sürüklemesini iste. Bulunca anlamlı ad öner ("el-yazisi-01 diye
+koyayım mı?"), onayla ve aynen (yeni ad uzantısız, küçük harf, Türkçe
+karaktersiz, tireli; uzantıyı betik korur):
+- Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh koy <kitap-adi> malzeme "<yol>" <yeni-ad>`
+- Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" koy <kitap-adi> malzeme "<yol>" <yeni-ad>`
+
+`VAR` derse bir sonraki sayıyı dene (`el-yazisi-02`). Diğer türde fotoğrafı oradan oku.
+
 ## Fotoğrafları bulma
 
 Glob ile klasördeki `*.jpg`, `*.jpeg`, `*.png`, `*.heic`, `*.webp` (büyük
