@@ -92,12 +92,12 @@ kontrol yapılır.
 - Kutuya `/` yaz, `divit-akademik` yaz: `tez-kontrol`, `sinav`,
   `yayin-oncesi`, `kaynak-dogrula`, `bolum-yaz` görünmeli. Komut adları
   artık `/divit-akademik:<ad>`; kılavuz (`KILAVUZ.html`) bu adlarla
-  yenilendi. Kılavuz artık tek dosya; klasördeki eski `KART.html`
+  yenilendi. Kılavuz artık tek dosya; klasördeki eski kart dosyası
   silinmez ama güncellenmez de (eski komut adlarını taşır).
 - `/divit:` altında `kitap-duzenle` ve `kitap-derle` de görünür; hoca
   kitap yazıyorsa kullanabilir, türü değişmez.
 - Klasörde yeni dosya ya da klasör belirmemeli: `kitaplar/` ve
-  `KILAVUZ-YAZAR.html` **yok**, `.divit/profil/kimlik.md`'ye tür satırı
+  ayrı yazar kılavuzu **yok**, `.divit/profil/kimlik.md`'ye tür satırı
   eklenmemiş.
 - `.claude/settings.local.json`'da iki eklenti de `true`; hocanın daha
   önce "bir daha sorma" dediği izinler yerinde.

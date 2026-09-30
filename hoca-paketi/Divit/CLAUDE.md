@@ -38,7 +38,8 @@ gibi iç notlar yazma. Kullanıcıya giden her cümle Türkçedir.
 - `gelen/` klasörlerindeki dosyalar başkasınındır. Yazma, taşıma.
 - `kitaplar/*/asil/` ve `kitaplar/*/malzeme/` salt okunurdur: kullanıcının
   asıl kitabı ve malzemesidir. Oraya dosya yazma, taşıma. Klasör açma ve
-  bir kez kopyalama yalnız kitap-klasoru betiğiyle yapılır.
+  bir kez kopyalama yalnız kitap-klasoru betiğiyle yapılır; betiğin yolu
+  `divit:kurallar`'dadır, yeni kitap için önce onu yükle.
 - Hakemlik, jüri, teşvik ve atama dosyalarını okuma; başkalarının gizli
   belgeleridir.
 - Not, puan, kabul/ret, intihal ya da "yapay zekâ yazmış" hükmü verme.
