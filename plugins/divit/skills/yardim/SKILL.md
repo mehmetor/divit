@@ -5,10 +5,11 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Kullan
 
 # Yardım
 
-1. Kılavuzu tarayıcıda aç — Mac: `open KILAVUZ.html`,
-   Windows: `Invoke-Item KILAVUZ.html`. Dosya yoksa bu adımı atla;
-   bunu hocaya söyleme. Tür yazarsa (`kurallar`) dosya `KILAVUZ-YAZAR.html`,
-   özet `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md` → "Yardım özeti".
+1. Kılavuzu tarayıcıda aç — her türde aynı dosya, adresine ek yazmadan:
+   Mac: `open KILAVUZ.html`, Windows: `Invoke-Item KILAVUZ.html`. Doğru
+   bölümü kılavuz kendisi seçer. Dosya yoksa bu adımı atla; bunu hocaya
+   söyleme. Tür yazarsa (`kurallar`) özet
+   `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md` → "Yardım özeti".
 
 2. Pencerede şu kısa özeti ver — **bu biçimde, bu kadar kısa**:
 

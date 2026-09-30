@@ -5,6 +5,8 @@ description: Divit'in bu bilgisayarda düzgün çalışıp çalışmadığını 
 
 # Sağlık denetimi
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
 
 ## Yasaklar
@@ -21,10 +23,11 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
 1. **Yazma:** `.divit/gecici/saglik.md` dosyasına bugünün tarihiyle
    `# deneme` yaz (Write), sonra oku (Read).
 2. **Word:** pandoc ile bu dosyayı Word'e, sonra geri metne çevir:
-   - Mac: `"$DIVIT_PANDOC" ".divit/gecici/saglik.md" -o ".divit/gecici/saglik.docx"`
-     ve `"$DIVIT_PANDOC" ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
-   - Windows: `& $env:DIVIT_PANDOC ".divit/gecici/saglik.md" -o ".divit/gecici/saglik.docx"`
-     ve `& $env:DIVIT_PANDOC ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
+   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/saglik.md" -o ".divit/gecici/saglik.docx"`
+     ve `~/.divit/araclar/pandoc ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
+   - Windows: `& "<pandoc>" ".divit/gecici/saglik.md" -o ".divit/gecici/saglik.docx"`
+     ve `& "<pandoc>" ".divit/gecici/saglik.docx" -t gfm -o ".divit/gecici/saglik-geri.md"`
+   (`<pandoc>`, `<pdfcpu>`: klasördeki `CLAUDE.md`'nin "Araçlar" bölümündeki tam yol.)
    Geri gelen metinde "deneme" var mı, bak.
 3. **PDF okuma:** `${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf` dosyasını
    `kurallar`'daki "PDF'ten metin" komutuyla `.divit/gecici/saglik.txt`'ye
@@ -33,8 +36,8 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
    Word'ün "PDF olarak kaydet" özelliğiyle yapılır; onu deneme, yalnızca
    Word okuma-yazma denemesinin geçtiğini bil.
    **PDF aracı:** deneme PDF'ini iki kez birleştir ve sayfa sayısına bak:
-   - Mac: `"$DIVIT_PDFCPU" merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
-   - Windows: `& $env:DIVIT_PDFCPU merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
+   - Mac: `~/.divit/araclar/pdfcpu merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
+   - Windows: `& "<pdfcpu>" merge ".divit/gecici/saglik.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf" "${CLAUDE_PLUGIN_ROOT}/scripts/deneme.pdf"`
    `.divit/gecici/saglik.pdf` önceden varsa araç üstüne yazmaz; adına saat ekle.
    Sonra `info` ile bak: 2 sayfa olmalı.
 4. **Profil:** `.divit/profil/` dosyaları var mı, `kimlik.md` doldurulmuş mu.

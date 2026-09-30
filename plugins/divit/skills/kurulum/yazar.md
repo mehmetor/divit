@@ -83,16 +83,17 @@ Kullanıcının cevabı yazdığını ezer. Sonucu `alan.md`'ye yaz.
 Cevaplara göre `gorevler.md`'yi yaz: iş, kitap, tarih, durum.
 
 Her kitap için klasör öner, onay alınca aç. Ad küçük harf, Türkçe karaktersiz,
-tireli (ör. `yonetim-notlari`). Her komut ayrı; zincirleme yok.
-- Yeni baskı: `kitaplar/<kitap-adi>/asil`
-  Mac `mkdir -p "kitaplar/<kitap-adi>/asil"` ·
-  Windows `New-Item -ItemType Directory -Force "kitaplar/<kitap-adi>/asil"`
-- Derlenecek yazılar: `kitaplar/<kitap-adi>/malzeme` (aynı komut, `malzeme` ile)
+tireli (ör. `yonetim-notlari`). Klasörü kendin açma; `kurulum` skill'inin
+6. adımındaki ya da `kurallar`'daki "Kitap klasörü" betiğini kullan
+(`ac <kitap-adi>`; `asil` ve `malzeme` birlikte açılır).
 
-Sonra dosyaların yerini söyle:
-> "Kitabınızın Word ya da PDF dosyasını 'asil' klasörüne koyun. Ben o dosyayı
-> yalnızca okurum, hiç değiştirmem."
-> "Kitaba girecek yazıları, konuşma metinlerini 'malzeme' klasörüne koyun."
+Sonra dosyaları iste:
+> "Kitabınızın Word ya da PDF dosyasını bu pencereye sürükler misiniz? Ben
+> onu yalnızca okurum, hiç değiştirmem."
+
+Gelen dosyayı aynı betikle yerleştir: kitabın kendisi `koy <kitap-adi> asil
+"<dosya>"`, derlenecek yazılar ve konuşma metinleri `koy <kitap-adi> malzeme
+"<dosya>"`. Betik HATA verirse `kurallar`'daki sıraya uy.
 
 ## 6. Güvence
 

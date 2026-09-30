@@ -5,6 +5,8 @@ description: Öğrenci tezi, makalesi, dönem ödevi, bitirme/tasarım projesi, 
 
 # Tez / öğrenci metni değerlendirme
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçmek değil.
 Çıktı bir **bulgu listesi**dir, not değil, hüküm değil.
 
@@ -26,11 +28,13 @@ Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçme
 
 1. `tez-kontrol/gelen/` içindeki dosyayı oku. PDF'i Read aracıyla
    doğrudan oku (uzunsa `pages` ile parça parça). Word dosyasını
-   `CLAUDE.md`'deki pandoc yoluyla `.divit/gecici/` altına metne çevir.
-2. Uzunsa önce yapıyı çıkar (başlıklar, bölüm uzunlukları), sonra
+   `divit:kurallar`'daki pandoc komutuyla `.divit/gecici/` altına metne çevir.
+2. Uzunsa önce yapıyı çıkar (başlıklar Grep ile, bölüm uzunlukları; kabukla
+   sayma), sonra
    bölüm bölüm oku. Tamamını okumadan rapor yazma.
 3. Aşağıdaki listeyi sırayla uygula.
-4. `tez-kontrol/rapor/<bashar>-<YYYY-AA-GG>.md` yaz.
+4. `tez-kontrol/rapor/<bashar>-<YYYY-AA-GG>.md` yaz; `divit:kurallar`'daki
+   "Rapor gösterme" kuralıyla `.html` hâlini üret, iki tam yolu ver.
 5. Hocaya raporun **üç cümlelik özetini** söyle, tamamını ekrana basma.
 
 ## Kontrol listesi
