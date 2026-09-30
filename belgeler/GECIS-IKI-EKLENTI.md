@@ -8,7 +8,8 @@ yapılacağını yazar.
 
 Buradaki her davranış `araclar/sinama-guncelleme.sh` ile yalıtılmış
 ortamda, gerçek güncelleme yoluyla (aynı adresteki pazar yeri + zip)
-sınandı; son çıktı: `belgeler/sinama/guncelleme-sinamasi.md`. Sınanmayan
+sınandı; son çıktı: `belgeler/sinama/guncelleme-sinamasi.md`. Kurulum
+betiğinin kendi sınaması: `belgeler/sinama/kurulum-sinamasi.md`. Sınanmayan
 tek şey Claude masaüstü uygulamasının kendisi ve Windows (aşağıda).
 
 ## Yayından sonra hocanın makinesinde ne olur

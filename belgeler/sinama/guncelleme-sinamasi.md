@@ -236,4 +236,69 @@ C'de kullanılan her kur.sh satırının kur.ps1 karşılığı:
 | settings.local.json: yalnız iki anahtar (plutil), okunamazsa dokunulmaz | 278–297 (ConvertFrom/To-Json `-Depth 20`, okunamazsa dokunulmaz) | anlamca aynı; PowerShell 5.1 dosyayı yeniden biçimler (girinti, `<`/`>` kaçışları) — içerik aynı kalır |
 | Eklenti adımı: add, update, install/update divit, install/update divit-akademik, liste | 309–332 | aynı |
 
-kur.ps1'de değişiklik yapılmadı.
+kur.ps1'de değişiklik yapılmadı. (Satır numaraları bu çalıştırmanın
+kur.ps1'ine göredir; kurulum düzeltmesinden sonraki eşleştirme:
+`belgeler/sinama/kurulum-sinamasi.md` → Windows.)
+
+## Kurulum düzeltmesinden sonra (2026-09-30)
+
+`kurulum-duzelt` dalında (tür çelişkisi, pazar yeri adresi denetimi,
+2.1.280 alt sınırı, tek kılavuz, kanal) yeniden çalıştırıldı; bütün
+kurulum ve eklenti ölçümleri GEÇTİ. Konuşma ölçümleri (B2, B3, D, C9)
+girişsiz çalıştırıldığı için ATLANDI: bu değişiklik skill'lere dokunmaz,
+yukarıdaki konuşma sonuçları geçerlidir. Yeni ölçüm C10: klasöre
+`.divit/kanal.txt` (kurulumdaki dal) ve CLAUDE.md'ye dolu "Araçlar"
+bölümü yazıldı. C6 artık kılavuzun kök etiketindeki `data-rol`'ü
+akademisyen olarak bekler (şablonda data-rol yokken de geçer).
+
+```
+== Ön koşullar
+Bu betik origin'e PUSH yapar: 'deneme-gecis-202609301649' dalı (önce main'in kopyası, sonra deneme commit'i).
+claude (eklenti işleri): /opt/homebrew/bin/claude 2.1.278 · konuşma: ~/.local/bin/claude 2.1.285
+Geçici dizin: /tmp/divit-sinama.XXXXXX
+
+== A) Eski hâl (main)
+Gönderildi: deneme-gecis-202609301649 = origin/main (caebb153ad2e)
+  kur.sh:   Kurulu ve güncel (sürüm 658769f6be47).
+GEÇTİ A1   yalnız divit@divit kurulu, sürüm main'deki özet (658769f6be47)
+GEÇTİ A2   init'te divit:tez-kontrol var
+BİLGİ A3   pazar yeri kaydında divit autoUpdate: yok (anahtar yazılmamış) (kur.sh CLI ile ekler; Desktop klasöre güvenince şablondaki autoUpdate:true işlenebilir)
+
+== B) Yeni sürüm gelir, kurulum yenilenmez
+  yayinla: Gönderildi: deneme-gecis-202609301649 → a94a58cb7bdd (kaynak 37558f0396d0 (orc/yonetici-kitap-yazarlari-i/kurulum-duzelt))
+  yayinla:   divit sürümü 635ffdbcfa8c
+  yayinla:   divit-akademik sürümü 8094459df0d4
+  Beklenen sürümler: divit 635ffdbcfa8c · divit-akademik 8094459df0d4. Ham adres önbelleği bekleniyor…
+GEÇTİ B0   raw marketplace.json deneme commit'iyle aynı (300 sn)
+GEÇTİ B1a  divit yeni özette (635ffdbcfa8c), divit-akademik kurulu değil
+GEÇTİ B1b  init: divit-akademik:* yok, divit:tez-kontrol yok, divit yeni yoldan
+GEÇTİ B4a  eski CLAUDE.md divit:kurallar'ı yüklüyor (tür kurallar'da çözülür)
+GEÇTİ B4b  eski settings.json eklenti dosyalarını okumaya izin veriyor (akademisyen.md)
+BİLGİ B4c  eski tez-kontrol/CLAUDE.md eski skill adını anıyor; B3 güvenlik ağı bunu karşılamalı
+BİLGİ B4d  eski settings.json'da kitaplar/ yasakları yok (akademisyende kitaplar/ yok; C'de gelir)
+BİLGİ B5   açık oturum eski eklentiyle sürer; yeni sürüm Claude kapatılıp açılınca gelir
+ATLANDI B2   konuşma ölçümü: giriş yok. Karma yol: araclar/sinama-guncelleme.sh --dal <yeni-dal> --karma
+ATLANDI B3   konuşma ölçümü: giriş yok. Karma yol: araclar/sinama-guncelleme.sh --dal <yeni-dal> --karma
+ATLANDI D    konuşma ölçümü: giriş yok. Karma yol: araclar/sinama-guncelleme.sh --dal <yeni-dal> --karma
+
+== C) Kurulum yenilenir (DIVIT_TUR yok)
+  kur.sh:   UYARI: Claude Code 2.1.278 eski (en az 2.1.280 gerekli) ve güncellenemedi. Divit klasörü açılınca 'model desteklenmiyor' hatası çıkabilir.
+  kur.sh:   Kullanıcı türü: akademisyen
+  kur.sh:   Kurulu ve güncel (sürüm 635ffdbcfa8c).
+GEÇTİ C1   iki eklenti kurulu: divit 635ffdbcfa8c, divit-akademik 8094459df0d4
+GEÇTİ C2   settings.local.json: iki eklenti açık, elle eklenen izinler duruyor
+GEÇTİ C3   profil, tez-kontrol/gelen, yazilar değişmedi; kimlik.md'ye tür satırı eklenmedi
+GEÇTİ C4   settings.json yeni: kitaplar yasakları var, pazar yeri deneme-gecis-202609301649
+GEÇTİ C5   .claude/rules/taslak-yazim.md yeni
+GEÇTİ C6   KILAVUZ.html yeni (/divit-akademik:, data-rol akademisyen), KILAVUZ-YAZAR.html ve kitaplar/ yok
+GEÇTİ C10  .divit/kanal.txt = deneme-gecis-202609301649, CLAUDE.md 'Araçlar' dolu
+GEÇTİ C7   .divit/kurulum-surumu.txt yazıldı (1.7)
+GEÇTİ C8   init'te beş divit-akademik skill'i, eklentiler yeni yollardan
+ATLANDI C9   konuşma ölçümü: giriş yok. Karma yol: araclar/sinama-guncelleme.sh --dal <yeni-dal> --karma
+
+== Son
+GEÇTİ G1   gerçek ~/.claude (settings, installed_plugins, known_marketplaces) değişmedi
+
+Uzak deneme dalı silinmedi. İş bitince: git push origin --delete deneme-gecis-202609301649
+SONUÇ: hepsi geçti (ATLANDI satırları hariç).
+```
