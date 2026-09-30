@@ -56,6 +56,24 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
       denenmeli. Aktarımdan önce `kaynak-dogrula` zorunlu. Fen/mühendislik
       hocalarını açar. (Benzer özellik: thesisai.io.)
 
+### Kitap yazarından gelen istekler (ilk yazar görüşmesi)
+
+- [ ] **Çeviri.** Yabancı yayınlardan alınan bölümleri Türkçe dil
+      kurallarına ve yazarın üslubuna (`.divit/profil/`) göre çevirme.
+      Kaynak gösterme ve alıntı sınırı yazara hatırlatılır.
+- [ ] **Grafik ve şekil.** Kitapta gereken grafikleri çizebilme (veriden
+      çizelge, akış şeması vb.). Python varsayılmaz; iki sistemde çalışan
+      bir yol bulunmalı (ör. SVG/HTML üretip pandoc ile Word'e gömme).
+- [ ] **Fotoğraftan malzeme.** El yazıları ve başka kitaplardan aldığı ya
+      da esinleneceği sayfalar fotoğraf olarak `malzeme/`ye girer; Divit
+      okur, metne çevirir, kaynağını not eder. Başka kitaptan alınanlar
+      alıntı/esin olarak işaretlenir, metne kopyalanmaz.
+- [ ] **Telefondan yükleme.** Fotoğrafları Claude mobil uygulamasından
+      göndermek ya da bilgisayara aktarmak. Araştır: mobil uygulama Code
+      oturumuna/klasöre dosya ulaştırabiliyor mu; yoksa en kolay yol
+      (AirDrop, iCloud/OneDrive/Google Drive eşitlemesiyle `malzeme/`
+      klasörüne düşürme) tarif edilir.
+
 ## Kaynak doğrulama — "sessiz hata sıfır"
 
 - [ ] 7. madde önce: bilerek hata konmuş **sınama seti**; her yayından önce
