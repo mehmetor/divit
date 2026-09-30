@@ -61,6 +61,12 @@ kurulumu yenile.**
    …)` görünmeli; "Üniversite işleri eklentisi şimdi kurulamadı" uyarısı
    **çıkmamalı.** Çıkarsa yayın adresleri henüz önbellekte eskidir
    (GitHub ~5 dakika tutar); birkaç dakika sonra komutu yeniden çalıştır.
+   Hocanın klasöründe kanal dosyası yoksa kurulum `main` kanalını kullanır
+   ve `.divit/kanal.txt`'ye `main` yazar; çıktıda "Deneme kanalı" satırı
+   **olmamalı.**
+   `DIVIT_TUR` **verme**: hocanın profili dolu ve tür satırı yok
+   (akademisyen sayılır); `DIVIT_TUR=yazar` verilirse kurulum hiçbir şeye
+   dokunmadan durur ("başka bir kullanım türüyle kurulmuş bir Divit var").
 4. Claude uygulamasını aç → Code sekmesi → Divit klasörü.
 
 Hoca kendisi "evet" dediyse `guncelleme` skill'i aynı komutu çalıştırmış
@@ -84,8 +90,9 @@ kontrol yapılır.
 
 - Kutuya `/` yaz, `divit-akademik` yaz: `tez-kontrol`, `sinav`,
   `yayin-oncesi`, `kaynak-dogrula`, `bolum-yaz` görünmeli. Komut adları
-  artık `/divit-akademik:<ad>`; kılavuz (`KILAVUZ.html`) ve kart bu
-  adlarla yenilendi.
+  artık `/divit-akademik:<ad>`; kılavuz (`KILAVUZ.html`) bu adlarla
+  yenilendi. Kılavuz artık tek dosya; klasördeki eski `KART.html`
+  silinmez ama güncellenmez de (eski komut adlarını taşır).
 - `/divit:` altında `kitap-duzenle` ve `kitap-derle` de görünür; hoca
   kitap yazıyorsa kullanabilir, türü değişmez.
 - Klasörde yeni dosya ya da klasör belirmemeli: `kitaplar/` ve
@@ -101,10 +108,12 @@ kontrol yapılır.
 | Görülen | Yapılacak |
 |---|---|
 | Akademik komutlar yok, Divit "kurulumu yenilemek gerekiyor" diyor | Yukarıdaki kurulum adımı. Hoca "evet" diyerek de yapabilir. |
+| Kurulum "Kurulum tamamlanmadı … başka bir kaynaktan kurulu" deyip bitti | `divit` pazar yeri o hesapta başka adresle kayıtlı. `claude plugin marketplace remove divit`, sonra kurulumu yeniden çalıştır. Klasöre dokunulmaz. |
+| Kurulum "Kurulum yapılmadı … başka bir kullanım türüyle" deyip bitti | Komuta `DIVIT_TUR` yazılmış ve klasörün türüyle çelişiyor. Hocada `DIVIT_TUR`'suz çalıştır; ikinci kullanım için çıktıdaki `DIVIT_HEDEF` komutu. |
 | Kurulum çıktısında "Üniversite işleri eklentisi şimdi kurulamadı" | 5 dakika bekleyip komutu yeniden çalıştır. Sürerse `claude plugin marketplace update divit` sonra komutu yeniden çalıştır. |
 | Kurulumdan sonra da akademik komutlar yok | Claude'u **tamamen** kapatıp aç (açık sohbet eski eklentiyle sürer). Yine yoksa klasörde `.claude/settings.local.json`'da `"divit-akademik@divit": true` var mı bak. |
 | "Klasör ayar dosyası okunamadı; dokunulmadı" uyarısı | Hocanın `settings.local.json`'u bozuk; betik ona dokunmadı. Dosyayı aç, `enabledPlugins` altına iki anahtarı elle yaz. |
-| Divit "Bu model desteklenmiyor" gibi İngilizce bir hata veriyor | Claude uygulaması eski; uygulamayı güncelle (klasör ayarındaki model yeni Claude Code ister). Geçişle ilgili değildir. |
+| Divit "Bu model desteklenmiyor" gibi İngilizce bir hata veriyor | Claude uygulaması eski; uygulamayı güncelle (klasör ayarındaki model Claude Code 2.1.280 ve sonrasını ister; kurulum betiği komut satırını buna göre günceller, olmazsa uyarı basar). Geçişle ilgili değildir. |
 | Bir dosya bozuldu | Kurulum hocanın dosyalarına dokunmaz (sınandı). Divit içinde "geri al" ya da `.divit/onceki-surumler/`. |
 
 ## Bilinen ayrıntılar

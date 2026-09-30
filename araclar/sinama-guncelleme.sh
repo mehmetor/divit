@@ -278,8 +278,11 @@ olc C3 "profil, tez-kontrol/gelen, yazilar değişmedi; kimlik.md'ye tür satır
 olc C4 "settings.json yeni: kitaplar yasakları var, pazar yeri $SD" \
   bash -c 'grep -qF "Edit(./kitaplar/*/asil/**)" "$1" && grep -qF "/$2/.claude-plugin/marketplace.json" "$1"' _ "$H/.claude/settings.json" "$SD"
 olc C5 ".claude/rules/taslak-yazim.md yeni" bash -c 'git show HEAD:hoca-paketi/Divit/.claude/rules/taslak-yazim.md | cmp -s - "$1"' _ "$H/.claude/rules/taslak-yazim.md"
-olc C6 "KILAVUZ.html yeni (/divit-akademik:), KILAVUZ-YAZAR.html ve kitaplar/ yok" \
-  bash -c 'git show HEAD:hoca-paketi/Divit/KILAVUZ.html | cmp -s - "$1/KILAVUZ.html" && grep -q "/divit-akademik:" "$1/KILAVUZ.html" && [ ! -e "$1/KILAVUZ-YAZAR.html" ] && [ ! -e "$1/kitaplar" ]' _ "$H"
+# Kılavuz tek dosya; kopyada yalnız kök etiketteki data-rol türe göre doldurulur.
+olc C6 "KILAVUZ.html yeni (/divit-akademik:, data-rol akademisyen), KILAVUZ-YAZAR.html ve kitaplar/ yok" \
+  bash -c 'sed "s|<html lang=\"tr\" data-rol=\"akademisyen\">|<html lang=\"tr\" data-rol=\"\">|" "$1/KILAVUZ.html" | cmp -s - <(git show HEAD:hoca-paketi/Divit/KILAVUZ.html) && grep -q "/divit-akademik:" "$1/KILAVUZ.html" && [ ! -e "$1/KILAVUZ-YAZAR.html" ] && [ ! -e "$1/kitaplar" ]' _ "$H"
+olc C10 ".divit/kanal.txt = $SD, CLAUDE.md 'Araçlar' dolu" \
+  bash -c '[ "$(cat "$1/.divit/kanal.txt")" = "$2" ] && grep -q "^## Araçlar" "$1/CLAUDE.md" && ! grep -q "__PANDOC__" "$1/CLAUDE.md"' _ "$H" "$SD"
 olc C7 ".divit/kurulum-surumu.txt yazıldı ($(cat "$H/.divit/kurulum-surumu.txt" 2>/dev/null))" test -s "$H/.divit/kurulum-surumu.txt"
 init > "$G/c-init.json"
 olc C8 "init'te beş divit-akademik skill'i, eklentiler yeni yollardan" \
