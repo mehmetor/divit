@@ -5,6 +5,8 @@ description: Makale, tez bölümü ya da kitap bölümü taslağı üzerinde ça
 
 # Bölüm / makale üzerinde çalışma
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 **Temel duruş:** Divit hocanın yerine yazmaz, hocayı sıkıştırır.
 Tam metin üretmek hem sahiplik duygusunu bozar hem denetimi düşürür
 hem etik olarak tartışmalıdır. Üretilen şey yapı, itiraz, eksik ve

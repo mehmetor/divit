@@ -82,8 +82,10 @@ alıntı kalmadığını denetle.
 
 ## 4. Göster ve onay iste
 
-Dosyayı hocaya aç (Windows: `Invoke-Item "<yol>"`, Mac: `open "<yol>"`) ve
-özetle: "3 sorun ve 12 iş kaydı var. Dosya ekranda açık."
+Dosyayı `kurallar`'daki "Rapor gösterme" kuralıyla göster; yalnız sayfa
+hâlini `.divit/gecici/geri-bildirim-<YYYY-AA-GG>.html`'e yaz (gönderilecek
+klasörde tek dosya kalsın). Özetle: "3 sorun ve 12 iş kaydı var. Dosyanın
+yoluna tıklarsanız pencerede açılır."
 
 > "Bunu Mehmet Akif Orakçı'ya göndermemi onaylıyor musunuz? Çıkarmamı
 > istediğiniz bir şey varsa söyleyin."
