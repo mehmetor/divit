@@ -1,6 +1,6 @@
 ---
 name: bakim
-description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyalarını, klasördeki CLAUDE.md'yi, Claude'un hafıza notlarını ve günlüğü sadeleştirir; ayrıca haftalık geri bildirim önerisinin ve aylık bakımın zamanını denetler. Kullanıcı "bakım yap", "düzenini gözden geçir", "kendini toparla" dediğinde ya da kurallar skill'i hatırlatma denetimi istediğinde kullan.
+description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyalarını, klasördeki CLAUDE.md'yi, Claude'un hafıza notlarını ve günlüğü sadeleştirir, eskiyen ara dosyaları ve dağınık adları listeler; ayrıca haftalık geri bildirim önerisinin ve aylık bakımın zamanını denetler. Kullanıcı "bakım yap", "düzenini gözden geçir", "kendini toparla" dediğinde ya da kurallar skill'i hatırlatma denetimi istediğinde kullan.
 ---
 
 # Bakım ve hatırlatmalar
@@ -11,7 +11,8 @@ description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyala
 - Hiçbir şeyi silme. Değiştireceğin her dosyanın kopyasını önce
   `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/` altına al.
 - Hocanın metinlerine, öğrenci dosyalarına, `gelen/` klasörlerine dokunma.
-  Bakım yalnızca Divit'in kendi düzenidir.
+  Bakım yalnızca Divit'in kendi düzenidir. Kullanıcının kendi dosyalarını
+  yeniden adlandırma, taşıma; düzen listesine de alma.
 - `kimlik.md`'deki `Kullanıcı türü:` satırına **dokunma**; sadeleştirirken
   de yerinde (ilk başlığın hemen altında) aynen kalır.
 - Klasördeki `CLAUDE.md`'nin "Her oturumun ilk mesajında" ve "Çekirdek
@@ -97,10 +98,27 @@ dosyalarını tutabilir (bilgisayarın kullanıcı klasöründe
 **Kota:** `saglik` skill'indeki "Kota ve model" kuralına göre ayın
 "kota" kayıtlarını say; gerekirse öneriyi yap.
 
-**5. Yer.** `.divit/onceki-surumler/` ve `.divit/gecici/` klasörlerinin
-kaba büyüklüğünü söyle. 90 günden eski önceki sürümler varsa hocaya
-söyle; **silme.** İsterse klasörü açarsın (Windows: `Invoke-Item`,
-Mac: `open`), kendisi karar verir.
+**5. Yer ve dosya düzeni.** Önce `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/dosya-duzeni.md`'yi
+Read ile yükle. Yalnız **listele**; bu adımda hiçbir dosyayı değiştirme.
+- `.divit/onceki-surumler/` ve `.divit/gecici/` klasörlerinin kaba büyüklüğünü
+  söyle (Glob ile dosya sayısı). 90 günden eski önceki sürümler varsa söyle.
+- `.divit/gecici/`: adındaki tarih **30 günden eski** dosyalar ve adında
+  tarih olmayanlar (ikincisi "tarihi belli değil" diye ayrı).
+- Kural dışı adlar: `<ad>-YYYY-AA-GG` biçiminde olmayan, Divit'in ürettiği
+  dosyalar. Yalnız Divit'in yazdığı yerlere bak: `tez-kontrol/rapor/`,
+  `kitaplar/*/raporlar/`, `cikti/` ve `yazilar/`'da yalnız `gunluk.md`'de
+  Divit'in yazdığı geçen dosyalar. Tarih almayan yaşayan dosyalar
+  (`plan.md`, `oneriler-…`) kural dışı değildir. Emin değilsen listeye alma.
+- Ara dosya `.divit/gecici/` dışında (kullanıcı klasöründe `.txt` ya da
+  metne çevrilmiş kopya) duruyorsa ve günlükte Divit'in yazdığı geçiyorsa listele.
+
+Silme ve taşıma **yalnız onayla ve öneri olarak**; Divit dosya silemez:
+- Kullanıcı "evet" derse ilgili klasörü açarsın (Windows: `Invoke-Item`,
+  Mac: `open`); siler ya da `arsiv/`'e taşır, kendisi karar verir.
+- Kullanıcının klasöründeki bir metin dosyası için önce kopyasını
+  `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/<aynı yol>` altına al.
+- Kural dışı adlar için yeniden adlandırma önerme; "Bundan sonrakiler yeni
+  düzende adlanacak" de. Kullanıcı isterse klasörü açarsın.
 
 ## Göster, onay al, kaydet
 
@@ -109,6 +127,7 @@ Mac: `open`), kendisi karar verir.
 > "Bakımı yaptım. Önerdiğim değişiklikler:
 > - Görevlerde biten 4 işi 'Biten işler'e taşıyorum.
 > - Üslup notlarında iki kez yazılmış bir kural var; birini çıkarıyorum.
+> - Bir aydan eski 12 ara dosya var; isterseniz klasörü açarım, siz silersiniz.
 > Onaylıyor musunuz?"
 
 Onaydan sonra uygula. `son-bakim`'i bugüne yaz. `gunluk.md`'ye tek satır:

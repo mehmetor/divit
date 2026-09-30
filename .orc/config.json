@@ -10,7 +10,7 @@
   },
   "budget": {
     "defaultRunUsd": 6,
-    "dailyUsd": 40,
+    "dailyUsd": 150,
     "warnAtPct": 75,
     "prices": {}
   },

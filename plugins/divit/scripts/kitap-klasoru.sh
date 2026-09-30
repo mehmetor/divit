@@ -3,7 +3,9 @@
 # Divit klasörünün içinde (alt klasörde de) çalışır; kökü .divit klasöründen bulur,
 # yollar köke göredir. Var olan dosyaya dokunmaz.
 # Kullanım: sh kitap-klasoru.sh ac <kitap-adi>
-#           sh kitap-klasoru.sh koy <kitap-adi> asil|malzeme "<kaynak dosya>"
+#           sh kitap-klasoru.sh koy <kitap-adi> asil|malzeme "<kaynak dosya>" [yeni-ad]
+# yeni-ad isteğe bağlı: küçük harf, rakam, tire; uzantı kaynaktan korunur
+# (ör. 327434a4-image.jpg + el-yazisi-01 → el-yazisi-01.jpg).
 # Çıktı tek satır: ACILDI <yol> | KOPYALANDI <yol> | VAR <yol> | HATA <neden>
 # Çıkış: 0 tamam, 3 aynı adlı dosya zaten var, 1 hata.
 # Windows eşi: kitap-klasoru.ps1 (aynı arayüz).
@@ -47,9 +49,16 @@ case "$islem" in
     echo "ACILDI $kok"
     ;;
   koy)
-    [ $# -eq 4 ] || hata "Kullanım: koy <kitap-adi> asil|malzeme \"<dosya>\""
+    [ $# -eq 4 ] || [ $# -eq 5 ] || hata "Kullanım: koy <kitap-adi> asil|malzeme \"<dosya>\" [yeni-ad]"
     bolum=$3
     kaynak=$4
+    yeni=$5
+    if [ $# -eq 5 ]; then
+      case "$yeni" in
+        '' | -* | *[!a-z0-9-]*)
+          hata "Yeni ad yalnız küçük harf, rakam ve tire olabilir, uzantısız (ör. el-yazisi-01)." ;;
+      esac
+    fi
     case "$kaynak" in
       /*) ;;
       *) kaynak="$calisma/$kaynak" ;;
@@ -60,7 +69,16 @@ case "$islem" in
     esac
     [ -f "$kaynak" ] || hata "Dosya bulunamadı: $kaynak"
     klasorleri_ac
-    hedef="$kok/$bolum/$(basename "$kaynak")"
+    taban=$(basename "$kaynak")
+    if [ -n "$yeni" ]; then
+      uzanti=""
+      case "$taban" in
+        ?*.*) uzanti=".${taban##*.}" ;;
+      esac
+      [ "$uzanti" = "." ] && uzanti=""
+      taban="$yeni$uzanti"
+    fi
+    hedef="$kok/$bolum/$taban"
     if [ -e "$hedef" ]; then
       echo "VAR $hedef"
       exit 3

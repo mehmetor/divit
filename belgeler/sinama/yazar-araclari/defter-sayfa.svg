@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+<rect width="900" height="600" fill="#fbf8ef"/>
+<g stroke="#b9d3ee" stroke-width="1.5"><line x1="40" y1="120" x2="860" y2="120"/><line x1="40" y1="190" x2="860" y2="190"/><line x1="40" y1="260" x2="860" y2="260"/><line x1="40" y1="330" x2="860" y2="330"/><line x1="40" y1="400" x2="860" y2="400"/><line x1="40" y1="470" x2="860" y2="470"/></g>
+<g font-family="Bradley Hand, Noteworthy, cursive" font-size="34" fill="#1f2d6b">
+<text x="60" y="110">Bölüm 4 için not - 12 Mart</text>
+<text x="60" y="180">İlk dükkânı açtığımızda raflar yarı boştu.</text>
+<text x="60" y="250">Babam her sabah kapıyı kendisi açardı,</text>
+<text x="60" y="320">müşteri gelmese de ışıkları yakardı.</text>
+<text x="60" y="390">Ona göre dükkân önce içeridekine</text>
+<text x="60" y="460">güven vermeliydi. <tspan fill="#1f2d6b" opacity="0.9">Sonra</tspan></text>
+</g>
+<path d="M448 450 q10 -25 20 0 t20 0 t20 0 t20 0 t25 -5 t20 5" stroke="#1f2d6b" stroke-width="3" fill="none"/>
+<text x="560" y="455" font-family="Bradley Hand, cursive" font-size="34" fill="#1f2d6b">gelirdi.</text>
+</svg>

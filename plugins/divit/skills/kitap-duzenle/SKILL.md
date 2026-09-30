@@ -1,6 +1,6 @@
 ---
 name: kitap-duzenle
-description: Var olan, basılmış ya da basılacak bir kitabın tamamına editör gözüyle bakar ve yeni baskıya hazırlar — yapı, anlatım, tutarlılık ve son okuma raporu; önerileri yalnız onayla işler. Kullanıcı "kitabımı yeni baskı için düzenle", "kitabıma editör gözüyle bak", "tekrarları ve çelişkileri bul", "yeni baskı hazırlıyorum", "kitabımı toparla" dediğinde kullan. Tek bir yazı için değil, bütün kitap için.
+description: Var olan, basılmış ya da basılacak bir kitabın tamamına editör gözüyle bakar ve yeni baskıya hazırlar — yapı, anlatım, tutarlılık ve son okuma raporu; önerileri yalnız onayla işler. Kullanıcı "kitabımı yeni baskı için düzenle", "kitabıma editör gözüyle bak", "tekrarları ve çelişkileri bul", "yeni baskı hazırlıyorum", "kitabımı toparla", "önerileri Word'de değişiklik izleme ile ver" dediğinde kullan. Tek bir yazı için değil, bütün kitap için.
 allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.ps1*)
 ---
 
@@ -57,10 +57,11 @@ Cevapları `kitaplar/<kitap-adi>/plan.md`'ye yaz. En üst satır her zaman:
 
 ## Okuma
 
-1. Word'ü metne çevir, çıktı `.divit/gecici/`:
-   - Mac: `~/.divit/araclar/pandoc "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>.md"`
-   - Windows: `& "<pandoc>" "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>.md"`
-   (`<pandoc>`: `kurallar`'daki Windows yolu). PDF ise `kurallar`'daki PDF'ten metin yolu.
+1. Word'ü metne çevir (PDF: `kurallar`'daki yol):
+   - Mac: `~/.divit/araclar/pandoc "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>-<YYYY-AA-GG>.md"`
+   - Windows: `& "<pandoc>" "<asil dosya>" -t gfm --wrap=none -o ".divit/gecici/<kitap-adi>-<YYYY-AA-GG>.md"`
+   Malzemeden okurken `notlar/malzeme-metin/*.md`'deki "Kaynak türü:" satırına uy:
+   başka kitaptan alıntı kitaba kopyalanmaz (kısa alıntı + künye + `[İZİN]`), esin cümlesi aktarılmaz.
 2. Önce yapıyı çıkar: bölüm ve başlık listesi, bölüm başına kelime. Başlıkları
    Grep ile bul, metni Read ile oku; kabukla sayma (`sed`, `wc` yok).
 3. Uzun kitabı bölüm bölüm oku. Her bölümden sonra `plan.md`'deki
@@ -98,7 +99,7 @@ belirsiz ünlü sözler (yanlış kişiye mal edilmiş söz yaygındır) →
 
 ## Çıktı
 
-1. `kitaplar/<kitap-adi>/duzenleme/rapor-<YYYY-AA-GG>.md` — öncelik
+1. `kitaplar/<kitap-adi>/raporlar/rapor-<YYYY-AA-GG>.md` — öncelik
    sıralı bulgular, önce yapı. Her bulguda yer (bölüm / başlık) ve en
    çok bir satırlık alıntı. Şablon `editorluk.md`'de.
 2. Somut öneriler bölüm bölüm:
@@ -116,26 +117,25 @@ belirsiz ünlü sözler (yanlış kişiye mal edilmiş söz yaygındır) →
    onaylar, reddeder ya da kendi değiştirir. Onaysız hiçbir öneri
    işlenmez. Öneri dosyasındaki "Durum" sütununu güncelle.
 2. Onaylananlar `taslak/<kitap-adi>.md` çalışma metnine işlenir. İlk
-   kez bu dosya `.divit/gecici/<kitap-adi>.md`'den Read + Write ile
+   kez bu dosya `.divit/gecici/<kitap-adi>-<YYYY-AA-GG>.md`'den Read + Write ile
    oluşturulur. Sonraki her değişiklikten önce önceki sürüm kopyası:
    `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/kitaplar/<kitap-adi>/taslak/<kitap-adi>.md`.
 3. Word istenirse `disa-aktar` →
    `cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx`. Metinde işaret
    (`[GÜNCELLE]`, `[DOĞRULA]`, `[TASLAK]`) kaldıysa önce listele, sor.
-   Kitap metninde kaynakça ve dergi stili adımı yoktur, atla. Önce söyle:
-
-> "Yeni Word dosyasında sayfa düzeni, resimler ve dipnotlar asıl
-> dosyanızdaki gibi olmayabilir. Yayınevinin dizgisi için iki yol daha
-> doğru: ya temiz metni verelim ya da öneri listesini verelim, siz kendi
-> Word dosyanızda uygularsınız."
-
-Word'de değişiklik izleme (izlenen değişiklik) üretilmez; bilinen sınır,
-sorulursa açıkça söyle.
+   Kaynakça ve dergi stili adımı yoktur, atla. Önce söyle: "Yeni Word
+   dosyasında sayfa düzeni, resimler ve dipnotlar asıl dosyanızdaki gibi
+   olmayabilir."
+4. **Word'de "Değişiklikleri İzle" ile öneri** (Kabul Et / Reddet):
+   `${CLAUDE_PLUGIN_ROOT}/skills/kitap-duzenle/izleme.md` — Read ile yükle.
+   Asıl dosyaya dokunulmaz. Komutlar (şablon yoksa `--reference-doc` kısmını çıkar):
+   - Mac: `~/.divit/araclar/pandoc "<asil dosya>" --track-changes=all -t markdown --wrap=none -o ".divit/gecici/<ad>-izleme-<YYYY-AA-GG>.md"`,
+     sonra `~/.divit/araclar/pandoc ".divit/gecici/<ad>-izleme-<YYYY-AA-GG>.md" -f markdown --reference-doc="<şablon>" -o "kitaplar/<kitap-adi>/cikti/<ad>-divit-oneriler-<YYYY-AA-GG>.docx"`
+   - Windows: aynı iki komut, `& "<pandoc>"` ile.
 
 ## Tür akademisyense
 
-Ders kitabı ya da monografi için aynı akış; akademik kelimeler serbest.
-Ek olarak:
+Ders kitabı ya da monografi için aynı akış; akademik kelimeler serbest. Ek olarak:
 - Atıflı metinde Word'den önce `divit-akademik:kaynak-dogrula`.
 - Tek bölüm üzerinde yapı ve argüman çalışması → `divit-akademik:bolum-yaz`.
 - Kitap değil, dergiye gidecek bir yazı → `divit-akademik:yayin-oncesi`.

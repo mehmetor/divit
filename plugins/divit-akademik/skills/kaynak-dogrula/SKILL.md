@@ -1,96 +1,123 @@
 ---
 name: kaynak-dogrula
-description: Bir metindeki atıfların gerçek olduğunu ve iddiayı gerçekten desteklediğini yerel kaynaklardan doğrular. Hoca "atıfları kontrol et", "kaynakça doğru mu", "bu cümlenin kaynağı var mı", "kaynakçayı düzenle" dediğinde veya atıf içeren bir metin üretilmeden önce kullan.
+description: Bir metindeki atıfların gerçek olduğunu, künyelerin yayın kaydıyla birebir tuttuğunu, geri çekilmiş makale olmadığını ve iddiayı gerçekten desteklediğini doğrular. Hoca "atıfları kontrol et", "kaynakça doğru mu", "bu cümlenin kaynağı var mı", "kaynakçayı düzenle", "geri çekilmiş makale var mı" dediğinde veya atıf içeren bir metin üretilmeden önce kullan.
 ---
 
 # Kaynak doğrulama
 
 **Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
 
-Akademisyen için tek gerçek felaket uydurma atıftır. İki katmanı var
-ve ikisi de burada kontrol edilir:
+## Yasaklar
 
-1. **Künye uydurma** — var olmayan bir kaynak. Kolay yakalanır.
-2. **Yanlış atfetme** — kaynak gerçek, künye doğru, ama yazar o şeyi
-   söylememiş. *Asıl tehlike budur.* Biçimsel her kontrolden geçer,
-   ancak hakem elinde patlar.
+- **Künye üretme.** `kaynaklar.bib` içinde olmayan hiçbir künye yazılmaz;
+  kaynak yoksa metne `[ATIF GEREKLİ]`. Adı, yılı, dergiyi tahmin etmek
+  yasak — tahminin doğru çıkması bile kuralı değiştirmez.
+- **Hafızadan doğrulama yok.** "Doğrulandı" yalnız bu oturumda WebFetch ile
+  okunan bir yayın kaydına dayanır; sorgu adresi kanıt dosyasına yazılır.
+- **Sessiz geçiş yok.** Emin olmadığın her giriş `ELLE BAK`'tır, `DOĞRULANDI` değil.
+  Kaydı okuyamadıysan (ağ hatası, boş yanıt) "doğrulanamadı" de.
+- `kaynaklar.bib`'i kendiliğinden düzeltme (aşağıda "Rapor").
 
-Bu yüzden ölçüt "kaynak listede var mı" değil, **"iddiayı destekleyen
-birebir pasajı gösterebiliyor muyum"**dur.
-
-## Değişmez kural
-
-`kaynaklar.bib` içinde olmayan hiçbir künye üretilmez. Kaynak yoksa
-metne `[ATIF GEREKLİ]` yazılır ve orada durulur. Kaynağın adını,
-yılını, dergisini tahmin etmek yasaktır — tahminin doğru çıkması bile
-kuralı değiştirmez.
+Akademisyen için tek gerçek felaket uydurma ya da yanlış atıftır. Üç katman
+denetlenir: **künye** (kaynak var mı, bilgileri doğru mu, geri çekilmiş mi),
+**eşleştirme** (metindeki atıf ile kaynakça birbirini tutuyor mu), **pasaj**
+(kaynak iddiayı gerçekten söylüyor mu). Asıl tehlike sonuncusudur.
 
 ## Kaynakça nereden gelir
 
-İki yol desteklenir, hocaya hangisini kullandığını sor:
+**Zotero kullanıyorsa** — Better BibTeX ile `kaynaklar.bib`'e otomatik dışa
+aktarım; tek doğruluk kaynağı Zotero'dur, `.bib` elle düzenlenmez.
+**Zotero kullanmıyorsa** — PDF'ler `kaynaklar/`'a atılır; künye PDF'in ilk
+sayfasından/DOI'sinden okunur, hatırlanmaz. Kaynakçayı Glob ile bul
+(`**/*.bib`); birden çoksa hocaya hangisi olduğunu sor.
 
-**Zotero kullanıyorsa** — Better BibTeX eklentisiyle `kaynaklar.bib`
-dosyasına otomatik dışa aktarım kurulur (bir kez kurulur, sonra
-kendiliğinden güncellenir). Tek doğruluk kaynağı Zotero'dur; `.bib`
-elle düzenlenmez.
+## Akış
 
-**Zotero kullanmıyorsa** — hoca PDF'leri `kaynaklar/` klasörüne atar.
-Her PDF'ten künye çıkarılır ve `kaynaklar.bib` buradan üretilir.
-Künye PDF'in kendi ilk sayfasından/DOI'sinden okunur, hatırlanmaz.
+Başlamadan `${CLAUDE_PLUGIN_ROOT}/skills/kaynak-dogrula/kunye.md` dosyasını
+Read ile yükle: sorgu adresleri, alan kuralları, kanıt dosyası biçimi ve
+ikinci okuma oradadır. Word metnini önce `kurallar`'daki gibi metne çevir.
 
-Her iki yolda da **tam metin yerelde olmalı**: atıf kurmak için
-kaynağın PDF'i veya metni `kaynaklar/` altında bulunmalı.
+### 1. Metin ↔ kaynakça eşleştirmesi (mekanik)
 
-## Doğrulama akışı
+- Metindeki atıfları **Grep** ile çıkar (`output_mode: content`, satır
+  numarasıyla): `\[@…\]` / `@anahtar` biçimi, "(Yılmaz, 2023)" / "Yılmaz vd.
+  (2023)" biçimi, dipnot. Göz gezdirerek sayma.
+- Kaynakçadaki girişleri Grep ile çıkar: `^@\w+\{` satırları (anahtar), yazar
+  ve yıl satırları.
+- Her atıfı ve her girişi **tek tek** listele: anahtar — metinde (satırlar) —
+  kaynakçada evet/hayır. Yazar-yıl biçiminde soyadı + yıl birlikte eşleşmeli.
+  Metinde olup kaynakçada olmayan → `KAYNAKÇADA YOK`; kaynakçada olup metinde
+  olmayan → `METİNDE YOK` (künyesi yine denetlenir).
 
-1. Metindeki tüm atıfları çıkar (`[@anahtar]`, "(Yılmaz, 2023)",
-   dipnot — hangisi kullanılmışsa).
-2. Her atıf için sırayla:
-   - **a. Künye var mı?** `.bib` içinde anahtar bulunuyor mu?
-   - **b. Tam metin var mı?** `kaynaklar/` altında PDF/metin var mı?
-   - **c. Pasaj var mı?** Atfın dayandığı iddiayı destekleyen
-     **birebir cümleyi** kaynaktan bul. PDF'i Read aracıyla aç, Grep ile ara.
-     Hafızadan cevap verme — dosyayı gerçekten aç.
-3. Sonucu tabloya yaz.
+### 2. Künye denetimi — her giriş için, tek tek
 
-| Durum | Anlamı | Ne yapılır |
-|---|---|---|
-| ✅ Doğrulandı | Künye + tam metin + destekleyen pasaj | — |
-| ⚠️ Pasaj bulunamadı | Kaynak var, iddiayı destekleyen yer yok | Hocaya sor: iddia mı yanlış, sayfa mı yanlış |
-| ⚠️ Tam metin yok | Künye var, PDF yok | Doğrulanamaz; hoca PDF'i eklemeli |
-| ❌ Künye yok | `.bib`'de yok | `[ATIF GEREKLİ]` — atıf kurulamaz |
+`kunye.md`'deki sırayla: Crossref (DOI) → OpenAlex (DOI) → başlık araması →
+DergiPark. Her giriş için yayın kaydını bul, geri çekme/düzeltme bilgisini
+al, **alan alan** karşılaştır: yazar soyadları, yıl, cilt, sayfa, başlık,
+dergi. Her alan `eşleşti` / `farklı` / `belirsiz` / `bulunamadı`. Sonucu
+`kunye.md`'deki öncelik sırasıyla koy. Girişleri birbirine karıştırmamak için
+her girişi bitirip kanıt dosyasına yazdıktan sonra sonrakine geç.
 
-## Yayıncı kaydıyla doğrulama (DOI)
+Özellikle ara: toplu değiştirmeyle bozulmuş adlar ("bell → capia" yapılınca
+"La Bella" → "La Capiaa"), tek harf kaymış soyadları, bir kelimesi değişmiş
+başlıklar, başka makaleye giden DOI.
 
-Künyenin kendisi de yanlış olabilir: yazar adı bozulmuş, yıl kaymış,
-başlık değişmiş. DOI'si olan her giriş için yayıncı kaydını çek ve
-karşılaştır (soyadı, yıl, dergi, cilt, sayfa, başlık):
+### 3. İkinci bağımsız okuma
 
-WebFetch aracıyla `https://api.crossref.org/works/<DOI>` adresini oku;
-başlığı, yazar soyadlarını, yılı, cildi ve sayfayı iste. (Komut satırı
-kullanma — WebFetch Windows'ta da Mac'te de aynı çalışır.)
+`DOĞRULANDI` ve `METİNDE YOK` çıkan her giriş, **rapor yazılmadan önce**,
+`kunye.md`'deki "İkinci bağımsız okuma" bölümüyle öteki kaynaktan yeniden
+okunur. Uyuşmazlık → `ELLE BAK`. İkinci okuma yapılmadıysa o giriş
+`DOĞRULANDI` olamaz.
 
-DOI'si olmayan giriş için `works?query.bibliographic=<başlık+yazar>`
-ile ara; **başlık benzerliği yüksek değilse eşleşme sayma.** Bulamadığını
-"doğrulanamadı" diye bırak, tahminle tamamlama.
+### 4. Kanıt dosyası
 
-Özellikle ara: bir kelimenin toplu değiştirilmesiyle bozulmuş adlar
-(metinde "bell → capia" yapılınca "La Bella" → "La Capiaa" olur).
+`.divit/dogrulama/<YYYY-AA-GG>-<metin adı>.md` — `kunye.md`'deki biçimle:
+eşleştirme listesi, özet tablo, her giriş için sorgu adresi, dönen alanlar,
+karşılaştırma ve ikinci okuma. Hakem ya da hoca sorduğunda gösterilecek
+belge budur; özet tablodaki her satırın arkasında bir sorgu adresi olmalı.
 
-## Doğrulanmış atıf kaydı
+### 5. Pasaj doğrulaması (tam metin varsa)
 
-Doğrulanan her atıf için `kaynaklar/dogrulama.md` dosyasına satır ekle:
+Künyesi `DOĞRULANDI` olan her atıf için:
+- **Tam metin var mı?** `kaynaklar/` altında PDF/metin var mı (Glob)?
+- **Pasaj var mı?** Atfın dayandığı iddiayı destekleyen **birebir cümleyi**
+  kaynaktan bul: PDF'i `kurallar`'daki yolla metne çevir, Grep ile ara,
+  Read ile oku. Hafızadan cevap verme.
+
+| Durum | Ne yapılır |
+|---|---|
+| ✅ Pasaj bulundu | `kaynaklar/dogrulama.md`'ye satır ekle (aşağıda) |
+| ⚠️ Pasaj bulunamadı | Hocaya sor: iddia mı yanlış, sayfa mı yanlış |
+| ⚠️ Tam metin yok | Künye doğru ama iddia denetlenemedi; hoca PDF'i eklemeli |
 
 ```markdown
 - `[@yilmaz2023]` — s. 44 — "birebir alıntılanan cümle"
   → dayandığı iddia: <taslaktaki cümle> — ✅ 2026-09-20
 ```
 
-Bu dosya hocanın kanıt defteridir. Hakem sorduğunda açar, gösterir.
-
 ## Rapor
 
-İşin sonunda hocaya **yalnızca sorunlu olanları** göster. 40 atıfın
-38'i temizse "38 atıf doğrulandı, 2'sinde sorun var" de ve ikisini
-aç. Temiz olanları tek tek sayma. Sorunlar ayrı bir rapor dosyasına
-yazıldıysa `divit:kurallar`'daki "Rapor gösterme" kuralıyla ver.
+Rapor `cikti/kaynak-dogrulama-<YYYY-AA-GG>.md`; `kurallar`'daki "Rapor
+gösterme" kuralıyla sayfa hâli de yapılır ve ikisi tam yoluyla verilir.
+Sade Türkçe, teknik kelime yok ("API", "JSON", "DOI kaydı" yerine "yayın
+kaydı", "yayıncının kaydı").
+
+- İlk satır sayım: "17 kaynaktan 5'i doğrulandı, 11'inde sorun var, 1'ine
+  elle bakmanız gerekiyor." Temiz olanları tek tek sayma.
+- Sonra sorunlular, önem sırasıyla: geri çekilmiş → kaynakçada yok →
+  bulunamadı → bilgisi farklı → elle bakın → metinde atfı olmayan.
+- Her sorunda: kaynakçada ne yazıyor, yayın kaydında ne yazıyor (yalnız
+  farklı alan), kaydın adresi. Geri çekilmişte: "Bu makale yayımlandıktan
+  sonra geri çekilmiş; atıf yapılmamalı ya da geri çekildiği belirtilmeli."
+- Bulunamadı: "Hiçbir yayın kaydında bulamadım. Uydurma olabilir ya da çok
+  yerel bir yayındır; elinizdeki nüshaya bakın." Tahmini künye önerme.
+- Pasaj durumu tek satır: kaç atıfın pasajı gösterildi, kaçının tam metni yok.
+- Son satır: kanıt dosyasının yolu.
+
+**Düzeltme.** Hoca "düzelt" derse ve Zotero kullanıyorsa düzeltmeyi
+Zotero'da yapmasını söyle. Kullanmıyorsa, `kurallar`'daki önceki sürüm
+kuralıyla `.bib`'in kopyasını al; yalnız **yayın kaydından birebir okunan**
+değeri yaz, başka alana dokunma. Geri çekilmiş ve bulunamayan girişi silme.
+
+Bitince `.divit/gunluk.md`'ye tek satır: `kaynak-dogrula · <metin> · N kaynak,
+M sorun`.

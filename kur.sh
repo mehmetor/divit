@@ -235,6 +235,8 @@ if [ -d "$HEDEF" ]; then
   [ -d "$HEDEF/tez-kontrol" ] && cp "$SABLON/tez-kontrol/CLAUDE.md" "$HEDEF/tez-kontrol/CLAUDE.md"
   # Türün klasörü yoksa eklenir; hiçbir klasör silinmez.
   [ -d "$HEDEF/$TUR_KLASORU" ] || { cp -R "$SABLON/$TUR_KLASORU" "$HEDEF/" && bilgi "Eklendi: $TUR_KLASORU"; }
+  # Gizli bölme (Divit okumaz) akademisyende; eski klasörlere de eklenir.
+  if [ "$TUR" = "akademisyen" ] && [ ! -d "$HEDEF/gizli" ]; then cp -R "$SABLON/gizli" "$HEDEF/" && bilgi "Eklendi: gizli"; fi
   mkdir -p "$HEDEF/.claude/rules" "$HEDEF/.divit"
   cp -R "$SABLON/.claude/rules/." "$HEDEF/.claude/rules/"
   cp -Rn "$SABLON/.divit/." "$HEDEF/.divit/" 2>/dev/null
@@ -249,6 +251,7 @@ else
     case "$(basename "$f")" in
       tez-kontrol) [ "$TUR" = "akademisyen" ] || continue ;;
       kitaplar)    [ "$TUR" = "yazar" ] || continue ;;
+      gizli)       [ "$TUR" = "akademisyen" ] || continue ;;
       *.html|CLAUDE.md) continue ;;     # aşağıda yazılır; eski kart/kılavuzlar kopyalanmaz
     esac
     cp -R "$f" "$HEDEF/"
@@ -377,4 +380,4 @@ cat <<MSG
   4. "merhaba" yazın. Divit gerisini kendisi sorar.
 
 MSG
-[ "$DAL" = "main" ] || printf 'Deneme kanalı: %s\n\n' "$DAL"
+[ "$DAL" = "main" ] || printf 'Güncellemeler şu dağıtımdan gelir: %s\n\n' "$DAL"

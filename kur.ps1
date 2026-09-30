@@ -298,6 +298,11 @@ if (Test-Path $Hedef) {
     Copy-Item (Join-Path $S $TurKlasoru) $Hedef -Recurse -Force
     Bilgi "Eklendi: $TurKlasoru"
   }
+  # Gizli bolme (Divit okumaz) akademisyende; eski klasorlere de eklenir.
+  if ($Tur -eq 'akademisyen' -and -not (Test-Path (Join-Path $Hedef 'gizli'))) {
+    Copy-Item (Join-Path $S 'gizli') $Hedef -Recurse -Force
+    Bilgi "Eklendi: gizli"
+  }
   New-Item -ItemType Directory -Force -Path (Join-Path $Hedef '.claude\rules') | Out-Null
   Copy-Item (Join-Path $S '.claude\rules\*') (Join-Path $Hedef '.claude\rules') -Recurse -Force
   foreach ($d in Get-ChildItem (Join-Path $S '.divit') -Directory) {
@@ -315,6 +320,7 @@ if (Test-Path $Hedef) {
   Get-ChildItem $S -Force | ForEach-Object {
     if ($Tur -ne 'akademisyen' -and $_.Name -eq 'tez-kontrol') { return }
     if ($Tur -ne 'yazar' -and $_.Name -eq 'kitaplar') { return }
+    if ($Tur -ne 'akademisyen' -and $_.Name -eq 'gizli') { return }
     if ($_.Name -like '*.html' -or $_.Name -eq 'CLAUDE.md') { return }
     Copy-Item $_.FullName $Hedef -Recurse -Force
   }
@@ -460,4 +466,4 @@ Simdi:
   4. "merhaba" yazin. Divit gerisini kendisi sorar.
 
 "@
-if ($Dal -ne 'main') { Write-Host "Deneme kanali: $Dal"; Write-Host "" }
+if ($Dal -ne 'main') { Write-Host "Guncellemeler su dagitimdan gelir: $Dal"; Write-Host "" }

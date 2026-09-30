@@ -1,0 +1,8 @@
+Divit'in okumaması gereken dosyalarınızı buraya bırakın.
+
+Öğrencilerle ilgili gizli dosyalar bunlar: vaka ve görüşme notları,
+veli görüşme kayıtları, gözlem formları, sağlık ya da değerlendirme
+raporları.
+
+Bu klasör kilitlidir: Divit içindekileri açamaz, okuyamaz, değiştiremez.
+Bir yazı için bilgi gerekiyorsa, adsız ve kısa olarak kendiniz yazın.

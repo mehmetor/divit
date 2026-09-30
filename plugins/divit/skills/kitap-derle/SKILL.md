@@ -1,6 +1,6 @@
 ---
 name: kitap-derle
-description: Yıllar içinde yazılmış yazılardan, konuşma ve röportaj dökümlerinden, sunumlardan yeni bir kitap çıkarır — malzeme listesi, konu haritası, içindekiler seçenekleri ve bölüm iskeletleri; yayın hakkı sorularını işaretler. Kullanıcı "yazılarımdan kitap yapalım", "bu yazıları bir araya getir", "konuşmalarımı kitaba çevir", "yeni kitap", "kitap derle" dediğinde kullan.
+description: Yıllar içinde yazılmış yazılardan, konuşma ve röportaj dökümlerinden, sunumlardan yeni bir kitap çıkarır — malzeme listesi, konu haritası, içindekiler seçenekleri ve bölüm iskeletleri; yayın hakkı sorularını işaretler. Kullanıcı "yazılarımdan kitap yapalım", "bu yazıları bir araya getir", "konuşmalarımı kitaba çevir", "yeni kitap", "kitap derle", "başka yazarların bölümlerini topluyorum", "editörü olduğum kitap", "ortak kitap" dediğinde kullan.
 allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.ps1*)
 ---
 
@@ -43,7 +43,13 @@ Gelen her dosyayı aynı betikle `koy <kitap-adi> malzeme "<dosya>"` ile
 yerleştir; HATA verirse `kurallar`'daki sıraya uy. Kullanıcı dosyaları
 kendisi `malzeme/`'ye koyduysa doğrudan oku.
 
-Word ve PDF okuma `kurallar`'daki yolla, metin `.divit/gecici/` altına.
+**Başka yazarların bölümleri** (editörlü kitap) varsa:
+`${CLAUDE_PLUGIN_ROOT}/skills/kitap-derle/editorlu.md` — önce Read ile yükle, dosya yollarına uy
+(`yazarlar.md`, `duzenleme/bicim-birligi.md`, her yazara ayrı `duzenleme/yazar-istekleri/…`). Yazarın metni yeniden yazılmaz.
+
+Word ve PDF okuma `kurallar`'daki yolla, metin `.divit/gecici/<ad>-<YYYY-AA-GG>.md`'ye.
+Fotoğraftan çıkmış malzemede (`notlar/malzeme-metin/*.md`) "Kaynak türü:" satırına uy:
+başka kitaptan alıntı kitaba kopyalanmaz (kısa alıntı + künye + `[İZİN]`), esin cümlesi aktarılmaz.
 `plan.md` en üst satırı her zaman:
 `Durum: <adım> · <sıradaki iş> · <YYYY-AA-GG>`.
 
@@ -131,8 +137,8 @@ Dosyayı `kurallar`'daki "Rapor gösterme" kuralıyla ver; tabloyu ekrana basma.
 Kendi yayınlarından kitap aynı akışla; akademik kelimeler serbest.
 Atıflar ve kaynakça korunur, silinmez; Word'den önce
 `divit-akademik:kaynak-dogrula`. Tek bölümün argümanı üzerinde
-çalışmak → `divit-akademik:bolum-yaz`. Başka yazarların bölümlerinden
-oluşan editörlü kitap bu sürümde yok; istenirse açıkça söyle.
+çalışmak → `divit-akademik:bolum-yaz`. Editörlü kitapta atıf biçimi
+birliği `editorlu.md`'deki listeye girer.
 Tür yazarsa bu skill'leri anma; kelime kuralları `kurallar`'da.
 
 ## Bitirirken

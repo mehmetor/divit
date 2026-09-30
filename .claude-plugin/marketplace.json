@@ -10,8 +10,8 @@
       "name": "divit",
       "source": {
         "source": "archive",
-        "url": "https://raw.githubusercontent.com/mehmetor/divit/deneme/dagitim/divit-c7b56e733a47.zip",
-        "sha256": "c7b56e733a4772ce9d4e8c07ac79ef3dd25fd41c629c8ce42c474f657f2747e5"
+        "url": "https://raw.githubusercontent.com/mehmetor/divit/deneme/dagitim/divit-a4b1d6b028ad.zip",
+        "sha256": "a4b1d6b028ad39eb0844d688c9138593c6114914dc5c9479bc243a37388b563e"
       },
       "description": "Divit — yazı tezgâhı: kitap, yazışma, Word/PDF"
     },
@@ -19,8 +19,8 @@
       "name": "divit-akademik",
       "source": {
         "source": "archive",
-        "url": "https://raw.githubusercontent.com/mehmetor/divit/deneme/dagitim/divit-akademik-fb29c366bf04.zip",
-        "sha256": "fb29c366bf041d2ef0ff4ae0dc18032ebbbc5526bb6111d03c6f679825f7d705"
+        "url": "https://raw.githubusercontent.com/mehmetor/divit/deneme/dagitim/divit-akademik-8767801395af.zip",
+        "sha256": "8767801395af29a0fd1a8d24b3dd4e68a6f54c2f6621278b90f4e0b42b2232e0"
       },
       "description": "Divit akademik işler: tez değerlendirme, sınav, yayın öncesi okuma, kaynak doğrulama"
     }

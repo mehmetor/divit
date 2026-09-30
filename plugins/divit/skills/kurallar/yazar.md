@@ -48,8 +48,8 @@ yeni baskı, taslak. Serbest olanlar: "dergi" (gazete ya da dergide
   - `asil/` — kitabın kullanıcıya ait Word/PDF'i. **Salt okunur.**
   - `malzeme/` — derlenecek yazılar, konuşma dökümleri, röportajlar.
     **Salt okunur.**
-  - `duzenleme/` — editör raporu `rapor-<YYYY-AA-GG>.md`, öneriler
-    `oneriler-<bolum-no>.md`.
+  - `raporlar/` — editör raporu `rapor-<YYYY-AA-GG>.md` (aynı gün yeni hâli `-s2`).
+  - `duzenleme/` — öneriler `oneriler-<bolum-no>.md`.
   - `taslak/` — bölüm iskeletleri ve onaylı değişikliklerin çalışma metni.
   - `plan.md` — en üstte tek satır:
     `Durum: <aşama> · <sıradaki iş> · <YYYY-AA-GG>`.
@@ -97,9 +97,16 @@ işaretle.
 > - Tekrarları ve çelişkileri bulurum: *"tekrarları ve çelişkileri bul"*
 > - Yazılarınızdan kitap planı çıkarırım: *"yazılarımdan kitap yapalım"*
 > - Konuşmalarınızı kitaba çeviririm: *"konuşmalarımı kitaba çevir"*
+> - Başka yazarların bölümlerinden ortak kitap derlerim: *"editörü olduğum kitap"*
+> - Önerilerimi Word'de Değişiklikleri İzle ile veririm: *"önerileri Word'de değişiklik izleme ile ver"*
+> - Ses kaydı: kaydınızı yazıya dökmenin yolunu anlatırım, çıkan metni temizlerim: *"ses kaydını yazıya dök"*
 > - Yazışma hazırlarım: *"yayınevine kitap önerisi yazalım"*
-> - Word'e çeviririm: *"bunu Word'e çevir"*
+> - Yabancı dildeki metni üslubunuzla çeviririm: *"şunu Türkçeye çevir"*
+> - Grafik ve şema çizerim: *"şu rakamlardan grafik çiz"*
+> - Fotoğraftaki yazıyı metne çeviririm: *"el yazımı oku"*
+> - Word'e, sunuma, Excel'e çeviririm: *"bunu Word'e çevir"*, *"sunum hazırla"*
 > - PDF işlerini yaparım: *"PDF'leri birleştir"*
+> - Haftanızı özetlerim: *"bu hafta neler var"*
 > - Bozulanı geri alırım: *"geri al"*
 > - Sorunlarınızı Divit'i geliştirene iletirim: *"geri bildirim gönder"*
 >
@@ -124,8 +131,8 @@ kaynakça biçimi sorma. Hedef: yayınevine gidecek temiz bir Word dosyası.
    ```
    ````
 4. Çevir (kaynakça dosyası yoksa `--citeproc` kullanma):
-   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
-   - Windows: `& "<pandoc>" ".divit/gecici/<kitap-adi>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
+   - Mac: `~/.divit/araclar/pandoc ".divit/gecici/<kitap-adi>-<YYYY-AA-GG>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
+   - Windows: `& "<pandoc>" ".divit/gecici/<kitap-adi>-<YYYY-AA-GG>.md" -o "cikti/<kitap-adi>-divit-<YYYY-AA-GG>.docx"`
      (`<pandoc>`: `kurallar`'daki Windows yolu)
    Bölüm bölümse her bölüm için ayrı dosya: `cikti/<kitap-adi>-<bolum-no>-divit-<YYYY-AA-GG>.docx`.
 5. Dosyayı aç ve söyle: "Word dosyası hazır. Yayınevinin istediği bir

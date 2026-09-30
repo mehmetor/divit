@@ -1,6 +1,6 @@
 ---
 name: disa-aktar
-description: Metni Word ya da PDF olarak hazırlar — yayınevine teslim dosyası ya da dergi biçimi. Kaynakça stilini biçimlendirir, AI kullanım beyanı taslağı üretir. Kullanıcı "Word'e çevir", "PDF al", "dergiye göndereceğim", "APA'ya çevir", "çıktı al", "yayınevine göndereceğim" dediğinde kullan.
+description: Metni Word ya da PDF olarak hazırlar — yayınevine teslim dosyası ya da dergi biçimi. Kaynakça stilini biçimlendirir, AI kullanım beyanı taslağı üretir. Kullanıcı "Word'e çevir", "PDF al", "dergiye göndereceğim", "APA'ya çevir", "çıktı al", "yayınevine göndereceğim", "Overleaf'e yükleyeceğim", "LaTeX dosyası lazım" dediğinde kullan.
 ---
 
 # Dışa aktarma
@@ -27,7 +27,8 @@ Kaydet → PDF seçin."
 1. **Önce `divit-akademik:kaynak-dogrula` çalıştır** (tür akademisyense). Doğrulanmamış atıf varken
    çıktı alma — çıktı alındıktan sonra hoca metni gönderir ve
    düzeltme şansı kalmaz. Sorunlu atıf varsa göster ve sor.
-2. Hedefi sor: Word mü PDF mi, hangi dergi/stil?
+2. Hedefi sırayla, her mesajda tek soru sor: önce "Word mü, PDF mi?", cevaptan
+   sonra "Hangi dergi ya da stil?"
    Tür yazarsa dergi/stil sorma; `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`
    → "Yayınevine teslim" bölümüne göre çalış, 3–4. adımları atla.
 3. CSL stilini belirle. `.claude/stiller/` altında yoksa Zotero Style
@@ -38,6 +39,14 @@ Kaydet → PDF seçin."
    - Windows: `& "<pandoc>" taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
 
 5. Çıktıyı `cikti/` altına koy, kaynak markdown'a dokunma.
+
+## LaTeX / Overleaf
+
+Hoca "Overleaf", "LaTeX" ya da "dergi LaTeX istiyor" derse Word yerine bu
+yol: `${CLAUDE_PLUGIN_ROOT}/skills/disa-aktar/latex.md` dosyasını Read ile
+yükle ve ona göre çalış. Oradaki `<filtre>` şu tam yoldur:
+`${CLAUDE_PLUGIN_ROOT}/skills/disa-aktar/overleaf.lua`. Tür akademisyen değilse
+bu yolu kendiliğinden önerme.
 
 ## Bilinen sınır — söylemekten kaçınma
 
