@@ -17,7 +17,6 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 Bu Mac'ten yapılamayanlar; her satır ne beklendiğini söyler.
 
-- [ ] Yayın kapısını (`./yayinla.sh --surum`) bir kez dene (kayıt özeti uyuşmazsa durmalı).
 - [ ] Ses: Word 365'te Transkribe'ın Türkçe dil listesinde olduğunu doğrula (Apple'da Türkçe yok).
 - [ ] Kitap: izlenen değişiklikli docx'i Word'de açıp Kabul Et/Reddet dene.
 - [ ] Sınav sorusu — ilk hocayla dene: sorular nottan mı, şıklar dengeli mi, Word düzeni.
