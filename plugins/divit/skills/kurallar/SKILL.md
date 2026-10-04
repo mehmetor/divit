@@ -50,13 +50,14 @@ anlama" diye yazılır. Soru sormadan, ipucu vermeden ya da düzeltme gelince
 
 Yalnız **hocanın dosyaları** için; `.divit/` altındaki Divit dosyalarına uygulanmaz.
 - **Word ve PDF'i asla yerinde değiştirme.** Yeni dosyaya yaz: `<ad>-divit-<YYYY-AA-GG>.docx`.
-- Var olan metin dosyasını (md, txt, bib) değiştirmeden önce Read + Write ile
-  kopyasını `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/<aynı yol>` altına al.
+- Var olan metin dosyasını (md, txt, bib; bu oturumda kendi yazdığın taslak da) değiştirmeden
+  önce Read + Write ile kopyasını `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/<aynı yol>` altına al.
 - Silme yok. Hoca bir dosyadan kurtulmak isterse `arsiv/` klasörüne taşı.
 
 ## İş günlüğü ve sorun notları
 
-Her iş bitince `.divit/gunluk.md` sonuna tek satır:
+Her iş bitince `.divit/gunluk.md` sonuna tek satır, **Read sonra Edit** ile (son satırın
+ardına ekle; Write ile baştan yazma, geçmiş silinir; `sorunlar.md` de böyle):
 `YYYY-AA-GG SS:DD · <iş türü> · <dosya> · <tek cümle sonuç>`. Yarım kalan ve başarısız
 işi de yaz; öğrenci adı değil baş harf. Saati bilmiyorsan uydurma, yalnız tarih yaz.
 Günlük yalnız hocanın izniyle paylaşılır.
@@ -69,13 +70,13 @@ biçimi"yle `.divit/sorunlar.md` sonuna **sessizce** ekle.
 ## Dosyalarla çalışma — iki işletim sistemi
 
 Hoca Windows ya da Mac kullanır (Windows'ta komut aracın PowerShell'dir). Okuma,
-yazma, sayma, arama **Read, Write, Edit** ile (Grep, Glob varsa onlar da); soru çıkmaz.
+yazma, sayma, arama **Read, Write, Edit** ile, klasörü listelemek Glob ile (Grep de); soru çıkmaz.
 **Kabuk kuralı.** Her komut tek başına: `;`, `|` ya da çift `&` ile zincir yok, `cd` yok,
 yollar klasöre göreli. Değişkenle başlayan komut yazma (`$DIVIT_…`, `$env:…`):
 izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu, pdftotext,
 kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
 yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`) ve `mkdir`
-(`kitaplar/*/asil` ve `malzeme` dışında) için. `sed`, `wc`, `awk`, `cat` yok.
+(`kitaplar/*/asil` ve `malzeme` dışında) için. `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
 PowerPoint ya da Excel işinde Python veya Node isteyen yerleşik beceriyi kullanma;
 `sunum` ve `tablo` skill'lerini kullan.
 **Araç yolları.** Mac'te her zaman `~/.divit/araclar/pandoc` ve
@@ -142,7 +143,7 @@ Akademik işler rol dosyasında; yazar açıkça istemedikçe onlara yönlendirm
 
 ## Oturum düzeni ve hatırlatmalar
 
-Hoca aynı oturumda **başka bir işe** geçerse (tezden dilekçeye) önce isteği yap, sonra
-bir kez söyle: "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
+Hoca aynı oturumda bir işi bitirip **ikinci bir işe** geçerse (tezden dilekçeye) önce
+isteği yap, sonra bir kez söyle (oturumun ilk işinde söyleme): "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
 açarsanız daha iyi çalışırım. Her şey klasörde duruyor." İzin kipi, kota, model: `saglik`.
 İlk iş bitince (önce değil) `bakim` skill'inin "Hatırlatma denetimi" bölümünü uygula.

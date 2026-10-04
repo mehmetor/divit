@@ -42,6 +42,9 @@ araçlar değiştiğinde).
 - Akademisyen: Veliye mektup, RAM'a yazı ve BEP yazışmalarını hazırlarım.
 - Herkes: İsterseniz dosyalarınızın ayrıntılı geçmişini tutarım: "kaydet" deyin, sonra "dünkü hâline dön" diyebilirsiniz. Kayıtlar yalnız bu bilgisayarda durur.
 - Herkes: Telefondan gönderdiğiniz fotoğrafı anlamlı bir adla kitap klasörünüze koyarım.
+- Herkes: Divit'in iş defteri artık hiç silinmez; her iş sona eklenir.
+- Herkes: Divit'in sizin için yazdığı bir taslağı (dilekçe, mektup) değiştirmeden önce de önceki hâlini saklarım; "ilk hâlini getir" diyebilirsiniz.
+- Yazar: Yazılarınızdan kitap yaparken klasördeki öteki kitaplarınıza da bakarım; aynı anı ya da birbirini tutmayan bir yıl orada da geçiyorsa gösteririm.
 
 ## 1.7 · 2026-09-27 · kurulum gerekir
 - Kılavuzda "/" ile komut seçme anlatıldı; her komutun ne yaptığı yazıldı.
