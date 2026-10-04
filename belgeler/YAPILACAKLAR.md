@@ -8,6 +8,12 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 - [ ] Değişken ya da betik içinden yapılan arama izin kalıplarıyla kapatılamaz;
       `gizli/` için son koruma kuraldaki yazılı yasak. Gerekirse işletim
       sistemi izniyle (klasör kilidi) araştırılır.
+- [ ] Varsayılan izin kipi: şimdi `acceptEdits`, kurulum sonunda Auto
+      öneriliyor. Auto varsayılan yapılabilir mi, her hesapta açık mı? (Karar.)
+- [ ] Dosya düzeni denetlensin: hocanın çalışma dosyalarında tarihli ve
+      sürümlü ad (`<ad>-YYYY-AA-GG-s2.docx`), iş türü → kişi/konu → dönem
+      alt klasörleri, ara dosyaların `.divit/gecici/` dışına çıkmaması,
+      `bakim`'ın dağınıklığı bulup önermesi. Hangisinin yapıldığına bakılmadı.
 
 ## Kapsam
 
