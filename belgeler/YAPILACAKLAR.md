@@ -13,6 +13,38 @@ Pilotta ve geliştirmede biriken konular. Bitince satırı sil, gerekiyorsa
 
 - [ ] Yazar kurulumu Windows'ta (ilk yazarla buluşmada): `belgeler/YENI-KURULUM.md`.
 
+## Masaüstü uygulaması
+
+Divit hocanın bilgisayarında çalışan bir uygulama olacak: açılışta hocanın
+Claude üyeliğini kullanmak için izin ister, arka planda yerel Claude Code
+oturumlarını çalıştırır; aynı oturumlar Claude Desktop'tan da izlenir.
+Üyelik buluta taşınmaz. Sohbet arayüzü ORC'ta geliştirilecek ortak
+kütüphaneden gelir (çalışma adı `@simetri/agent-ui`, temeli assistant-ui,
+React, MIT). 2–4 bu kütüphane hazır olunca devralınır; Divit'e özgü
+olanlar 1 ve 5–8.
+
+- [ ] 1. Masaüstü kabuğu (Tauri ya da Electron): açılışta Claude üyeliği izni,
+      yerel Claude Code oturumlarını başlatma ve sürdürme, Claude Desktop ile
+      aynı oturumu paylaşma.
+- [ ] 2. Gelişmiş sohbet alanı: sürükle-bırak ek, `/komut` ve `@dosya`
+      önerileri, mesajı düzenleme, yanıtı durdurma, izin isteği ve plan kartları.
+      *(ortak kütüphane)*
+- [ ] 3. Uygulama içi dosya görüntüleyiciler: PDF (pdf.js), DOCX
+      (docx-preview), XLSX/CSV (SheetJS), Markdown + LaTeX (KaTeX), görsel,
+      kod ve diff. *(ortak kütüphane)*
+- [ ] 4. Sohbette zengin içerik: grafik, tablo, pano, form. Araçlar arayüzü
+      MCP Apps standardıyla döndürsün; `tez-kontrol` raporu Divit'te ve Claude
+      Desktop'ta aynı açılsın. *(ortak kütüphane)*
+- [ ] 5. Atıf ve kaynakça paneli: Zotero ya da BibTeX listesi, atıfa tıklayınca
+      kaynak açılır (`kaynak-dogrula` ile bağlantılı).
+- [ ] 6. PDF üzerinde vurgu ve not; asistanın yorumu sayfadaki ilgili yere
+      iliştirilir.
+- [ ] 7. İki belgeyi yan yana karşılaştırma (taslak ile düzeltilmiş hâli).
+- [ ] 8. Word'deki değişiklik izleme benzeri öneri ve kabul/ret akışı.
+- [ ] 9. Dosya ve sürüm paneli: değişen dosyalar, önceki sürüme dönme
+      (`geri-al` ile uyumlu, arka planda git).
+- [ ] 10. Oturum geçmişinde arama.
+
 ## Mehmet'e kalan
 
 Bu Mac'ten yapılamayanlar; her satır ne beklendiğini söyler.
