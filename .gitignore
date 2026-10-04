@@ -2,3 +2,4 @@
 *.tmp
 hocalar/
 dist/
+.claude/worktrees/
