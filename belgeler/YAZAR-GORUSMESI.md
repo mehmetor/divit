@@ -199,4 +199,4 @@ Demoda Mehmet'in Mac'inde başka eklentilerin komutları görünebilir
    neyi sildi, Word'e geri döndü mü.
 3. Görüşme notları, yazarın adı, kitap adları, ücret ve konuşulanlar
    **repoya girmez**: git dışı `hocalar/` klasörüne.
-4. Çıkan istekler `YAPILACAKLAR.md` "Kapsam"a, kişisel bilgi olmadan.
+4. Çıkan istekler Plane DVT'ye iş olarak açılır (etiket `kapsam`).

@@ -1,6 +1,7 @@
 # Ses kaydını yazıya dökme — araştırma
 
-Tarih: 2026-10-01. İş: YAPILACAKLAR "ses kaydını yazıya dökme".
+Tarih: 2026-10-01. İş: eski yapılacaklar listesinde "ses kaydını yazıya dökme" (şimdi
+Plane DVT; kalan deneme DVT-6).
 
 **Yöntem uyarısı.** Bu oturumda web arama/getirme aracı yoktu; aşağıdaki
 bilgiler modelin bilgi kesimine (2026 ortası) dayanır ve **canlı kaynakla
