@@ -7,6 +7,11 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
+## Sıradaki
+- Herkes: Divit'in iş defteri artık hiç silinmez; her iş sona eklenir.
+- Herkes: Divit'in sizin için yazdığı bir taslağı (dilekçe, mektup) değiştirmeden önce de önceki hâlini saklarım; "ilk hâlini getir" diyebilirsiniz.
+- Yazar: Yazılarınızdan kitap yaparken klasördeki öteki kitaplarınıza da bakarım; aynı anı ya da birbirini tutmayan bir yıl orada da geçiyorsa gösteririm.
+
 ## 1.8.0 · 2026-10-08 · kurulum gerekir
 - Herkes: Kurulumu yenilediğinizde Divit'in kendi koyduğu ayar dosyalarının önceki hâli saklanır; elle yaptığınız bir değişiklik kaybolmaz, "geri al" ile geri gelir.
 - Herkes: Güncellemede bir parça hemen inmezse Divit bunu söyler ve birkaç dakika sonra sizin "tamam"ınızla bir kez daha dener; ayar dosyalarının önceki hâli saklandıysa bunu da tek cümleyle bildirir.

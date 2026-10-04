@@ -31,6 +31,10 @@ Toplam: <n> parça · yaklaşık <kelime> kelime
 ### Birbirini tutmayanlar
 - <ne>: <parça no> "<alıntı>" ↔ <parça no> "<alıntı>"
 - <parça no>: "<zaman ifadesi>" [DOĞRULA] — <parça tarihi> ↔ <parça no> "<alıntı>": <hesap, ör. 2008 − 1987 = 21 yıl>
+- <parça no> "<alıntı>" ↔ *<öteki kitabın adı>*, "<yazı başlığı>": "<alıntı>" [DOĞRULA]
+
+### Öteki kitaplarla ortak olanlar
+- <parça no>: aynı anekdot ya da cümle *<öteki kitabın adı>*, "<yazı başlığı>" içinde de var — ikisi de kalsın mı? (soru bekliyor)
 
 ### Eskimiş olabilecekler
 - <parça no>: "<alıntı>" [GÜNCELLE] — <neden>

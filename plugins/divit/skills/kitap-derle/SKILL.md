@@ -27,9 +27,9 @@ cümleleri kullanıcınındır; Divit onları sıraya koyar, eksiği gösterir.
 ## Başlangıç
 
 Tür satırını `.divit/profil/kimlik.md`'den oku; türe özgü ekler en sondadır.
-`kitaplar/<kitap-adi>/` yoksa çalışma adı sor (sonra değişebilir), adı
-küçük harf, Türkçe karaktersiz, tireli yaz, onay al. Klasörü `kurallar`'daki
-"Kitap klasörü" betiğiyle aç; kendin klasör açma:
+Sürüklenen klasörün içine Glob ile bak (`ls` değil). `kitaplar/<kitap-adi>/` yoksa
+çalışma adı sor (sonra değişebilir), adı küçük harf, Türkçe karaktersiz, tireli yaz,
+onay al. Klasörü `kurallar`'daki "Kitap klasörü" betiğiyle aç; kendin klasör açma:
 - Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <kitap-adi>`
 - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <kitap-adi>`
 
@@ -69,11 +69,13 @@ aynı fikri ya da anekdotu anlatan parçalar, birbirini tutmayan bilgiler
 Zaman ifadelerini ("otuz yıla yakın", "on iki yıl sonra", "geçen yıl")
 parçanın tarihiyle ve öteki parçalardaki tarihlerle hesapla. Tutmuyorsa
 `[DOĞRULA]`: iki parçayı alıntıyla ve hesabı yaz; doğrusunu tahmin
-etme. Yalnız eskimişse `[GÜNCELLE]`.
+etme. Yalnız eskimişse `[GÜNCELLE]`. Klasörde yazarın başka kitabı varsa
+(Glob: `kitaplar/*/taslak/*.md`; yoksa `asil/` Word'ünü metne çevir) aynı
+yıl, kişi, anekdot ve cümleleri Grep aracıyla (kabukta `grep` değil) orada da ara;
+bulduğunu kitap adıyla yaz.
 
-Numaralı sorularda seçenek metni sayıyla başlamaz; ad önce, sayı
-parantezde: "1) Sahada (1. bölüm), önerim". Yoksa ekranda iç içe liste
-gibi görünür.
+Numaralı sorularda seçenek metni sayıyla başlamaz; ad önce, sayı parantezde:
+"1) Sahada (1. bölüm), önerim". Yoksa ekranda iç içe liste gibi görünür.
 
 **3. İddia ve okur.** Haritadan 2-3 aday çıkar, tek soru sor:
 
