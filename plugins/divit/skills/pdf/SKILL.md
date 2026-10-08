@@ -31,7 +31,7 @@ PDF aracı her zaman tam yoluyla yazılır (değişkenle değil; yoksa izin soru
 - Mac: `~/.divit/araclar/pdfcpu <komut> ...`
 - Windows: `& "<pdfcpu tam yolu>" <komut> ...` — yol klasördeki `CLAUDE.md`'nin "Araçlar" bölümünde.
 
-Aşağıda `P` yerine bunu yaz. Araç çalışmazsa `saglik` skill'ine geç.
+Aşağıda `P` yerine bunu yaz; çıktı adlarına `-<YYYY-AA-GG>` ekle (aynı gün varsa `-s2`). Araç çalışmazsa `saglik` skill'ine geç.
 
 | İş | Komut |
 |---|---|
@@ -86,7 +86,7 @@ Evet derse `eposta` skill'ine geç.
 - PDF'i `kurallar`'daki yolla metne çevir (Mac: pdf-metin.js, Windows:
   pdftotext), metni başlık,
   paragraf ve çizelgeleriyle md olarak `.divit/gecici/`'ye yaz, pandoc
-  ile `cikti/<ad>.docx` üret. Hocaya söyle: "Metin ve çizelgeler geldi;
+  ile `cikti/<ad>-divit-<YYYY-AA-GG>.docx` üret. Hocaya söyle: "Metin ve çizelgeler geldi;
   sayfa düzeni ve resimler aynı olmayabilir."
 - Taranmış (resim) PDF'te metni sayfa sayfa okuyarak çıkar; emin
   olmadığın sözcüğü `[?]` ile işaretle.

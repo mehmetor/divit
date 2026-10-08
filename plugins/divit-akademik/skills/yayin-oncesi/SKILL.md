@@ -44,7 +44,7 @@ listesidir; metni yeniden yazmaz.
    Raporda ayrı bir "Dergi kuralları" çizelgesi: kural · metindeki durum ·
    uyuyor mu. Kurallar verilmezse bu bölümü atla; kuralları hafızadan
    yazma.
-4. `rapor/on-degerlendirme-<tarih>.md` yaz; `divit:kurallar`'daki "Rapor
+4. `yazilar/<makale-adi>/on-degerlendirme-<YYYY-AA-GG>.md` yaz (ad ve yer `divit:kurallar`'daki dosya düzeni); `divit:kurallar`'daki "Rapor
    gösterme" kuralıyla `.html` hâlini üret, iki tam yolu ver. Hoca Word'de
    okumak isterse aynı pandoc komutuyla .docx da üret (tablo sütun
    oranlarını içeriğe göre ayarla).

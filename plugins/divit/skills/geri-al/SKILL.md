@@ -26,7 +26,7 @@ ona uy. Yoksa ve kullanıcı bunları demiyorsa ayrıntılı geçmişi anma.
 1. **Önce göster, sonra dokun.** Ne değiştiğini bul:
    - `.divit/onceki-surumler/` altındaki klasörleri Glob ile listele.
      Klasör adları tarih ve saattir (`2026-09-27_1430`).
-   - Divit'in yazdığı yeni dosyaları bul: `*-divit-*` adlı dosyalar.
+   - Divit'in yazdığı yeni dosyaları bul: `*-divit-*` adlı dosyalar ve `cikti/` altındakiler.
    - Ayrıntılı geçmiş açıksa onun kayıtlarını da tarihle listele.
 2. Sade dille anlat: "Bugün 14:30'da üçüncü bölümün önceki sürümünü
    sakladım. Ondan sonra şu değişti: …"

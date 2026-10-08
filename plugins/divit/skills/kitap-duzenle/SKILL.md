@@ -130,7 +130,7 @@ belirsiz ünlü sözler (yanlış kişiye mal edilmiş söz yaygındır) →
    `${CLAUDE_PLUGIN_ROOT}/skills/kitap-duzenle/izleme.md` — Read ile yükle.
    Asıl dosyaya dokunulmaz. Komutlar (şablon yoksa `--reference-doc` kısmını çıkar):
    - Mac: `~/.divit/araclar/pandoc "<asil dosya>" --track-changes=all -t markdown --wrap=none -o ".divit/gecici/<ad>-izleme-<YYYY-AA-GG>.md"`,
-     sonra `~/.divit/araclar/pandoc ".divit/gecici/<ad>-izleme-<YYYY-AA-GG>.md" -f markdown --reference-doc="<şablon>" -o "kitaplar/<kitap-adi>/cikti/<ad>-divit-oneriler-<YYYY-AA-GG>.docx"`
+     sonra `~/.divit/araclar/pandoc ".divit/gecici/<ad>-izleme-<YYYY-AA-GG>.md" -f markdown --reference-doc="<şablon>" -o "cikti/<kitap-adi>-divit-oneriler-<YYYY-AA-GG>.docx"`
    - Windows: aynı iki komut, `& "<pandoc>"` ile.
 
 ## Tür akademisyense

@@ -75,8 +75,8 @@ yazma, sayma, arama **Read, Write, Edit** ile, klasörü listelemek Glob ile (Gr
 yollar klasöre göreli. Değişkenle başlayan komut yazma (`$DIVIT_…`, `$env:…`):
 izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu, pdftotext,
 kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
-yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`) ve `mkdir`
-(`kitaplar/*/asil` ve `malzeme` dışında) için. `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
+yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), Divit dosyasını taşıma
+(yalnız `bakim` ve tür değişimi, onayla) ve `mkdir` (`kitaplar/*/asil`, `malzeme` dışında) için; `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
 PowerPoint ya da Excel işinde Python veya Node isteyen yerleşik beceriyi kullanma;
 `sunum` ve `tablo` skill'lerini kullan.
 **Araç yolları.** Mac'te her zaman `~/.divit/araclar/pandoc` ve
@@ -98,11 +98,11 @@ PDF metni boşsa taranmıştır: Read ile sayfa sayfa oku. Word'ü gizli açtır
 Divit'in ürettiği her dosya `<ad>-YYYY-AA-GG.<uzantı>`; aynı gün yeni hâli `-s2`,
 `-s3`. İş türü klasörü altında konu ya da kişi alt klasörü (akademisyen
 `tez-kontrol/rapor/<baş harfler>/`, yazar `kitaplar/<kitap-adi>/raporlar/`).
-Ara dosyalar yalnız `.divit/gecici/`. `kitaplar/*/asil` ve `malzeme`'yi yalnız
+Ara dosyalar yalnız `.divit/gecici/`; kökte Divit dosyası durmaz. `kitaplar/*/asil` ve `malzeme`'yi yalnız
 kitap klasörü betiği açar ve doldurur. **Oturumda ilk yeni dosyayı yazmadan, kitap
 klasörüne dosya koymadan ya da kullanıcı klasör dışından dosya verince**
 `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/dosya-duzeni.md`'yi Read ile yükle
-(klasör listesi, adlandırma, betiğin cevapları). **Kitap klasörü betiği** — aynen
+(klasör listesi, adlandırma, taşıma, betiğin cevapları). **Kitap klasörü betiği** — aynen
 (Mac'te yol tırnaksız; izin kuralı tırnaklı yolu tanımaz):
 - Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <ad>`
 - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <ad>`
@@ -133,7 +133,7 @@ Komut ve gösterme biçimi `dosya-duzeni.md`'nin "Rapor gösterme" bölümünde;
 | "Gmail'imi bağla", "takvimime erişebiliyor musun", "Drive", "bağladım" | `baglanti` |
 | "yardım", "ne yapabilirsin" | `yardim` |
 | "geri bildirim gönder", "sorunları ilet", "paylaş" | `gelistirici-paylas` |
-| "düzenini gözden geçir", "bakım yap" | `bakim` |
+| "düzenini gözden geçir", "bakım yap", "klasör karıştı" | `bakim` |
 | "e-posta olarak hazırla", "öğrenciye gönder", "taslak oluştur" | `eposta` |
 | "PDF'leri birleştir", "sayfaları çıkar", "listeyi işaretle" | `pdf` |
 | "yenilikler neler", "güncelle", "Divit güncel mi" | `guncelleme` |
