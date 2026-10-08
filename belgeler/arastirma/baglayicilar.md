@@ -57,8 +57,8 @@ ya da Bedrock gibi sağlayıcılarla gelmez.
 | Google Takvim | Etkinlikler, takvimler, boş zaman | Etkinlik oluşturur, günceller, siler |
 | Google Drive | Arama; Docs, Sheets, Slides, PDF, görsel, Office dosyalarını okur | Destek sayfasına göre yeni Docs/Sheets/Slides oluşturur, **her türden dosya yükler**, paylaşır, taşır, çöpe atar (bir kısmı "beta") |
 
-YAPILACAKLAR'daki "Drive büyük ihtimalle yalnız okur" varsayımı **yanlış
-çıktı**: destek belgesine göre Drive yazabiliyor. Ancak Code sekmesinde
+Eski yapılacaklar listesindeki (şimdi Plane DVT) "Drive büyük ihtimalle
+yalnız okur" varsayımı **yanlış çıktı**: destek belgesine göre Drive yazabiliyor. Ancak Code sekmesinde
 hangi Drive araçlarının geldiği bu Mac'te görülemedi (Drive girişi yok);
 yedek için yine de **masaüstü eşitlemesi** (Google Drive/OneDrive/iCloud
 uygulaması) daha sağlam: dosya bilgisayarda kalır, Divit'in kabuk izni

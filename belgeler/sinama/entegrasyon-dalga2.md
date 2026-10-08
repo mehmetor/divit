@@ -141,6 +141,6 @@ Gözlem: `disa-aktar` iki soruyu bir arada sordu ("tek soru" kuralına aykırı)
   kaynak kontrolü çıktısı, Overleaf, raporlar klasörü, "Gizli dosyalar" kutusu
   (yalnız akademisyen), ayrıntılı geçmiş, telefondan fotoğraf.
 - SURUM `## Sıradaki · kurulum gerekir`: rol önekli satırlar.
-- YAPILACAKLAR: biten satırlar silindi; `## Mehmet'e kalan` açıldı.
+- Yapılacaklar listesi (şimdi Plane DVT): biten satırlar silindi; `## Mehmet'e kalan` açıldı.
 - `araclar/sinama-kurulum.sh`: `viii4`.
 - `plugins/divit-akademik/SURUM.md` yok; akademik notlar çekirdek SURUM'da "Akademisyen:" önekiyle.

@@ -19,6 +19,8 @@
 #   viii settings.json izinleri, CLAUDE.md "Araçlar"
 #   ix   kanal: .divit/kanal.txt, DIVIT_DAL'sız yeniden kurulum aynı kanalda
 #   x    DIVIT_TEST=1'de "claude update" ve resmî kurulum çağrılmaz
+#   xi   yedek: ilk kurulumda yok, değişmeyen dosya yedeklenmez, elle
+#        değiştirilen Divit dosyası önceki hâliyle saklanır, hoca dosyası girmez
 #
 # Her ölçüm için GEÇTİ / KALDI / ATLANDI satırı basar; KALDI varsa çıkış 1.
 set -uo pipefail
@@ -236,6 +238,36 @@ sed 's/^/  çağrı: /' "$S/cagrilar.log"
 olc x1 "sahte claude çağrıldı ama 'update' yok" bash -c 'grep -q "^claude --version" "$1" && ! grep -q "^claude update" "$1"' _ "$S/cagrilar.log"
 olc x2 "resmî kurulum (claude.ai/install) indirilmedi" bash -c '! grep -q "claude.ai/install" "$1"' _ "$S/cagrilar.log"
 olc x3 "bilgi satırı: güncelleme atlandı" grep -q 'güncelleme atlandı' "$G/x.txt"
+
+# ---------------------------------------------------------------- xi
+bolum "xi) Yedek: üstüne yazılan Divit dosyalarının önceki hâli"
+XI="$G/xi/Divit"; YED="$XI/.divit/onceki-surumler"
+yedekler() { ls -d "$YED"/kurulum-* 2>/dev/null | wc -l | tr -d ' '; }
+kur xia DIVIT_TUR=akademisyen DIVIT_HEDEF="$XI"
+olc xi1 "(a) ilk kurulum: yedek klasörü yok, yedek satırı yok" bash -c '[ "$1" = 0 ] && [ "$2" = 0 ] && ! grep -q "önceki hâli saklandı" "$3"' _ "$(kod xia)" "$(yedekler)" "$G/xia.txt"
+IMZA_XI="$(imza "$XI")"
+kur xib DIVIT_TUR=akademisyen DIVIT_HEDEF="$XI"
+grep -E 'saklandı|UYARI' "$G/xib.txt" | sed 's/^/  kur.sh: /'
+olc xi2 "(b) aynı kurulum yeniden: hiçbir dosya değişmedi, yedek klasörü yok" bash -c '[ "$1" = 0 ] && [ "$2" = "$3" ] && [ "$4" = 0 ]' _ "$(kod xib)" "$IMZA_XI" "$(imza "$XI")" "$(yedekler)"
+printf '\n<!-- hocanın notu -->\n' >>"$XI/CLAUDE.md"
+py 'import json,sys
+p=sys.argv[1]; d=json.load(open(p)); d["hocaNotu"]="elle"; json.dump(d,open(p,"w"),indent=2,ensure_ascii=False)' "$XI/.claude/settings.json"
+cp "$XI/CLAUDE.md" "$G/xi-claude-elle.md"; cp "$XI/.claude/settings.json" "$G/xi-settings-elle.json"
+printf 'ogrenci tezi' >"$XI/tez-kontrol/gelen/x.docx"
+sleep 1
+kur xic DIVIT_TUR=akademisyen DIVIT_HEDEF="$XI"
+grep -E 'saklandı|UYARI' "$G/xic.txt" | sed 's/^/  kur.sh: /'
+YK="$(ls -d "$YED"/kurulum-* 2>/dev/null | head -1)"
+olc xi3 "(c) tek yedek klasörü açıldı (kurulum-<tarih-saat>), çıktıda yeri yazıyor" \
+  bash -c '[ "$1" = 1 ] && [ -n "$2" ] && grep -qF "önceki hâli saklandı: .divit/onceki-surumler/$(basename "$2")" "$3"' _ "$(yedekler)" "$YK" "$G/xic.txt"
+olc xi4 "(c) CLAUDE.md ve .claude/settings.json yedekte, içerik elle değişen hâl" \
+  bash -c 'cmp -s "$1/CLAUDE.md" "$2" && cmp -s "$1/.claude/settings.json" "$3"' _ "$YK" "$G/xi-claude-elle.md" "$G/xi-settings-elle.json"
+olc xi5 "(c) klasördeki CLAUDE.md ve settings.json yenilendi (not gitti, yer tutucu yok)" \
+  bash -c '! grep -q "hocanın notu" "$1/CLAUDE.md" && ! grep -q hocaNotu "$1/.claude/settings.json" && ! grep -q "__[A-Z]*__" "$1/CLAUDE.md"' _ "$XI"
+olc xi6 "(c) yedekte yalnız bu iki dosya var; hoca dosyası (gelen/x.docx) yerinde, yedekte değil" \
+  bash -c '[ "$(cd "$1" && find . -type f | sort | tr "\n" " ")" = "./.claude/settings.json ./CLAUDE.md " ] && [ "$(cat "$2/tez-kontrol/gelen/x.docx")" = "ogrenci tezi" ]' _ "$YK" "$XI"
+olc xi7 "(c) settings.local.json ve kimlik.md değişmedi, yedeğe girmedi" \
+  bash -c '! [ -e "$1/.claude/settings.local.json" ] && ! [ -e "$1/.divit/profil/kimlik.md" ]' _ "$YK"
 
 # ---------------------------------------------------------------- son
 bolum "Son"

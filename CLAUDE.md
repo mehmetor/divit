@@ -85,6 +85,16 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
   boş gelir (pilotta görüldü).
 - `.claude/` korumalı yoldur; Divit'in yazacağı hiçbir şey orada durmaz.
 
+## İş takibi
+
+- İşler yerel Plane'de, **DVT** projesinde (http://127.0.0.1:3200,
+  workspace `simetri`); orc tracker'ı `plane` / `DVT`.
+  `belgeler/YAPILACAKLAR.md` yalnızca buraya yönlendirir.
+- Yeni iş Plane'de açılır. Hassas not (hoca adı, ücret, strateji)
+  Plane'e yazılabilir, repoya yazılmaz.
+- Commit mesajında ilgili iş anılabilir: `fix: PDF okuma (DVT-14)`.
+- İş bitince Plane'de durumu **Tamamlandı** yapılır.
+
 ## Dallar ve yayın
 
 - **main = hocalara giden hâl.** Kurulum betikleri, klasör şablonu, site

@@ -2,6 +2,7 @@
   "projectId": "1ed2ff23-7891-464b-aa70-09738f8831fe",
   "project": "divit",
   "defaultProvider": "claude",
+  "backend": "sdk",
   "tmuxSession": "orc",
   "baseBranch": "develop",
   "tracker": {
