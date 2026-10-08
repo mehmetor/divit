@@ -341,16 +341,22 @@ basın" der ve aynı komutu kutuda verir; Run'a basın (DVT-67).
 **Beklenen:** komutta `/deneme/kur.sh`, `DIVIT_DAL=deneme` ve
 `DIVIT_HEDEF="<bu sohbetin klasörü>"` var (Divit-Yazar'da güncellerken
 `Documents/Divit-Yazar`, `Documents/Divit` değil); çıktıda
-"Kullanıcı türü" klasörün türü; "önceki hâli saklandı" ve "şimdi
-kurulamadı" satırları yok; "Güncelleme tamam… Claude'u kapatıp açın".
-Ret olduysa `.divit/sorunlar.md`'nin sonunda "güncelleme" notu var.
+"Kullanıcı türü" klasörün türü; "Değiştirilen 3 ayar dosyasının önceki
+hâli saklandı" (CLAUDE.md, KILAVUZ.html, .claude/settings.json; sürüm bu
+dosyaları değiştirdiği için olağan, Divit bunu "eski hâli saklandı" diye
+söyler); "şimdi kurulamadı" satırı yok; "Güncelleme tamam… Claude'u
+kapatıp açın". Ret olduysa `.divit/sorunlar.md`'nin sonunda "güncelleme"
+notu var.
 
-Claude'u kapatıp açtıktan sonra `yenilikler neler`.
-**Beklenen:** 1.9.0'ın notları (en çok dört madde; yazar klasöründe
-akademik madde yok), kurulum önerisi yok. Akademisyen klasöründe ilk
-işten sonra bir kez "gizli klasörü … Divit klasörünü açayım mı?" sorusu
-(geçiş notu, `plugins/divit/gecisler/1.9.0.md`); yazar klasöründe bu
-soru yok. Terminal'de:
+Yenilikleri (en çok dört madde; yazar klasöründe akademik madde yok)
+Divit güncelleme sohbetinde, kurulumu önermeden önce anlatır. Claude'u
+kapatıp açtıktan sonra `yenilikler neler`.
+**Beklenen:** "Divit'iniz güncel", kurulum önerisi yok (notlar zaten
+gösterildiği için yeniden sayılmaz). Akademisyen klasöründe ilk işin
+(ör. bir dilekçe) sonunda bir kez "gizli klasörü … Divit klasörünü
+açayım mı?" sorusu (geçiş notu, `plugins/divit/gecisler/1.9.0.md`); yazar
+klasöründe bu soru yok. Yalnız soru-cevap ("kaç cümle var") iş sayılmaz,
+günlüğe satır yazılmaz, soru da gelmez. Terminal'de:
 
 ```bash
 cd ~ && claude plugin list | grep -A2 '@divit'
