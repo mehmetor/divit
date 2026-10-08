@@ -106,6 +106,8 @@ yazı kutusuna yapıştırıp gönderin.
 Önce iki not:
 1. Ekranda İngilizce bir izin sorusu çıkarsa "Allow once" seçin; birkaç
    kez çıkabilir. Divit "Şimdi yapayım mı?" diye sorarsa "evet" yazın.
+   Divit "güvenlik ayarı izin vermedi" derse gösterdiği kutunun yanındaki
+   "Run" düğmesine basın.
 2. Divit "kurulum bitti, Claude'u kapatıp açın" deyince Claude'u tamamen
    kapatıp yeniden açın (pencereyi kapatmak yetmezse sağ alttaki saatin
    yanındaki Claude simgesine sağ tıklayıp çıkın). Divit "birkaç dakika
@@ -152,6 +154,14 @@ skill'leri okunarak değerlendirildi; makinede sınanmadı):
   2. not hocayı bekleyip yeniden yapıştırmaya yönlendirir. Yeniden
   yapıştırmada çekirdek artık yeni sürümdedir; yeni `guncelleme` skill'i
   aynı yolu izler ve akademik eklentiyi kurar.
+- 1.8.0'daki `guncelleme` komutu klasörü vermez; kurulum Belgeler'deki
+  `Divit` klasörünü günceller. Hoca başka bir klasörde (ör. `Divit-Yazar`)
+  çalışıyorsa yanlış klasör güncellenir (DVT-66). 1.9.0'dan beri komut
+  sohbetin klasörünü `DIVIT_HEDEF` ile verir; çekirdek kendiliğinden
+  1.9.0'a indiyse bu istem de doğru klasörü günceller. Auto kipinde
+  komut engellenirse Divit aynı komutu **Run** düğmeli kutuda verir
+  (DVT-67); güncellemeden sonra klasörün kendi güncelleyicisi sorusuz
+  çalışır.
 - Eski sürüm yedek klasörünü (`.divit/onceki-surumler/kurulum-…`) tanımaz;
   satır bilgi satırıdır, uyarı değil, hocaya söylenmeyebilir. Zararsız.
 - Yeniden açılışta "Divit çalışıyor mu, kontrol et" → yeni `saglik` skill'i
