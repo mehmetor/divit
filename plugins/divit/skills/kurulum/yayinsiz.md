@@ -57,11 +57,11 @@ uzunluğu. "Koru / İşaretle" tablosunu koy. Kısa özet göster, onaylat.
 Onayla klasör öner: `yazilar/<is-adi>/`.
 
 **Gizli klasör.** Rehberlik ya da özel eğitim işi yapan kullanıcıya bir kez söyle:
-> "Öğrencilerle ilgili gizli dosyalarınız için klasörünüzde 'gizli' adlı bir
-> bölme var. Oraya koyduğunuz hiçbir dosyayı okuyamam; bu bilgisayarın
-> ayarıyla kilitli. Vaka ve görüşme dosyalarınızı orada tutun."
+> "Klasörünüzde 'gizli' adlı bir bölme var; Divit oraya koyduğunuz dosyaları
+> okumaz. En hassas dosyalarınızı ise (vaka, görüşme, sağlık raporu) Divit
+> klasörüne hiç koymayın; Belgeler'de ayrı bir klasörde tutun."
 
 Klasörde `gizli/` yoksa onayla aç (Mac `mkdir -p "gizli"` · Windows
 `New-Item -ItemType Directory -Force "gizli"`). İçine hiçbir şey yazma, içini
-listeleme, içindeki dosyayı okumaya çalışma; okuma reddedilirse kilidi
-aşmaya uğraşma, kilidi açmayı önerme, yukarıdaki cümleyi söyle.
+listeleme, içindeki dosyayı okumaya çalışma; okuma reddedilirse izni
+aşmaya uğraşma, izni açmayı önerme, yukarıdaki cümleyi söyle.

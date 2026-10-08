@@ -105,6 +105,7 @@ Bu repo bir Claude Code **marketplace**'idir. Hocaların makinesinde
   `chore: ...`. Sürümü release-please bunlardan çıkarır.
 - Yeni işi Mehmet denemeden yayına alma.
 - Yayından önce deneme: `./yayinla.sh --deneme deneme` → belgeler/DENEME-KANALI.md
+- Yayından önce Mehmet'in Mac'i deneme kanalında: belgeler/TEST-ORTAMI.md
 - **Yayın:** develop'a push → release-please "divit X yayını" PR'ını açar
   (CHANGELOG.md geliştirici içindir; hocanın notu SURUM.md). PR birleşince
   `.github/workflows/yayin.yml` `./yayinla.sh --surum X` çalıştırır ve

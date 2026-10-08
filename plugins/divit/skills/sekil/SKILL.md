@@ -43,7 +43,7 @@ Ad: kısa, küçük harf, Türkçe karaktersiz, tireli (`satis-2020-2024`).
 - Yazar: `kitaplar/<kitap-adi>/sekiller/`; kitap belli değilse sor. Kitap
   klasörü yoksa önce `kurallar`'daki betikle `ac <kitap-adi>`.
 - Diğer: `sekiller/`.
-Aynı adlı dosya varsa sonuna `-2` ekle; üstüne yazma. Klasörü Write kendisi açar.
+Aynı adlı başka bir şekil varsa ayırt eden bir ad seç; üstüne yazma. Klasörü Write kendisi açar.
 
 ## Çizim
 

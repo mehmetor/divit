@@ -4,5 +4,9 @@ Divit'in okumaması gereken dosyalarınızı buraya bırakın.
 veli görüşme kayıtları, gözlem formları, sağlık ya da değerlendirme
 raporları.
 
-Bu klasör kilitlidir: Divit içindekileri açamaz, okuyamaz, değiştiremez.
+Divit bu klasörü okumaz; içindekilere dokunmaz.
+
+En hassas dosyalarınızı (vaka, görüşme notu, sağlık raporu) Divit klasörüne
+hiç koymayın. Onları Belgeler klasöründe ayrı bir klasörde tutun.
+
 Bir yazı için bilgi gerekiyorsa, adsız ve kısa olarak kendiniz yazın.

@@ -7,6 +7,15 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
+## 1.9.0 · 2026-10-08 · kurulum gerekir
+- Herkes: Kılavuzdaki "gizli" klasörü anlatımı düzeltildi: Divit bu klasörü okumaz; en hassas dosyalarınızı (vaka, görüşme, sağlık raporu) Divit klasörüne hiç koymayın, Belgeler'de ayrı bir klasörde tutun.
+- Herkes: İzin soruları için kılavuza yeni bir not eklendi: Auto seçiliyken Divit klasörü dışındaki bir dosya için soru çıkarsa "Yes, and keep allowing…" seçeneğini seçin. Seçicide Auto yoksa sorun değil, Divit böyle de çalışır.
+- Herkes: Divit'in iş defteri artık hiç silinmez; her iş sona eklenir.
+- Herkes: Divit'in sizin için yazdığı bir taslağı (dilekçe, mektup) değiştirmeden önce de önceki hâlini saklarım; "ilk hâlini getir" diyebilirsiniz.
+- Yazar: Yazılarınızdan kitap yaparken klasördeki öteki kitaplarınıza da bakarım; aynı anı ya da birbirini tutmayan bir yıl orada da geçiyorsa gösteririm.
+- Herkes: Aylık bakımda yanlış yerde kalmış ya da aynı adla birikmiş, benim hazırladığım dosyaları bulurum; onay verirseniz yerine taşırım. Sizin dosyalarınıza dokunmam, hiçbir şeyi silmem.
+- Herkes: Word, PDF ve makale ön değerlendirmesi gibi hazırladığım her dosyanın adında artık tarih var ve her biri kendi klasöründe durur.
+
 ## 1.8.0 · 2026-10-08 · kurulum gerekir
 - Herkes: Kurulumu yenilediğinizde Divit'in kendi koyduğu ayar dosyalarının önceki hâli saklanır; elle yaptığınız bir değişiklik kaybolmaz, "geri al" ile geri gelir.
 - Herkes: Güncellemede bir parça hemen inmezse Divit bunu söyler ve birkaç dakika sonra sizin "tamam"ınızla bir kez daha dener; ayar dosyalarının önceki hâli saklandıysa bunu da tek cümleyle bildirir.

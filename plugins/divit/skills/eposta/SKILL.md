@@ -54,7 +54,7 @@ ile kodlanmış:
 - Mac: `open "mailto:<adres>?subject=<konu>&body=<metin>"`
 
 Metin çok uzunsa (2000 karakterden fazla) gövdeye koyma; metni
-`yazilar/` altında bir dosyaya yaz, klasörü aç ve "Metni e-postaya
+`yazilar/eposta-<konu>-<YYYY-AA-GG>.md` dosyasına yaz, klasörü aç ve "Metni e-postaya
 kopyalayın" de. Ek gerekiyorsa dosyanın klasörünü aç: "Dosyayı açılan
 e-postaya sürükleyin."
 

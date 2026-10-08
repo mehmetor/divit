@@ -35,10 +35,10 @@ Kaydet → PDF seçin."
    Repository'den (`https://www.zotero.org/styles/<stil-adı>`) indir —
    Mac'te `curl -fsSL -o`, Windows'ta `Invoke-WebRequest -OutFile`.
 4. Çalıştır (tek satır):
-   - Mac: `~/.divit/araclar/pandoc taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
-   - Windows: `& "<pandoc>" taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>.docx"`
+   - Mac: `~/.divit/araclar/pandoc taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>-divit-<YYYY-AA-GG>.docx"`
+   - Windows: `& "<pandoc>" taslak.md --citeproc --bibliography=kaynaklar.bib --csl=.claude/stiller/<stil>.csl -o "cikti/<ad>-divit-<YYYY-AA-GG>.docx"`
 
-5. Çıktıyı `cikti/` altına koy, kaynak markdown'a dokunma.
+5. Çıktıyı `cikti/` altına koy (aynı gün varsa `-s2`), kaynak markdown'a dokunma.
 
 ## LaTeX / Overleaf
 

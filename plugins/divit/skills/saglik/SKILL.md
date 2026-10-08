@@ -59,7 +59,7 @@ Amaç: bir sorun hocanın işinin ortasında değil, önceden görünsün.
 
 Claude'un alt çubuğunda bir izin kipi seçicisi vardır. Divit en rahat
 **Auto** kipinde çalışır: güvenli işleri sormadan yapar, riskli olanı
-yine sorar. Başka kipte her komutta İngilizce izin sorusu çıkar.
+yine sorar. Başka kipte Divit'in tanımadığı işlerde İngilizce izin sorusu çıkar.
 
 Bu oturumda Auto kipinin açık olduğuna dair bir sistem bildirimi
 görmüyorsan ve hoca bir izin sorusunda takıldıysa (izin reddedildi,
@@ -73,6 +73,8 @@ Tür yazarsa son cümle: "Divit yine de dosyalarınızı silmez ve kitabınızı
 asıl dosyasına yazmaz."
 
 Sağlık denetiminde de kipi söyle. Kip Auto değilse aynı öneriyi yap.
+Hoca seçicide Auto olmadığını söylerse (kurum hesabı) öneriyi bir daha
+yapma: "Sorun değil, Divit böyle de çalışır." de.
 
 ## Kota ve model
 

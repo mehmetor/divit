@@ -4,7 +4,13 @@ Soru: `kur.sh` Mehmet'in Claude masaüstü denemesinde görülen durumlarda
 doğru davranıyor mu? (tür/profil çelişkisi, sessiz başarısızlık, sürüm
 alt sınırı, klasör adı, tek kılavuz, kitap klasörü izinleri, kanal)
 
-**Sonuç (2026-09-30):** 41 ölçüm GEÇTİ, KALDI yok. Tek ATLANDI (vii4):
+**Sonuç (2026-10-08, `yeni` kanalı kaldırıldıktan sonra):** 50 ölçüm GEÇTİ,
+KALDI yok, ATLANDI yok. ix6 artık `DIVIT_DAL=yeni` verilince uyarıyla
+`main`'e düşüldüğünü, ix7 ise `.divit/kanal.txt`'sinde `yeni` kalmış bir
+klasörün `DIVIT_DAL`'sız yeniden kurulumda uyarıyla `main`'e döndüğünü
+ölçer (eski `yeni` kullanıcısı yoktu; olsaydı bu yolla main'e geçerdi).
+
+**Önceki sonuç (2026-09-30):** 41 ölçüm GEÇTİ, KALDI yok. Tek ATLANDI (vii4):
 kılavuz şablonunda `data-rol=""` henüz yok (kılavuz parçası bu dala
 birleşmedi); betik bu durumda kopyanın şablonla birebir olduğunu denetler
 (vii5 GEÇTİ). data-rol yolu elle ayrıca denendi: şablona
@@ -36,25 +42,22 @@ araclar/sinama-kurulum.sh            # --sakla: geçici klasör silinmez
 ```
 
 == Hazırlık
-claude: /opt/homebrew/bin/claude 2.1.278 (Claude Code)
+claude: /Users/minihome/.local/bin/claude 2.1.293 (Claude Code)
 Geçici dizin: /tmp/divit-kurulum.XXXXXX
-Kaynak: 37558f0396d0
+Kaynak: 3d231098dd93 + commit'lenmemiş değişiklikler
 
 == i) Boş klasöre akademisyen
-  kur.sh:   UYARI: Claude Code 2.1.278 eski (en az 2.1.280 gerekli) ve güncellenemedi. Divit klasörü açılınca 'model desteklenmiyor' hatası çıkabilir.
   kur.sh:   Kullanıcı türü: akademisyen
-  kur.sh:   Kurulu ve güncel (sürüm 658769f6be47).
-  kur.sh:   UYARI: Üniversite işleri eklentisi (divit-akademik) şimdi kurulamadı; kurulumu sonra yeniden çalıştırın.
+  kur.sh:   Kurulu ve güncel (sürüm 70921676b383).
 GEÇTİ i1    çıkış 0, 'Kurulum bitti'
 GEÇTİ i2    tez-kontrol var, kitaplar yok
 GEÇTİ i3    kimlik.md'ye (şablon) 'Kullanıcı türü: akademisyen' yazıldı
 GEÇTİ i4    iki eklenti açık, divit kurulu ve güncel
 
 == ii) Boş klasöre yazar (deneme kanalıyla; ix'in ilk yarısı)
-  kur.sh:   UYARI: Claude Code 2.1.278 eski (en az 2.1.280 gerekli) ve güncellenemedi. Divit klasörü açılınca 'model desteklenmiyor' hatası çıkabilir.
   kur.sh:   Kullanıcı türü: yazar
   kur.sh:   Kanal: deneme
-  kur.sh:   Kurulu ve güncel (sürüm 635ffdbcfa8c).
+  kur.sh:   Kurulu ve güncel (sürüm a4b1d6b028ad).
 GEÇTİ ii1   çıkış 0, 'Kurulum bitti'
 GEÇTİ ii2   kitaplar var, tez-kontrol yok
 GEÇTİ ii3   kimlik.md'ye 'Kullanıcı türü: yazar' yazıldı
@@ -75,10 +78,8 @@ GEÇTİ iii3  klasördeki hiçbir dosya değişmedi (shasum)
 GEÇTİ iii4  tersi (dolu yazar profili + DIVIT_TUR=akademisyen) de durur, dosya değişmez
 
 == iv) Değişkensiz yeniden kurulum (hocanın yolu)
-  kur.sh:   UYARI: Claude Code 2.1.278 eski (en az 2.1.280 gerekli) ve güncellenemedi. Divit klasörü açılınca 'model desteklenmiyor' hatası çıkabilir.
   kur.sh:   Kullanıcı türü: akademisyen
-  kur.sh:   Kurulu ve güncel (sürüm 658769f6be47).
-  kur.sh:   UYARI: Üniversite işleri eklentisi (divit-akademik) şimdi kurulamadı; kurulumu sonra yeniden çalıştırın.
+  kur.sh:   Kurulu ve güncel (sürüm 70921676b383).
 GEÇTİ iv1   çıkış 0, 'Kurulum bitti', tür akademisyen
 GEÇTİ iv2   dolu kimlik.md değişmedi (tür satırı eklenmedi)
 GEÇTİ iv3   elle eklenen izin duruyor, iki eklenti açık
@@ -109,26 +110,26 @@ GEÇTİ vi3   Belgeler dışında: tam yol
 GEÇTİ vii1  yeni klasörlerde yalnız KILAVUZ.html (kart ve yazar kılavuzu yok)
 GEÇTİ vii2  eski klasördeki KART.html silinmedi
 GEÇTİ vii3  klasör CLAUDE.md'si ve şablonlarda kart anılmıyor
-ATLANDI vii4  şablonda data-rol="" yok (kılavuz parçası birleşmemiş); kopya şablonla aynı mı:
-GEÇTİ vii5  şablonda data-rol yokken kopya şablonla birebir
+GEÇTİ vii4  data-rol türe göre (akademisyen / yazar)
 
 == viii) İzinler ve araçlar
 GEÇTİ viii1 settings.json: iki kitap-klasoru allow, asil/malzeme deny birebir; mkdir allow duruyor
+GEÇTİ viii4 settings.json dalga 2: zip, uploads, openalex, geçmiş ve bağlayıcı allow; gizli, genel arama, git ve gönderme/silme deny
 GEÇTİ viii2 CLAUDE.md 'Araçlar' dolu (pandoc, pdfcpu tam yol; pdftotext 'yok'; yer tutucu yok)
 GEÇTİ viii3 CLAUDE.md çekirdek kuralı: klasör açma ve kopyalama yalnız kitap-klasoru betiğiyle
 
 == ix) Kanal
 GEÇTİ ix1   .divit/kanal.txt = DIVIT_DAL (deneme / main)
-  kur.sh:   UYARI: Claude Code 2.1.278 eski (en az 2.1.280 gerekli) ve güncellenemedi. Divit klasörü açılınca 'model desteklenmiyor' hatası çıkabilir.
   kur.sh:   Kullanıcı türü: yazar
   kur.sh:   Kanal: deneme
-  kur.sh:   Kurulu ve güncel (sürüm 635ffdbcfa8c).
-  kur.sh: Deneme kanalı: deneme
+  kur.sh:   Kurulu ve güncel (sürüm a4b1d6b028ad).
+  kur.sh: Güncellemeler şu dağıtımdan gelir: deneme
 GEÇTİ ix2   DIVIT_DAL'sız yeniden kurulum deneme kanalında kaldı
 GEÇTİ ix3   klasör ayarındaki pazar yeri adresi kanalın adresi
-GEÇTİ ix4   main kanalında 'Deneme kanalı' satırı yok
+GEÇTİ ix4   main kanalında dağıtım satırı yok
 GEÇTİ ix5   izinsiz dal adı → uyarı, main
-GEÇTİ ix6   'yeni' izinli kanal
+GEÇTİ ix6   'yeni' artık izinli değil: DIVIT_DAL=yeni → uyarı, main
+GEÇTİ ix7   kanal.txt'sinde 'yeni' kalan klasör, DIVIT_DAL'sız kurulumda uyarıyla main'e döner
 
 == x) DIVIT_TEST=1'de Claude Code güncellenmez
   çağrı: claude --version
@@ -136,9 +137,19 @@ GEÇTİ x1    sahte claude çağrıldı ama 'update' yok
 GEÇTİ x2    resmî kurulum (claude.ai/install) indirilmedi
 GEÇTİ x3    bilgi satırı: güncelleme atlandı
 
+== xi) Yedek: üstüne yazılan Divit dosyalarının önceki hâli
+GEÇTİ xi1   (a) ilk kurulum: yedek klasörü yok, yedek satırı yok
+GEÇTİ xi2   (b) aynı kurulum yeniden: hiçbir dosya değişmedi, yedek klasörü yok
+  kur.sh:   Değiştirilen 2 ayar dosyasının önceki hâli saklandı: .divit/onceki-surumler/kurulum-2026-10-08-165418
+GEÇTİ xi3   (c) tek yedek klasörü açıldı (kurulum-<tarih-saat>), çıktıda yeri yazıyor
+GEÇTİ xi4   (c) CLAUDE.md ve .claude/settings.json yedekte, içerik elle değişen hâl
+GEÇTİ xi5   (c) klasördeki CLAUDE.md ve settings.json yenilendi (not gitti, yer tutucu yok)
+GEÇTİ xi6   (c) yedekte yalnız bu iki dosya var; hoca dosyası (gelen/x.docx) yerinde, yedekte değil
+GEÇTİ xi7   (c) settings.local.json ve kimlik.md değişmedi, yedeğe girmedi
+
 == Son
 GEÇTİ G1    gerçek ~/.claude (settings, installed_plugins, known_marketplaces) değişmedi
-GEÇTİ G2    /opt/homebrew/bin/claude sürümü değişmedi (2.1.278 (Claude Code))
+GEÇTİ G2    /opt/homebrew/bin/claude sürümü değişmedi (2.1.287 (Claude Code))
 GEÇTİ G3    ~/Documents klasör kaydı (değişme zamanı, boyut) değişmedi
 
 SONUÇ: hepsi geçti (ATLANDI satırları hariç).
@@ -146,12 +157,10 @@ SONUÇ: hepsi geçti (ATLANDI satırları hariç).
 
 Notlar:
 
-- "Claude Code 2.1.278 eski (en az 2.1.280 gerekli)" uyarısı beklenir:
-  bu Mac'teki `/opt/homebrew/bin/claude` 2.1.278; sınama onu güncellemez
-  (x ve G2).
-- main kanalında "Üniversite işleri eklentisi (divit-akademik) şimdi
-  kurulamadı" uyarısı beklenir: main'in pazar yerinde akademik eklenti
-  henüz yok (bilinen durum, uyarı olarak kalır; kurulum biter).
+- 2026-09-30 koşusundaki iki uyarı ("Claude Code 2.1.278 eski",
+  "Üniversite işleri eklentisi şimdi kurulamadı") 2026-10-08'de artık
+  çıkmıyor: bu Mac'teki `claude` güncel, main'in pazar yerinde (1.8.0)
+  akademik eklenti var. Sınama `claude`'u güncellemez (x ve G2).
 - v3: çözüm mesajındaki `claude plugin marketplace remove divit`
   çalıştırılınca aynı kurulum hatasız biter.
 
@@ -164,7 +173,7 @@ eşleştirildi.
 
 | Konu | Çapa (kur.sh / kur.ps1) | Fark |
 |---|---|---|
-| Kanal önceliği, izinli adlar | `# Kanal: DIVIT_DAL > klasörün kanal.txt'si > main.` | ps1 büyük/küçük harf duyarlı karşılaştırır (`-ceq`, `-cmatch`) |
+| Kanal önceliği, izinli adlar (`main`, `deneme`, `deneme-*`; `yeni` 2026-10-08'de çıkarıldı) | `# Kanal: DIVIT_DAL > klasörün kanal.txt'si > main.` | ps1 büyük/küçük harf duyarlı karşılaştırır (`-ceq`, `-cmatch`); ikisinde de `yeni` izinli listede değil, uyarıyla `main` olur |
 | Profil dolu mu, profildeki tür, DIVIT_TUR | `# Kullanıcı türü: DIVIT_TUR > kimlik.md satırı > akademisyen.` | ps1 "Kullanıcı türü:" ve "Henüz doldurulmadı"yı `[char]` ile kurar (betik ANSI okunsa da bozulmasın) |
 | Tür çelişkisinde dur | `# Dolu profil başka türdense hiçbir şeye dokunmadan dur` | Mac `exit 2`; Windows `return` (betik `irm … \| iex` ile çalışır, `exit` pencereyi kapatır). Önerilen komut: Mac `DIVIT_HEDEF="$HOME/Documents/Divit-Yazar"`, Windows `$env:DIVIT_HEDEF=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Divit-Yazar'` |
 | Alt sınır 2.1.280, DIVIT_TEST=1'de güncelleme yok | `EN_AZ=` / `$EnAzSurum =`, `# Sınama geliştiricinin kendi Claude Code'unu değiştirmez.` | ps1'de ayrıca `$ArsivEnAz` 2.1.224: CLI bunun da altındaysa eklenti adımı atlanır (bugünkü davranış). Mac bugünkü gibi eklenti adımını dener |
@@ -271,3 +280,8 @@ Sınanamayan noktalar (Mehmet Windows'ta elle dener):
 - [ ] Yedeklenen dosyalar Not Defteri'nde Türkçe harfleriyle düzgün açılıyor (BOM'suz UTF-8).
 - [ ] `settings.local.json`'da bir eklenti anahtarını elle `false` yap, yeniden kur:
       bu sefer dosya yedeklenip düzeltilmiş olmalı (yedek klasöründe `.claude\settings.local.json`).
+- [ ] `yeni` kanalı kaldırıldı (ix6/ix7 karşılığı): `$env:DIVIT_DAL="yeni"` ile kur →
+      çıktıda "'yeni' bilinen bir kanal degil; main kullaniliyor" uyarısı,
+      `.divit\kanal.txt` = `main`, `.claude\settings.json`'daki pazar yeri adresi
+      `/main/.claude-plugin/marketplace.json`. Sonra `kanal.txt`'ye elle `yeni` yazıp
+      `DIVIT_DAL`'sız yeniden kur: aynı uyarı, `kanal.txt` yine `main`.

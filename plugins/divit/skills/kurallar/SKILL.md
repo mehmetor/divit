@@ -33,8 +33,8 @@ her durumda (satır yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skill
 - **Üslup hocanındır.** `uslup.md` ve hocanın istekleri her genel yazım kuralını ezer.
 - `kitaplar/*/asil/` ve `kitaplar/*/malzeme/` kullanıcının asıl dosyaları: oku; yazma, taşıma (yerleştirmek yalnız betikle, aşağıda).
 - Kullanıcının kendi dosyalarını yeniden adlandırma, taşıma; adı kurala uymasa da.
-- **`gizli/` klasörü okunmaz**, içinde arama da yapılmaz; izin de kapalıdır. Reddedilirse
-  kilidi açmayı, dosyayı taşımayı ya da içeriği yapıştırmayı önerme; adsız genel taslak öner.
+- **`gizli/` okunmaz**, içinde arama yapılmaz; betik, değişken ya da `sh -c` ile dolaylı okuma da yok. Reddedilirse
+  izni açmayı, dosyayı taşımayı ya da içeriği yapıştırmayı önerme; adsız genel taslak öner.
 
 ## Belirsiz istek
 
@@ -50,13 +50,14 @@ anlama" diye yazılır. Soru sormadan, ipucu vermeden ya da düzeltme gelince
 
 Yalnız **hocanın dosyaları** için; `.divit/` altındaki Divit dosyalarına uygulanmaz.
 - **Word ve PDF'i asla yerinde değiştirme.** Yeni dosyaya yaz: `<ad>-divit-<YYYY-AA-GG>.docx`.
-- Var olan metin dosyasını (md, txt, bib) değiştirmeden önce Read + Write ile
-  kopyasını `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/<aynı yol>` altına al.
+- Var olan metin dosyasını (md, txt, bib; bu oturumda kendi yazdığın taslak da) değiştirmeden
+  önce Read + Write ile kopyasını `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/<aynı yol>` altına al.
 - Silme yok. Hoca bir dosyadan kurtulmak isterse `arsiv/` klasörüne taşı.
 
 ## İş günlüğü ve sorun notları
 
-Her iş bitince `.divit/gunluk.md` sonuna tek satır:
+Her iş bitince `.divit/gunluk.md` sonuna tek satır, **Read sonra Edit** ile (son satırın
+ardına ekle; Write ile baştan yazma, geçmiş silinir; `sorunlar.md` de böyle):
 `YYYY-AA-GG SS:DD · <iş türü> · <dosya> · <tek cümle sonuç>`. Yarım kalan ve başarısız
 işi de yaz; öğrenci adı değil baş harf. Saati bilmiyorsan uydurma, yalnız tarih yaz.
 Günlük yalnız hocanın izniyle paylaşılır.
@@ -69,13 +70,13 @@ biçimi"yle `.divit/sorunlar.md` sonuna **sessizce** ekle.
 ## Dosyalarla çalışma — iki işletim sistemi
 
 Hoca Windows ya da Mac kullanır (Windows'ta komut aracın PowerShell'dir). Okuma,
-yazma, sayma, arama **Read, Write, Edit** ile (Grep, Glob varsa onlar da); soru çıkmaz.
+yazma, sayma, arama **Read, Write, Edit** ile, klasörü listelemek Glob ile (Grep de); soru çıkmaz.
 **Kabuk kuralı.** Her komut tek başına: `;`, `|` ya da çift `&` ile zincir yok, `cd` yok,
 yollar klasöre göreli. Değişkenle başlayan komut yazma (`$DIVIT_…`, `$env:…`):
 izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu, pdftotext,
 kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
-yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`) ve `mkdir`
-(`kitaplar/*/asil` ve `malzeme` dışında) için. `sed`, `wc`, `awk`, `cat` yok.
+yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), Divit dosyasını taşıma
+(yalnız `bakim` ve tür değişimi, onayla) ve `mkdir` (`kitaplar/*/asil`, `malzeme` dışında) için; `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
 PowerPoint ya da Excel işinde Python veya Node isteyen yerleşik beceriyi kullanma;
 `sunum` ve `tablo` skill'lerini kullan.
 **Araç yolları.** Mac'te her zaman `~/.divit/araclar/pandoc` ve
@@ -97,11 +98,11 @@ PDF metni boşsa taranmıştır: Read ile sayfa sayfa oku. Word'ü gizli açtır
 Divit'in ürettiği her dosya `<ad>-YYYY-AA-GG.<uzantı>`; aynı gün yeni hâli `-s2`,
 `-s3`. İş türü klasörü altında konu ya da kişi alt klasörü (akademisyen
 `tez-kontrol/rapor/<baş harfler>/`, yazar `kitaplar/<kitap-adi>/raporlar/`).
-Ara dosyalar yalnız `.divit/gecici/`. `kitaplar/*/asil` ve `malzeme`'yi yalnız
+Ara dosyalar yalnız `.divit/gecici/`; kökte Divit dosyası durmaz. `kitaplar/*/asil` ve `malzeme`'yi yalnız
 kitap klasörü betiği açar ve doldurur. **Oturumda ilk yeni dosyayı yazmadan, kitap
 klasörüne dosya koymadan ya da kullanıcı klasör dışından dosya verince**
 `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/dosya-duzeni.md`'yi Read ile yükle
-(klasör listesi, adlandırma, betiğin cevapları). **Kitap klasörü betiği** — aynen
+(klasör listesi, adlandırma, taşıma, betiğin cevapları). **Kitap klasörü betiği** — aynen
 (Mac'te yol tırnaksız; izin kuralı tırnaklı yolu tanımaz):
 - Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <ad>`
 - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <ad>`
@@ -132,7 +133,7 @@ Komut ve gösterme biçimi `dosya-duzeni.md`'nin "Rapor gösterme" bölümünde;
 | "Gmail'imi bağla", "takvimime erişebiliyor musun", "Drive", "bağladım" | `baglanti` |
 | "yardım", "ne yapabilirsin" | `yardim` |
 | "geri bildirim gönder", "sorunları ilet", "paylaş" | `gelistirici-paylas` |
-| "düzenini gözden geçir", "bakım yap" | `bakim` |
+| "düzenini gözden geçir", "bakım yap", "klasör karıştı" | `bakim` |
 | "e-posta olarak hazırla", "öğrenciye gönder", "taslak oluştur" | `eposta` |
 | "PDF'leri birleştir", "sayfaları çıkar", "listeyi işaretle" | `pdf` |
 | "yenilikler neler", "güncelle", "Divit güncel mi" | `guncelleme` |
@@ -142,7 +143,7 @@ Akademik işler rol dosyasında; yazar açıkça istemedikçe onlara yönlendirm
 
 ## Oturum düzeni ve hatırlatmalar
 
-Hoca aynı oturumda **başka bir işe** geçerse (tezden dilekçeye) önce isteği yap, sonra
-bir kez söyle: "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
+Hoca aynı oturumda bir işi bitirip **ikinci bir işe** geçerse (tezden dilekçeye) önce
+isteği yap, sonra bir kez söyle (oturumun ilk işinde söyleme): "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
 açarsanız daha iyi çalışırım. Her şey klasörde duruyor." İzin kipi, kota, model: `saglik`.
 İlk iş bitince (önce değil) `bakim` skill'inin "Hatırlatma denetimi" bölümünü uygula.

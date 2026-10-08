@@ -7,13 +7,12 @@
 #   ./yayinla.sh --surum 1.8.0    yayın (CI çalıştırır, elle çalıştırma):
 #                                 SURUM.md'de "Sıradaki" → "1.8.0 · tarih",
 #                                 dagitim/ zip'leri, marketplace.json, commit.
-#   ./yayinla.sh --kanal yeni     yayın kanalı: zip'leri ve bu dalı gösteren
+#   ./yayinla.sh --kanal deneme   deneme kanalı: zip'leri ve bu dalı gösteren
 #                                 marketplace.json'u GitHub'daki kanal dalına
 #                                 gönderir. Mevcut dal, main ve SURUM.md
-#                                 değişmez. İzinli dallar: deneme, deneme-*,
-#                                 yeni. (--deneme <dal> eski adıdır, aynıdır.)
-#                                 Adım adım: belgeler/DENEME-KANALI.md,
-#                                 belgeler/YENI-KURULUM.md
+#                                 değişmez. İzinli dallar: deneme, deneme-*.
+#                                 (--deneme <dal> eski adıdır, aynıdır.)
+#                                 Adım adım: belgeler/DENEME-KANALI.md
 #
 # Yayın akışı: develop'ta çalışılır → release-please sürüm PR'ı açar →
 # PR birleşince .github/workflows/yayin.yml bu betiği --surum ile çalıştırır
@@ -38,11 +37,11 @@ SURUM=""
 KANAL=""
 [ "${1:-}" = "--surum" ] && SURUM="${2:?sürüm numarası eksik}"
 if [ "${1:-}" = "--kanal" ] || [ "${1:-}" = "--deneme" ]; then
-  KANAL="${2:?kanal dalı eksik (ör. --kanal yeni ya da --kanal deneme)}"
+  KANAL="${2:?kanal dalı eksik (ör. --kanal deneme)}"
   case "$KANAL" in
     main|develop) echo "HATA: '$KANAL' kanal dalı olamaz; hocalara giden yayın --surum ile yapılır."; exit 1 ;;
-    deneme|deneme-*|yeni) ;;
-    *) echo "HATA: kanal dalı 'deneme', 'deneme-…' ya da 'yeni' olmalı."; exit 1 ;;
+    deneme|deneme-*) ;;
+    *) echo "HATA: kanal dalı 'deneme' ya da 'deneme-…' olmalı."; exit 1 ;;
   esac
   git check-ref-format --branch "$KANAL" >/dev/null 2>&1 || { echo "HATA: '$KANAL' geçerli bir dal adı değil."; exit 1; }
   [ -z "$(git status --porcelain)" ] || { echo "HATA: çalışma ağacı temiz değil; önce commit'leyin."; git status --short; exit 1; }
@@ -173,16 +172,10 @@ PY
     echo "  ${EKLENTILER[$i]} sürümü ${OZETLER[$i]:0:12}"
   done
   # Deneme kanalında ikinci tür ayrı klasöre kurulur (aynı Mac'te iki tür
-  # denenir); yeni kanalı gerçek kullanıcıya gider: varsayılan klasör.
-  if [ "$KANAL" = "yeni" ]; then
-    REHBER="belgeler/YENI-KURULUM.md"
-    AKADEMIK_MAC="curl -fsSL $HAM/kur.sh | DIVIT_DAL=$KANAL bash"
-    AKADEMIK_WIN="\$env:DIVIT_DAL='$KANAL'; irm $HAM/kur.ps1 | iex"
-  else
-    REHBER="belgeler/DENEME-KANALI.md"
-    AKADEMIK_MAC="curl -fsSL $HAM/kur.sh | DIVIT_DAL=$KANAL DIVIT_TUR=akademisyen DIVIT_HEDEF=~/Documents/Divit-Akademik bash"
-    AKADEMIK_WIN="\$env:DIVIT_DAL='$KANAL'; \$env:DIVIT_TUR='akademisyen'; \$env:DIVIT_HEDEF=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Divit-Akademik'; irm $HAM/kur.ps1 | iex"
-  fi
+  # denenir).
+  REHBER="belgeler/DENEME-KANALI.md"
+  AKADEMIK_MAC="curl -fsSL $HAM/kur.sh | DIVIT_DAL=$KANAL DIVIT_TUR=akademisyen DIVIT_HEDEF=~/Documents/Divit-Akademik bash"
+  AKADEMIK_WIN="\$env:DIVIT_DAL='$KANAL'; \$env:DIVIT_TUR='akademisyen'; \$env:DIVIT_HEDEF=Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Divit-Akademik'; irm $HAM/kur.ps1 | iex"
   cat <<MSG
 
 GitHub ham adresleri ~5 dakika önbellekte kalır; hemen kurarsanız eski hâl inebilir.

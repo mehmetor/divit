@@ -26,7 +26,8 @@ Amaç: danışmanın ilk okumasını hızlandırmak. Danışmanın yerine geçme
 
 ## Akış
 
-1. `tez-kontrol/gelen/` içindeki dosyayı oku. PDF'i Read aracıyla
+1. `tez-kontrol/gelen/` içindeki dosyayı Glob ile bul (`tez-kontrol/gelen/**/*`;
+   `ls` kullanma), sonra oku. PDF'i Read aracıyla
    doğrudan oku (uzunsa `pages` ile parça parça). Word dosyasını
    `divit:kurallar`'daki pandoc komutuyla `.divit/gecici/<bashar>-<YYYY-AA-GG>.md`'ye çevir.
 2. Uzunsa önce yapıyı çıkar (başlıklar Grep ile, bölüm uzunlukları; kabukla

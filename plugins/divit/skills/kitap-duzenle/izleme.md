@@ -7,8 +7,8 @@ görmek isterse. Kullanıcıya Word'deki adıyla anlat: **"Değişiklikleri
 ## Yasaklar
 
 1. Asıl dosyaya (`asil/`) dokunma. Çıktı her zaman yeni dosyadır:
-   `kitaplar/<kitap-adi>/cikti/<ad>-divit-oneriler-<YYYY-AA-GG>.docx`.
-   Aynı gün ikinci kez: sona `-2`, `-3`.
+   `cikti/<kitap-adi>-divit-oneriler-<YYYY-AA-GG>.docx`.
+   Aynı gün ikinci kez: sona `-s2`, `-s3`.
 2. Yalnız "Durum: onaylandı" olan öneriler işlenir. Onaysız öneri
    izlenen değişiklik olarak da girmez.
 3. Önerinin "Sonra"sını değiştirme; onaylanan neyse o.

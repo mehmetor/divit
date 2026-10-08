@@ -19,7 +19,7 @@
 # aynı bilgisayarda ikinci kullanım ayrı klasördür (DIVIT_HEDEF).
 #
 # Kanal (yayın dalı): DIVIT_DAL > klasördeki .divit\kanal.txt > main.
-# İzinli: main, yeni, deneme, deneme-*. Klasör kanalını kanal.txt'de
+# İzinli: main, deneme, deneme-*. Klasör kanalını kanal.txt'de
 # hatırlar; "güncelle" aynı kanalda kalır.
 #
 # Sınama değişkenleri (geliştirici için):
@@ -68,7 +68,7 @@ $KanalDosyasi = Join-Path $Hedef '.divit\kanal.txt'
 if ($env:DIVIT_DAL) { $Dal = $env:DIVIT_DAL }
 elseif (Test-Path $KanalDosyasi) { $Dal = ([IO.File]::ReadAllLines($KanalDosyasi) | Select-Object -First 1).Trim() }
 else { $Dal = 'main' }
-if (-not ($Dal -ceq 'main' -or $Dal -ceq 'yeni' -or $Dal -cmatch '^deneme(-.+)?$')) {
+if (-not ($Dal -ceq 'main' -or $Dal -cmatch '^deneme(-.+)?$')) {
   Uyari "'$Dal' bilinen bir kanal degil; main kullaniliyor."; $Dal = 'main'
 }
 $PazarUrl = "https://raw.githubusercontent.com/$Repo/$Dal/.claude-plugin/marketplace.json"
