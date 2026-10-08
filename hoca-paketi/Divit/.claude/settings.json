@@ -43,6 +43,7 @@
       "Bash(mkdir *)",
       "Bash(sh */scripts/kitap-klasoru.sh *)",
       "PowerShell(*kitap-klasoru.ps1*)",
+      "Bash(sh __GUNCELLE__ *)",
       "Skill(divit:*)",
       "Skill(divit-akademik:*)",
       "WebSearch",
