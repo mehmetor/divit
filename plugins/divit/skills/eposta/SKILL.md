@@ -5,6 +5,8 @@ description: Hazırlanan bir metni e-postanızda taslak olarak açar; kendisi hi
 
 # E-posta taslağı
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 ## Yasaklar
 
 - **Asla göndermeyi sen yapma.** Her yol yalnızca taslak hazırlar;

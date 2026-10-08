@@ -5,6 +5,8 @@ description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyala
 
 # Bakım ve hatırlatmalar
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 ## Yasaklar
 
 - **İzin almadan bakıma başlama.** Hoca "hayır" ya da "sonra" derse dur.
@@ -32,10 +34,21 @@ son-oneri-bakim: YYYY-AA-GG
 son-gorulen-surum: 1.6
 son-oneri-guncelleme: YYYY-AA-GG
 son-uzak-denetim: YYYY-AA-GG
+son-gecis: 1.8.0
 ```
 
-Oturumda **en fazla bir** hatırlatma yap. Sıra: yenilik/güncelleme
+Anahtarı **Edit** ile güncelle: satırı varsa o satırı değiştir, yoksa bir kez ekle; aynı anahtar iki kez durmaz.
+Oturumda **en fazla bir** hatırlatma yap. Sıra: geçiş notu, yenilik/güncelleme
 (`guncelleme` skill'i, 1. ve 2. adımlar), geri bildirim, bakım.
+
+**Geçiş notu** — yeni sürümün bir kez yapılacak işleri. Başlangıç `son-gecis` (yoksa
+`.divit/kurulum-surumu.txt`, o da yoksa 0); yüklü sürüm `${CLAUDE_PLUGIN_ROOT}/SURUM.md`'deki ilk
+`## <sürüm>` (sayı değilse geç). `${CLAUDE_PLUGIN_ROOT}/gecisler/<sürüm>.md` dosyalarından (Glob; README
+değil) başlangıçtan büyük, yüklü sürümden büyük olmayanları sayı sırasıyla (1.10 > 1.9) Read ile oku.
+"Kimin için"i türe uymayan maddeyi atla; kalanın sorusunu aynen, tek tek sor; yalnız "evet"te adımlarını
+uygula, onaysız iş yok. Her dosyadan sonra (cevap ne olursa olsun) `son-gecis`'i o sürüme yaz; soru
+sorduysan `gunluk.md`'ye `YYYY-AA-GG SS:DD · geçiş · <sürüm> · <yapılan ya da "istemedi">` yaz ve bu
+oturumun hatırlatması bu olsun; sormadıysan sıradakine geç.
 
 **Geri bildirim** — şu üçü birden doğruysa öner:
 1. `geri-bildirim-sorma` "evet" değil;

@@ -21,6 +21,9 @@
 #   x    DIVIT_TEST=1'de "claude update" ve resmî kurulum çağrılmaz
 #   xi   yedek: ilk kurulumda yok, değişmeyen dosya yedeklenmez, elle
 #        değiştirilen Divit dosyası önceki hâliyle saklanır, hoca dosyası girmez
+#   xii  güncelleyici (~/.divit/guncelle.sh): kural ve CLAUDE.md satırı; boşluklu,
+#        Türkçe harfli klasörü DIVIT_HEDEF ile günceller, Belgeler/Divit'e
+#        dokunmaz, türü kimlik.md'den alır; son-gecis bir kez yazılır
 #
 # Her ölçüm için GEÇTİ / KALDI / ATLANDI satırı basar; KALDI varsa çıkış 1.
 set -uo pipefail
@@ -274,6 +277,62 @@ olc xi6 "(c) yedekte yalnız bu iki dosya var; hoca dosyası (gelen/x.docx) yeri
   bash -c '[ "$(cd "$1" && find . -type f | sort | tr "\n" " ")" = "./.claude/settings.json ./CLAUDE.md " ] && [ "$(cat "$2/tez-kontrol/gelen/x.docx")" = "ogrenci tezi" ]' _ "$YK" "$XI"
 olc xi7 "(c) settings.local.json ve kimlik.md değişmedi, yedeğe girmedi" \
   bash -c '! [ -e "$1/.claude/settings.local.json" ] && ! [ -e "$1/.divit/profil/kimlik.md" ]' _ "$YK"
+
+# ---------------------------------------------------------------- xii
+bolum "xii) Güncelleyici: doğru klasör (DIVIT_HEDEF), izin kuralı, son-gecis"
+GU="$EV/.divit/guncelle.sh"
+olc xii1 "~/.divit/guncelle.sh kuruldu, kaynakla aynı, çalıştırılabilir" \
+  bash -c '[ -x "$1" ] && cmp -s "$1" "$2"' _ "$GU" hoca-paketi/guncelle.sh
+olc xii2 "settings.json: güncelleyici kuralı mutlak yol, tırnaksız; yer tutucu yok" \
+  py 'import json,re,sys; a=json.load(open(sys.argv[1]))["permissions"]["allow"]
+sys.exit(0 if ("Bash(sh %s *)" % sys.argv[2]) in a and not any(re.search("__[A-Z]+__", r) for r in a) else 1)' "$A/.claude/settings.json" "$GU"
+olc xii3 "CLAUDE.md 'Araçlar': Güncelleyici yolu" grep -qF "Güncelleyici: \`$GU\`" "$A/CLAUDE.md"
+# Sahte curl: yalnız kur.sh isteğini bu ağacın kur.sh'siyle karşılar, çağrıları yazar.
+SG="$G/sahte-gu"; mkdir -p "$SG"
+cat >"$SG/curl" <<EOF
+#!/bin/sh
+echo "curl \$*" >>"$SG/cagrilar.log"
+case "\$*" in
+  */kur.sh*) while [ \$# -gt 0 ]; do [ "\$1" = -o ] && cp "$KOK/kur.sh" "\$2"; shift; done; exit 0 ;;
+esac
+exec /usr/bin/curl "\$@"
+EOF
+chmod +x "$SG/curl"
+gu() {  # gu <ad> <kanal> <klasör>: güncelleyiciyi Divit'in çağırdığı biçimde çalıştırır
+  local ad="$1"; shift
+  (cd "$G" && env -u CLAUDE_CONFIG_DIR -u DIVIT_DAL -u DIVIT_TUR -u DIVIT_HEDEF -u DIVIT_REPO HOME="$EV" DIVIT_TEST=1 DIVIT_KAYNAK_ZIP="$G/repo.zip" PATH="$SG:$PATH" sh "$GU" "$@") >"$G/$ad.log" 2>&1
+  echo $? >"$G/$ad.kod"
+  sed 's/\x1b\[[0-9;]*m//g' "$G/$ad.log" >"$G/$ad.txt"
+}
+P="$B/Çalışma Klasörü/Divit Yazar"; mkdir -p "$(dirname "$P")"
+kur xiia DIVIT_TUR=yazar DIVIT_HEDEF="$P" DIVIT_DAL=deneme
+printf '\n<!-- hocanın notu -->\n' >>"$P/CLAUDE.md"
+printf '0.1.0\n' >"$P/.divit/kurulum-surumu.txt"                   # şablondakinden eski bir kurulum
+printf 'son-bakim: 2026-09-01' >"$P/.divit/hatirlatma.md"          # sonda satır sonu yok
+IMZA_A2="$(imza "$A")"
+gu xiib deneme "$P"
+grep -E 'Kullanıcı türü|Kanal|UYARI|HATA|saklandı' "$G/xiib.txt" | sed 's/^/  guncelle.sh: /'
+olc xii4 "çıkış 0, 'Kurulum bitti'; kur.sh deneme kanalından istendi" \
+  bash -c '[ "$1" = 0 ] && grep -q "Kurulum bitti" "$2" && grep -q "raw.githubusercontent.com/mehmetor/divit/deneme/kur.sh" "$3"' _ "$(kod xiib)" "$G/xiib.txt" "$SG/cagrilar.log"
+olc xii5 "boşluklu, Türkçe harfli klasör güncellendi (not gitti, yedekte)" \
+  bash -c '! grep -q "hocanın notu" "$1/CLAUDE.md" && grep -rq "hocanın notu" "$1/.divit/onceki-surumler/"' _ "$P"
+olc xii6 "Belgeler/Divit'e dokunulmadı (shasum)" test "$IMZA_A2" = "$(imza "$A")"
+olc xii7 "tür kimlik.md'den: yazar, kitaplar var, tez-kontrol yok, kanal deneme" \
+  bash -c 'grep -q "Kullanıcı türü: yazar" "$1" && [ -d "$2/kitaplar" ] && [ ! -e "$2/tez-kontrol" ] && [ "$(cat "$2/.divit/kanal.txt")" = deneme ]' _ "$G/xiib.txt" "$P"
+olc xii8 "hatirlatma.md: eski satır korundu, 'son-gecis: 0.1.0' kendi satırında" \
+  bash -c '[ "$(cat "$1")" = "$(printf "son-bakim: 2026-09-01\nson-gecis: 0.1.0")" ]' _ "$P/.divit/hatirlatma.md"
+printf '0.0.9\n' >"$P/.divit/kurulum-surumu.txt"
+gu xiic deneme "$P"
+olc xii9 "yeniden güncelleme son-gecis'i ikinci kez yazmaz" \
+  bash -c '[ "$1" = 0 ] && [ "$(grep -c "^son-gecis:" "$2")" = 1 ] && grep -q "^son-gecis: 0.1.0$" "$2"' _ "$(kod xiic)" "$P/.divit/hatirlatma.md"
+olc xii10 "yeni klasörde son-gecis yazılmaz" bash -c '! grep -qs "^son-gecis:" "$1/.divit/hatirlatma.md"' _ "$Y"
+IMZA_A3="$(imza "$A")"
+gu xiid deneme "$G/divit-degil"
+olc xii11 "Divit klasörü olmayan yol: çıkış ≠ 0, kurulum yok, hiçbir yer açılmadı" \
+  bash -c '[ "$1" != 0 ] && grep -q "Divit klasörü bulunamadı" "$2" && [ ! -e "$3" ] && [ "$4" = "$5" ]' _ "$(kod xiid)" "$G/xiid.txt" "$G/divit-degil" "$IMZA_A3" "$(imza "$A")"
+gu xiie "kotu;kanal" "$P"
+olc xii12 "bilinmeyen kanal adı main'e düşer (kur.sh main'den istenir)" \
+  grep -q "raw.githubusercontent.com/mehmetor/divit/main/kur.sh" "$SG/cagrilar.log"
 
 # ---------------------------------------------------------------- son
 bolum "Son"

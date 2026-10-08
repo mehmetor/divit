@@ -7,7 +7,10 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
-## 1.9.0 · 2026-10-08 · kurulum gerekir
+## 1.9.0 · 2026-10-09 · kurulum gerekir
+- Herkes: Haftalık geri bildirim ve aylık bakım önerileri artık ilk işiniz bitince gelir; bir sohbette en çok bir tane.
+- Herkes: "Güncelle" dediğinizde Divit artık o an çalıştığınız klasörü günceller. Bu güncellemeden sonra İngilizce izin sorusu da çıkmaz; bilgisayarınızın güvenlik ayarı yine engellerse Divit size basacağınız düğmeyi gösterir.
+- Herkes: Yeni bir sürüm sizin kararınızı isteyen bir değişiklik getirirse Divit bunu bir kez sorar, yalnız onayınızla yapar. Akademisyen: bu sürümde "gizli" klasörüyle ilgili tek bir soru gelecek.
 - Herkes: Kılavuzdaki "gizli" klasörü anlatımı düzeltildi: Divit bu klasörü okumaz; en hassas dosyalarınızı (vaka, görüşme, sağlık raporu) Divit klasörüne hiç koymayın, Belgeler'de ayrı bir klasörde tutun.
 - Herkes: İzin soruları için kılavuza yeni bir not eklendi: Auto seçiliyken Divit klasörü dışındaki bir dosya için soru çıkarsa "Yes, and keep allowing…" seçeneğini seçin. Seçicide Auto yoksa sorun değil, Divit böyle de çalışır.
 - Herkes: Divit'in iş defteri artık hiç silinmez; her iş sona eklenir.

@@ -5,6 +5,8 @@ description: Yazışma taslağı hazırlar — dilekçe, mektup, yayınevine ya 
 
 # Akademik ve idari yazışma
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Hocanın en çok zamanını yiyen, en az bilişsel değer taşıyan iş bu.
 Risk düşük, kazanç anında görünür — ürünün güven kazandığı yer burası.
 

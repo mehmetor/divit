@@ -56,3 +56,4 @@ içinde, değişkensiz yaz (Mac: `"<yol>" …`, Windows: `& "<yol>" …`).
 - Word/PDF çevirici: `__PANDOC__`
 - PDF aracı: `__PDFCPU__`
 - PDF metin (Windows): `__PDFTOTEXT__`
+- Güncelleyici: `__GUNCELLE__`

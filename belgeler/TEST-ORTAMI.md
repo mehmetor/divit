@@ -323,36 +323,64 @@ kapatıp açın, Divit klasörünü açın. Ya kısaca `güncelle` yazın ya da
 hocaya gönderilecek istemi (`GECIS-IKI-EKLENTI.md` → "Hoca kendisi
 yaparsa", "Yapıştırılacak metin" kısmı) yapıştırın; istemdeki
 `1.8.0`'ı denenen sürümle (`1.9.0`) değiştirin, yoksa önbellek eskiyse
-1.8.0'ı yeniden kurar. İki yol olabilir; ikisi de doğru:
+1.8.0'ı yeniden kurar.
 
-- **Divit kendiliğinden inmediyse:** Divit yayındaki sürümü 1.9.0 bulur,
-  "kısa bir güncelleme gerekiyor… Şimdi yapayım mı?" der. "evet" →
-  İngilizce izin sorusunda **Allow once** → kurulum `DIVIT_DAL=deneme`
-  ile çalışır → "Güncelleme tamam… Claude'u kapatıp açın".
-  **Beklenen:** komutta `/deneme/kur.sh` ve `DIVIT_DAL=deneme` (main
-  değil); "önceki hâli saklandı" ve "şimdi kurulamadı" satırları yok.
-- **Divit kendiliğinden indiyse** (klasör ayarında otomatik güncelleme
-  açık; uygulama açılışında gelir): Divit kurulum **önermez** (1.9.0
-  başlığında "kurulum gerekir" yok), yenilikleri anlatır.
+1.9.0 başlığında `kurulum gerekir` var: Divit kendiliğinden inmiş olsa
+da inmemiş olsa da kurulum önerir. "kısa bir güncelleme gerekiyor… Şimdi
+yapayım mı?" → "evet". Bu klasör 1.8.0'dan geldiği için güncelleyici
+henüz yok; Divit eski biçimdeki komutu klasörün tam yoluyla verir:
 
-Claude'u kapatıp açtıktan sonra `yenilikler neler`.
-**Beklenen:** 1.9.0'in notları (en çok dört madde; yazar klasöründe
-akademik madde yok), kurulum önerisi yok. Terminal'de:
+```
+curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/deneme/kur.sh | DIVIT_DAL=deneme DIVIT_HEDEF="/Users/<sen>/Documents/<klasör>" bash
+```
+
+İngilizce izin sorusu çıkarsa **Allow once**. Auto kipinde ret
+iletisi gelirse Divit "güvenlik ayarı izin vermedi… **Run** düğmesine
+basın" der ve aynı komutu kutuda verir; Run'a basın (DVT-67).
+
+**Beklenen:** komutta `/deneme/kur.sh`, `DIVIT_DAL=deneme` ve
+`DIVIT_HEDEF="<bu sohbetin klasörü>"` var (Divit-Yazar'da güncellerken
+`Documents/Divit-Yazar`, `Documents/Divit` değil); çıktıda
+"Kullanıcı türü" klasörün türü; "Değiştirilen 3 ayar dosyasının önceki
+hâli saklandı" (CLAUDE.md, KILAVUZ.html, .claude/settings.json; sürüm bu
+dosyaları değiştirdiği için olağan, Divit bunu "eski hâli saklandı" diye
+söyler); "şimdi kurulamadı" satırı yok; "Güncelleme tamam… Claude'u
+kapatıp açın". Ret olduysa `.divit/sorunlar.md`'nin sonunda "güncelleme"
+notu var.
+
+Yenilikleri (en çok dört madde; yazar klasöründe akademik madde yok)
+Divit güncelleme sohbetinde, kurulumu önermeden önce anlatır. Claude'u
+kapatıp açtıktan sonra `yenilikler neler`.
+**Beklenen:** "Divit'iniz güncel", kurulum önerisi yok (notlar zaten
+gösterildiği için yeniden sayılmaz). Akademisyen klasöründe ilk işin
+(ör. bir dilekçe) sonunda bir kez "gizli klasörü … Divit klasörünü
+açayım mı?" sorusu (geçiş notu, `plugins/divit/gecisler/1.9.0.md`); yazar
+klasöründe bu soru yok. Yalnız soru-cevap ("kaç cümle var") iş sayılmaz,
+günlüğe satır yazılmaz, soru da gelmez. Terminal'de:
 
 ```bash
 cd ~ && claude plugin list | grep -A2 '@divit'
-for K in Divit Divit-Yazar; do echo "$K: $(cat ~/Documents/$K/.divit/kanal.txt) $(cat ~/Documents/$K/.divit/kurulum-surumu.txt)"; done
+for K in Divit Divit-Yazar; do echo "$K: $(cat ~/Documents/$K/.divit/kanal.txt) $(cat ~/Documents/$K/.divit/kurulum-surumu.txt)"; grep -H 'son-gecis' ~/Documents/$K/.divit/hatirlatma.md; done
+grep -F 'guncelle.sh' ~/Documents/Divit*/CLAUDE.md ~/Documents/Divit*/.claude/settings.json
 ```
 
 **Beklenen:** `Version` 7.1'deki yeni numaralar; kanal iki klasörde de
-`deneme`; kurulum sürümü güncellemeyi Divit'in kurduğu klasörde
-`1.9.0`, kurulumsuz gelen klasörde `1.8.0` (doğru: kurulum gerekmedi).
-Kişinin dosyaları değişmemiş olmalı.
+`deneme`; kurulum sürümü yalnız güncellenen klasörde `1.9.0`, öbüründe
+`1.8.0` (o klasör güncellenmedi; DVT-66'dan önce Divit-Yazar'da
+"güncelle" `Documents/Divit`'i güncelliyordu). Güncellenen klasörde
+`son-gecis: 1.8.0` (geçiş sorulduysa `1.9.0`); CLAUDE.md'de
+`Güncelleyici: /Users/<sen>/.divit/guncelle.sh`, settings.json'da
+`Bash(sh /Users/<sen>/.divit/guncelle.sh *)`. Öbür klasörde de "güncelle"
+deyin: o klasörün ayarı henüz eski olduğu için komut yine `curl … | …
+DIVIT_HEDEF=…` biçimindedir. Güncelleyiciyi denemek için
+güncellenen klasörde `.divit/kurulum-surumu.txt`'yi elle `1.8.0` yapıp
+yeniden "güncelle" deyin: komut `sh /Users/<sen>/.divit/guncelle.sh
+deneme "<klasör>"` olmalı, izin sorusu ve Auto'da ret çıkmamalı. Kişinin dosyaları değişmemiş olmalı.
 
-Yalıtılmış sınamada 1.9.0 adayının `kur.sh`'i iki dolu klasörün
-üstünde `DIVIT_DAL`'sız çalıştırıldı: kanal `deneme` kaldı, "Klasör
-zaten var. Kişisel dosyalara dokunmadan…", `kurulum-surumu` `1.9.0`.
-Claude uygulamasının içindeki güncelleme denenmedi; asıl denenecek o.
+Yalıtılmış sınamada (`araclar/sinama-kurulum.sh`, xii) güncelleyici
+boşluklu ve Türkçe harfli bir klasörü `DIVIT_HEDEF` ile güncelledi,
+Belgeler'deki öbür klasöre dokunmadı. Claude uygulamasının içindeki
+güncelleme denenmedi; asıl denenecek o.
 
 **7.4 Onay.** Mehmet sürümü beğenirse release-please PR'ı birleştirilir,
 CI main'e yayınlar. Mehmet'in Mac'i zaten bu sürümdedir; bir sonraki

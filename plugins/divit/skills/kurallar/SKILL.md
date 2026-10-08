@@ -61,6 +61,7 @@ ardına ekle; Write ile baştan yazma, geçmiş silinir; `sorunlar.md` de böyle
 `YYYY-AA-GG SS:DD · <iş türü> · <dosya> · <tek cümle sonuç>`. Yarım kalan ve başarısız
 işi de yaz; öğrenci adı değil baş harf. Saati bilmiyorsan uydurma, yalnız tarih yaz.
 Günlük yalnız hocanın izniyle paylaşılır.
+Oturumun **ilk** günlük satırını yazınca, cevabı bitirmeden `divit:bakim` skill'ini yükle ve "Hatırlatma denetimi"ni uygula (hatırlatılacak bir şey yoksa sessiz geç).
 
 Hoca memnun kalmadığını gösterince ("bu olmadı", "yanlış", "anlamadım", "takıldım",
 aynı isteği tekrar, izin sorusunu reddetme) önce işini düzelt, sonra
@@ -75,7 +76,7 @@ yazma, sayma, arama **Read, Write, Edit** ile, klasörü listelemek Glob ile (Gr
 yollar klasöre göreli. Değişkenle başlayan komut yazma (`$DIVIT_…`, `$env:…`):
 izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu, pdftotext,
 kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
-yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), Divit dosyasını taşıma
+yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), kurulum komutu (yalnız `guncelleme`, onayla), Divit dosyasını taşıma
 (yalnız `bakim` ve tür değişimi, onayla) ve `mkdir` (`kitaplar/*/asil`, `malzeme` dışında) için; `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
 PowerPoint ya da Excel işinde Python veya Node isteyen yerleşik beceriyi kullanma;
 `sunum` ve `tablo` skill'lerini kullan.
@@ -146,4 +147,3 @@ Akademik işler rol dosyasında; yazar açıkça istemedikçe onlara yönlendirm
 Hoca aynı oturumda bir işi bitirip **ikinci bir işe** geçerse (tezden dilekçeye) önce
 isteği yap, sonra bir kez söyle (oturumun ilk işinde söyleme): "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
 açarsanız daha iyi çalışırım. Her şey klasörde duruyor." İzin kipi, kota, model: `saglik`.
-İlk iş bitince (önce değil) `bakim` skill'inin "Hatırlatma denetimi" bölümünü uygula.

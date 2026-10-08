@@ -22,6 +22,11 @@
 # İzinli: main, deneme, deneme-*. Klasör kanalını kanal.txt'de
 # hatırlar; "güncelle" aynı kanalda kalır.
 #
+# Güncelleyici: %USERPROFILE%\.divit\guncelle.ps1 (hoca-paketi\guncelle.ps1).
+# Klasör ayarına bu yolla tam eşleşen tek bir izin kuralı, CLAUDE.md'nin
+# "Araçlar"ına yolu yazılır; Divit'in "güncelle"si kurulumu bununla ve
+# klasörün tam yoluyla (DIVIT_HEDEF) başlatır.
+#
 # Sınama değişkenleri (geliştirici için):
 #   $env:DIVIT_TEST = "1"          Claude uygulaması ve komut satırı kurulmaz, kılavuz açılmaz
 #   $env:DIVIT_KAYNAK_ZIP = "yol"  GitHub yerine yerel repo zip'i kullan
@@ -44,6 +49,7 @@ $Hedef       = if ($env:DIVIT_HEDEF) { $env:DIVIT_HEDEF } else { Join-Path $Belg
 $Hedef       = [IO.Path]::GetFullPath($Hedef)
 $Ev          = if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME }
 $Araclar     = Join-Path $Ev '.divit\araclar'
+$Guncelleyici = Join-Path $Ev '.divit\guncelle.ps1'
 $script:Uyarilar = 0
 $BaskaKaynak = $null                                # iex oturumu değişkenleri korur: önceki çalıştırmadan kalmasın
 
@@ -258,6 +264,12 @@ $Sablon = Get-ChildItem -Path (Join-Path $Gecici 'repo') -Directory -Recurse -De
           Where-Object { $_.Name -eq 'Divit' -and $_.Parent.Name -eq 'hoca-paketi' } | Select-Object -First 1
 if (-not $Sablon) { Write-Host "HATA: Divit sablonu bulunamadi." -ForegroundColor Red; return }
 $S = $Sablon.FullName
+# Güncelleyici her kurulumda yenilenir (Divit'in dosyası, klasör dışında).
+try {
+  New-Item -ItemType Directory -Force -Path (Split-Path -Parent $Guncelleyici) -ErrorAction Stop | Out-Null
+  Copy-Item (Join-Path (Split-Path -Parent $S) 'guncelle.ps1') $Guncelleyici -Force -ErrorAction Stop
+  Unblock-File $Guncelleyici -ErrorAction SilentlyContinue
+} catch { Uyari "Guncelleyici yazilamadi; Divit guncellemede izin sorabilir." }
 
 if ($Tur -eq 'yazar') { $TurKlasoru = 'kitaplar'; $Akademik = $false }
 else { $TurKlasoru = 'tez-kontrol'; $Akademik = $true }
@@ -327,7 +339,7 @@ function KilavuzYaz {
 function ClaudeMdYaz {
   $pt = if (Test-Path $Pdftotext) { $Pdftotext } else { 'yok' }
   $m = [IO.File]::ReadAllText((Join-Path $S 'CLAUDE.md'))
-  YerlestirMetin 'CLAUDE.md' $m.Replace('__PANDOC__', $Pandoc).Replace('__PDFCPU__', $Pdfcpu).Replace('__PDFTOTEXT__', $pt)
+  YerlestirMetin 'CLAUDE.md' $m.Replace('__PANDOC__', $Pandoc).Replace('__PDFCPU__', $Pdfcpu).Replace('__PDFTOTEXT__', $pt).Replace('__GUNCELLE__', $Guncelleyici)
 }
 
 if (Test-Path $Hedef) {
@@ -346,6 +358,9 @@ if (Test-Path $Hedef) {
     Copy-Item (Join-Path $S 'gizli') $Hedef -Recurse -Force
     Bilgi "Eklendi: gizli"
   }
+  # Bolmedeki not Divit'in dosyasidir; varsa yeni metinle yenilenir (onceki hali saklanir).
+  $notGizli = Join-Path $Hedef 'gizli\BURAYA-BIRAKIN.txt'
+  if (Test-Path -LiteralPath $notGizli -PathType Leaf) { Yerlestir 'gizli\BURAYA-BIRAKIN.txt' (Join-Path $S 'gizli\BURAYA-BIRAKIN.txt') }
   New-Item -ItemType Directory -Force -Path (Join-Path $Hedef '.claude\rules') | Out-Null
   $kuralKok = Join-Path $S '.claude\rules'
   foreach ($k in Get-ChildItem -LiteralPath $kuralKok -Recurse -File) {        # kural dosyaları tek tek
@@ -381,14 +396,36 @@ YazUtf8 $KanalDosyasi "$Dal`n"
 # izinleri settings.local.json'da durur; orada yalnız iki eklenti anahtarı değişir.
 $pandocYolu = $Pandoc -replace '\\', '/'
 $ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu).Replace('__PDFCPU__', ($Pdfcpu -replace '\\', '/')).Replace('__PDFTOTEXT__', ($Pdftotext -replace '\\', '/'))
+# Güncelleyici kuralı mutlak yolla (JSON kaçışlı); şablondaki Mac kuralının yerine.
+# "*\.divit\guncelle.ps1" gibi bir kural klasörün içine yazılabilen bir betiği de geçirirdi.
+$guncelleKurali = 'PowerShell(powershell -NoProfile -ExecutionPolicy Bypass -File "' + $Guncelleyici + '" *)'
+$ayar = $ayar.Replace('"Bash(sh __GUNCELLE__ *)"', '"' + $guncelleKurali.Replace('\', '\\').Replace('"', '\"') + '"')
 # Pazar yeri adresi kanala göre (klasör açılınca uygulama da aynı kanaldan alır).
 $ayar = $ayar -replace 'https://raw\.githubusercontent\.com/[^"]*/\.claude-plugin/marketplace\.json', $PazarUrl
 YerlestirMetin '.claude\settings.json' $ayar
+# Geçiş notları (plugins\divit\gecisler) "son-gecis"ten sonraki sürümler için
+# çalışır; yoksa kurulum-surumu.txt'den. Var olan klasör yeni sürüme
+# geçerken eski sürüm, kurulum-surumu.txt'nin üstüne yazılmadan önce
+# hatirlatma.md'ye bir kez yazılır; yoksa kurulumdan sonra geçiş atlanırdı.
 $surumDosyasi = Join-Path (Split-Path (Split-Path $S)) 'plugins\divit\SURUM.md'
+$kurulumSurumu = Join-Path $Hedef '.divit\kurulum-surumu.txt'
+$surumYeni = ''
 if (Test-Path $surumDosyasi) {
   $ilk = Select-String -Path $surumDosyasi -Pattern '^## ([0-9.]+) ' | Select-Object -First 1
-  if ($ilk) { YazUtf8 (Join-Path $Hedef '.divit\kurulum-surumu.txt') ($ilk.Matches[0].Groups[1].Value + "`n") }
+  if ($ilk) { $surumYeni = $ilk.Matches[0].Groups[1].Value }
 }
+$surumEski = ''
+if (Test-Path $kurulumSurumu) { $surumEski = ([string]([IO.File]::ReadAllLines($kurulumSurumu) | Select-Object -First 1)).Trim() }
+$hatirlatma = Join-Path $Hedef '.divit\hatirlatma.md'
+if (-not $script:IlkKurulum -and $surumEski -ne $surumYeni) {
+  $hm = if (Test-Path $hatirlatma) { [IO.File]::ReadAllText($hatirlatma) } else { '' }
+  if ($hm -notmatch '(?m)^son-gecis:') {
+    if ($hm -and -not $hm.EndsWith("`n")) { $hm += "`n" }
+    $eskiDeger = if ($surumEski) { $surumEski } else { '0' }
+    YazUtf8 $hatirlatma ($hm + "son-gecis: $eskiDeger`n")
+  }
+}
+if ($surumYeni) { YazUtf8 $kurulumSurumu ($surumYeni + "`n") }
 # Hangi eklenti bu klasörde açık: akademik eklenti yalnız akademisyende.
 $yerel = Join-Path $Hedef '.claude\settings.local.json'
 $akademikJson = if ($Akademik) { 'true' } else { 'false' }
