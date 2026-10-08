@@ -214,8 +214,14 @@ olc ix3 "klasör ayarındaki pazar yeri adresi kanalın adresi" grep -qF "\"url\
 olc ix4 "main kanalında dağıtım satırı yok" bash -c '! grep -q "Güncellemeler şu dağıtımdan" "$1"' _ "$G/iv.txt"
 kur ix5 DIVIT_HEDEF="$D" DIVIT_DAL=baska-dal
 olc ix5 "izinsiz dal adı → uyarı, main" bash -c 'grep -q "bilinen bir kanal değil" "$1" && [ "$(cat "$2/.divit/kanal.txt")" = main ]' _ "$G/ix5.txt" "$D"
+# Kaldırılan 'yeni' kanalı: DIVIT_DAL=yeni ve kanal.txt'sinde 'yeni' kalmış klasör uyarıyla main'e düşer.
 kur ix6 DIVIT_HEDEF="$B/Divit-Yeni" DIVIT_DAL=yeni
-olc ix6 "'yeni' izinli kanal" bash -c '[ "$(cat "$1/.divit/kanal.txt")" = yeni ] && grep -qF "/yeni/.claude-plugin/marketplace.json" "$1/.claude/settings.json"' _ "$B/Divit-Yeni"
+olc ix6 "'yeni' artık izinli değil: DIVIT_DAL=yeni → uyarı, main" \
+  bash -c 'grep -q "bilinen bir kanal değil" "$1" && [ "$(cat "$2/.divit/kanal.txt")" = main ] && grep -qF "\"url\": \"$3\"" "$2/.claude/settings.json"' _ "$G/ix6.txt" "$B/Divit-Yeni" "$PAZAR_MAIN"
+printf 'yeni\n' >"$B/Divit-Yeni/.divit/kanal.txt"
+kur ix7 DIVIT_HEDEF="$B/Divit-Yeni"
+olc ix7 "kanal.txt'sinde 'yeni' kalan klasör, DIVIT_DAL'sız kurulumda uyarıyla main'e döner" \
+  bash -c '[ "$1" = 0 ] && grep -q "bilinen bir kanal değil" "$2" && ! grep -q "Güncellemeler şu dağıtımdan" "$2" && [ "$(cat "$3/.divit/kanal.txt")" = main ]' _ "$(kod ix7)" "$G/ix7.txt" "$B/Divit-Yeni"
 
 # ---------------------------------------------------------------- x
 bolum "x) DIVIT_TEST=1'de Claude Code güncellenmez"

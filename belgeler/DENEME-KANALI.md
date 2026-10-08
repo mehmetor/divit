@@ -29,8 +29,7 @@ her Terminal komutu yalıtılmış bir ortamda denendi.
 
    **Beklenen:** iki satır, ikisi de `/deneme/dagitim/…-<sürüm>.zip`.
 
-`main` ve `develop` reddedilir; izinli kanallar `deneme`, `deneme-*` ve
-`yeni` (gerçek kullanıcıya giden ayrı kanal: `belgeler/YENI-KURULUM.md`).
+`main` ve `develop` reddedilir; izinli kanallar `deneme` ve `deneme-*`.
 Eski yazım `--deneme deneme` aynı işi yapar.
 Farklı denemeler yan yana gerekirse `deneme-yazar` gibi bir ad
 verin; komutlarda `deneme` yerine o ad yazılır.
@@ -39,7 +38,7 @@ verin; komutlarda `deneme` yerine o ad yazılır.
 
 Kurulum betiği kanalı (dal adını) klasörde `.divit/kanal.txt`'ye yazar.
 Öncelik: `DIVIT_DAL` > var olan `.divit/kanal.txt` > `main`. İzinli adlar
-`main`, `yeni`, `deneme`, `deneme-*`; başka bir ad uyarıyla `main` olur.
+`main`, `deneme`, `deneme-*`; başka bir ad uyarıyla `main` olur.
 Bu yüzden:
 
 - `DIVIT_DAL` yalnız ilk kurulumda gerekir; aynı klasörde yeniden kurulum

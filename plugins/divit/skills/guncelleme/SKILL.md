@@ -17,7 +17,7 @@ Sürüm notları: `${CLAUDE_PLUGIN_ROOT}/SURUM.md`.
 
 ## Sürümleri bul
 
-- **Kanal:** `.divit/kanal.txt`'nin ilk satırı (Read). Yalnız `main`, `yeni`,
+- **Kanal:** `.divit/kanal.txt`'nin ilk satırı (Read). Yalnız `main`,
   `deneme` ya da `deneme-` ile başlayan bir ad geçerlidir; dosya yoksa ya
   da başka bir şey yazıyorsa `main`. Aşağıda `<kanal>` bu değerdir; hocaya
   anlatma.

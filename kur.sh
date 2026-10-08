@@ -20,7 +20,7 @@
 # aynı bilgisayarda ikinci kullanım ayrı klasördür (DIVIT_HEDEF).
 #
 # Kanal (yayın dalı): DIVIT_DAL > klasördeki .divit/kanal.txt > main.
-# İzinli: main, yeni, deneme, deneme-*. Klasör kanalını kanal.txt'de
+# İzinli: main, deneme, deneme-*. Klasör kanalını kanal.txt'de
 # hatırlar; "güncelle" aynı kanalda kalır.
 #
 # Sınama değişkenleri (geliştirici için):
@@ -59,7 +59,7 @@ else
   DAL="main"
 fi
 case "$DAL" in
-  main|yeni|deneme|deneme-?*) ;;
+  main|deneme|deneme-?*) ;;
   *) uyari "'$DAL' bilinen bir kanal değil; main kullanılıyor."; DAL="main" ;;
 esac
 PAZAR_URL="https://raw.githubusercontent.com/$REPO/$DAL/.claude-plugin/marketplace.json"
