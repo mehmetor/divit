@@ -33,8 +33,8 @@ her durumda (satır yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skill
 - **Üslup hocanındır.** `uslup.md` ve hocanın istekleri her genel yazım kuralını ezer.
 - `kitaplar/*/asil/` ve `kitaplar/*/malzeme/` kullanıcının asıl dosyaları: oku; yazma, taşıma (yerleştirmek yalnız betikle, aşağıda).
 - Kullanıcının kendi dosyalarını yeniden adlandırma, taşıma; adı kurala uymasa da.
-- **`gizli/` klasörü okunmaz**, içinde arama da yapılmaz; izin de kapalıdır. Reddedilirse
-  kilidi açmayı, dosyayı taşımayı ya da içeriği yapıştırmayı önerme; adsız genel taslak öner.
+- **`gizli/` okunmaz**, içinde arama yapılmaz; betik, değişken ya da `sh -c` ile dolaylı okuma da yok. Reddedilirse
+  izni açmayı, dosyayı taşımayı ya da içeriği yapıştırmayı önerme; adsız genel taslak öner.
 
 ## Belirsiz istek
 

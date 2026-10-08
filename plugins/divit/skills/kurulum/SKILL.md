@@ -129,7 +129,7 @@ Kapanışta tek paragraf:
 Güvenceden önce `saglik` skill'ini sessizce çalıştır. Sorun çıkarsa hocaya yalnız o tek adımı söyle.
 
 Sonra tek cümle:
-> "İzin soruları çok mu? Yazı kutusunun yanındaki seçiciden Auto'yu seçin; bir kez yeter."
+> "İzin soruları çok mu? Yazı kutusunun yanındaki seçiciden Auto'yu seçin; bir kez yeter. Seçicide Auto yoksa böyle kalabilir."
 
 Sonra gerçek bir işe geç: `gorevler.md`'de en yakın tarihli iş hangisiyse onu öner (ör. tez için
 `divit-akademik:tez-kontrol`). Hiç iş yoksa `yardim` skill'inin özetini göster.
