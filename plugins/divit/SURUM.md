@@ -8,6 +8,7 @@ komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
 ## Sıradaki · kurulum gerekir
+- Herkes: Haftalık geri bildirim ve aylık bakım önerileri artık ilk işiniz bitince gelir; bir sohbette en çok bir tane.
 - Herkes: "Güncelle" dediğinizde Divit artık o an çalıştığınız klasörü günceller. Bu güncellemeden sonra İngilizce izin sorusu da çıkmaz; bilgisayarınızın güvenlik ayarı yine engellerse Divit size basacağınız düğmeyi gösterir.
 - Herkes: Yeni bir sürüm sizin kararınızı isteyen bir değişiklik getirirse Divit bunu bir kez sorar, yalnız onayınızla yapar. Akademisyen: bu sürümde "gizli" klasörüyle ilgili tek bir soru gelecek.
 - Herkes: Kılavuzdaki "gizli" klasörü anlatımı düzeltildi: Divit bu klasörü okumaz; en hassas dosyalarınızı (vaka, görüşme, sağlık raporu) Divit klasörüne hiç koymayın, Belgeler'de ayrı bir klasörde tutun.
