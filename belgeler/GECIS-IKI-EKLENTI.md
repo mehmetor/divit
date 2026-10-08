@@ -114,10 +114,10 @@ yazı kutusuna yapıştırıp gönderin.
 
 Yapıştırılacak metin:
 
-Divit'i güncellemek istiyorum. Önce yayındaki en yeni sürüme bak: 1.8
-değilse bana yalnızca "birkaç dakika bekleyip yeniden yazın" de ve başka
-bir şey yapma. 1.8 ise ne yapacağını söyleyip onayımı al, sonra kurulumu
-yeniden çalıştır. Kurulum bitince sırayla ne yapmam gerektiğini söyle;
+Divit'i güncellemek istiyorum. Önce yayındaki en yeni sürüme bak.
+Sürüm 1.8.0 ya da daha yeniyse ne yapacağını söyleyip onayımı al, sonra
+kurulumu yeniden çalıştır. Daha eskiyse bana yalnızca "birkaç dakika
+bekleyip yeniden yazın" de ve başka bir şey yapma. Kurulum bitince sırayla ne yapmam gerektiğini söyle;
 çıktıda bir şeyin şimdi kurulamadığı yazıyorsa bunu bana açıkça söyle.
 
 Claude'u yeniden açınca Divit klasöründe şunu yazın:
@@ -138,11 +138,11 @@ skill'leri okunarak değerlendirildi; makinede sınanmadı):
   başlığından WebFetch ile okur. Skill bunu haftada bir yapar
   (`son-uzak-denetim`), ama istem açıkça istediği için hemen bakar;
   WebFetch için İngilizce izin sorusu çıkabilir (1. not).
-- İlk başlık 1.8 değilse istem "bekleyin" dedirtir. İki önbellek var:
+- İlk başlık 1.8.0'dan eskiyse istem "bekleyin" dedirtir. İki önbellek var:
   GitHub'ın ~5 dakikası ve Claude'un aynı oturumda aynı adresi ~15 dakika
   yeniden indirmemesi. Bu yüzden hocaya "bekleyip aynı sohbette tekrar
   yazın" değil, "Claude'u kapatıp açın, metni yeniden yapıştırın" dendi.
-- 1.8 ise skill 2. adımdaki soruyu sorar ("Şimdi yapayım mı? … Allow
+- Sürüm uygunsa skill 2. adımdaki soruyu sorar ("Şimdi yapayım mı? … Allow
   once"), "evet" ile 3. adımda `main`'deki `kur.ps1`'i tek komutla
   çalıştırır; onaysız çalıştırmaz. Hocanın dosyalarına dokunulmaz.
 - Çıktıda "Kurulum bitti" görünce "Claude'u tamamen kapatıp açın" der.
