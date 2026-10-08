@@ -87,6 +87,82 @@ kontrol yapılır.
 3. Çıktıda Mac'teki 3. adımdaki satırlar görünmeli.
 4. Claude uygulamasını aç → Code sekmesi → Divit klasörü.
 
+## Hoca kendisi yaparsa (istemle)
+
+Mehmet yanında değilse hoca geçişi kendi Claude oturumunda, aşağıdaki
+istemle yapar. İstem hem **eski** sürümde (main'deki `guncelleme`
+skill'i) hem otomatik güncellemeyle gelmiş **yeni** sürümde çalışır; iki
+sürüm de "güncelle" sözüyle `guncelleme` skill'ini açar, yayındaki sürüm
+notuna bakar, onay ister ve kurulum komutunu kendisi çalıştırır. İstemde
+komut **yok**: Windows'ta tırnaklar yapıştırmada bozuluyor.
+
+Hocaya gönderilecek metin (başlıktan sona kadar olduğu gibi kopyalanır):
+
+```text
+Divit'i yeni sürüme geçirmek için küçük bir ricam var. Claude uygulamasını
+açıp Code sekmesinde Divit klasörüne girin ve aşağıdaki metni olduğu gibi
+yazı kutusuna yapıştırıp gönderin.
+
+Önce iki not:
+1. Ekranda İngilizce bir izin sorusu çıkarsa "Allow once" seçin; birkaç
+   kez çıkabilir. Divit "Şimdi yapayım mı?" diye sorarsa "evet" yazın.
+2. Divit "kurulum bitti, Claude'u kapatıp açın" deyince Claude'u tamamen
+   kapatıp yeniden açın (pencereyi kapatmak yetmezse sağ alttaki saatin
+   yanındaki Claude simgesine sağ tıklayıp çıkın). Divit "birkaç dakika
+   bekleyin" derse ya da "bir şey şimdi kurulamadı" derse de aynısı:
+   10 dakika bekleyin, Claude'u kapatıp açın, metni yeniden yapıştırın.
+
+Yapıştırılacak metin:
+
+Divit'i güncellemek istiyorum. Önce yayındaki en yeni sürüme bak: 1.8
+değilse bana yalnızca "birkaç dakika bekleyip yeniden yazın" de ve başka
+bir şey yapma. 1.8 ise ne yapacağını söyleyip onayımı al, sonra kurulumu
+yeniden çalıştır. Kurulum bitince sırayla ne yapmam gerektiğini söyle;
+çıktıda bir şeyin şimdi kurulamadığı yazıyorsa bunu bana açıkça söyle.
+
+Claude'u yeniden açınca Divit klasöründe şunu yazın:
+
+Divit çalışıyor mu, kontrol et
+
+Sonra yazı kutusuna "/" yazıp "divit-akademik" yazın: tez-kontrol, sinav,
+yayin-oncesi, kaynak-dogrula, bolum-yaz görünmeli. Görünmüyorsa 10 dakika
+bekleyip Claude'u kapatıp açın ve ilk metni yeniden yapıştırın. Takılırsanız
+bana yazın.
+```
+
+**Eski sürüm bu istemle ne yapar** (main'deki `guncelleme` ve `kurallar`
+skill'leri okunarak değerlendirildi; makinede sınanmadı):
+
+- "Güncellemek istiyorum" → `kurallar` yönlendirme tablosu `guncelleme`'yi
+  açar. Skill yayındaki sürümü `main` dalındaki `SURUM.md`'nin ilk
+  başlığından WebFetch ile okur. Skill bunu haftada bir yapar
+  (`son-uzak-denetim`), ama istem açıkça istediği için hemen bakar;
+  WebFetch için İngilizce izin sorusu çıkabilir (1. not).
+- İlk başlık 1.8 değilse istem "bekleyin" dedirtir. İki önbellek var:
+  GitHub'ın ~5 dakikası ve Claude'un aynı oturumda aynı adresi ~15 dakika
+  yeniden indirmemesi. Bu yüzden hocaya "bekleyip aynı sohbette tekrar
+  yazın" değil, "Claude'u kapatıp açın, metni yeniden yapıştırın" dendi.
+- 1.8 ise skill 2. adımdaki soruyu sorar ("Şimdi yapayım mı? … Allow
+  once"), "evet" ile 3. adımda `main`'deki `kur.ps1`'i tek komutla
+  çalıştırır; onaysız çalıştırmaz. Hocanın dosyalarına dokunulmaz.
+- Çıktıda "Kurulum bitti" görünce "Claude'u tamamen kapatıp açın" der.
+  "Üniversite işleri eklentisi şimdi kurulamadı" uyarısını **yeniden
+  denemez**; skill uyarıyı tek cümleyle söyler ve `sorunlar.md`'ye yazar.
+  İstemin son cümlesi bu uyarının hocaya açıkça söylenmesini garantiler;
+  2. not hocayı bekleyip yeniden yapıştırmaya yönlendirir. Yeniden
+  yapıştırmada çekirdek artık yeni sürümdedir; yeni `guncelleme` skill'i
+  aynı yolu izler ve akademik eklentiyi kurar.
+- Eski sürüm yedek klasörünü (`.divit/onceki-surumler/kurulum-…`) tanımaz;
+  satır bilgi satırıdır, uyarı değil, hocaya söylenmeyebilir. Zararsız.
+- Yeniden açılışta "Divit çalışıyor mu, kontrol et" → yeni `saglik` skill'i
+  akademik komutların göründüğünü de denetler; görünmüyorsa kurulumu
+  yenilemeyi kendisi önerir (onayla `guncelleme`).
+
+Bilinen boşluklar: Windows'ta Claude'un tamamen kapanıp kapanmadığı
+(tepsi simgesi) ve WebFetch izin sorusunun görünümü Mehmet'in o makinede
+ilk kez elle doğrulaması gereken şeyler; `kur.ps1` bu akışta sınanmadı
+(aşağıdaki Windows notu).
+
 ## Kontrol — ne görülmeli (iki sistemde aynı)
 
 - Kutuya `/` yaz, `divit-akademik` yaz: `tez-kontrol`, `sinav`,

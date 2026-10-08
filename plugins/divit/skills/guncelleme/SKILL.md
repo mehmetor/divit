@@ -74,11 +74,25 @@ Tek komut, aynen (`<kanal>` yerine kanal adı; kanal `main` ise de aynı biçim)
 - Windows: `` powershell -NoProfile -ExecutionPolicy Bypass -Command "`$env:DIVIT_DAL='<kanal>'; irm https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.ps1 | iex" `` (`$env`'in önündeki ters tırnak kalsın: dıştaki PowerShell değişkeni açmasın)
 - Mac: `curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.sh | DIVIT_DAL=<kanal> bash`
 
-Çıktının sonunu oku. "Kurulum bitti" görünüyorsa:
+Çıktının tamamını oku ("Kurulum bitti" uyarı varken de yazılır):
+
+- "önceki hâli saklandı" (Windows: "onceki hali saklandi") satırı varsa
+  tek cümle: "Kurulumun değiştirdiği birkaç ayar dosyasının önceki hâli
+  saklandı; elle yaptığınız bir değişiklik kaybolmadı, gerekirse 'geri
+  al' deyin."
+- "Üniversite işleri eklentisi … şimdi kurulamadı" (Windows: "simdi
+  kurulamadi") varsa yayın adresi henüz yenilenmemiştir: "Bir parça şimdi
+  inmedi; birkaç dakika sonra yeniden deneyelim. Hazır olunca 'tamam'
+  yazın." de. "tamam" gelince aynı komutu **bir kez daha** çalıştır (yeni
+  onay istemeden; hoca zaten istedi). Yine çıkarsa uyarıyı tek cümleyle
+  söyle ve bir sonraki sohbette "güncelle" demesini iste.
+- Başka uyarı varsa tek cümleyle söyle.
+
+Uyarı olmadan ya da ikinci denemede bitince:
 
 > "Güncelleme tamam. Yeniliklerin çalışması için Claude'u bir kez
 > tamamen kapatıp yeniden açın. Sonra Divit sohbetine dönün."
 
-Uyarı varsa uyarıyı tek cümleyle söyle ve `sorunlar.md`'ye "güncelleme"
-türüyle yaz. Kurulum tarayıcıda kılavuzu açabilir; bunu hocaya söyle.
+Her uyarıyı `sorunlar.md`'ye "güncelleme" türüyle yaz. Kurulum tarayıcıda
+kılavuzu açabilir; bunu hocaya söyle.
 `gunluk.md`'ye tek satır: `… · güncelleme · — · <sürüm>`.
