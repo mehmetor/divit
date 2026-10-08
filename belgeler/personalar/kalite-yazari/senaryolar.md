@@ -10,8 +10,8 @@ değiştirilebilir; anlamı aynı kalsın.
 
 **Hazırlık:** paketi repo dışına kopyala (ör. `~/Desktop/kamil-bey/`).
 `beklenen-bulgular.md` ve `.md` kaynaklarını oraya koyma ya da ayrı
-tut; Divit cevabı görmemeli. Kurulum ve sürüm kanalı test ortamı
-rehberine göre (ayrı belge); hedef klasör Mehmet'in kendi Divit
+tut; Divit cevabı görmemeli. Kurulum ve sürüm kanalı `belgeler/TEST-ORTAMI.md`
+rehberine göre (4. ve 5. adım); hedef klasör Mehmet'in kendi Divit
 klasöründen **ayrı** olmalı (ör. `~/Documents/Divit-Yazar`), yoksa
 kurulum "başka türde Divit var" diye durur.
 
