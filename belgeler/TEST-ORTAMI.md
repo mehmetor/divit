@@ -30,7 +30,7 @@ denenmeyenler yanında yazıyor.
   önce `deneme` dalına gider, Mehmet alır, onay verince main'e çıkar.
   main'e yayın yapılmadan güncelleme denenebilir.
 - **Başlangıç 1.8.0.** Güncellemeyi gerçekten denemek için kurulum
-  bugünkü yayındaki sürümle (main'deki 1.8.0) yapılır; 1.8.1 sonra
+  bugünkü yayındaki sürümle (main'deki 1.8.0) yapılır; 1.9.0 sonra
   üstüne gelir. Bu yüzden deneme dalı önce main'in aynısına getirilir
   (2. adım).
 
@@ -272,12 +272,12 @@ profilin üstüne gelmeli, hocadaki gibi.
 
 ## 7. Yeni sürümü yayından önce al (her sürümde)
 
-İlk kez: 1.8.0 → 1.8.1. Sonraki her develop işinde aynı döngü, yalnız
+İlk kez: 1.8.0 → 1.9.0. Sonraki her develop işinde aynı döngü, yalnız
 sürüm numarası değişir.
 
 **7.1 Aday sürümü deneme dalına gönder** (yönetici ya da ajan). Sürüm
 numarası release-please'in açık PR'ının başlığındaki numaradır
-("divit 1.8.1 yayını"). develop'taki `SURUM.md`'nin en üstünde
+("divit 1.9.0 yayını"). develop'taki `SURUM.md`'nin en üstünde
 `## Sıradaki` yazar; Divit'in "güncelle"si sürümleri **sayı** olarak
 karşılaştırır, "Sıradaki"yi okuyamaz. Bu yüzden geçici kopyada başlık,
 yayında CI'nin yapacağı gibi numarayla değiştirilir; bu commit yalnız
@@ -286,7 +286,7 @@ deneme dalına gider, develop'a girmez:
 ```bash
 cd ~/Simetri/Develop/divit
 git fetch origin
-S=1.8.1
+S=1.9.0
 git worktree add --detach /tmp/divit-aday origin/develop
 cd /tmp/divit-aday
 python3 - "$S" "$(TZ=Europe/Istanbul date +%Y-%m-%d)" <<'PY'
@@ -316,27 +316,27 @@ aynı özeti alır.
 curl -fsSL https://raw.githubusercontent.com/mehmetor/divit/deneme/plugins/divit/SURUM.md | grep -m1 '^## '
 ```
 
-**Beklenen:** `## 1.8.1 · <tarih>`.
+**Beklenen:** `## 1.9.0 · <tarih>`.
 
 **7.3 `[Mehmet elle]` Kişinin klasöründe güncelle.** Claude'u tamamen
 kapatıp açın, Divit klasörünü açın. Ya kısaca `güncelle` yazın ya da
 hocaya gönderilecek istemi (`GECIS-IKI-EKLENTI.md` → "Hoca kendisi
 yaparsa", "Yapıştırılacak metin" kısmı) yapıştırın; istemdeki
-`1.8.0`'ı denenen sürümle (`1.8.1`) değiştirin, yoksa önbellek eskiyse
+`1.8.0`'ı denenen sürümle (`1.9.0`) değiştirin, yoksa önbellek eskiyse
 1.8.0'ı yeniden kurar. İki yol olabilir; ikisi de doğru:
 
-- **Divit kendiliğinden inmediyse:** Divit yayındaki sürümü 1.8.1 bulur,
+- **Divit kendiliğinden inmediyse:** Divit yayındaki sürümü 1.9.0 bulur,
   "kısa bir güncelleme gerekiyor… Şimdi yapayım mı?" der. "evet" →
   İngilizce izin sorusunda **Allow once** → kurulum `DIVIT_DAL=deneme`
   ile çalışır → "Güncelleme tamam… Claude'u kapatıp açın".
   **Beklenen:** komutta `/deneme/kur.sh` ve `DIVIT_DAL=deneme` (main
   değil); "önceki hâli saklandı" ve "şimdi kurulamadı" satırları yok.
 - **Divit kendiliğinden indiyse** (klasör ayarında otomatik güncelleme
-  açık; uygulama açılışında gelir): Divit kurulum **önermez** (1.8.1
+  açık; uygulama açılışında gelir): Divit kurulum **önermez** (1.9.0
   başlığında "kurulum gerekir" yok), yenilikleri anlatır.
 
 Claude'u kapatıp açtıktan sonra `yenilikler neler`.
-**Beklenen:** 1.8.1'in notları (en çok dört madde; yazar klasöründe
+**Beklenen:** 1.9.0'in notları (en çok dört madde; yazar klasöründe
 akademik madde yok), kurulum önerisi yok. Terminal'de:
 
 ```bash
@@ -346,12 +346,12 @@ for K in Divit Divit-Yazar; do echo "$K: $(cat ~/Documents/$K/.divit/kanal.txt) 
 
 **Beklenen:** `Version` 7.1'deki yeni numaralar; kanal iki klasörde de
 `deneme`; kurulum sürümü güncellemeyi Divit'in kurduğu klasörde
-`1.8.1`, kurulumsuz gelen klasörde `1.8.0` (doğru: kurulum gerekmedi).
+`1.9.0`, kurulumsuz gelen klasörde `1.8.0` (doğru: kurulum gerekmedi).
 Kişinin dosyaları değişmemiş olmalı.
 
-Yalıtılmış sınamada 1.8.1 adayının `kur.sh`'i iki dolu klasörün
+Yalıtılmış sınamada 1.9.0 adayının `kur.sh`'i iki dolu klasörün
 üstünde `DIVIT_DAL`'sız çalıştırıldı: kanal `deneme` kaldı, "Klasör
-zaten var. Kişisel dosyalara dokunmadan…", `kurulum-surumu` `1.8.1`.
+zaten var. Kişisel dosyalara dokunmadan…", `kurulum-surumu` `1.9.0`.
 Claude uygulamasının içindeki güncelleme denenmedi; asıl denenecek o.
 
 **7.4 Onay.** Mehmet sürümü beğenirse release-please PR'ı birleştirilir,
@@ -368,7 +368,7 @@ yinelenir; main'e bir şey gitmez.
 
 Uymayan her şey Plane'de **DVT** projesine yeni iş olarak yazılır,
 `mehmet` etiketiyle. Başlıkta sürüm, kişi ve senaryo:
-`1.8.1 · ziraat · 7: çizelge farkını bulmadı`. Gövdede ne yazıldı, ne
+`1.9.0 · ziraat · 7: çizelge farkını bulmadı`. Gövdede ne yazıldı, ne
 bekleniyordu, ne oldu; varsa ekran görüntüsü. Divit'in klasördeki
 `.divit/sorunlar.md`'sine yazmayın (Divit okur, sonucu bozar).
 Hassas not (gerçek hoca adı, ücret, strateji) Plane'e yazılabilir,
