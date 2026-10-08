@@ -358,6 +358,9 @@ if (Test-Path $Hedef) {
     Copy-Item (Join-Path $S 'gizli') $Hedef -Recurse -Force
     Bilgi "Eklendi: gizli"
   }
+  # Bolmedeki not Divit'in dosyasidir; varsa yeni metinle yenilenir (onceki hali saklanir).
+  $notGizli = Join-Path $Hedef 'gizli\BURAYA-BIRAKIN.txt'
+  if (Test-Path -LiteralPath $notGizli -PathType Leaf) { Yerlestir 'gizli\BURAYA-BIRAKIN.txt' (Join-Path $S 'gizli\BURAYA-BIRAKIN.txt') }
   New-Item -ItemType Directory -Force -Path (Join-Path $Hedef '.claude\rules') | Out-Null
   $kuralKok = Join-Path $S '.claude\rules'
   foreach ($k in Get-ChildItem -LiteralPath $kuralKok -Recurse -File) {        # kural dosyaları tek tek

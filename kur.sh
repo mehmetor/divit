@@ -275,6 +275,8 @@ if [ -d "$HEDEF" ]; then
   [ -d "$HEDEF/$TUR_KLASORU" ] || { cp -R "$SABLON/$TUR_KLASORU" "$HEDEF/" && bilgi "Eklendi: $TUR_KLASORU"; }
   # Gizli bölme (Divit okumaz) akademisyende; eski klasörlere de eklenir.
   if [ "$TUR" = "akademisyen" ] && [ ! -d "$HEDEF/gizli" ]; then cp -R "$SABLON/gizli" "$HEDEF/" && bilgi "Eklendi: gizli"; fi
+  # Bölmedeki not Divit'in dosyasıdır; varsa yeni metinle yenilenir (önceki hâli saklanır).
+  [ -f "$HEDEF/gizli/BURAYA-BIRAKIN.txt" ] && yerlestir "gizli/BURAYA-BIRAKIN.txt" "$SABLON/gizli/BURAYA-BIRAKIN.txt"
   mkdir -p "$HEDEF/.claude/rules" "$HEDEF/.divit"
   while IFS= read -r f; do                          # kural dosyaları tek tek (boru yok: sayaç korunsun)
     yerlestir ".claude/rules/${f#./}" "$SABLON/.claude/rules/$f"
