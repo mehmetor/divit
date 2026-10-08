@@ -75,7 +75,7 @@ yazma, sayma, arama **Read, Write, Edit** ile, klasörü listelemek Glob ile (Gr
 yollar klasöre göreli. Değişkenle başlayan komut yazma (`$DIVIT_…`, `$env:…`):
 izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu, pdftotext,
 kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
-yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), Divit dosyasını taşıma
+yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), kurulum komutu (yalnız `guncelleme`, onayla), Divit dosyasını taşıma
 (yalnız `bakim` ve tür değişimi, onayla) ve `mkdir` (`kitaplar/*/asil`, `malzeme` dışında) için; `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
 PowerPoint ya da Excel işinde Python veya Node isteyen yerleşik beceriyi kullanma;
 `sunum` ve `tablo` skill'lerini kullan.

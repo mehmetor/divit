@@ -5,6 +5,8 @@ description: Divit kılavuzunu açar ve kısa bir kullanım özeti verir. Kullan
 
 # Yardım
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 1. Kılavuzu tarayıcıda aç — her türde aynı dosya, adresine ek yazmadan:
    Mac: `open KILAVUZ.html`, Windows: `Invoke-Item KILAVUZ.html`. Doğru
    bölümü kılavuz kendisi seçer. Dosya yoksa bu adımı atla; bunu hocaya

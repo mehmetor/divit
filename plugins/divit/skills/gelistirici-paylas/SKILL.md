@@ -5,6 +5,8 @@ description: Divit'in çalışırken tuttuğu notları (iş günlüğü, karşı
 
 # Geri bildirim paylaşma
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Divit'i geliştiren kişi hocanın makinesini göremez. Hocanın geri bildirimi
 ürünün nasıl gelişeceğini belirler. Ama **hiçbir şey hocanın açık onayı
 olmadan gönderilmez.**

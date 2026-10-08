@@ -6,6 +6,8 @@ allowed-tools: Bash(xcode-select -p), Bash(git --version), PowerShell(git --vers
 
 # Geri alma
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Hocanın en büyük korkusu çalışmasını kaybetmek. Divit bu korkuyu iki
 kuralla karşılar (bkz. `CLAUDE.md` → Önceki sürüm kuralı):
 
