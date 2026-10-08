@@ -181,3 +181,93 @@ eşleştirildi.
 | Klasör yeri | `# Klasör seçerken gösterilecek yer` | Windows "Belgeler > <ad>" (betik mesajları ASCII) |
 | Deneme kanalı satırı | `Deneme kanalı: …` / `Deneme kanali: …` | — |
 | `$BaskaKaynak` sıfırlama | — / `$BaskaKaynak = $null` | yalnız ps1: `iex` oturum değişkenlerini korur |
+
+## Yedek adımı: üstüne yazılan Divit dosyalarının önceki hâli (DVT-57)
+
+Soru: Kurulum yeniden çalıştırıldığında Divit'in klasöre koyduğu ve betiğin
+üstüne yazdığı dosyaların (CLAUDE.md, KILAVUZ.html, tez-kontrol/CLAUDE.md,
+.claude/rules/*, .claude/settings.json, .claude/settings.local.json,
+.divit/profil/kimlik.md'deki tür satırı) önceki hâli saklanıyor mu; hocanın
+kendi dosyaları ve değişmeyen dosyalar yedeğe girmiyor mu?
+
+**Sonuç (2026-10-08):** `araclar/sinama-kurulum.sh` 49 ölçüm GEÇTİ, KALDI
+yok (i–x eski ölçümler değişmedi; yeni bölüm xi). Yedek satırı 49 koşunun
+yalnız birinde (xi-c) çıktı: başka hiçbir senaryo gereksiz yedek üretmedi.
+Geçici dosyalar `/tmp/divit-kurulum.XXXXXX` altında (CLAUDE_JOB_DIR bu
+oturumda tanımlı değildi), koşu sonunda silindi.
+
+Tasarım (iki betikte aynı):
+
+- Yeni içerik önce geçici dosyaya üretilir; klasördeki dosya varsa ve
+  içerik farklıysa `.divit/onceki-surumler/kurulum-<YYYY-AA-GG-SSDDss>/<göreli yol>`
+  altına kopyalanır, sonra üstüne yazılır. Klasör bu çalıştırmada
+  açıldıysa (ilk kurulum) yedek alınmaz; içerik aynıysa alınmaz; hiç
+  dosya yedeklenmediyse klasör açılmaz.
+- Yedek alınamazsa dosyaya dokunulmaz, uyarı basılır:
+  `Önceki hâli saklanamadı, dosyaya dokunulmadı: <yol>`.
+- Çıktıda tek satır: `Değiştirilen N ayar dosyasının önceki hâli saklandı:
+  .divit/onceki-surumler/kurulum-…`.
+- `.claude/settings.local.json`: iki eklenti anahtarı zaten doğruysa dosyaya
+  hiç dokunulmaz. Sebep: `plutil` (Mac) ve `ConvertTo-Json` (Windows) her
+  yazışta biçimi ve sırayı değiştiriyor; dokunulsaydı her yeniden kurulum
+  bu dosyayı gereksiz yedeklerdi.
+
+```
+== xi) Yedek: üstüne yazılan Divit dosyalarının önceki hâli
+GEÇTİ xi1   (a) ilk kurulum: yedek klasörü yok, yedek satırı yok
+GEÇTİ xi2   (b) aynı kurulum yeniden: hiçbir dosya değişmedi, yedek klasörü yok
+  kur.sh:   Değiştirilen 2 ayar dosyasının önceki hâli saklandı: .divit/onceki-surumler/kurulum-2026-10-08-124341
+GEÇTİ xi3   (c) tek yedek klasörü açıldı (kurulum-<tarih-saat>), çıktıda yeri yazıyor
+GEÇTİ xi4   (c) CLAUDE.md ve .claude/settings.json yedekte, içerik elle değişen hâl
+GEÇTİ xi5   (c) klasördeki CLAUDE.md ve settings.json yenilendi (not gitti, yer tutucu yok)
+GEÇTİ xi6   (c) yedekte yalnız bu iki dosya var; hoca dosyası (gelen/x.docx) yerinde, yedekte değil
+GEÇTİ xi7   (c) settings.local.json ve kimlik.md değişmedi, yedeğe girmedi
+```
+
+(b) iki kez denendi: `DIVIT_TUR=akademisyen` ile ve değişkensiz; ikisinde
+de klasörün özeti (shasum) öncekiyle aynı kaldı.
+
+Bulunan ve düzeltilen hata: ilk sürümde ilk kurulumda da yedek alınıyordu
+(şablondan kopyalanan `settings.json` ve `kimlik.md`, hemen ardından
+doldurulmuş hâlleriyle yazılınca "değişti" sayılıyordu). Klasör bu
+çalıştırmada açıldıysa yedek atlanıyor (`ILK_KURULUM` / `$script:IlkKurulum`).
+
+### Windows (kur.ps1) eşleştirmesi — denenmedi
+
+Bu makinede PowerShell yok; kur.ps1 kur.sh ile satır satır eşleştirildi.
+Yalnız Windows PowerShell 5.1'de olanlar kullanıldı: `Get-FileHash`
+(içerik karşılaştırma), `Copy-Item -LiteralPath`, `New-Item`, `Join-Path`,
+`Get-Date -Format`. Git, Python, yönetici hakkı, `Compress-Archive` yok.
+
+| Konu | Çapa (kur.sh / kur.ps1) | Fark |
+|---|---|---|
+| Yedek klasörü ve sayaç | `YEDEK_KLASORU=` / `$YedekKlasoru =` | ps1 `$script:YedekSayisi`, `$script:IlkKurulum` (`iex` oturumunda her koşuda sıfırlanır) |
+| Yedekle / yerleştir | `yedekle`, `yerlestir` / `Yedekle`, `Yerlestir`, `YerlestirMetin` | Mac `cmp -s`; Windows SHA-256 özeti. Metin üreten yerler Windows'ta önce `YazUtf8` ile (BOM'suz) geçici dosyaya yazar, sonra kopyalar: klasördeki dosyayla bayt bayt aynı biçim |
+| İlk kurulumda yedek yok | `ILK_KURULUM=1` / `$script:IlkKurulum = $true` | — |
+| Kural dosyaları tek tek | `# kural dosyaları tek tek` | Mac `find` + `while` (boru yok: sayaç korunsun); ps1 `Get-ChildItem -LiteralPath -Recurse -File` |
+| settings.local.json'a dokunma | `# iki anahtar zaten doğru` / `$degisti` | Mac `plutil -extract … raw` (macOS 12+; eskisinde çıkarım başarısız olur ve bugünkü gibi yazılır); ps1 nesne üstünde karşılaştırma |
+| Tek satır bilgi | `önceki hâli saklandı` / `onceki hali saklandi` | ps1 mesajları ASCII (betik ANSI okunsa da bozulmasın) |
+
+Sınanamayan noktalar (Mehmet Windows'ta elle dener):
+
+- [ ] İlk kurulum (`$env:DIVIT_TEST="1"; $env:DIVIT_KAYNAK_ZIP=...; $env:DIVIT_HEDEF=...`):
+      `.divit\onceki-surumler\` altında `kurulum-*` klasörü **olmamalı**, çıktıda
+      "onceki hali saklandi" satırı olmamalı.
+- [ ] Aynı kurulumu hiçbir şey değiştirmeden yeniden çalıştır: yine `kurulum-*`
+      klasörü yok; `CLAUDE.md`, `KILAVUZ.html`, `.claude\settings.json`,
+      `.claude\settings.local.json` değişme zamanı/içeriği aynı
+      (`Get-FileHash` ile önce/sonra karşılaştır).
+- [ ] `CLAUDE.md` sonuna bir satır ekle, `.claude\settings.json`'a bir anahtar
+      ekle, `tez-kontrol\gelen\x.docx` adında bir dosya koy; yeniden kur:
+      çıktıda "Degistirilen 2 ayar dosyasinin onceki hali saklandi: .divit\onceki-surumler\kurulum-<tarih>"
+      satırı; o klasörde **yalnız** `CLAUDE.md` ve `.claude\settings.json`
+      (elle değişmiş hâlleriyle); `gelen\x.docx` yerinde ve yedekte değil;
+      klasördeki `CLAUDE.md` ve `settings.json` yenilenmiş (eklenen satır/anahtar yok).
+- [ ] Yolda boşluk ve Türkçe harf: `$env:DIVIT_HEDEF="C:\Users\<ad>\Belgeler\Divit Deneme ğüş"` ile
+      üçüncü madde tekrar; yedek klasörü aynı yolun altında, dosya adları bozulmamış.
+- [ ] OneDrive altındaki Belgeler: yedek kopyalama ve üstüne yazma "dosya kullanımda"
+      hatası vermiyor; verirse "Onceki hali saklanamadi, dosyaya dokunulmadi" uyarısı
+      çıkıp dosya eski hâlinde kalmalı.
+- [ ] Yedeklenen dosyalar Not Defteri'nde Türkçe harfleriyle düzgün açılıyor (BOM'suz UTF-8).
+- [ ] `settings.local.json`'da bir eklenti anahtarını elle `false` yap, yeniden kur:
+      bu sefer dosya yedeklenip düzeltilmiş olmalı (yedek klasöründe `.claude\settings.local.json`).

@@ -7,6 +7,9 @@
 #
 # Git ya da yönetici hakkı gerekmez. Yeniden çalıştırmak güvenlidir:
 # kullanıcının dosyalarına dokunmaz, yalnızca Divit'i günceller.
+# Divit'in koyduğu ve bu kurulumun üstüne yazacağı dosyaların (CLAUDE.md,
+# kılavuz, .claude\ ayarları, kurallar) önceki hâli, içerik değişiyorsa,
+# .divit\onceki-surumler\kurulum-<tarih-saat>\ altına kopyalanır.
 #
 # Kullanıcı türü (akademisyen | yazar) klasörleri, kılavuzun açılış
 # sekmesini ve açık eklentileri belirler. Öncelik: DIVIT_TUR >
@@ -261,6 +264,46 @@ else { $TurKlasoru = 'tez-kontrol'; $Akademik = $true }
 Bilgi "Kullanici turu: $Tur"
 if ($Dal -ne 'main') { Bilgi "Kanal: $Dal" }
 
+# Önceki sürüm kuralı: üstüne yazılacak Divit dosyasının klasördeki hâli,
+# yeni içerikten farklıysa, .divit\onceki-surumler\kurulum-<zaman>\<göreli yol>
+# altına kopyalanır. İlk kurulumda ve değişmeyen dosyada yedek yoktur; yedek
+# alınamazsa dosyaya dokunulmaz (uyarı). Yalnız bu betiğin yazdığı dosyalar
+# için kullanılır; kullanıcının belgeleri bu yoldan geçmez.
+$YedekKlasoru = Join-Path $Hedef ('.divit\onceki-surumler\kurulum-' + (Get-Date -Format 'yyyy-MM-dd-HHmmss'))
+$script:YedekSayisi = 0
+$script:IlkKurulum = $false                         # klasör bu çalıştırmada açıldıysa $true
+function DosyaAyni($a, $b) {
+  try { return ((Get-FileHash -LiteralPath $a -Algorithm SHA256).Hash -eq (Get-FileHash -LiteralPath $b -Algorithm SHA256).Hash) } catch { return $false }
+}
+# Yedekle <göreli yol> <yeni içeriğin dosyası>: $true = yazılabilir, $false = dokunma
+function Yedekle($goreli, $yeniDosya) {
+  $eski = Join-Path $Hedef $goreli
+  if ($script:IlkKurulum -or -not (Test-Path -LiteralPath $eski -PathType Leaf)) { return $true }   # ilk kurulum ya da dosya yok: yedeklenecek şey yok
+  if (DosyaAyni $eski $yeniDosya) { return $true }                            # içerik aynı: yedek gereksiz
+  try {
+    $yedek = Join-Path $YedekKlasoru $goreli
+    New-Item -ItemType Directory -Force -Path (Split-Path -Parent $yedek) -ErrorAction Stop | Out-Null
+    Copy-Item -LiteralPath $eski -Destination $yedek -Force -ErrorAction Stop
+    $script:YedekSayisi++
+    return $true
+  } catch {
+    Uyari "Onceki hali saklanamadi, dosyaya dokunulmadi: $goreli"
+    return $false
+  }
+}
+# Yerlestir <göreli yol> <yeni içeriğin dosyası>: yedekle, sonra üstüne yaz.
+function Yerlestir($goreli, $yeniDosya) {
+  if (-not (Yedekle $goreli $yeniDosya)) { return }
+  $h = Join-Path $Hedef $goreli
+  New-Item -ItemType Directory -Force -Path (Split-Path -Parent $h) | Out-Null
+  Copy-Item -LiteralPath $yeniDosya -Destination $h -Force
+}
+# YerlestirMetin <göreli yol> <metin>: metni BOM'suz geçici dosyaya yazar, Yerlestir'e verir.
+function YerlestirMetin($goreli, $metin) {
+  $g = Join-Path $Gecici ('yeni-' + ($goreli -replace '[\\/]', '_'))
+  YazUtf8 $g $metin
+  Yerlestir $goreli $g
+}
 # Tür satırı yalnız doldurulmamış profile yazılır (ilk başlığın altına ya da
 # var olan satırın yerine). Dolu profile hiç dokunulmaz.
 function TurSatiriYaz {
@@ -273,25 +316,25 @@ function TurSatiriYaz {
     $yeni.Add($l)
     if (-not $yazildi -and $l.StartsWith('# ')) { $yeni.Add("$TurSatiri $Tur"); $yazildi = $true }
   }
-  YazUtf8 $Kimlik (($yeni -join "`n") + "`n")
+  YerlestirMetin '.divit\profil\kimlik.md' (($yeni -join "`n") + "`n")
 }
 # Kılavuz tek dosyadır; açılış sekmesi kök etiketteki data-rol'dür.
 function KilavuzYaz {
   $m = [IO.File]::ReadAllText((Join-Path $S 'KILAVUZ.html'))
-  YazUtf8 (Join-Path $Hedef 'KILAVUZ.html') $m.Replace('<html lang="tr" data-rol="">', "<html lang=`"tr`" data-rol=`"$Tur`">")
+  YerlestirMetin 'KILAVUZ.html' $m.Replace('<html lang="tr" data-rol="">', "<html lang=`"tr`" data-rol=`"$Tur`">")
 }
 # Klasörün CLAUDE.md'si: araç yolları kurulumda yazılır.
 function ClaudeMdYaz {
   $pt = if (Test-Path $Pdftotext) { $Pdftotext } else { 'yok' }
   $m = [IO.File]::ReadAllText((Join-Path $S 'CLAUDE.md'))
-  YazUtf8 (Join-Path $Hedef 'CLAUDE.md') $m.Replace('__PANDOC__', $Pandoc).Replace('__PDFCPU__', $Pdfcpu).Replace('__PDFTOTEXT__', $pt)
+  YerlestirMetin 'CLAUDE.md' $m.Replace('__PANDOC__', $Pandoc).Replace('__PDFCPU__', $Pdfcpu).Replace('__PDFTOTEXT__', $pt)
 }
 
 if (Test-Path $Hedef) {
   Bilgi "Klasor zaten var. Kisisel dosyalara dokunmadan Divit dosyalari guncelleniyor."
   ClaudeMdYaz
   if (Test-Path (Join-Path $Hedef 'tez-kontrol')) {
-    Copy-Item (Join-Path $S 'tez-kontrol\CLAUDE.md') (Join-Path $Hedef 'tez-kontrol\CLAUDE.md') -Force
+    Yerlestir 'tez-kontrol\CLAUDE.md' (Join-Path $S 'tez-kontrol\CLAUDE.md')
   }
   # Türün klasörü yoksa eklenir; hiçbir klasör silinmez.
   if (-not (Test-Path (Join-Path $Hedef $TurKlasoru))) {
@@ -304,7 +347,10 @@ if (Test-Path $Hedef) {
     Bilgi "Eklendi: gizli"
   }
   New-Item -ItemType Directory -Force -Path (Join-Path $Hedef '.claude\rules') | Out-Null
-  Copy-Item (Join-Path $S '.claude\rules\*') (Join-Path $Hedef '.claude\rules') -Recurse -Force
+  $kuralKok = Join-Path $S '.claude\rules'
+  foreach ($k in Get-ChildItem -LiteralPath $kuralKok -Recurse -File) {        # kural dosyaları tek tek
+    Yerlestir ('.claude\rules\' + $k.FullName.Substring($kuralKok.Length).TrimStart('\')) $k.FullName
+  }
   foreach ($d in Get-ChildItem (Join-Path $S '.divit') -Directory) {
     New-Item -ItemType Directory -Force -Path (Join-Path $Hedef ".divit\$($d.Name)") | Out-Null
   }
@@ -313,6 +359,7 @@ if (Test-Path $Hedef) {
     if (-not (Test-Path $h)) { Copy-Item $p.FullName $h }
   }
 } else {
+  $script:IlkKurulum = $true
   New-Item -ItemType Directory -Force -Path $Hedef | Out-Null
   # Şablon türe göre: başka türün klasörü kopyalanmaz. Kılavuz ve CLAUDE.md
   # aşağıda yazılır; eski kart/kılavuz dosyaları kopyalanmaz.
@@ -336,7 +383,7 @@ $pandocYolu = $Pandoc -replace '\\', '/'
 $ayar = [IO.File]::ReadAllText((Join-Path $S '.claude\settings.json')).Replace('__PANDOC__', $pandocYolu).Replace('__PDFCPU__', ($Pdfcpu -replace '\\', '/')).Replace('__PDFTOTEXT__', ($Pdftotext -replace '\\', '/'))
 # Pazar yeri adresi kanala göre (klasör açılınca uygulama da aynı kanaldan alır).
 $ayar = $ayar -replace 'https://raw\.githubusercontent\.com/[^"]*/\.claude-plugin/marketplace\.json', $PazarUrl
-YazUtf8 (Join-Path $Hedef '.claude\settings.json') $ayar
+YerlestirMetin '.claude\settings.json' $ayar
 $surumDosyasi = Join-Path (Split-Path (Split-Path $S)) 'plugins\divit\SURUM.md'
 if (Test-Path $surumDosyasi) {
   $ilk = Select-String -Path $surumDosyasi -Pattern '^## ([0-9.]+) ' | Select-Object -First 1
@@ -356,15 +403,19 @@ if (-not (Test-Path $yerel)) {
       $j | Add-Member -NotePropertyName 'enabledPlugins' -NotePropertyValue ([pscustomobject]@{})
     }
     $anahtarlar = [ordered]@{ 'divit@divit' = $true; 'divit-akademik@divit' = $Akademik }
+    $degisti = $false
     foreach ($k in $anahtarlar.Keys) {
-      if ($j.enabledPlugins.PSObject.Properties.Name -contains $k) { $j.enabledPlugins.$k = $anahtarlar[$k] }
-      else { $j.enabledPlugins | Add-Member -NotePropertyName $k -NotePropertyValue $anahtarlar[$k] }
+      if ($j.enabledPlugins.PSObject.Properties.Name -contains $k) {
+        if ($j.enabledPlugins.$k -ne $anahtarlar[$k]) { $j.enabledPlugins.$k = $anahtarlar[$k]; $degisti = $true }
+      } else { $j.enabledPlugins | Add-Member -NotePropertyName $k -NotePropertyValue $anahtarlar[$k]; $degisti = $true }
     }
-    YazUtf8 $yerel (($j | ConvertTo-Json -Depth 20) + "`n")   # varsayılan derinlik iç içe izinleri keser
+    # İki anahtar zaten doğruysa dosyaya dokunulmaz (ConvertTo-Json biçimi değiştirir, gereksiz yedek olmasın).
+    if ($degisti) { YerlestirMetin '.claude\settings.local.json' (($j | ConvertTo-Json -Depth 20) + "`n") }   # varsayılan derinlik iç içe izinleri keser
   } catch { Uyari "Klasor ayar dosyasi okunamadi; dokunulmadi: .claude\settings.local.json" }
 }
 Get-ChildItem $Hedef -Recurse -File -ErrorAction SilentlyContinue | Unblock-File -ErrorAction SilentlyContinue
 Get-ChildItem $Hedef -Recurse -Force -Filter '.gitkeep' -ErrorAction SilentlyContinue | Remove-Item -Force   # git kalintisi
+if ($script:YedekSayisi -gt 0) { Bilgi "Degistirilen $($script:YedekSayisi) ayar dosyasinin onceki hali saklandi: $($YedekKlasoru.Substring($Hedef.Length).TrimStart('\'))" }
 
 # ---------------------------------------------------------------- 5
 Adim "5/6 Divit eklentisi"

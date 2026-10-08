@@ -8,6 +8,9 @@
 #
 # Git, Homebrew ya da yönetici parolası gerekmez. Yeniden çalıştırmak
 # güvenlidir: kullanıcının dosyalarına dokunmaz, yalnızca Divit'i günceller.
+# Divit'in koyduğu ve bu kurulumun üstüne yazacağı dosyaların (CLAUDE.md,
+# kılavuz, .claude/ ayarları, kurallar) önceki hâli, içerik değişiyorsa,
+# .divit/onceki-surumler/kurulum-<tarih-saat>/ altına kopyalanır.
 #
 # Kullanıcı türü (akademisyen | yazar) klasörleri, kılavuzun açılış
 # sekmesini ve açık eklentileri belirler. Öncelik: DIVIT_TUR >
@@ -218,32 +221,61 @@ tur_satiri_yaz() {
   [ -f "$KIMLIK" ] || return
   grep -q 'Henüz doldurulmadı' "$KIMLIK" || return
   awk -v s="Kullanıcı türü: $TUR" '/^Kullanıcı türü:/{next} {print} !y && /^# /{print s; y=1}' "$KIMLIK" > "$GECICI/kimlik.md" \
-    && cat "$GECICI/kimlik.md" > "$KIMLIK"
+    && yerlestir ".divit/profil/kimlik.md" "$GECICI/kimlik.md"
+}
+# Önceki sürüm kuralı: üstüne yazılacak Divit dosyasının klasördeki hâli,
+# yeni içerikten farklıysa, .divit/onceki-surumler/kurulum-<zaman>/<göreli yol>
+# altına kopyalanır. İlk kurulumda ve değişmeyen dosyada yedek yoktur; yedek
+# alınamazsa dosyaya dokunulmaz (uyarı). Yalnız bu betiğin yazdığı dosyalar
+# için kullanılır; kullanıcının belgeleri bu yoldan geçmez.
+YEDEK_KLASORU="$HEDEF/.divit/onceki-surumler/kurulum-$(date +%Y-%m-%d-%H%M%S)"
+YEDEK_SAYISI=0
+# yedekle <göreli yol> <yeni içeriğin dosyası>: 0 = yazılabilir, 1 = dokunma
+ILK_KURULUM=""                                     # klasör bu çalıştırmada açıldıysa 1
+yedekle() {
+  local gore="$1" yeni="$2" eski="$HEDEF/$1"
+  [ -z "$ILK_KURULUM" ] && [ -f "$eski" ] || return 0   # ilk kurulum ya da dosya yok: yedeklenecek şey yok
+  cmp -s "$eski" "$yeni" && return 0               # içerik aynı: yedek gereksiz
+  if mkdir -p "$YEDEK_KLASORU/$(dirname "$gore")" && cp -p "$eski" "$YEDEK_KLASORU/$gore"; then
+    YEDEK_SAYISI=$((YEDEK_SAYISI+1)); return 0
+  fi
+  uyari "Önceki hâli saklanamadı, dosyaya dokunulmadı: $gore"
+  return 1
+}
+# yerlestir <göreli yol> <yeni içeriğin dosyası>: yedekle, sonra üstüne yaz.
+yerlestir() {
+  yedekle "$1" "$2" || return 1
+  mkdir -p "$(dirname "$HEDEF/$1")" && cat "$2" > "$HEDEF/$1"
 }
 # Kılavuz tek dosyadır; açılış sekmesi kök etiketteki data-rol'dür.
 kilavuz_yaz() {
-  sed "s|<html lang=\"tr\" data-rol=\"\">|<html lang=\"tr\" data-rol=\"$TUR\">|" "$SABLON/KILAVUZ.html" > "$HEDEF/KILAVUZ.html"
+  sed "s|<html lang=\"tr\" data-rol=\"\">|<html lang=\"tr\" data-rol=\"$TUR\">|" "$SABLON/KILAVUZ.html" > "$GECICI/KILAVUZ.html"
+  yerlestir "KILAVUZ.html" "$GECICI/KILAVUZ.html"
 }
 # Klasörün CLAUDE.md'si: araç yolları kurulumda yazılır.
 claude_md_yaz() {
-  sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__|yok|" "$SABLON/CLAUDE.md" > "$HEDEF/CLAUDE.md"
+  sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__|yok|" "$SABLON/CLAUDE.md" > "$GECICI/CLAUDE.md"
+  yerlestir "CLAUDE.md" "$GECICI/CLAUDE.md"
 }
 
 if [ -d "$HEDEF" ]; then
   bilgi "Klasör zaten var. Kişisel dosyalara dokunmadan Divit dosyaları güncelleniyor."
   claude_md_yaz
-  [ -d "$HEDEF/tez-kontrol" ] && cp "$SABLON/tez-kontrol/CLAUDE.md" "$HEDEF/tez-kontrol/CLAUDE.md"
+  [ -d "$HEDEF/tez-kontrol" ] && yerlestir "tez-kontrol/CLAUDE.md" "$SABLON/tez-kontrol/CLAUDE.md"
   # Türün klasörü yoksa eklenir; hiçbir klasör silinmez.
   [ -d "$HEDEF/$TUR_KLASORU" ] || { cp -R "$SABLON/$TUR_KLASORU" "$HEDEF/" && bilgi "Eklendi: $TUR_KLASORU"; }
   # Gizli bölme (Divit okumaz) akademisyende; eski klasörlere de eklenir.
   if [ "$TUR" = "akademisyen" ] && [ ! -d "$HEDEF/gizli" ]; then cp -R "$SABLON/gizli" "$HEDEF/" && bilgi "Eklendi: gizli"; fi
   mkdir -p "$HEDEF/.claude/rules" "$HEDEF/.divit"
-  cp -R "$SABLON/.claude/rules/." "$HEDEF/.claude/rules/"
+  while IFS= read -r f; do                          # kural dosyaları tek tek (boru yok: sayaç korunsun)
+    yerlestir ".claude/rules/${f#./}" "$SABLON/.claude/rules/$f"
+  done < <(cd "$SABLON/.claude/rules" && find . -type f)
   cp -Rn "$SABLON/.divit/." "$HEDEF/.divit/" 2>/dev/null
   for f in "$SABLON/.divit/profil/"*.md; do          # yeni eklenen profil dosyaları
     [ -f "$HEDEF/.divit/profil/$(basename "$f")" ] || cp "$f" "$HEDEF/.divit/profil/"
   done
 else
+  ILK_KURULUM=1
   mkdir -p "$HEDEF"
   # Şablon türe göre: başka türün klasörü ve kılavuzu kopyalanmaz.
   for f in "$SABLON"/* "$SABLON"/.[!.]*; do
@@ -267,7 +299,8 @@ printf '%s\n' "$DAL" > "$KANAL_DOSYASI"
 # Pazar yeri adresi kanala göre (klasör açılınca uygulama da aynı kanaldan alır).
 sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__||" \
   -e "s|https://raw.githubusercontent.com/[^\"]*/\.claude-plugin/marketplace\.json|$PAZAR_URL|" \
-  "$SABLON/.claude/settings.json" > "$HEDEF/.claude/settings.json"
+  "$SABLON/.claude/settings.json" > "$GECICI/settings.json"
+yerlestir ".claude/settings.json" "$GECICI/settings.json"
 sed -n "s/^## \([0-9][0-9.]*\) ·.*/\1/p" "$(dirname "$SABLON")/../plugins/divit/SURUM.md" | head -1 > "$HEDEF/.divit/kurulum-surumu.txt"
 # Hangi eklenti bu klasörde açık: akademik eklenti yalnız akademisyende.
 YEREL="$HEDEF/.claude/settings.local.json"
@@ -275,19 +308,23 @@ if [ ! -f "$YEREL" ]; then
   printf '{\n  "enabledPlugins": { "divit@divit": true, "divit-akademik@divit": %s }\n}\n' "$AKADEMIK" > "$YEREL"
 elif [ "$(tr -d ' \t\r\n' < "$YEREL" | head -c1)" != "{" ] || ! plutil -convert json -o /dev/null "$YEREL" 2>/dev/null; then
   uyari "Klasör ayar dosyası okunamadı; dokunulmadı: .claude/settings.local.json"
+elif [ "$(plutil -extract 'enabledPlugins.divit@divit' raw -o - "$YEREL" 2>/dev/null)" = "true" ] \
+  && [ "$(plutil -extract 'enabledPlugins.divit-akademik@divit' raw -o - "$YEREL" 2>/dev/null)" = "$AKADEMIK" ]; then
+  :   # iki anahtar zaten doğru: dosyaya dokunulmaz (plutil her yazışta biçimi değiştirir, gereksiz yedek olmasın)
 else
   # plutil izinleri ve diğer anahtarları korur; önce kopyada denenir.
   cp "$YEREL" "$GECICI/yerel.json"
   plutil -insert enabledPlugins -json '{}' "$GECICI/yerel.json" >/dev/null 2>&1   # varsa hata verir, yok sayılır
   if plutil -replace 'enabledPlugins.divit@divit' -bool true "$GECICI/yerel.json" >/dev/null 2>&1 \
     && plutil -replace 'enabledPlugins.divit-akademik@divit' -bool "$AKADEMIK" "$GECICI/yerel.json" >/dev/null 2>&1; then
-    cat "$GECICI/yerel.json" > "$YEREL"
+    yerlestir ".claude/settings.local.json" "$GECICI/yerel.json"
   else
     uyari "Klasör ayar dosyası güncellenemedi; dokunulmadı: .claude/settings.local.json"
   fi
 fi
 xattr -dr com.apple.quarantine "$HEDEF" 2>/dev/null
 find "$HEDEF" -name .gitkeep -delete 2>/dev/null   # git kalıntısı; kullanıcıya görünmesin
+[ "$YEDEK_SAYISI" -gt 0 ] && bilgi "Değiştirilen $YEDEK_SAYISI ayar dosyasının önceki hâli saklandı: ${YEDEK_KLASORU#$HEDEF/}"
 
 # ---------------------------------------------------------------- 5
 adim "5/6 Divit eklentisi"
