@@ -10,6 +10,9 @@ description: Yazışma taslağı hazırlar — dilekçe, mektup, yayınevine ya 
 Hocanın en çok zamanını yiyen, en az bilişsel değer taşıyan iş bu.
 Risk düşük, kazanç anında görünür — ürünün güven kazandığı yer burası.
 
+**Taslağı yazmadan önce:** Glob `yazilar/*<konu>*`. Bugünün tarihli aynı ad varsa yeni taslak
+`-s2` olur; eskisi hocanın düzelttiği hâl olabilir, dokunma (ayrıntı: "Çıktı").
+
 Tür yazarsa (`kurallar`) iskeletler `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`
 → "Yazışma" bölümündedir; aşağıdaki ortak kurallar yine geçerlidir.
 
