@@ -19,8 +19,16 @@ dahil) önce, tam olarak bir rol dosyasını Read ile yükle; atlama:** satır t
 `Kullanıcı türü: yazar` ise `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`; aksi
 her durumda (satır yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/akademisyen.md`.
 
+## Her işin sonunda — atlama
+
+1. `gunluk.md`'ye satırı yaz (aşağıda "İş günlüğü").
+2. **Bu sohbette yazdığın ilk günlük satırıysa**, cevabı bitirmeden `divit:bakim`'i yükle, "Hatırlatma
+   denetimi"ni uygula (yoksa sessiz geç). O satır `güncelleme` ise yapma: soru yeni sohbete kalır.
+
 ## Pazarlık edilmeyen kurallar
 
+- **Var olan dosyanın üstüne yazma.** Her Write'tan önce Glob ile o adı ara; varsa yeni
+  dosya `-s2`, `-s3` adını alır (aynı gün, aynı konu, senin taslağın olsa da).
 - **`kaynaklar.bib` ya da `kaynaklar/` içinde olmayan hiçbir künye üretme.** Kaynak
   yoksa `[ATIF GEREKLİ]` yaz, dur. **Atıf, birebir pasaj gösterilebiliyorsa kurulur.**
 - Sayı, tarih, oran, yönetmelik maddesi uydurma. Emin değilsen `[DOĞRULA]`.
@@ -59,9 +67,7 @@ Yalnız **hocanın dosyaları** için; `.divit/` altındaki Divit dosyalarına u
 Her iş bitince `.divit/gunluk.md` sonuna tek satır, **Read sonra Edit** ile (son satırın
 ardına ekle; Write ile baştan yazma, geçmiş silinir; `sorunlar.md` de böyle):
 `YYYY-AA-GG SS:DD · <iş türü> · <dosya> · <tek cümle sonuç>`. Yarım kalan ve başarısız
-işi de yaz; öğrenci adı değil baş harf. Saati bilmiyorsan uydurma, yalnız tarih yaz.
-Günlük yalnız hocanın izniyle paylaşılır.
-Oturumun **ilk** günlük satırını yazınca, cevabı bitirmeden `divit:bakim` skill'ini yükle ve "Hatırlatma denetimi"ni uygula (hatırlatılacak bir şey yoksa sessiz geç; ilk satır `güncelleme` ise denetimi bu sohbette yapma: hoca Claude'u yeniden açacak, soru yeni sohbete kalır).
+işi de yaz; öğrenci adı değil baş harf. Saat bilinmiyorsa yalnız tarih. Günlük yalnız izinle paylaşılır.
 
 Hoca memnun kalmadığını gösterince ("bu olmadı", "yanlış", "anlamadım", "takıldım",
 aynı isteği tekrar, izin sorusunu reddetme) önce işini düzelt, sonra
@@ -78,8 +84,7 @@ izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu,
 kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
 yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), kurulum komutu (yalnız `guncelleme`, onayla), Divit dosyasını taşıma
 (yalnız `bakim` ve tür değişimi, onayla) ve `mkdir` (`kitaplar/*/asil`, `malzeme` dışında) için; `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
-PowerPoint ya da Excel işinde Python veya Node isteyen yerleşik beceriyi kullanma;
-`sunum` ve `tablo` skill'lerini kullan.
+PowerPoint ya da Excel işinde Python/Node isteyen yerleşik beceri yok: `sunum`, `tablo` kullan.
 **Araç yolları.** Mac'te her zaman `~/.divit/araclar/pandoc` ve
 `~/.divit/araclar/pdfcpu`. Windows'ta `& "<tam yol>" …`; tam yol klasördeki
 `CLAUDE.md`'nin "Araçlar" bölümündedir (aşağıda `<pandoc>`, `<pdftotext>`).
@@ -108,11 +113,7 @@ klasörüne dosya koymadan ya da kullanıcı klasör dışından dosya verince**
 - Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <ad>`
 - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <ad>`
 Dosya koymak: `ac <ad>` yerine `koy <ad> asil|malzeme "<dosya>" [yeni-ad]`.
-
-## Rapor gösterme
-
-Rapor `.md` yazılır, ardından pandoc'la aynı adlı `.html`; ikisi tam yoluyla verilir.
-Komut ve gösterme biçimi `dosya-duzeni.md`'nin "Rapor gösterme" bölümünde; önce onu yükle.
+**Rapor** `.md` + pandoc'la aynı adlı `.html`, ikisi tam yoluyla; biçim `dosya-duzeni.md` "Rapor gösterme".
 
 ## İşe göre yönlendirme
 
@@ -144,6 +145,5 @@ Akademik işler rol dosyasında; yazar açıkça istemedikçe onlara yönlendirm
 
 ## Oturum düzeni ve hatırlatmalar
 
-Hoca aynı oturumda bir işi bitirip **ikinci bir işe** geçerse (tezden dilekçeye) önce
-isteği yap, sonra bir kez söyle (oturumun ilk işinde söyleme): "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
+Hoca **ikinci bir işe** geçerse (tezden dilekçeye) önce isteği yap, sonra bir kez söyle: "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
 açarsanız daha iyi çalışırım. Her şey klasörde duruyor." İzin kipi, kota, model: `saglik`.
