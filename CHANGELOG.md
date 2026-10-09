@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.9.0](https://github.com/mehmetor/divit/compare/v1.8.0...v1.9.0) (2026-10-09)
+
+
+### Yeni
+
+* dosya düzeni denetimi ve bakımda dağınıklık önerisi (DVT-4) ([e5a56ba](https://github.com/mehmetor/divit/commit/e5a56ba6f5dd7687b016c23ea928d85ec499ad98))
+* kurulum güncelleyiciyi ve izin kuralını koyar, eski sürümü son-gecis'e yazar (DVT-66, DVT-67, DVT-69) ([cad52e2](https://github.com/mehmetor/divit/commit/cad52e2edd237e6d9b02d2036cf212d1b2998fbf))
+* sürüme özel geçiş notları (DVT-69, DVT-68) ([de9a739](https://github.com/mehmetor/divit/commit/de9a73916e671e3d77cdc654d6e045940d4eff62))
+
+
+### Düzeltme
+
+* güncelleme doğru klasörü günceller, engelde Run yolu; beceriler önce kuralları yükler (DVT-66, DVT-67, DVT-68) ([6649347](https://github.com/mehmetor/divit/commit/664934722da8d5025bb483f732304b590226dc4f))
+* güncelleme sohbetinde hatırlatma ve geçiş sorusu sorulmaz (DVT-69) ([9e00ea5](https://github.com/mehmetor/divit/commit/9e00ea5b54ea5c1a84f0a97dd136c0587e84b448))
+* hatırlatma denetimi ilk günlük satırından hemen sonra (DVT-69) ([eaaeec0](https://github.com/mehmetor/divit/commit/eaaeec0508afe3faa54719d8f8f09165e356ab24))
+* izin kipi ve gizli klasör anlatımı ölçülen davranışa göre (DVT-3, DVT-2) ([ec2c86d](https://github.com/mehmetor/divit/commit/ec2c86d0afb80932c2391224c178768841e7481e))
+* kurulum gizli klasördeki notu yeni metinle yeniler, önceki hâli saklanır (DVT-2) ([91e3de6](https://github.com/mehmetor/divit/commit/91e3de6ec3ba5c8036516a913682deb9e2a33962))
+* kurulum içinden çalıştığı Divit klasörünü hedef alır (DVT-66) ([4026c36](https://github.com/mehmetor/divit/commit/4026c360d6ccdd6f15e4a529201c44f128e347ab))
+* rol testinde bulunan günlük, yedek ve kitaplar arası denetim hataları ([3d23109](https://github.com/mehmetor/divit/commit/3d231098dd934cef96d5c576dd8a557981c3fc13))
+* taslak üstüne yazılmaz, hatırlatma denetimi her işin sonunda (DVT-74, DVT-75) ([6a27c7c](https://github.com/mehmetor/divit/commit/6a27c7c52aae2eeb880bdae6c4619f37dab6f504))
+* üstüne yazma kuralı kapsamlandı, rapor gösterme yönlendirmesi, bakım sürüm okuma (DVT-74, DVT-75) ([3e87714](https://github.com/mehmetor/divit/commit/3e877144ab5076461ca8ba7c75f562ed4fcfa1ec))
+* yazışmada üstüne yazma uyarısı yeniden başa alındı (DVT-74) ([61ee903](https://github.com/mehmetor/divit/commit/61ee90368ef2d5afd776be32ea54bfa40ac9089d))
+
+
+### Belgeler
+
+* bu Mac'te test ortamı rehberi (DVT-59) ([815aed1](https://github.com/mehmetor/divit/commit/815aed1d75bf43592cc88922c58887fe07900588))
+* güncelleme paketi ölçümü (DVT-67, DVT-68) ([618e6f4](https://github.com/mehmetor/divit/commit/618e6f4fbb0b415a3728c00960c582f52ab40645))
+* güncelleme paketi sınaması (DVT-66..69) ([4042ceb](https://github.com/mehmetor/divit/commit/4042cebbc506c6f0b91dbf667cdfda1ecce277d7))
+* izin kipi ve gizli klasör kilidi araştırması (DVT-3, DVT-2) ([190d53f](https://github.com/mehmetor/divit/commit/190d53f88bac18f56755ed03ad114ea7f9352675))
+* kurgusal kalite yazarı persona paketi (DVT-59) ([0bf6e72](https://github.com/mehmetor/divit/commit/0bf6e72a3f18d81b5b58503b56304fc81491c351))
+* kurgusal ziraat profesörü persona paketi (DVT-59) ([684aba3](https://github.com/mehmetor/divit/commit/684aba38535e894ec0fe4acc14a820a51894ce9e))
+* sessiz geçmiş planı (git ile belirleyici yedek) ([c09a5f1](https://github.com/mehmetor/divit/commit/c09a5f137cf031c6262ccf5bd7394968c537838d))
+* sıradaki sürüm 1.9.0 (release-please özellikten dolayı) (DVT-59) ([faf25dc](https://github.com/mehmetor/divit/commit/faf25dcc59cf1fcd059503e3d84c1f69ac8eb11f))
+* sürüm notu, test rehberi 7.3 ve geçiş istemi (DVT-66, DVT-67, DVT-69) ([962cdd8](https://github.com/mehmetor/divit/commit/962cdd860673766c901e1ca947936579609db9b2))
+* yazar senaryosunda test ortamı rehberinin yolu (DVT-59) ([e32de07](https://github.com/mehmetor/divit/commit/e32de07fcce769583573d6b1e2d85ffddc18c25b))
+
 ## [1.8.0](https://github.com/mehmetor/divit/compare/v1.7.0...v1.8.0) (2026-10-08)
 
 
