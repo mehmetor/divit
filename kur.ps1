@@ -45,9 +45,13 @@ $PdfcpuSurum = '0.15.0'
 $PopplerSurum = '26.09.0-0'
 $Test        = [bool]$env:DIVIT_TEST
 $Belgeler    = [Environment]::GetFolderPath('MyDocuments')     # OneDrive yönlendirmesini de bilir
-$Hedef       = if ($env:DIVIT_HEDEF) { $env:DIVIT_HEDEF } else { Join-Path $Belgeler 'Divit' }
-$Hedef       = [IO.Path]::GetFullPath($Hedef)
 $Ev          = if ($env:USERPROFILE) { $env:USERPROFILE } else { $HOME }
+# Klasör verilmediyse ve komut bir Divit klasörünün içinden çalıştıysa o
+# klasör hedeftir: eski bir "güncelle" DIVIT_HEDEF vermese de doğru klasör
+# yenilenir (DVT-66). Ev klasöründeki .divit araç klasörüdür, sayılmaz.
+$Burasi      = (Get-Location).Path
+$Hedef       = if ($env:DIVIT_HEDEF) { $env:DIVIT_HEDEF } elseif ($Burasi -ne $Ev -and (Test-Path -LiteralPath (Join-Path $Burasi '.divit\kurulum-surumu.txt'))) { $Burasi } else { Join-Path $Belgeler 'Divit' }
+$Hedef       = [IO.Path]::GetFullPath($Hedef)
 $Araclar     = Join-Path $Ev '.divit\araclar'
 $Guncelleyici = Join-Path $Ev '.divit\guncelle.ps1'
 $script:Uyarilar = 0

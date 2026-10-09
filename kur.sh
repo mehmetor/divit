@@ -40,6 +40,12 @@ REPO="${DIVIT_REPO:-mehmetor/divit}"
 PANDOC_SURUM="3.11"
 PDFCPU_SURUM="0.15.0"
 TEST="${DIVIT_TEST:-}"
+# Klasör verilmediyse ve komut bir Divit klasörünün içinden çalıştıysa o
+# klasör hedeftir: eski bir "güncelle" DIVIT_HEDEF vermese de doğru klasör
+# yenilenir (DVT-66). Ev klasöründeki ~/.divit araç klasörüdür, sayılmaz.
+if [ -z "${DIVIT_HEDEF:-}" ] && [ "$PWD" != "$HOME" ] && [ -f "$PWD/.divit/kurulum-surumu.txt" ]; then
+  DIVIT_HEDEF="$PWD"
+fi
 HEDEF="${DIVIT_HEDEF:-$HOME/Documents/Divit}"
 case "$HEDEF" in /*) ;; *) HEDEF="$PWD/$HEDEF" ;; esac
 ARACLAR="$HOME/.divit/araclar"
