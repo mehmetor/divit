@@ -10,6 +10,7 @@ araçlar değiştiğinde).
 ## Sıradaki · kurulum gerekir
 - Kitap yazarı: Divit yazınızın kendine özgü tarzından "sesiniz" diye değil, "üslubunuz" diye söz eder; kılavuzda da böyle.
 - Herkes: Kılavuzda ses kaydını yazıya dökme işi de anlatılıyor: "ses kaydını yazıya dök" yazın, kaydı yazıya dökmenin yolunu adım adım anlatırım.
+- Herkes: Kılavuzdaki komut listesinde her işin ne yaptığı daha ayrıntılı yazıyor (atıf kontrolü, sınav, çeviri, ders takvimi, fotoğraftan metin).
 
 ## 1.9.0 · 2026-10-09 · kurulum gerekir
 - Herkes: Aynı gün aynı konuda ikinci bir taslak (dilekçe, mektup) istediğinizde eskisinin üstüne yazmam; yenisi yanına gelir, sizin düzelttiğiniz hâl durur. "Şunu düzelt" derseniz yine aynı dosyada çalışırım.

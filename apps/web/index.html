@@ -196,17 +196,17 @@ Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.</pre>
   <div style="overflow-x:auto"><table class="cizelge">
 <tr><td><code>/divit-akademik:tez-kontrol</code></td><td>Öğrenci tezini, ödevini ya da raporunu okur, bulgu raporu yazar.</td></tr>
 <tr><td><code>/divit-akademik:yayin-oncesi</code></td><td>Kendi makalenizi göndermeden önce kontrol eder: çizelge, birim, dergi kuralları.</td></tr>
-<tr><td><code>/divit-akademik:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder.</td></tr>
+<tr><td><code>/divit-akademik:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder: her künyeyi üç ayrı yayın kaydında arar, yanlış yıl, cilt, sayfa, yazar ve geri çekilmiş makaleyi bulur.</td></tr>
 <tr><td><code>/divit:yazisma</code></td><td>Dilekçe, kurul yazısı, referans mektubu, hakem cevabı yazar.</td></tr>
-<tr><td><code>/divit-akademik:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir.</td></tr>
+<tr><td><code>/divit-akademik:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir. Her sorunun nottaki yeri yazılır; doğru şıklar dengeli dağılır.</td></tr>
 <tr><td><code>/divit-akademik:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
-<tr><td><code>/divit-akademik:ders-takvimi</code></td><td>Dönem takviminizi ve ders programınızı kaydeder; hatırlatmalar buna göre yapılır.</td></tr>
+<tr><td><code>/divit-akademik:ders-takvimi</code></td><td>Dönem takviminizi ve ders programınızı kaydeder; sınavdan önce soru hazırlığını, not girişinden önce değerlendirmeyi hatırlatır.</td></tr>
 <tr><td><code>/divit:takvim</code></td><td>Yaklaşan işlerinizi özetler, son tarihleri listeye ve takvime ekler.</td></tr>
 <tr><td><code>/divit:sunum</code></td><td>Metninizden PowerPoint sunumu hazırlar.</td></tr>
 <tr><td><code>/divit:tablo</code></td><td>Tabloyu Excel'de açılan dosyaya çevirir; gelen Excel dosyasını okur.</td></tr>
-<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir.</td></tr>
+<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir. Seçtiği terim karşılıkları bir listede durur, hep aynı kalır.</td></tr>
 <tr><td><code>/divit:sekil</code></td><td>Grafik, akış şeması, zaman çizelgesi çizer.</td></tr>
-<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir.</td></tr>
+<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir; kendi yazınız mı, alıntı mı, esin mi olduğunu not eder.</td></tr>
 <tr><td><code>/divit:baglanti</code></td><td>Gmail, Google Takvim ve Drive bağlı mı bakar; değilse nasıl bağlanacağını anlatır.</td></tr>
 <tr><td><code>/divit:kitap-duzenle</code></td><td>Var olan kitabınızı editör gözüyle okur: tekrar, çelişki, eskimiş bilgi. Onayladığınız değişiklikleri ayrı bir çalışma metnine işler. İsterseniz önerileri Word'de Değişiklikleri İzle ile ayrı bir dosyada verir.</td></tr>
 <tr><td><code>/divit:kitap-derle</code></td><td>Dağınık yazılarınızdan, konuşmalarınızdan kitap planı ve bölüm iskeleti çıkarır. Editörü olduğunuz ortak kitapta başka yazarların bölümlerini de derler.</td></tr>
@@ -324,9 +324,9 @@ Bilgisayarımda başka hiçbir şeyi değiştirme, hiçbir dosyayı silme.</pre>
 <tr><td><code>/divit:ses</code></td><td>Ses kaydınızı yazıya dökmenin yolunu adım adım anlatır, çıkan metni konuşanlarıyla temiz bir nota çevirir.</td></tr>
 <tr><td><code>/divit:yazisma</code></td><td>Yayınevine, editöre yazı; izin isteme yazısı hazırlar.</td></tr>
 <tr><td><code>/divit:takvim</code></td><td>Yaklaşan işlerinizi özetler, son tarihleri listeye ve takvime ekler.</td></tr>
-<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir.</td></tr>
+<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir. Seçtiği terim karşılıkları bir listede durur, hep aynı kalır.</td></tr>
 <tr><td><code>/divit:sekil</code></td><td>Grafik, akış şeması, zaman çizelgesi çizer.</td></tr>
-<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir.</td></tr>
+<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir; kendi yazınız mı, alıntı mı, esin mi olduğunu not eder.</td></tr>
 <tr><td><code>/divit:sunum</code></td><td>Metninizden PowerPoint sunumu hazırlar.</td></tr>
 <tr><td><code>/divit:tablo</code></td><td>Tabloyu Excel'de açılan dosyaya çevirir; gelen Excel dosyasını okur.</td></tr>
 <tr><td><code>/divit:baglanti</code></td><td>Gmail, Google Takvim ve Drive bağlı mı bakar; değilse nasıl bağlanacağını anlatır.</td></tr>
