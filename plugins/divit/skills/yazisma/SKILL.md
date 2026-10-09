@@ -10,11 +10,16 @@ description: Yazışma taslağı hazırlar — dilekçe, mektup, yayınevine ya 
 Hocanın en çok zamanını yiyen, en az bilişsel değer taşıyan iş bu.
 Risk düşük, kazanç anında görünür — ürünün güven kazandığı yer burası.
 
+**Taslağı yazmadan önce:** Glob `yazilar/*<konu>*`. Bugünün tarihli aynı ad varsa yeni taslak
+`-s2` olur; eskisi hocanın düzelttiği hâl olabilir, dokunma.
+
 Tür yazarsa (`kurallar`) iskeletler `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`
 → "Yazışma" bölümündedir; aşağıdaki ortak kurallar yine geçerlidir.
 
 ## Ortak kurallar
 
+- **Kaydetmeden önce Glob ile `yazilar/<tür>-<konu>-<tarih>*` ara.** Varsa yeni
+  taslak `-s2` (`-s3` …) adını alır; var olan dosyaya Write yapma, üstüne yazma.
 - Hocanın unvanı, bölümü, üniversitesi `.divit/profil/kimlik.md`
   dosyasından alınır. Orada yoksa **sor**, uydurma.
 - Tarih, sayı, yönetmelik maddesi, madde numarası **asla uydurulmaz**.
@@ -69,6 +74,7 @@ adım. Kişiye değil metne yönelik dil: "sen dağınık yazmışsın" değil,
 
 ## Çıktı
 
-`yazilar/<tür>-<konu>-<tarih>.md` olarak kaydet. Hoca Word isterse
+1. Glob: `yazilar/<tür>-<konu>-<tarih>*`. 2. Ad boşsa `yazilar/<tür>-<konu>-<tarih>.md`,
+doluysa sıradaki `-s2`, `-s3` ile kaydet; hocaya "önceki taslak duruyor" de. Hoca Word isterse
 `disa-aktar` skill'ine geç. E-postayla gidecekse (öğrenciye, editöre)
 `eposta` skill'ine geç.

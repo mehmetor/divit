@@ -43,7 +43,7 @@ Oturumda **en fazla bir** hatırlatma yap. Sıra: geçiş notu, yenilik/güncell
 
 **Geçiş notu** — yeni sürümün bir kez yapılacak işleri. Başlangıç `son-gecis` (yoksa
 `.divit/kurulum-surumu.txt`, o da yoksa 0); yüklü sürüm `${CLAUDE_PLUGIN_ROOT}/SURUM.md`'deki ilk
-`## <sürüm>` (sayı değilse geç). `${CLAUDE_PLUGIN_ROOT}/gecisler/<sürüm>.md` dosyalarından (Glob; README
+`## <sürüm>` (Read, limit 20; başlık 10. satır civarında) (sayı değilse geç). `${CLAUDE_PLUGIN_ROOT}/gecisler/<sürüm>.md` dosyalarından (Glob; README
 değil) başlangıçtan büyük, yüklü sürümden büyük olmayanları sayı sırasıyla (1.10 > 1.9) Read ile oku.
 "Kimin için"i türe uymayan maddeyi atla; kalanın sorusunu aynen, tek tek sor; yalnız "evet"te adımlarını
 uygula, onaysız iş yok. Her dosyadan sonra (cevap ne olursa olsun) `son-gecis`'i o sürüme yaz; soru
