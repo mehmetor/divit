@@ -8,6 +8,7 @@ komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
 ## Sıradaki · kurulum gerekir
+- Herkes: Aynı gün aynı konuda ikinci bir taslak (dilekçe, mektup) istediğinizde eskisinin üstüne yazmam; yenisi yanına gelir, sizin düzelttiğiniz hâl durur. "Şunu düzelt" derseniz yine aynı dosyada çalışırım.
 - Herkes: Haftalık geri bildirim ve aylık bakım önerileri artık ilk işiniz bitince gelir; bir sohbette en çok bir tane.
 - Herkes: "Güncelle" dediğinizde Divit artık o an çalıştığınız klasörü günceller. Bu güncellemeden sonra İngilizce izin sorusu da çıkmaz; bilgisayarınızın güvenlik ayarı yine engellerse Divit size basacağınız düğmeyi gösterir.
 - Herkes: Yeni bir sürüm sizin kararınızı isteyen bir değişiklik getirirse Divit bunu bir kez sorar, yalnız onayınızla yapar. Akademisyen: bu sürümde "gizli" klasörüyle ilgili tek bir soru gelecek.
