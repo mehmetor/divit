@@ -61,7 +61,7 @@ ardına ekle; Write ile baştan yazma, geçmiş silinir; `sorunlar.md` de böyle
 `YYYY-AA-GG SS:DD · <iş türü> · <dosya> · <tek cümle sonuç>`. Yarım kalan ve başarısız
 işi de yaz; öğrenci adı değil baş harf. Saati bilmiyorsan uydurma, yalnız tarih yaz.
 Günlük yalnız hocanın izniyle paylaşılır.
-Oturumun **ilk** günlük satırını yazınca, cevabı bitirmeden `divit:bakim` skill'ini yükle ve "Hatırlatma denetimi"ni uygula (hatırlatılacak bir şey yoksa sessiz geç).
+Oturumun **ilk** günlük satırını yazınca, cevabı bitirmeden `divit:bakim` skill'ini yükle ve "Hatırlatma denetimi"ni uygula (hatırlatılacak bir şey yoksa sessiz geç; ilk satır `güncelleme` ise denetimi bu sohbette yapma: hoca Claude'u yeniden açacak, soru yeni sohbete kalır).
 
 Hoca memnun kalmadığını gösterince ("bu olmadı", "yanlış", "anlamadım", "takıldım",
 aynı isteği tekrar, izin sorusunu reddetme) önce işini düzelt, sonra

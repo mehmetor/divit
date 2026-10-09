@@ -129,3 +129,5 @@ Uyarı olmadan ya da ikinci denemede bitince:
 Her uyarıyı `sorunlar.md`'ye "güncelleme" türüyle yaz. Kurulum tarayıcıda
 kılavuzu açabilir; bunu hocaya söyle.
 `gunluk.md`'ye tek satır (Read sonra Edit, sona): `… · güncelleme · — · <sürüm>`.
+Bu sohbette hatırlatma denetimi yapma ve geçiş notu sorma: Claude yeniden
+açılınca ilk işte sorulur; yoksa soru kapanan sohbette kalır.
