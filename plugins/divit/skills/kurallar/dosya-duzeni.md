@@ -17,10 +17,13 @@ dosyalar içindir.
   Yazmadan önce Glob ile bak; varsa bir sonraki sayıyı kullan, üstüne yazma.
 - Kullanıcının dosyasından türeyen Word/PDF: ad kısmında `-divit` olur,
   karışmasın: `<kullanıcının dosya adı>-divit-YYYY-AA-GG.docx`.
+- Sürüm eki her yerde `-s2`, `-s3`; `-2`, `-yeni`, `(1)` kullanma.
 - Raporun sayfa hâli aynı adı taşır: `rapor-2026-10-01.md` → `rapor-2026-10-01.html`.
 - Güncellenerek yaşayan dosyalar tarih almaz: `plan.md`, `envanter.md`,
-  `oneriler-<bolum-no>.md`, `kaynaklar/dogrulama.md`, `.divit/` altındaki
-  profil, günlük ve not dosyaları. Bunlara önceki sürüm kuralı uygulanır.
+  `oneriler-<bolum-no>.md`, `kaynaklar/dogrulama.md`,
+  `yazilar/<makale-adi>/hakem-cevap-tablosu.md`, `sekiller/` içindeki şekil
+  dosyaları (metin onlara adıyla bağlanır), `.divit/` altındaki profil, günlük
+  ve not dosyaları. Bunlara önceki sürüm kuralı uygulanır.
 
 ## Klasörler — iş türü, sonra konu ya da kişi
 
@@ -29,10 +32,19 @@ dosyalar içindir.
 | Akademisyen: öğrenci metni raporu | `tez-kontrol/rapor/<baş harfler>/<baş harfler>-YYYY-AA-GG.md` |
 | Yazar: kitap raporu | `kitaplar/<kitap-adi>/raporlar/rapor-YYYY-AA-GG.md` |
 | Yazar: öneri, çalışma metni | `kitaplar/<kitap-adi>/duzenleme/`, `taslak/` |
-| Yazışma | `yazilar/<tür>-<konu>-YYYY-AA-GG.md` |
-| Word ve PDF çıktısı | `cikti/<ad>-YYYY-AA-GG.docx` |
+| Yazar: kitaba ait çeviri, şekil, ses ya da fotoğraf metni | `kitaplar/<kitap-adi>/ceviri/`, `sekiller/`, `notlar/` |
+| Kendi makalesi: ön değerlendirme, hakem cevap tablosu | `yazilar/<makale-adi>/on-degerlendirme-YYYY-AA-GG.md` |
+| Yazışma (e-postaya sığmayan metin de) | `yazilar/<tür>-<konu>-YYYY-AA-GG.md` |
+| Sınav | `yazilar/sinav/<ders>-<sınav>-YYYY-AA-GG.md` |
+| Çeviri (kitaba ait değilse) | `yazilar/<ad>-ceviri-YYYY-AA-GG.md` |
+| Ses ve fotoğraf metni | `notlar/ses-metin/`, `notlar/malzeme-metin/` |
+| Kaynak doğrulama raporu | `cikti/kaynak-dogrulama-YYYY-AA-GG.md` |
+| Word, PDF, PowerPoint, Excel çıktısı | `cikti/<ad>-YYYY-AA-GG.<uzantı>`; kullanıcının dosyasından türeyense `cikti/<dosya adı>-divit-YYYY-AA-GG.<uzantı>` (kitapta `<kitap-adi>-divit-…`) |
 | Ara dosya (metne çevrilmiş Word/PDF, deneme) | yalnız `.divit/gecici/<ad>-YYYY-AA-GG.<uzantı>` |
 
+- Klasör sırası: iş türü → kişi ya da konu. Dönem için ayrı klasör açılmaz;
+  dönem addaki tarihtir, klasörde ad sırası zaman sırasıdır.
+- Kökte Divit dosyası durmaz; her çıktının yeri bu tablodadır.
 - Baş harf kullan, öğrencinin adını dosya ya da klasör adına yazma.
 - Alt klasörü Write kendisi açar; ayrıca klasör açma komutu gerekmez.
 - Ara dosya kullanıcının klasörlerine hiç yazılmaz. Adında tarih olsun ki
@@ -56,6 +68,22 @@ Dosya koymak: `koy <ad> asil "<dosya>"` (ya da `malzeme`). Sona isteğe bağlı
 (`el-yazisi-01`); uzantı özgün dosyadan gelir. Telefondan gelen fotoğrafın
 adı anlamsızdır, yeni adla koy. Cevap: `ACILDI`, `KOPYALANDI` tamam; `VAR` →
 aynı adlı dosya orada, dokunulmadı, onu kullan; `HATA` → sade söyle.
+
+## Divit dosyasını taşımak
+
+Yalnız `bakim` (ve tür değişimi) önerir; kullanıcı dosyaları adıyla gösteren öneriye "evet" dedikten sonra.
+Yalnız Divit'in ürettiği dosya taşınır: adında `-divit-` olan ya da
+`.divit/gunluk.md`'de Divit'in yazdığı geçen. `gelen/`, `asil/`, `malzeme/`,
+`hakemlik/`, `gizli/` içindekiler ve günlükte geçmeyen her dosya kullanıcınındır;
+taşınmaz, adı değişmez. Silme yok.
+- Hedefte aynı ad varsa `-s2` (önce Glob ile bak). Hedef klasör yoksa `mkdir`.
+- Komut, dosya başına tek (üstüne yazmaz):
+  - Mac: `mv -n "<eski yol>" "<yeni yol>"`
+  - Windows: `Move-Item -LiteralPath "<eski yol>" -Destination "<yeni yol>"`
+- Raporun `.md` ve `.html` eşi birlikte taşınır.
+- Sonra Glob ile yeni yerde olduğuna bak; değilse "taşıyamadım" de, yeniden deneme.
+- Bilgisayar bir onay penceresi açabilir; önceden söyle: "Taşırken bilgisayar
+  her dosya için onay sorabilir, kabul etmeniz yeter."
 
 ## Rapor gösterme
 

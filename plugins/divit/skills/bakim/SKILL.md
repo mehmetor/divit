@@ -1,9 +1,11 @@
 ---
 name: bakim
-description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyalarını, klasördeki CLAUDE.md'yi, Claude'un hafıza notlarını ve günlüğü sadeleştirir, eskiyen ara dosyaları ve dağınık adları listeler; ayrıca haftalık geri bildirim önerisinin ve aylık bakımın zamanını denetler. Kullanıcı "bakım yap", "düzenini gözden geçir", "kendini toparla" dediğinde ya da kurallar skill'i hatırlatma denetimi istediğinde kullan.
+description: Divit'in ayda bir yaptığı iç düzen bakımı — profil dosyalarını, klasördeki CLAUDE.md'yi, Claude'un hafıza notlarını ve günlüğü sadeleştirir, eskiyen ara dosyaları listeler, yanlış yerde ya da sürümsüz kalmış Divit dosyalarını bulup onayla yerine taşır; ayrıca haftalık geri bildirim önerisinin ve aylık bakımın zamanını denetler. Kullanıcı "bakım yap", "düzenini gözden geçir", "kendini toparla", "klasör karıştı" dediğinde ya da kurallar skill'i hatırlatma denetimi istediğinde kullan.
 ---
 
 # Bakım ve hatırlatmalar
+
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
 
 ## Yasaklar
 
@@ -32,10 +34,21 @@ son-oneri-bakim: YYYY-AA-GG
 son-gorulen-surum: 1.6
 son-oneri-guncelleme: YYYY-AA-GG
 son-uzak-denetim: YYYY-AA-GG
+son-gecis: 1.8.0
 ```
 
-Oturumda **en fazla bir** hatırlatma yap. Sıra: yenilik/güncelleme
+Anahtarı **Edit** ile güncelle: satırı varsa o satırı değiştir, yoksa bir kez ekle; aynı anahtar iki kez durmaz.
+Oturumda **en fazla bir** hatırlatma yap. Sıra: geçiş notu, yenilik/güncelleme
 (`guncelleme` skill'i, 1. ve 2. adımlar), geri bildirim, bakım.
+
+**Geçiş notu** — yeni sürümün bir kez yapılacak işleri. Başlangıç `son-gecis` (yoksa
+`.divit/kurulum-surumu.txt`, o da yoksa 0); yüklü sürüm `${CLAUDE_PLUGIN_ROOT}/SURUM.md`'deki ilk
+`## <sürüm>` (Read, limit 40; ilk `## ` başlığı, girişten hemen sonra; sayı değilse geç). `${CLAUDE_PLUGIN_ROOT}/gecisler/<sürüm>.md` dosyalarından (Glob; README
+değil) başlangıçtan büyük, yüklü sürümden büyük olmayanları sayı sırasıyla (1.10 > 1.9) Read ile oku.
+"Kimin için"i türe uymayan maddeyi atla; kalanın sorusunu aynen, tek tek sor; yalnız "evet"te adımlarını
+uygula, onaysız iş yok. Her dosyadan sonra (cevap ne olursa olsun) `son-gecis`'i o sürüme yaz; soru
+sorduysan `gunluk.md`'ye `YYYY-AA-GG SS:DD · geçiş · <sürüm> · <yapılan ya da "istemedi">` yaz ve bu
+oturumun hatırlatması bu olsun; sormadıysan sıradakine geç.
 
 **Geri bildirim** — şu üçü birden doğruysa öner:
 1. `geri-bildirim-sorma` "evet" değil;
@@ -99,26 +112,24 @@ dosyalarını tutabilir (bilgisayarın kullanıcı klasöründe
 "kota" kayıtlarını say; gerekirse öneriyi yap.
 
 **5. Yer ve dosya düzeni.** Önce `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/dosya-duzeni.md`'yi
-Read ile yükle. Yalnız **listele**; bu adımda hiçbir dosyayı değiştirme.
+Read ile yükle (yerler tablosu ve "Divit dosyasını taşımak"). Bu adımda yalnız **listele**.
 - `.divit/onceki-surumler/` ve `.divit/gecici/` klasörlerinin kaba büyüklüğünü
   söyle (Glob ile dosya sayısı). 90 günden eski önceki sürümler varsa söyle.
 - `.divit/gecici/`: adındaki tarih **30 günden eski** dosyalar ve adında
   tarih olmayanlar (ikincisi "tarihi belli değil" diye ayrı).
-- Kural dışı adlar: `<ad>-YYYY-AA-GG` biçiminde olmayan, Divit'in ürettiği
-  dosyalar. Yalnız Divit'in yazdığı yerlere bak: `tez-kontrol/rapor/`,
-  `kitaplar/*/raporlar/`, `cikti/` ve `yazilar/`'da yalnız `gunluk.md`'de
-  Divit'in yazdığı geçen dosyalar. Tarih almayan yaşayan dosyalar
-  (`plan.md`, `oneriler-…`) kural dışı değildir. Emin değilsen listeye alma.
-- Ara dosya `.divit/gecici/` dışında (kullanıcı klasöründe `.txt` ya da
-  metne çevrilmiş kopya) duruyorsa ve günlükte Divit'in yazdığı geçiyorsa listele.
+- **Dağınıklık** — yalnız Divit'in ürettikleri (adında `-divit-` olan ya da
+  `gunluk.md`'de Divit'in yazdığı geçen); emin değilsen listeye alma:
+  a) Yanlış yer: kökte ya da tablodakinden başka klasörde duran çıktı → tablodaki yer.
+  b) Ara dosya `.divit/gecici/` dışında (metne çevrilmiş kopya, deneme) → `.divit/gecici/`.
+  c) Sürümsüz aynı ad: aynı klasörde tarihsiz ya da `-2`, `-yeni`, `(1)` ekli
+     çıktılar → `<ad>-YYYY-AA-GG`, sonra `-s2`; tarih günlükteki kayıttan,
+     bulamazsan yeniden adlandırma önerme.
+  Tarih almayan yaşayan dosyalar (`plan.md`, `oneriler-…`) dağınık değildir.
 
-Silme ve taşıma **yalnız onayla ve öneri olarak**; Divit dosya silemez:
-- Kullanıcı "evet" derse ilgili klasörü açarsın (Windows: `Invoke-Item`,
-  Mac: `open`); siler ya da `arsiv/`'e taşır, kendisi karar verir.
-- Kullanıcının klasöründeki bir metin dosyası için önce kopyasını
-  `.divit/onceki-surumler/<YYYY-AA-GG_SSDD>/<aynı yol>` altına al.
-- Kural dışı adlar için yeniden adlandırma önerme; "Bundan sonrakiler yeni
-  düzende adlanacak" de. Kullanıcı isterse klasörü açarsın.
+Taşıma ve yeniden adlandırma **yalnız onayla**, `dosya-duzeni.md`'deki komutla,
+her dosya ayrı komutla. Divit dosya silemez: silmek isteyene klasörü açarsın (Windows:
+`Invoke-Item`, Mac: `open`); siler ya da `arsiv/`'e taşır, kendisi karar verir.
+Kullanıcının dosyası için "Bundan sonrakiler yeni düzende adlanacak" de.
 
 ## Göster, onay al, kaydet
 
@@ -128,7 +139,9 @@ Silme ve taşıma **yalnız onayla ve öneri olarak**; Divit dosya silemez:
 > - Görevlerde biten 4 işi 'Biten işler'e taşıyorum.
 > - Üslup notlarında iki kez yazılmış bir kural var; birini çıkarıyorum.
 > - Bir aydan eski 12 ara dosya var; isterseniz klasörü açarım, siz silersiniz.
+> - Benim yazdığım 3 rapor ana klasörde duruyor; öğrencinin klasörüne taşıyayım mı?
 > Onaylıyor musunuz?"
+Dağınıklık maddeleri türe göre birleşir ("3 rapor"); özet yine en çok beş madde.
 
 Onaydan sonra uygula. `son-bakim`'i bugüne yaz. `gunluk.md`'ye tek satır:
 `YYYY-AA-GG SS:DD · bakım · .divit · <ne değişti, tek cümle>`.

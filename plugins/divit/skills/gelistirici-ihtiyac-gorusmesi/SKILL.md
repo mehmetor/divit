@@ -5,6 +5,8 @@ description: Kullanıcının gerçek iş akışını ve ihtiyaçlarını tespit 
 
 # İhtiyaç görüşmesi
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Bu skill ürünü hocaya uydurmak *ve* geliştiriciye ne yapacağını
 söylemek için var. Çıktı iki yere gider: hocanın profiline ve
 `.divit/paylasim/ihtiyac-notu.md` dosyasına.

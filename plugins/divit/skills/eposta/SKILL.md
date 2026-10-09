@@ -5,6 +5,8 @@ description: Hazırlanan bir metni e-postanızda taslak olarak açar; kendisi hi
 
 # E-posta taslağı
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 ## Yasaklar
 
 - **Asla göndermeyi sen yapma.** Her yol yalnızca taslak hazırlar;
@@ -54,7 +56,7 @@ ile kodlanmış:
 - Mac: `open "mailto:<adres>?subject=<konu>&body=<metin>"`
 
 Metin çok uzunsa (2000 karakterden fazla) gövdeye koyma; metni
-`yazilar/` altında bir dosyaya yaz, klasörü aç ve "Metni e-postaya
+`yazilar/eposta-<konu>-<YYYY-AA-GG>.md` dosyasına yaz, klasörü aç ve "Metni e-postaya
 kopyalayın" de. Ek gerekiyorsa dosyanın klasörünü aç: "Dosyayı açılan
 e-postaya sürükleyin."
 

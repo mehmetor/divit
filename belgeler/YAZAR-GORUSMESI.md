@@ -194,6 +194,14 @@ Demoda Mehmet'in Mac'inde başka eklentilerin komutları görünebilir
    - Mac: `curl -fsSL https://divit.simetri.app/kur.sh | DIVIT_TUR=yazar bash`
    - Windows: `$env:DIVIT_TUR='yazar'; irm https://divit.simetri.app/kur.ps1 | iex`
    Windows'ta yazar kurulumu henüz denenmedi; birlikte yapılsın.
+   - Bilgisayarda Divit daha önce başka kaynaktan (ör. `deneme` kanalı)
+     kurulduysa kurulum `HATA: Divit bu bilgisayarda başka bir kaynaktan
+     kurulu` der; önce `claude plugin marketplace remove divit`, sonra
+     aynı komut. Klasördeki dosyalara dokunulmaz.
+   - Mac'te Claude Code eskiyse (2.1.280 altı) kurulum önce günceller,
+     olmazsa resmî kurulumu yapar; resmî kurulum npm ile genel kurulmuş
+     `claude`'u kaldırır (geliştirme makinesinde `/opt/homebrew/bin/claude`
+     bu yüzden gidebilir).
 2. Takip `PILOT.md` düzeninde: 3 gün sonra telefon, 1 hafta sonra kısa
    görüşme. Ölçü beğeni değil davranış: kendiliğinden açtı mı, rapordan
    neyi sildi, Word'e geri döndü mü.

@@ -5,6 +5,8 @@ description: Divit'in sizi tanıdığı ilk kurulum. Özgeçmişinizden ya da ki
 
 # İlk kurulum — Divit hocayı tanır
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Kimse hocanın bilgilerini önceden hazırlamadı. Her şeyi **sen** toplarsın: özgeçmişten, hocanın yayımlanmış
 makalelerinden ve hocanın cevaplarından. Hedef: hoca 15 dakika içinde ilk gerçek işini bitirmiş olsun.
 
@@ -34,8 +36,7 @@ soruyu sorma: tür `akademisyen`. Tür kesinleşince satırı `kimlik.md`'de ilk
 
 ## 1. Tanışma ve özgeçmiş
 
-Kendini üç cümleyle tanıt: ne yaparsın, ne yapmazsın (not vermem, sizin yerinize yazmam,
-kaynaklarınızda olmayan atıf üretmem).
+Kendini üç cümleyle tanıt: ne yaparsın, ne yapmazsın (not vermem, sizin yerinize yazmam, kaynaklarınızda olmayan atıf üretmem).
 
 Sonra iste:
 > "Özgeçmişinizi bu pencereye sürükler misiniz? PDF ya da Word olabilir.
@@ -82,8 +83,7 @@ yazarlı makalelerde metni çoğu zaman ilk yazar (öğrenci) yazar; o metin hoc
 ## 4. Alan kurallarını yaz
 
 `${CLAUDE_PLUGIN_ROOT}/alan/` klasörüne bak. Hocanın alanına uyan hazır bir kılavuz varsa (ör.
-`ziraat.md`; okul, öğretmenlik, rehberlik için `okul-rehberligi.md`) başlangıç olarak kullan,
-hocanın alt alanına göre daralt.
+`ziraat.md`; okul, öğretmenlik, rehberlik için `okul-rehberligi.md`) başlangıç olarak kullan, hocanın alt alanına göre daralt.
 
 Uyan kılavuz yoksa **kendin yaz.** Yapı olarak `${CLAUDE_PLUGIN_ROOT}/alan/ORNEK-SABLON.md`
 dosyasını izle. İçeriği hafızadan değil, 3. adımda okuduğun makalelerden çıkar:
@@ -129,7 +129,7 @@ Kapanışta tek paragraf:
 Güvenceden önce `saglik` skill'ini sessizce çalıştır. Sorun çıkarsa hocaya yalnız o tek adımı söyle.
 
 Sonra tek cümle:
-> "İzin soruları çok mu? Yazı kutusunun yanındaki seçiciden Auto'yu seçin; bir kez yeter."
+> "İzin soruları çok mu? Yazı kutusunun yanındaki seçiciden Auto'yu seçin; bir kez yeter. Seçicide Auto yoksa böyle kalabilir."
 
 Sonra gerçek bir işe geç: `gorevler.md`'de en yakın tarihli iş hangisiyse onu öner (ör. tez için
 `divit-akademik:tez-kontrol`). Hiç iş yoksa `yardim` skill'inin özetini göster.

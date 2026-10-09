@@ -324,7 +324,7 @@ Divit e-postayı kendisi göndermez. Divit yalnızca taslak açar. Bunun için b
 <tbody>
 <tr><td><code>tez-kontrol/gelen</code></td><td>Öğrenci dosyaları. Değerlendirilecek dosyayı buraya koyun.</td></tr>
 <tr><td><code>tez-kontrol/rapor</code></td><td>Divit'in yazdığı değerlendirme raporları. Her öğrenci için baş harfleriyle ayrı klasör.</td></tr>
-<tr><td><code>gizli</code></td><td>Vaka, görüşme ve benzeri gizli dosyalar. Divit bu klasörü hiç okumaz.</td></tr>
+<tr><td><code>gizli</code></td><td>Divit'in okumaması gereken dosyalar. Divit bu klasörü okumaz. En hassas dosyalar buraya değil, Divit klasörünün dışına.</td></tr>
 <tr><td><code>yazilar</code></td><td>Sizin metinleriniz ve yazışmalarınız.</td></tr>
 <tr><td><code>kaynaklar</code></td><td>Kaynak PDF'leriniz. Divit yalnızca buradaki kaynaklara atıf yapar.</td></tr>
 <tr><td><code>cikti</code></td><td>Word ve PDF çıktıları.</td></tr>
@@ -333,7 +333,7 @@ Divit e-postayı kendisi göndermez. Divit yalnızca taslak açar. Bunun için b
 <div class="kutu uyari"><b class="etiket">UYARI</b>
 <code>.divit</code> ve <code>.claude</code> klasörlerine dokunmayın. Bu klasörler Divit'in kendi dosyalarıdır. Sizi tanıdığı bilgiler ve önceki sürümler buradadır.</div>
 <div class="kutu not"><b class="etiket">GİZLİ DOSYALAR</b>
-Öğrenci vaka dosyası, görüşme notu, RAM dosyası gibi gizli belgeleri <code>gizli</code> klasörüne koyun. Divit bu klasörü okuyamaz; izin ayarı bunu kapatır. Bu belgelerle ilgili bir yazı gerekirse Divit adsız, genel bir taslak hazırlar; gerekli bilgiyi siz adsız ve kısa olarak yazarsınız.</div>
+Divit'in okumaması gereken dosyaları <code>gizli</code> klasörüne koyun. Divit bu klasörü okumaz. En hassas dosyaları (öğrenci vaka dosyası, görüşme notu, sağlık raporu, RAM dosyası) Divit klasörüne hiç koymayın; Belgeler'de ayrı bir klasörde tutun. Bu belgelerle ilgili bir yazı gerekirse Divit adsız, genel bir taslak hazırlar; gerekli bilgiyi siz adsız ve kısa olarak yazarsınız.</div>
 </section>
 
 <section id="a-guvenlik">
@@ -670,6 +670,8 @@ Bir işlemi anlamazsanız izin vermeyin. Sonra Divit'e "bu ne işlem?" diye soru
 <p>Divit dosya okumak ve kendi klasörlerine yazmak için izin istemez. Bu işlemlere önceden izin verildi.</p>
 <h3>Çok izin sorusu çıkıyorsa</h3>
 <p>Mesaj kutusunun altında bir kip seçici vardır. Bu seçiciden <b>Auto</b>'yu seçin. Divit güvenli işleri sormadan yapar. Divit riskli işlerde yine sorar.</p>
+<p>Seçicide <b>Auto</b> yoksa sorun değil. Divit böyle de çalışır; yalnızca tanımadığı işlerde izin sorar.</p>
+<p>Auto kipinde Divit klasörü dışındaki bir dosya için İngilizce bir soru çıkabilir. Bu soruda <b>Yes, and keep allowing…</b> ile başlayan seçeneği seçin. <b>No, and block…</b> ile başlayan seçeneği seçmeyin; Divit o dosyaya bir daha ulaşamaz.</p>
 <p>Auto kipinde de Divit dosyalarınızı silmez. Divit'in yalnızca okuduğu klasörlere yazma yasağı her kipte geçerlidir. Bu klasörler yukarıdaki klasör çizelgesinde yazar.</p>
 </section>
 

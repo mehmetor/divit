@@ -5,8 +5,13 @@ description: Yazışma taslağı hazırlar — dilekçe, mektup, yayınevine ya 
 
 # Akademik ve idari yazışma
 
+**Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
+
 Hocanın en çok zamanını yiyen, en az bilişsel değer taşıyan iş bu.
 Risk düşük, kazanç anında görünür — ürünün güven kazandığı yer burası.
+
+**Taslağı yazmadan önce:** Glob `yazilar/*<konu>*`. Bugünün tarihli aynı ad varsa yeni taslak
+`-s2` olur; eskisi hocanın düzelttiği hâl olabilir, dokunma (ayrıntı: "Çıktı").
 
 Tür yazarsa (`kurallar`) iskeletler `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`
 → "Yazışma" bölümündedir; aşağıdaki ortak kurallar yine geçerlidir.
@@ -67,6 +72,9 @@ adım. Kişiye değil metne yönelik dil: "sen dağınık yazmışsın" değil,
 
 ## Çıktı
 
-`yazilar/<tür>-<konu>-<tarih>.md` olarak kaydet. Hoca Word isterse
+1. Glob: `yazilar/<tür>-<konu>-<tarih>*`. 2. Ad boşsa `yazilar/<tür>-<konu>-<tarih>.md`,
+doluysa sıradaki `-s2`, `-s3` ile kaydet ve hocaya "önceki taslak duruyor" de — eskisi hocanın
+düzelttiği hâl olabilir, üstüne yazma. Hoca var olan taslağı düzeltmeni **açıkça** isterse
+`kurallar`'daki önceki sürüm kuralıyla (kopya, sonra Edit) onu değiştir. Hoca Word isterse
 `disa-aktar` skill'ine geç. E-postayla gidecekse (öğrenciye, editöre)
 `eposta` skill'ine geç.

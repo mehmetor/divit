@@ -20,8 +20,13 @@
 # aynı bilgisayarda ikinci kullanım ayrı klasördür (DIVIT_HEDEF).
 #
 # Kanal (yayın dalı): DIVIT_DAL > klasördeki .divit/kanal.txt > main.
-# İzinli: main, yeni, deneme, deneme-*. Klasör kanalını kanal.txt'de
+# İzinli: main, deneme, deneme-*. Klasör kanalını kanal.txt'de
 # hatırlar; "güncelle" aynı kanalda kalır.
+#
+# Güncelleyici: ~/.divit/guncelle.sh (hoca-paketi/guncelle.sh). Klasör
+# ayarına bu yolla tam eşleşen tek bir izin kuralı, CLAUDE.md'nin
+# "Araçlar"ına yolu yazılır; Divit'in "güncelle"si kurulumu bununla ve
+# klasörün tam yoluyla (DIVIT_HEDEF) başlatır.
 #
 # Sınama değişkenleri (geliştirici için):
 #   DIVIT_TEST=1           Claude uygulaması ve komut satırı kurulmaz, kılavuz açılmaz
@@ -35,9 +40,16 @@ REPO="${DIVIT_REPO:-mehmetor/divit}"
 PANDOC_SURUM="3.11"
 PDFCPU_SURUM="0.15.0"
 TEST="${DIVIT_TEST:-}"
+# Klasör verilmediyse ve komut bir Divit klasörünün içinden çalıştıysa o
+# klasör hedeftir: eski bir "güncelle" DIVIT_HEDEF vermese de doğru klasör
+# yenilenir (DVT-66). Ev klasöründeki ~/.divit araç klasörüdür, sayılmaz.
+if [ -z "${DIVIT_HEDEF:-}" ] && [ "$PWD" != "$HOME" ] && [ -f "$PWD/.divit/kurulum-surumu.txt" ]; then
+  DIVIT_HEDEF="$PWD"
+fi
 HEDEF="${DIVIT_HEDEF:-$HOME/Documents/Divit}"
 case "$HEDEF" in /*) ;; *) HEDEF="$PWD/$HEDEF" ;; esac
 ARACLAR="$HOME/.divit/araclar"
+GUNCELLEYICI="$HOME/.divit/guncelle.sh"
 
 adim()  { printf '\n\033[1;32m▸ %s\033[0m\n' "$1"; }
 bilgi() { printf '  %s\n' "$1"; }
@@ -59,7 +71,7 @@ else
   DAL="main"
 fi
 case "$DAL" in
-  main|yeni|deneme|deneme-?*) ;;
+  main|deneme|deneme-?*) ;;
   *) uyari "'$DAL' bilinen bir kanal değil; main kullanılıyor."; DAL="main" ;;
 esac
 PAZAR_URL="https://raw.githubusercontent.com/$REPO/$DAL/.claude-plugin/marketplace.json"
@@ -206,6 +218,9 @@ fi
 unzip -q "$GECICI/repo.zip" -d "$GECICI/repo"
 SABLON="$(find "$GECICI/repo" -maxdepth 3 -type d -path '*/hoca-paketi/Divit' | head -1)"
 [ -d "$SABLON" ] || { echo "HATA: Divit şablonu bulunamadı."; exit 1; }
+# Güncelleyici her kurulumda yenilenir (Divit'in dosyası, klasör dışında).
+mkdir -p "$(dirname "$GUNCELLEYICI")" && cp "$(dirname "$SABLON")/guncelle.sh" "$GUNCELLEYICI" && chmod +x "$GUNCELLEYICI" \
+  || uyari "Güncelleyici yazılamadı; Divit güncellemede izin sorabilir."
 
 if [ "$TUR" = "yazar" ]; then
   TUR_KLASORU="kitaplar"; AKADEMIK=false
@@ -254,7 +269,7 @@ kilavuz_yaz() {
 }
 # Klasörün CLAUDE.md'si: araç yolları kurulumda yazılır.
 claude_md_yaz() {
-  sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__|yok|" "$SABLON/CLAUDE.md" > "$GECICI/CLAUDE.md"
+  sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__|yok|" -e "s|__GUNCELLE__|$GUNCELLEYICI|" "$SABLON/CLAUDE.md" > "$GECICI/CLAUDE.md"
   yerlestir "CLAUDE.md" "$GECICI/CLAUDE.md"
 }
 
@@ -266,6 +281,8 @@ if [ -d "$HEDEF" ]; then
   [ -d "$HEDEF/$TUR_KLASORU" ] || { cp -R "$SABLON/$TUR_KLASORU" "$HEDEF/" && bilgi "Eklendi: $TUR_KLASORU"; }
   # Gizli bölme (Divit okumaz) akademisyende; eski klasörlere de eklenir.
   if [ "$TUR" = "akademisyen" ] && [ ! -d "$HEDEF/gizli" ]; then cp -R "$SABLON/gizli" "$HEDEF/" && bilgi "Eklendi: gizli"; fi
+  # Bölmedeki not Divit'in dosyasıdır; varsa yeni metinle yenilenir (önceki hâli saklanır).
+  [ -f "$HEDEF/gizli/BURAYA-BIRAKIN.txt" ] && yerlestir "gizli/BURAYA-BIRAKIN.txt" "$SABLON/gizli/BURAYA-BIRAKIN.txt"
   mkdir -p "$HEDEF/.claude/rules" "$HEDEF/.divit"
   while IFS= read -r f; do                          # kural dosyaları tek tek (boru yok: sayaç korunsun)
     yerlestir ".claude/rules/${f#./}" "$SABLON/.claude/rules/$f"
@@ -297,11 +314,24 @@ printf '%s\n' "$DAL" > "$KANAL_DOSYASI"
 # Ayarlar Divit'e aittir, her kurulumda yenilenir. Kullanıcının "bir daha sorma"
 # izinleri settings.local.json'da durur; orada yalnız iki eklenti anahtarı değişir.
 # Pazar yeri adresi kanala göre (klasör açılınca uygulama da aynı kanaldan alır).
-sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__||" \
+# Güncelleyici kuralı mutlak yolla ve tırnaksız: "*/.divit/guncelle.sh" gibi
+# bir kural klasörün içine yazılabilen bir betiği de geçirirdi.
+sed -e "s|__PANDOC__|$PANDOC|" -e "s|__PDFCPU__|$PDFCPU|" -e "s|__PDFTOTEXT__||" -e "s|__GUNCELLE__|$GUNCELLEYICI|" \
   -e "s|https://raw.githubusercontent.com/[^\"]*/\.claude-plugin/marketplace\.json|$PAZAR_URL|" \
   "$SABLON/.claude/settings.json" > "$GECICI/settings.json"
 yerlestir ".claude/settings.json" "$GECICI/settings.json"
-sed -n "s/^## \([0-9][0-9.]*\) ·.*/\1/p" "$(dirname "$SABLON")/../plugins/divit/SURUM.md" | head -1 > "$HEDEF/.divit/kurulum-surumu.txt"
+# Geçiş notları (plugins/divit/gecisler) "son-gecis"ten sonraki sürümler için
+# çalışır; yoksa kurulum-surumu.txt'den. Var olan klasör yeni sürüme
+# geçerken eski sürüm, kurulum-surumu.txt'nin üstüne yazılmadan önce
+# hatirlatma.md'ye bir kez yazılır; yoksa kurulumdan sonra geçiş atlanırdı.
+SURUM_YENI="$(sed -n "s/^## \([0-9][0-9.]*\) ·.*/\1/p" "$(dirname "$SABLON")/../plugins/divit/SURUM.md" | head -1)"
+SURUM_ESKI="$(head -1 "$HEDEF/.divit/kurulum-surumu.txt" 2>/dev/null | tr -d ' \t\r')"
+HATIRLATMA="$HEDEF/.divit/hatirlatma.md"
+if [ -z "$ILK_KURULUM" ] && [ "$SURUM_ESKI" != "$SURUM_YENI" ] && ! grep -q '^son-gecis:' "$HATIRLATMA" 2>/dev/null; then
+  [ -s "$HATIRLATMA" ] && [ -n "$(tail -c1 "$HATIRLATMA")" ] && printf '\n' >> "$HATIRLATMA"
+  printf 'son-gecis: %s\n' "${SURUM_ESKI:-0}" >> "$HATIRLATMA"
+fi
+if [ -n "$SURUM_YENI" ]; then printf '%s\n' "$SURUM_YENI"; fi > "$HEDEF/.divit/kurulum-surumu.txt"
 # Hangi eklenti bu klasörde açık: akademik eklenti yalnız akademisyende.
 YEREL="$HEDEF/.claude/settings.local.json"
 if [ ! -f "$YEREL" ]; then
