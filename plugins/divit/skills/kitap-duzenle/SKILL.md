@@ -9,7 +9,7 @@ allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.
 **Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
 
 Divit bir yayınevi editörünün ilk okumasını yapar: bulgu listesi ve
-somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, sesini korur.
+somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, üslubunu korur.
 
 ## Yasaklar
 
