@@ -37,7 +37,7 @@ rol dosyasına göre: yazara "kitabınız", "okur", "yayınevi"; akademik kelime
 4. **Üslup.** `.divit/profil/uslup.md`'yi Read ile oku. Yoksa ya da "Henüz
    doldurulmadı" diyorsa Grep ile `.divit/profil/` içinde "üslup" ya da
    "Nasıl yazar" ara. Hiçbiri yoksa sade, akıcı Türkçe; işin sonunda bir kez
-   "Kendi yazdığınız bir metni verirseniz çeviriyi sizin sesinize yaklaştırırım" de.
+   "Kendi yazdığınız bir metni verirseniz çeviriyi sizin üslubunuza yaklaştırırım" de.
 5. **Terimler.** `.divit/profil/terimler.md`'yi Read ile oku (yoksa işin
    sonunda açılır). Oradaki karşılıklar **bağlayıcıdır**; kendi tercihin başka
    olsa da onları kullan.

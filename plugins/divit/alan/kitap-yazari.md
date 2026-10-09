@@ -39,7 +39,7 @@ Başlangıç varsayımları — kullanıcının kitabından doğrula:
   değilse açıklanmamış her terim işaretlenir.
 - Aynı kavrama farklı adlar verilmiş mi (ör. "ekip", "takım", "kadro")?
   Bilinçli seçimse korunur; değilse işaretlenir.
-- Konuşma dili yazarın sesiyse korunur (`uslup.md` "Koru" tablosu).
+- Konuşma dili yazarın üslubuysa korunur (`uslup.md` "Koru" tablosu).
 
 ## Tekrar ve dolgu tuzakları
 
