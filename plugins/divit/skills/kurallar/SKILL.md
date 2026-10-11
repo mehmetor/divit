@@ -14,10 +14,8 @@ kuralları kazanır.
 Kullanıcı bir öğretim üyesi ya da bir kitap yazarı. Türü `.divit/profil/kimlik.md`'de
 ilk başlığın altındaki `Kullanıcı türü:` satırıdır; satır yoksa `akademisyen`. "Hoca"
 iç terimdir, "kullanıcı" demektir. Tür hitabı, kılavuzu ve klasörleri belirler;
-hangi işin yapılabileceğini belirlemez. **Şimdi, cevaptan ve başka skill'den (kurulum
-dahil) önce, tam olarak bir rol dosyasını Read ile yükle; atlama:** satır tam olarak
-`Kullanıcı türü: yazar` ise `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`; aksi
-her durumda (satır yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/akademisyen.md`.
+hangi işin yapılabileceğini belirlemez. **Şimdi, cevaptan ve başka skill'den (kurulum dahil) önce, tam olarak bir rol dosyasını Read ile yükle; atlama:** satır tam olarak
+`Kullanıcı türü: yazar` ise `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/yazar.md`; aksi her durumda (satır yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/akademisyen.md`.
 
 ## Her işin sonunda — atlama
 
@@ -27,8 +25,10 @@ her durumda (satır yok, bozuk ya da `akademisyen`) `${CLAUDE_PLUGIN_ROOT}/skill
 
 ## Pazarlık edilmeyen kurallar
 
-- **Var olan dosyanın üstüne yazma.** Her Write'tan önce Glob ile o adı ara; varsa yeni
-  dosya `-s2`, `-s3` adını alır (aynı gün, aynı konu, senin taslağın olsa da).
+- **Ürettiğin dosyanın üstüne yazma.** Yeni çıktı (taslak, rapor, çeviri) yazmadan önce Glob ile
+  adı ara (boş sonuç "yok" demektir; `ls`, `Get-ChildItem` gibi başka komutla bakma); varsa `-s2`, `-s3`
+  (aynı gün, aynı konu, senin taslağın olsa da). Hoca var olan dosyayı düzeltmeni açıkça isterse,
+  `geri-al` dönüşünde ve yaşayan dosyalarda (`dosya-duzeni.md`) yerinde değiştir: önce önceki sürüm kuralı.
 - **`kaynaklar.bib` ya da `kaynaklar/` içinde olmayan hiçbir künye üretme.** Kaynak
   yoksa `[ATIF GEREKLİ]` yaz, dur. **Atıf, birebir pasaj gösterilebiliyorsa kurulur.**
 - Sayı, tarih, oran, yönetmelik maddesi uydurma. Emin değilsen `[DOĞRULA]`.
@@ -113,7 +113,7 @@ klasörüne dosya koymadan ya da kullanıcı klasör dışından dosya verince**
 - Mac: `sh ${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.sh ac <ad>`
 - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/kitap-klasoru.ps1" ac <ad>`
 Dosya koymak: `ac <ad>` yerine `koy <ad> asil|malzeme "<dosya>" [yeni-ad]`.
-**Rapor** `.md` + pandoc'la aynı adlı `.html`, ikisi tam yoluyla; biçim `dosya-duzeni.md` "Rapor gösterme".
+**Rapor gösterme:** `.md` + pandoc'la aynı adlı `.html`, ikisi tam yoluyla. Komut ve biçim için önce `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/dosya-duzeni.md` → "Rapor gösterme" bölümünü Read ile yükle.
 
 ## İşe göre yönlendirme
 
@@ -145,5 +145,5 @@ Akademik işler rol dosyasında; yazar açıkça istemedikçe onlara yönlendirm
 
 ## Oturum düzeni ve hatırlatmalar
 
-Hoca **ikinci bir işe** geçerse (tezden dilekçeye) önce isteği yap, sonra bir kez söyle: "Yeni bir işe geçtik. Sonraki işte soldaki **New session** ile yeni sohbet
-açarsanız daha iyi çalışırım. Her şey klasörde duruyor." İzin kipi, kota, model: `saglik`.
+Hoca aynı sohbette **ikinci bir işe** geçerse (tezden dilekçeye) önce isteği yap, sonra bir kez söyle (ilk işte değil): "Yeni bir işe geçtik.
+Sonraki işte soldaki **New session** ile yeni sohbet açarsanız daha iyi çalışırım. Her şey klasörde duruyor." İzin kipi, kota, model: `saglik`.

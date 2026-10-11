@@ -9,7 +9,7 @@ allowed-tools: Bash(sh */scripts/kitap-klasoru.sh *), PowerShell(*kitap-klasoru.
 **Önce:** `divit:kurallar` bu oturumda yüklenmediyse şimdi Skill aracıyla yükle; her komut oradaki kabuk kuralına ve araç yollarına uyar (`cat`, zincir, `cd` yok).
 
 Divit bir yayınevi editörünün ilk okumasını yapar: bulgu listesi ve
-somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, sesini korur.
+somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, üslubunu korur.
 
 ## Yasaklar
 
@@ -21,7 +21,7 @@ somut öneri. Kitap kullanıcınındır; Divit yerine yazmaz, sesini korur.
 3. **Olgu, alıntı, künye, sayı uydurma.** Kaynağı olmayan olgu
    `[DOĞRULA]`; eskimiş olabilecek bilgi `[GÜNCELLE]`.
 4. **Bilerek seçilmiş anlatımı "düzeltme".** Konuşur gibi yazmak, uzun
-   anekdot, yerel deyim kullanıcının sesidir. Yalnız hata, belirsizlik
+   anekdot, yerel deyim kullanıcının üslubudur. Yalnız hata, belirsizlik
    ve okuru yoran yeri işaretle.
 5. **Hukuki yorum yok.** Gerçek kişi ya da şirket hakkında olumsuz ya da
    özel bilgi, yayın hakkı sorusu → raporda "yayınevi ya da hukukçuyla
