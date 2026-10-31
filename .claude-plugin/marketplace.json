@@ -10,8 +10,8 @@
       "name": "divit",
       "source": {
         "source": "archive",
-        "url": "https://raw.githubusercontent.com/mehmetor/divit/main/dagitim/divit-6291ea83dbc6.zip",
-        "sha256": "6291ea83dbc6bb5c7dd523e4209c93ec5975553ef8112e1d3b23c769c9ca382b"
+        "url": "https://raw.githubusercontent.com/mehmetor/divit/main/dagitim/divit-41d1631fc665.zip",
+        "sha256": "41d1631fc665a38da19d22a08b9033cad83a02cb2ad28bf051b6f11387642134"
       },
       "description": "Divit — yazı tezgâhı: kitap, yazışma, Word/PDF"
     },

@@ -7,7 +7,7 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
-## Sıradaki · kurulum gerekir
+## 1.10.1 · 2026-10-31 · kurulum gerekir
 - Kitap yazarı: Divit yazınızın kendine özgü tarzından "sesiniz" diye değil, "üslubunuz" diye söz eder; kılavuzda da böyle.
 - Herkes: Kılavuzda ses kaydını yazıya dökme işi de anlatılıyor: "ses kaydını yazıya dök" yazın, kaydı yazıya dökmenin yolunu adım adım anlatırım.
 - Herkes: Kılavuzdaki komut listesinde her işin ne yaptığı daha ayrıntılı yazıyor (atıf kontrolü, sınav, çeviri, ders takvimi, fotoğraftan metin).
