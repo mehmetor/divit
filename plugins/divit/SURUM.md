@@ -7,6 +7,9 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
+## Sıradaki
+- Herkes: İnternette bir şey ararken ya da indirirken (ör. sunum için fotoğraf) adınızı, e-posta adresinizi ya da kurum bilginizi hiçbir siteye göndermem; bir site iletişim bilgisi isterse genel bir ad kullanırım ya da size sorarım.
+
 ## 1.10.3 · 2026-10-31
 - Herkes (Windows): Eski bir Divit klasöründe "güncelle" dediğinizde size verdiğim satır bazı bilgisayarlarda **Run** düğmesiyle çalışmıyordu; artık doğrudan çalışan satırı veririm.
 
