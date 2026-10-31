@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.4](https://github.com/mehmetor/divit/compare/v1.10.3...v1.10.4) (2026-10-31)
+
+
+### Düzeltme
+
+* kişisel bilgi web isteklerine konmaz ([#38](https://github.com/mehmetor/divit/issues/38)) ([bb4fcef](https://github.com/mehmetor/divit/commit/bb4fcef5315d7d3f180285d9fa816e38d0337821))
+
 ## [1.10.3](https://github.com/mehmetor/divit/compare/v1.10.2...v1.10.3) (2026-10-31)
 
 
