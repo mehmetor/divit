@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1](https://github.com/mehmetor/divit/compare/v1.10.0...v1.10.1) (2026-10-31)
+
+
+### Belgeler
+
+* web sitesi ve kılavuz 1.9.0'a göre eşitlendi; "ses" yerine "üslup". ([2a5bad6](https://github.com/mehmetor/divit/commit/2a5bad6d31902a7ddd544cf591d1cc884f636dfe))
+
 ## [1.10.0](https://github.com/mehmetor/divit/compare/v1.9.0...v1.10.0) (2026-10-31)
 
 
