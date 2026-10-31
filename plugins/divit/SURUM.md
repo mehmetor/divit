@@ -7,7 +7,7 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
-## Sıradaki · kurulum gerekir
+## 1.10.0 · 2026-10-31 · kurulum gerekir
 - Herkes: Word, Excel ve PowerPoint'in eski biçimindeki dosyaları (.doc, .xls, .ppt) artık okuyabilirim. Bunun için bilgisayarınızdaki programı (Windows'ta Word, Excel, PowerPoint; Mac'te Keynote, Numbers) arka planda kısa bir süre açıp dosyanın bir kopyasını çeviririm; ilk seferde izninizi sorarım, "bundan sonra hiç sormadan çevir" derseniz bir daha sormam. Mac'te eski Word dosyaları hiçbir program açılmadan, sormadan okunur. Asıl dosyanıza dokunmam.
 
 ## 1.9.0 · 2026-10-09 · kurulum gerekir
