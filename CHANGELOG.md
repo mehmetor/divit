@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.3](https://github.com/mehmetor/divit/compare/v1.10.2...v1.10.3) (2026-10-31)
+
+
+### Düzeltme
+
+* Windows'ta eski klasörün güncelleme satırı Run ile çalışmıyordu ([0fd85e2](https://github.com/mehmetor/divit/commit/0fd85e2f17e2e83209d2e1cc578ae92c3068bc89))
+
 ## [1.10.2](https://github.com/mehmetor/divit/compare/v1.10.1...v1.10.2) (2026-10-31)
 
 
