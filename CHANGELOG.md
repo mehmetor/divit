@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.2](https://github.com/mehmetor/divit/compare/v1.10.1...v1.10.2) (2026-10-31)
+
+
+### Düzeltme
+
+* Windows'ta eski Word dosyası açılmıyordu ([3f1e13b](https://github.com/mehmetor/divit/commit/3f1e13b1a39319edf440e10a4f3af3b81406c6aa))
+
 ## [1.10.1](https://github.com/mehmetor/divit/compare/v1.10.0...v1.10.1) (2026-10-31)
 
 
