@@ -80,8 +80,8 @@ Hoca Windows ya da Mac kullanır (Windows'ta komut aracın PowerShell'dir). Okum
 yazma, sayma, arama **Read, Write, Edit** ile, klasörü listelemek Glob ile (Grep de); soru çıkmaz.
 **Kabuk kuralı.** Her komut tek başına: `;`, `|` ya da çift `&` ile zincir yok, `cd` yok,
 yollar klasöre göreli. Değişkenle başlayan komut yazma (`$DIVIT_…`, `$env:…`):
-izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu, pdftotext, eski Word
-çevirisi (`textutil`, `doc-cevir.ps1`), kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
+izinle eşleşmez, hocaya İngilizce soru çıkar. Kabuk yalnız pandoc, pdfcpu, pdftotext, eski dosya
+çevirisi (`textutil`, `eski-cevir`), kitap klasörü betiği, dosya ya da klasör açma, `zip` (Windows'ta `Compress-Archive`,
 yalnız `disa-aktar`), ayrıntılı geçmiş komutları (yalnız `geri-al`), kurulum komutu (yalnız `guncelleme`, onayla), Divit dosyasını taşıma
 (yalnız `bakim` ve tür değişimi, onayla) ve `mkdir` (`kitaplar/*/asil`, `malzeme` dışında) için; `sed`, `wc`, `awk`, `cat`, `ls`, `find` yok.
 PowerPoint ya da Excel işinde Python/Node isteyen yerleşik beceri yok: `sunum`, `tablo` kullan.
@@ -90,14 +90,14 @@ tam yol klasördeki `CLAUDE.md`'nin "Araçlar" bölümündedir (aşağıda `<pan
 
 | İş | Mac | Windows |
 |---|---|---|
-| Eski Word (`.doc`) → `.docx` | `textutil -convert docx -output ".divit/gecici/girdi-<tarih>.docx" "girdi.doc"` | `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/doc-cevir.ps1" "girdi.doc" ".divit/gecici/girdi-<tarih>.docx"` |
+| Eski Word, Excel, PowerPoint → yeni (`.doc`→`.docx`, `.xls`→`.xlsx`, `.ppt`→`.pptx`) | `.doc`: `textutil -convert docx -output ".divit/gecici/girdi-<tarih>.docx" "girdi.doc"`; `.xls`, `.ppt`: `osascript -l JavaScript "${CLAUDE_PLUGIN_ROOT}/scripts/eski-cevir.js" "girdi.xls" ".divit/gecici/girdi-<tarih>.xlsx"` | `powershell -NoProfile -ExecutionPolicy Bypass -File "${CLAUDE_PLUGIN_ROOT}/scripts/eski-cevir.ps1" "girdi.doc" ".divit/gecici/girdi-<tarih>.docx"` (üç tür) |
 | Word → metin | `~/.divit/araclar/pandoc "girdi.docx" -t gfm -o ".divit/gecici/girdi-<tarih>.md"` | `& "<pandoc>" "girdi.docx" -t gfm -o ".divit/gecici/girdi-<tarih>.md"` |
 | PDF → metin | `osascript -l JavaScript "${CLAUDE_PLUGIN_ROOT}/scripts/pdf-metin.js" "girdi.pdf" ".divit/gecici/girdi-<tarih>.txt"` | `& "<pdftotext>" -layout -enc UTF-8 "girdi.pdf" ".divit/gecici/girdi-<tarih>.txt"` |
 | Word çıktısı (metin md) | `~/.divit/araclar/pandoc "x.md" -o "cikti/x-<tarih>.docx"` | `& "<pandoc>" "x.md" -o "cikti/x-<tarih>.docx"` |
 | Dosya ya da klasör açma | `open "<yol>"` | `Invoke-Item "<yol>"` |
 
-PDF metni boşsa taranmıştır: Read ile sayfa sayfa oku. **`.doc` dosyasını** çevirmeden önce `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/eski-word.md`'yi
-Read ile yükle (onay, cevaplar); Word'ü başka yolla açtırma. pandoc çalışmazsa "Word dosyasını okuyamadım, PDF olarak verebilir misiniz?" de.
+PDF metni boşsa taranmıştır: Read ile sayfa sayfa oku. **`.doc`, `.xls`, `.ppt`** çevirmeden önce `${CLAUDE_PLUGIN_ROOT}/skills/kurallar/eski-dosya.md`'yi
+Read ile yükle (onay, cevaplar); Office'i başka yolla açtırma. pandoc çalışmazsa "Word dosyasını okuyamadım, PDF olarak verebilir misiniz?" de.
 
 ## Dosya düzeni, kitap klasörü ve dışarıdaki dosya
 

@@ -100,7 +100,7 @@ Kullanıcı bir `.pptx` verip "oku", "özetle", "bundan metin çıkar" derse:
 - Windows: `& "<pandoc>" "<dosya>.pptx" -t gfm -o ".divit/gecici/<ad>-YYYY-AA-GG.md"`
 
 Sonra Read ile oku. Resimlerdeki yazı gelmez; gerekirse söyle. Eski `.ppt`
-okunmaz: "PowerPoint'te açıp Farklı Kaydet → .pptx yapar mısınız?"
+önce `kurallar` → `eski-dosya.md` ile `.pptx` kopyasına çevrilir (onay orada).
 
 ## Değişiklik
 

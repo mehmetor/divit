@@ -8,7 +8,7 @@ komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
 ## Sıradaki · kurulum gerekir
-- Herkes: Word'ün eski biçimindeki dosyaları (.doc) artık okuyabilirim. Mac'te kendiliğinden olur. Windows'ta bilgisayarınızdaki Word'ü arka planda birkaç saniye açıp dosyanın bir kopyasını çeviririm; bunun için ilk seferde izninizi sorarım, "bundan sonra hiç sormadan çevir" derseniz bir daha sormam. Asıl dosyanıza dokunmam.
+- Herkes: Word, Excel ve PowerPoint'in eski biçimindeki dosyaları (.doc, .xls, .ppt) artık okuyabilirim. Bunun için bilgisayarınızdaki programı (Windows'ta Word, Excel, PowerPoint; Mac'te Keynote, Numbers) arka planda kısa bir süre açıp dosyanın bir kopyasını çeviririm; ilk seferde izninizi sorarım, "bundan sonra hiç sormadan çevir" derseniz bir daha sormam. Mac'te eski Word dosyaları hiçbir program açılmadan, sormadan okunur. Asıl dosyanıza dokunmam.
 
 ## 1.9.0 · 2026-10-09 · kurulum gerekir
 - Herkes: Aynı gün aynı konuda ikinci bir taslak (dilekçe, mektup) istediğinizde eskisinin üstüne yazmam; yenisi yanına gelir, sizin düzelttiğiniz hâl durur. "Şunu düzelt" derseniz yine aynı dosyada çalışırım.
