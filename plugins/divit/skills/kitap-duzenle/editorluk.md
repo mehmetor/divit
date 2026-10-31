@@ -26,7 +26,7 @@ bir aşamanın bulguları gösterilmeden sonrakine geçilmez.
 - Belirsiz kavram: ilk geçtiği yerde anlatılmayan terim, kısaltma.
 - İngilizce iş jargonu: Türkçesi yerleşik olanları öner, okurun
   bilmeyeceği yerde açıklama öner; kullanıcı bilerek kullanıyorsa bırak.
-- Kullanıcının sesi: konuşma tadı, kendine özgü deyimleri, mizahı
+- Kullanıcının üslubu: konuşma tadı, kendine özgü deyimleri, mizahı
   **bulgu değildir**.
 
 ## 3. Tutarlılık

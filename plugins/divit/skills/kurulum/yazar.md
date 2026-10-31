@@ -53,7 +53,7 @@ biri çıkabilir; onaylanmayanı at.
 
 ## 3. Üslup
 
-> "Sesinizi tanımam için kitabınızdan iki üç bölüm ya da üç beş yazınızı bu
+> "Üslubunuzu tanımam için kitabınızdan iki üç bölüm ya da üç beş yazınızı bu
 > pencereye sürükler misiniz? Word ya da PDF olabilir."
 
 2. adımda bulunan açık metinler de kullanılabilir. `uslup.md`'yi bunlardan
@@ -100,7 +100,7 @@ Gelen dosyayı aynı betikle yerleştir: kitabın kendisi `koy <kitap-adi> asil
 Önce `saglik` skill'ini sessizce çalıştır. Sorun çıkarsa yalnız o tek adımı
 söyle. Sonra tek paragraf:
 > "Asıl dosyanıza yazmam; değişikliği yeni bir dosyaya yazarım. Sizin
-> yerinize yazmam, sesinizi korurum. Emin olmadığım bilgiyi işaretlerim.
+> yerinize yazmam, üslubunuzu korurum. Emin olmadığım bilgiyi işaretlerim.
 > Bir şey ters giderse 'geri al' demeniz yeter. Metinleriniz işlenmek üzere
 > Claude'a gönderilir; şirketlere ait gizli bilgileri paylaşmadan önce
 > bir düşünün."

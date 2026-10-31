@@ -176,17 +176,17 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tbody>
 <tr><td><code>/divit-akademik:tez-kontrol</code></td><td>Öğrenci tezini, ödevini ya da raporunu okur, bulgu raporu yazar.</td></tr>
 <tr><td><code>/divit-akademik:yayin-oncesi</code></td><td>Kendi makalenizi göndermeden önce kontrol eder: çizelge, birim, dergi kuralları.</td></tr>
-<tr><td><code>/divit-akademik:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder.</td></tr>
+<tr><td><code>/divit-akademik:kaynak-dogrula</code></td><td>Atıfları ve kaynakçayı kontrol eder: her künyeyi üç ayrı yayın kaydında arar, yanlış yıl, cilt, sayfa, yazar ve geri çekilmiş makaleyi bulur.</td></tr>
 <tr><td><code>/divit:yazisma</code></td><td>Dilekçe, kurul yazısı, referans mektubu, hakem cevabı yazar.</td></tr>
-<tr><td><code>/divit-akademik:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir.</td></tr>
+<tr><td><code>/divit-akademik:sinav</code></td><td>Ders notunuzdan sınav sorusu ve cevap anahtarı hazırlar, Word olarak verir. Her sorunun nottaki yeri yazılır; doğru şıklar dengeli dağılır.</td></tr>
 <tr><td><code>/divit-akademik:bolum-yaz</code></td><td>Bir bölüm ya da makale üzerinde sizinle çalışır: yapı, eksik, itiraz.</td></tr>
-<tr><td><code>/divit-akademik:ders-takvimi</code></td><td>Dönem takviminizi ve ders programınızı kaydeder; hatırlatmalar buna göre yapılır.</td></tr>
+<tr><td><code>/divit-akademik:ders-takvimi</code></td><td>Dönem takviminizi ve ders programınızı kaydeder; sınavdan önce soru hazırlığını, not girişinden önce değerlendirmeyi hatırlatır.</td></tr>
 <tr><td><code>/divit:takvim</code></td><td>Yaklaşan işlerinizi özetler, son tarihleri listeye ve takvime ekler.</td></tr>
 <tr><td><code>/divit:sunum</code></td><td>Metninizden PowerPoint sunumu hazırlar.</td></tr>
 <tr><td><code>/divit:tablo</code></td><td>Tabloyu Excel'de açılan dosyaya çevirir; gelen Excel dosyasını okur.</td></tr>
-<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir.</td></tr>
+<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir. Seçtiği terim karşılıkları bir listede durur, hep aynı kalır.</td></tr>
 <tr><td><code>/divit:sekil</code></td><td>Grafik, akış şeması, zaman çizelgesi çizer.</td></tr>
-<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir.</td></tr>
+<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir; kendi yazınız mı, alıntı mı, esin mi olduğunu not eder.</td></tr>
 <tr><td><code>/divit:baglanti</code></td><td>Gmail, Google Takvim ve Drive bağlı mı bakar; değilse nasıl bağlanacağını anlatır.</td></tr>
 <tr><td><code>/divit:kitap-duzenle</code></td><td>Var olan kitabınızı editör gözüyle okur: tekrar, çelişki, eskimiş bilgi. Onayladığınız değişiklikleri ayrı bir çalışma metnine işler. İsterseniz önerileri Word'de Değişiklikleri İzle ile ayrı bir dosyada verir.</td></tr>
 <tr><td><code>/divit:kitap-derle</code></td><td>Dağınık yazılarınızdan, konuşmalarınızdan kitap planı ve bölüm iskeleti çıkarır. Editörü olduğunuz ortak kitapta başka yazarların bölümlerini de derler.</td></tr>
@@ -267,6 +267,9 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td>Fotoğraftaki yazıyı metne çevirme</td>
     <td><span class="yaz">el yazımı oku</span></td>
     <td><code>notlar</code></td></tr>
+<tr><td>Ses kaydını yazıya dökme</td>
+    <td><span class="yaz">ses kaydını yazıya dök</span><br>Divit kaydı Word 365 ile yazıya dökmenin yolunu anlatır; çıkan metni yapıştırın.</td>
+    <td><code>notlar/ses-metin</code></td></tr>
 <tr><td>Gmail, Google Takvim, Drive bağlantısı</td>
     <td><span class="yaz">Gmail'imi bağla</span></td>
     <td>Sohbette</td></tr>
@@ -384,7 +387,7 @@ Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gö
 <h2>Divit nedir</h2>
 <p>Divit, bilgisayarınızda çalışan bir yardımcıdır.</p>
 <p>Divit kitabınızı bir editör gözüyle okur. Divit dağınık yazılarınızı bir kitap planına dönüştürür. Divit yayınevine ve editöre gidecek yazılarınızı hazırlar.</p>
-<p>Divit sizin yerinize yazmaz. Divit size bulgu ve öneri verir. Sesiniz ve cümleleriniz sizindir; son karar sizindir.</p>
+<p>Divit sizin yerinize yazmaz. Divit size bulgu ve öneri verir. Üslubunuz ve cümleleriniz sizindir; son karar sizindir.</p>
 <div class="tanim"><b>Divit nerede çalışır?</b><br>
 Divit, <b>Claude</b> uygulamasının içinde çalışır. Claude uygulamasında <b>Code</b> sekmesini açarsınız. Sonra <b>Divit klasörünü</b> seçersiniz. Bu kılavuzda buna <b>Divit sohbeti</b> diyoruz.</div>
 <p>Divit'i nasıl açacağınız aşağıda, <a href="#ac">Divit'i açın</a> bölümünde yazar.</p>
@@ -441,9 +444,9 @@ Divit uzun bir metni okurken birkaç dakika çalışır. Pencereyi kapatmayın. 
 <tr><td><code>/divit:ses</code></td><td>Ses kaydınızı yazıya dökmenin yolunu adım adım anlatır, çıkan metni konuşanlarıyla temiz bir nota çevirir.</td></tr>
 <tr><td><code>/divit:yazisma</code></td><td>Yayınevine, editöre yazı; izin isteme yazısı hazırlar.</td></tr>
 <tr><td><code>/divit:takvim</code></td><td>Yaklaşan işlerinizi özetler, son tarihleri listeye ve takvime ekler.</td></tr>
-<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir.</td></tr>
+<tr><td><code>/divit:ceviri</code></td><td>Yabancı dildeki metni üslubunuzla Türkçeye çevirir. Seçtiği terim karşılıkları bir listede durur, hep aynı kalır.</td></tr>
 <tr><td><code>/divit:sekil</code></td><td>Grafik, akış şeması, zaman çizelgesi çizer.</td></tr>
-<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir.</td></tr>
+<tr><td><code>/divit:malzeme</code></td><td>Fotoğraftaki el yazısını ve sayfaları metne çevirir; kendi yazınız mı, alıntı mı, esin mi olduğunu not eder.</td></tr>
 <tr><td><code>/divit:sunum</code></td><td>Metninizden PowerPoint sunumu hazırlar.</td></tr>
 <tr><td><code>/divit:tablo</code></td><td>Tabloyu Excel'de açılan dosyaya çevirir; gelen Excel dosyasını okur.</td></tr>
 <tr><td><code>/divit:baglanti</code></td><td>Gmail, Google Takvim ve Drive bağlı mı bakar; değilse nasıl bağlanacağını anlatır.</td></tr>
@@ -499,6 +502,9 @@ Listede <code>gelistirici-</code> ile başlayan komutlar Divit'i geliştiren ki�
 <tr><td>Fotoğraftaki el yazısını ve sayfaları metne çevirme</td>
     <td><span class="yaz">el yazımı oku</span><br><span class="yaz">fotoğraftaki yazıyı metne çevir</span></td>
     <td><code>kitaplar/&lt;kitabınız&gt;/notlar</code></td></tr>
+<tr><td>Ses kaydını yazıya dökme</td>
+    <td><span class="yaz">ses kaydını yazıya dök</span><br>Divit kaydı Word 365 ile yazıya dökmenin yolunu anlatır; çıkan metni yapıştırın.</td>
+    <td><code>kitaplar/&lt;kitabınız&gt;/notlar/ses-metin</code></td></tr>
 <tr><td>PowerPoint sunumu</td>
     <td><span class="yaz">bu bölümden sunum hazırla</span></td>
     <td><code>cikti</code></td></tr>
@@ -569,7 +575,7 @@ Yeni Word dosyasında sayfa düzeni, resimler ve dipnotlar asıl dosyanızdaki g
   <li>Daha önce bir gazetede yayımlanmış yazı, röportaj ya da konuşma kaydı için Divit yayın hakkı sorusu sorar. Hüküm vermez; yayınevi ya da bir hukukçuyla konuşmanızı önerir.</li>
 </ol>
 <div class="kutu not"><b class="etiket">NOT</b>
-Divit ses kaydını ve videoyu okuyamaz. Konuşmalarınızın yazıya dökülmüş hâlini verin. Sunumlarınızı PDF olarak verin.</div>
+Divit ses kaydını ve videoyu kendisi dinleyemez. Konuşma kaydınız varsa <span class="yaz">ses kaydını yazıya dök</span> yazın: Divit kaydı yazıya dökmenin yolunu anlatır, çıkan metni konuşanlarıyla temiz bir nota çevirir. Sunumlarınızı PDF olarak verin.</div>
 <div class="kutu not"><b class="etiket">NOT</b>
 Kitabın ne aşamada olduğu <code>plan.md</code> dosyasının ilk satırında yazar. Ara verip döndüğünüzde Divit'e <span class="yaz">kitapta nerede kaldık</span> yazmanız yeterlidir.</div>
 </section>
@@ -619,12 +625,12 @@ Divit'e verdiğiniz metinler işlenmek için internet üzerinden Anthropic'e gö
 <h2>Divit'in yapmadığı işler</h2>
 <ul>
   <li>Divit sizin yerinize kitap yazmaz. Divit yapıyı, eksikleri ve tekrarları gösterir; cümleler sizindir.</li>
-  <li>Divit sesinizi değiştirmez. Konuşur gibi yazmanızı, anekdotlarınızı, deyimlerinizi düzeltmez; yalnız hatayı ve okuru yoran yeri gösterir.</li>
+  <li>Divit üslubunuzu değiştirmez. Konuşur gibi yazmanızı, anekdotlarınızı, deyimlerinizi düzeltmez; yalnız hatayı ve okuru yoran yeri gösterir.</li>
   <li>Divit bilgi uydurmaz. Emin olmadığı her bilgiyi işaretler.</li>
   <li>Divit asıl dosyanızı değiştirmez. Değişiklik her zaman yeni bir dosyaya yazılır.</li>
   <li>Divit hukuki görüş vermez. Yayın hakkı ve izin konularını yalnızca soru olarak işaretler.</li>
   <li>Divit satış ya da başarı vaadi vermez. Kitabın ne kadar satacağını söylemez.</li>
-  <li>Divit ses kaydını ve videoyu okuyamaz. Yazıya dökülmüş hâlini ister.</li>
+  <li>Divit ses kaydını ve videoyu kendisi dinleyemez. Kaydı yazıya dökmenin yolunu anlatır, yazıya dökülmüş hâliyle çalışır.</li>
 </ul>
 </section>
 </div>
