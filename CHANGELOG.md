@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.0](https://github.com/mehmetor/divit/compare/v1.9.0...v1.10.0) (2026-10-31)
+
+
+### Yeni
+
+* eski Excel (.xls) ve PowerPoint (.ppt) dosyalarını okuma ([89dc348](https://github.com/mehmetor/divit/commit/89dc3485368c90a2eca881d384b299dffb9485b4))
+* eski Word (.doc) dosyalarını okuma ([803fee0](https://github.com/mehmetor/divit/commit/803fee0503437f39f4dc5de8ac13f192a131c656))
+
 ## [1.9.0](https://github.com/mehmetor/divit/compare/v1.8.0...v1.9.0) (2026-10-09)
 
 
