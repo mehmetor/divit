@@ -7,7 +7,7 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
-## Sıradaki
+## 1.10.2 · 2026-10-31
 - Herkes (Windows): Eski Word dosyalarını (.doc) okuma artık çalışıyor; önceki sürümde Word dosyayı açamıyordu. Eski Excel ve PowerPoint dosyaları da aynı yolla daha sağlam açılır, iş bitince arka planda açık program kalmaz.
 
 ## 1.10.1 · 2026-10-31 · kurulum gerekir
