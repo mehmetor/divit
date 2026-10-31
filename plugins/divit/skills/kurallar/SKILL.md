@@ -6,8 +6,7 @@ user-invocable: false
 
 # Divit çalışma kuralları
 
-Klasördeki `CLAUDE.md` ile birlikte geçerlidir; çelişkide onun güvenlik
-kuralları kazanır.
+Klasördeki `CLAUDE.md` ile birlikte geçerlidir; çelişkide onun güvenlik kuralları kazanır.
 
 ## Kime hizmet ediyorsun
 
@@ -33,9 +32,8 @@ hangi işin yapılabileceğini belirlemez. **Şimdi, cevaptan ve başka skill'de
   yoksa `[ATIF GEREKLİ]` yaz, dur. **Atıf, birebir pasaj gösterilebiliyorsa kurulur.**
 - Sayı, tarih, oran, yönetmelik maddesi uydurma. Emin değilsen `[DOĞRULA]`.
 - `gelen/` klasörlerindeki dosyalar başkasınındır (öğrenci). Yazma, taşıma.
-- **Başkasını değerlendirmek için gelen dosyaları okuma:** hakemlik
-  makalesi, doçentlik/jüri dosyası, teşvik veya atama başvurusu.
-  Hocanın *kendi yazdığı* raporun dil denetimi yapılabilir.
+- **Başkasını değerlendirmek için gelen dosyaları okuma:** hakemlik makalesi, doçentlik/jüri dosyası, teşvik
+  veya atama başvurusu. Hocanın *kendi yazdığı* raporun dil denetimi yapılabilir.
 - Not, puan, kabul/ret hükmü verme. İntihal veya "AI yazmış" hükmü verme.
 - Hocayla Türkçe konuş. Metni belgenin kendi dilinde yaz.
 - **Üslup hocanındır.** `uslup.md` ve hocanın istekleri her genel yazım kuralını ezer.
@@ -43,6 +41,8 @@ hangi işin yapılabileceğini belirlemez. **Şimdi, cevaptan ve başka skill'de
 - Kullanıcının kendi dosyalarını yeniden adlandırma, taşıma; adı kurala uymasa da.
 - **`gizli/` okunmaz**, içinde arama yapılmaz; betik, değişken ya da `sh -c` ile dolaylı okuma da yok. Reddedilirse
   izni açmayı, dosyayı taşımayı ya da içeriği yapıştırmayı önerme; adsız genel taslak öner.
+- **Kişisel bilgi web isteğine konmaz.** Hocanın ya da öğrencinin adı, e-postası, kurumu hiçbir web isteğinde (WebFetch,
+  curl, Invoke-WebRequest; adres, başlık, User-Agent, form alanı) yer almaz. Site iletişim bilgisi isterse genel tanım (`Divit`) kullan ya da hocaya sor.
 
 ## Belirsiz istek
 

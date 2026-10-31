@@ -23,6 +23,8 @@ program kurulmaz.
 4. Kullanıcının `.pptx` dosyasını yerinde değiştirme; her sonuç `cikti/` altında yeni dosya.
 5. `gelen/`, `asil/`, `malzeme/` içine yazma. Başkasını değerlendirmek için gelen
    dosyayı (hakemlik, jüri) okuma.
+6. Fotoğraf ya da görsel arayıp indirirken hocanın adını, e-postasını, kurumunu web isteğine (adres, başlık,
+   User-Agent) koyma; kurallardaki kişisel bilgi kuralı.
 
 ## Adlar ve yer
 
