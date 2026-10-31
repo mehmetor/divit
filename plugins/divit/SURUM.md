@@ -7,7 +7,7 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
-## Sıradaki
+## 1.10.3 · 2026-10-31
 - Herkes (Windows): Eski bir Divit klasöründe "güncelle" dediğinizde size verdiğim satır bazı bilgisayarlarda **Run** düğmesiyle çalışmıyordu; artık doğrudan çalışan satırı veririm.
 
 ## 1.10.2 · 2026-10-31
