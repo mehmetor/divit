@@ -7,6 +7,9 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
+## Sıradaki · kurulum gerekir
+- Herkes: Word'ün eski biçimindeki dosyaları (.doc) artık okuyabilirim. Mac'te kendiliğinden olur. Windows'ta bilgisayarınızdaki Word'ü arka planda birkaç saniye açıp dosyanın bir kopyasını çeviririm; bunun için ilk seferde izninizi sorarım, "bundan sonra hiç sormadan çevir" derseniz bir daha sormam. Asıl dosyanıza dokunmam.
+
 ## 1.9.0 · 2026-10-09 · kurulum gerekir
 - Herkes: Aynı gün aynı konuda ikinci bir taslak (dilekçe, mektup) istediğinizde eskisinin üstüne yazmam; yenisi yanına gelir, sizin düzelttiğiniz hâl durur. "Şunu düzelt" derseniz yine aynı dosyada çalışırım.
 - Herkes: Haftalık geri bildirim ve aylık bakım önerileri artık ilk işiniz bitince gelir; bir sohbette en çok bir tane.

@@ -43,6 +43,8 @@
       "Bash(mkdir *)",
       "Bash(sh */scripts/kitap-klasoru.sh *)",
       "PowerShell(*kitap-klasoru.ps1*)",
+      "PowerShell(*doc-cevir.ps1*)",
+      "Bash(textutil -convert docx *)",
       "Bash(sh __GUNCELLE__ *)",
       "Skill(divit:*)",
       "Skill(divit-akademik:*)",
