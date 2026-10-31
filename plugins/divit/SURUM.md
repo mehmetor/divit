@@ -7,6 +7,9 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
+## Sıradaki
+- Herkes (Windows): Eski Word dosyalarını (.doc) okuma artık çalışıyor; önceki sürümde Word dosyayı açamıyordu. Eski Excel ve PowerPoint dosyaları da aynı yolla daha sağlam açılır, iş bitince arka planda açık program kalmaz.
+
 ## 1.10.1 · 2026-10-31 · kurulum gerekir
 - Kitap yazarı: Divit yazınızın kendine özgü tarzından "sesiniz" diye değil, "üslubunuz" diye söz eder; kılavuzda da böyle.
 - Herkes: Kılavuzda ses kaydını yazıya dökme işi de anlatılıyor: "ses kaydını yazıya dök" yazın, kaydı yazıya dökmenin yolunu adım adım anlatırım.

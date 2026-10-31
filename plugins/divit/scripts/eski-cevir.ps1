@@ -80,7 +80,23 @@ if ($bizimId) {
     }
 }
 
-$eksik = [System.Reflection.Missing]::Value
+# Office yöntemlerini IDispatch üzerinden, seçenekleri ADIYLA geçirerek çağırır.
+# Word'ün seçenekleri "başvuru" (ByRef) türündedir; PowerShell oraya $true/$false
+# veremez ("Cannot convert the True value of type bool to type Object", pilotta
+# görüldü). Adlı çağrıda başvuru da eksik değer de gerekmez.
+function Cagir($nesne, [string]$yontem, $secenekler) {
+    $adlar = [string[]]@()
+    $degerler = [object[]]@()
+    if ($secenekler) {
+        foreach ($k in $secenekler.Keys) {
+            $adlar += [string]$k
+            $degerler += , $secenekler[$k]
+        }
+    }
+    return [System.__ComObject].InvokeMember($yontem, [Reflection.BindingFlags]::InvokeMethod,
+        $null, $nesne, $degerler, $null, $null, $adlar)
+}
+
 $belge = $null
 $sonuc = $null
 try {
@@ -89,36 +105,31 @@ try {
             $app.Visible = $false
             $app.DisplayAlerts = 0          # wdAlertsNone
             $app.AutomationSecurity = 3     # msoAutomationSecurityForceDisable: makro çalışmaz
-            # Open(FileName, ConfirmConversions, ReadOnly, AddToRecentFiles, PasswordDocument,
-            #      PasswordTemplate, Revert, WritePasswordDocument, WritePasswordTemplate, Format,
-            #      Encoding, Visible, OpenAndRepair, DocumentDirection, NoEncodingDialog)
-            $belge = $app.Documents.Open($girdi, $false, $true, $false, $SAHTE_SIFRE,
-                $eksik, $false, $eksik, $eksik, 0, $eksik, $false, $false, $eksik, $true)
-            if ($belge.PSObject.Methods['SaveAs2']) {
-                # SaveAs2(FileName, FileFormat=wdFormatXMLDocument, LockComments, Password, AddToRecentFiles)
-                $belge.SaveAs2($cikti, 16, $false, '', $false)
-            } else {
-                $ad = $cikti; $bicim = 16
-                $belge.SaveAs([ref]$ad, [ref]$bicim)
-            }
+            $belge = Cagir $app.Documents 'Open' ([ordered]@{
+                FileName = $girdi; ConfirmConversions = $false; ReadOnly = $true
+                AddToRecentFiles = $false; PasswordDocument = $SAHTE_SIFRE
+                Revert = $false; Format = 0; Visible = $false; NoEncodingDialog = $true })
+            # wdFormatXMLDocument = 16; SaveAs2 Word 2010 ve sonrası, öncesi SaveAs
+            $kaydet = if ($belge.PSObject.Methods['SaveAs2']) { 'SaveAs2' } else { 'SaveAs' }
+            [void](Cagir $belge $kaydet ([ordered]@{ FileName = $cikti; FileFormat = 16; AddToRecentFiles = $false }))
         }
         '.xls' {
             $app.Visible = $false
             $app.DisplayAlerts = $false
             $app.AutomationSecurity = 3
-            # Open(Filename, UpdateLinks, ReadOnly, Format, Password, WriteResPassword,
-            #      IgnoreReadOnlyRecommended, Origin, Delimiter, Editable, Notify, Converter, AddToMru)
-            $belge = $app.Workbooks.Open($girdi, 0, $true, $eksik, $SAHTE_SIFRE, $eksik,
-                $true, $eksik, $eksik, $false, $false, $eksik, $false)
-            $belge.SaveAs($cikti, 51)       # xlOpenXMLWorkbook
+            $belge = Cagir $app.Workbooks 'Open' ([ordered]@{
+                Filename = $girdi; UpdateLinks = 0; ReadOnly = $true; Password = $SAHTE_SIFRE
+                IgnoreReadOnlyRecommended = $true; Editable = $false; Notify = $false; AddToMru = $false })
+            [void](Cagir $belge 'SaveAs' ([ordered]@{ Filename = $cikti; FileFormat = 51 }))   # xlOpenXMLWorkbook
         }
         '.ppt' {
             # PowerPoint'te uygulama gizlenemez; dosya penceresiz açılır.
             $app.DisplayAlerts = 1          # ppAlertsNone
             $app.AutomationSecurity = 3
-            # Open(FileName, ReadOnly=msoTrue, Untitled=msoFalse, WithWindow=msoFalse)
-            $belge = $app.Presentations.Open($girdi, -1, 0, 0)
-            $belge.SaveAs($cikti, 24)       # ppSaveAsOpenXMLPresentation
+            # msoTrue = -1, msoFalse = 0
+            $belge = Cagir $app.Presentations 'Open' ([ordered]@{
+                FileName = $girdi; ReadOnly = -1; Untitled = 0; WithWindow = 0 })
+            [void](Cagir $belge 'SaveAs' ([ordered]@{ FileName = $cikti; FileFormat = 24 }))   # ppSaveAsOpenXMLPresentation
         }
     }
     if (Test-Path -LiteralPath $cikti -PathType Leaf) { $sonuc = "TAMAM $ciktiGoster" }
@@ -136,10 +147,19 @@ try {
     }
 } finally {
     if ($null -ne $belge) {
-        try { if ($uzanti -eq '.ppt') { $belge.Close() } else { $belge.Close($false) } } catch { }
+        try {
+            switch ($uzanti) {
+                '.doc' { [void](Cagir $belge 'Close' ([ordered]@{ SaveChanges = 0 })) }   # wdDoNotSaveChanges
+                '.xls' { [void](Cagir $belge 'Close' ([ordered]@{ SaveChanges = $false })) }
+                '.ppt' { [void](Cagir $belge 'Close' $null) }
+            }
+        } catch { }
     }
     if ($kendiProgram) {
-        try { if ($uzanti -eq '.doc') { $app.Quit(0) } else { $app.Quit() } } catch { }
+        try {
+            if ($uzanti -eq '.doc') { [void](Cagir $app 'Quit' ([ordered]@{ SaveChanges = 0 })) }
+            else { [void](Cagir $app 'Quit' $null) }
+        } catch { }
     }
     foreach ($o in @($belge, $app)) {
         if ($null -ne $o) { try { [void][Runtime.InteropServices.Marshal]::ReleaseComObject($o) } catch { } }
@@ -149,6 +169,14 @@ try {
     if ($bekci) {
         Stop-Job -Job $bekci -ErrorAction SilentlyContinue
         Remove-Job -Job $bekci -Force -ErrorAction SilentlyContinue
+    }
+    # Kapanmadıysa bizim başlattığımız süreci kapat: görünmez program arkada kalmasın
+    # (kalırsa kullanıcının sonra açtığı dosyalar görünmez pencereye düşebilir).
+    if ($bizimId) {
+        $surec = Get-Process -Id $bizimId -ErrorAction SilentlyContinue
+        if ($surec -and -not $surec.WaitForExit(5000)) {
+            Stop-Process -Id $bizimId -Force -ErrorAction SilentlyContinue
+        }
     }
 }
 Bitir $sonuc
