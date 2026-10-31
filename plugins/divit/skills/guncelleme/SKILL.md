@@ -101,7 +101,11 @@ classifier"): başka araçla, başka komutla ya da parça parça deneme. Söyle:
 > kutunun yanındaki **Run** düğmesine basın. Birkaç dakika sürer;
 > dosyalarınıza dokunmaz."
 
-Sonra denediğin komutun aynısını tek başına bir kod kutusunda ver. Hoca izin
+Sonra denediğin komutun aynısını tek başına bir kod kutusunda ver; **yalnız Windows'un b) yolunda**
+dıştaki `powershell … -Command "…"` sarmalayıcısını kaldır (Run düğmesi komutu PowerShell 7'de
+çalıştırır, içteki `powershell.exe` orada açılamıyor; pilotta "UseShellExecute" hatası), ters tırnak da yok:
+`$env:DIVIT_DAL='<kanal>'; $env:DIVIT_HEDEF='<klasör>'; irm https://raw.githubusercontent.com/mehmetor/divit/<kanal>/kur.ps1 | iex`
+(klasör adında `'` varsa `''` yaz). Hoca izin
 sorusuna kendisi "No" dediyse ısrar etme: "Tamam, güncellemeyi yapmadım;
 isterseniz sonra 'güncelle' deyin." İkisinde de `sorunlar.md`'ye "güncelleme"
 türüyle not yaz (Ne oldu: komutun hangi yolu, ret iletisi, izin kipi).
