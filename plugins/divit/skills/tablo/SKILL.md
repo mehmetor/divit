@@ -81,8 +81,8 @@ Kullanıcı `.xlsx` verip "oku", "bak", "şu tabloyu kullan" derse:
 Sonra Read ile oku. Her sayfa `##` başlığıyla gelir. Sayılar `650.0` biçiminde
 gelebilir: kullanıcıya gösterirken ve yazarken yukarıdaki kurala göre düzelt.
 Formüller gelmez, yalnız son hesaplanmış değerler gelir; gerekirse söyle.
-Eski `.xls` okunmaz: "Excel'de açıp Farklı Kaydet → .xlsx yapar mısınız?" ya da
-"İlgili satırları seçip buraya yapıştırır mısınız?"
+Eski `.xls` önce `kurallar` → `eski-dosya.md` ile `.xlsx` kopyasına çevrilir (onay
+orada); olmazsa "İlgili satırları seçip buraya yapıştırır mısınız?" da denebilir.
 
 Klasör dışındaki dosya için kurallardaki "Klasör dışındaki dosya" adımı.
 

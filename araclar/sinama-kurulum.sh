@@ -201,6 +201,9 @@ D={"Read(./gizli/**)","Edit(./gizli/**)","Bash(*gizli*)","PowerShell(*gizli*)",
 "mcp__claude_ai_Gmail__send_message","mcp__claude_ai_Gmail__reply","mcp__claude_ai_Gmail__forward",
 "mcp__claude_ai_Gmail__trash_message","mcp__claude_ai_Gmail__trash_thread","mcp__claude_ai_Google_Calendar__delete_event"}
 sys.exit(0 if A<=a and D<=d and not (a&d) and len(d)>=51 else 1)' "$A/.claude/settings.json"
+olc viii5 "settings.json: eski dosya çevirisi allow (eski-cevir.ps1, textutil, osascript)" \
+  py 'import json,sys; a=set(json.load(open(sys.argv[1]))["permissions"]["allow"])
+sys.exit(0 if {"PowerShell(*eski-cevir.ps1*)","Bash(textutil -convert docx *)","Bash(osascript -l JavaScript *)"}<=a else 1)' "$A/.claude/settings.json"
 olc viii2 "CLAUDE.md 'Araçlar' dolu (pandoc, pdfcpu tam yol; pdftotext 'yok'; yer tutucu yok)" \
   bash -c 'grep -qF "Word/PDF çevirici: \`$2/.divit/araclar/pandoc\`" "$1" && grep -qF "PDF aracı: \`$2/.divit/araclar/pdfcpu\`" "$1" && grep -qF "PDF metin (Windows): \`yok\`" "$1" && ! grep -q "__[A-Z]*__" "$1"' _ "$Y/CLAUDE.md" "$EV"
 olc viii3 "CLAUDE.md çekirdek kuralı: klasör açma ve kopyalama yalnız kitap-klasoru betiğiyle" grep -q 'yalnız kitap-klasoru betiğiyle' "$A/CLAUDE.md"

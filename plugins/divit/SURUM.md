@@ -7,10 +7,8 @@ Başlığın sonuna ` · kurulum gerekir` eklenirse Divit hocaya kurulum
 komutunu yeniden çalıştırmayı önerir (klasör ayarları, kılavuz ya da
 araçlar değiştiğinde).
 
-## 1.9.1 · 2026-10-11 · kurulum gerekir
-- Kitap yazarı: Divit yazınızın kendine özgü tarzından "sesiniz" diye değil, "üslubunuz" diye söz eder; kılavuzda da böyle.
-- Herkes: Kılavuzda ses kaydını yazıya dökme işi de anlatılıyor: "ses kaydını yazıya dök" yazın, kaydı yazıya dökmenin yolunu adım adım anlatırım.
-- Herkes: Kılavuzdaki komut listesinde her işin ne yaptığı daha ayrıntılı yazıyor (atıf kontrolü, sınav, çeviri, ders takvimi, fotoğraftan metin).
+## Sıradaki · kurulum gerekir
+- Herkes: Word, Excel ve PowerPoint'in eski biçimindeki dosyaları (.doc, .xls, .ppt) artık okuyabilirim. Bunun için bilgisayarınızdaki programı (Windows'ta Word, Excel, PowerPoint; Mac'te Keynote, Numbers) arka planda kısa bir süre açıp dosyanın bir kopyasını çeviririm; ilk seferde izninizi sorarım, "bundan sonra hiç sormadan çevir" derseniz bir daha sormam. Mac'te eski Word dosyaları hiçbir program açılmadan, sormadan okunur. Asıl dosyanıza dokunmam.
 
 ## 1.9.0 · 2026-10-09 · kurulum gerekir
 - Herkes: Aynı gün aynı konuda ikinci bir taslak (dilekçe, mektup) istediğinizde eskisinin üstüne yazmam; yenisi yanına gelir, sizin düzelttiğiniz hâl durur. "Şunu düzelt" derseniz yine aynı dosyada çalışırım.
